@@ -1,5 +1,5 @@
 {
-  "name": "uk-public-debt-explorer",
+  "name": "uk-public-finances-explorer",
   "version": "0.1.0",
   "description": "A clean, factual, data-led explorer for UK government debt and public finances.",
   "type": "module",

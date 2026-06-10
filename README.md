@@ -1,4 +1,4 @@
-# UK Public Debt Explorer
+# UK Public Finances Explorer
 
 A clean, factual, data-led website that helps people understand UK government debt and public finances. Built with official data sources in mind, plain-English explanations, historical context, and useful comparisons.
 
