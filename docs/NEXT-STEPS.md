@@ -1,37 +1,47 @@
-# Next steps
+# Status and next steps
 
-## Built in this MVP skeleton
+The site is **live at [ukpublicfinances.org](https://ukpublicfinances.org)**, deployed on Netlify from `main`.
 
-- **Project setup** — Eleventy 3.x, vanilla JS, JSON data, single stylesheet, data tests.
-- **Data model** — provenance-carrying JSON in `src/_data`, confidence levels, contract tests.
-- **1. Homepage dashboard** — five headline metrics, each with explanation, "what this means", source note, confidence badge; overall caveat.
-- **2. Historical timeline** — inline-SVG line chart with measure/period switching, neutral event markers, full table fallback.
-- **3. Debt in context** — debt and annual interest set against NHS, education, defence, pension, welfare, tax receipts.
-- **4. Big numbers translator** — per-person/adult/taxpayer, % of GDP, % of budgets, months of interest; table fallback.
-- **5. During your lifetime** — birth-year debt/GDP vs now, events and prime ministers for context, neutral framing.
-- **6. Debt vs deficit explainer** — plain-English terms, who lends, why ratios and rates matter, household analogy with limits.
-- **7. Interest costs** — annual/monthly/daily cost, % of revenue and GDP (build-time computed), historical trend, why the rate matters.
-- **8. International comparison** — `internationalComparisons.json` rendered as a table sorted by debt/GDP, UK highlighted, with the measurement caveat.
-- **9. Public finance health** — wider indicators from `indicators.json` (inflation, unemployment, productivity, tax burden, etc.) with neutral rising/falling/stable markers.
-- **10. Budget simulator** — "You are Chancellor": accessible sliders → live borrowing and 5-year debt path, from `assumptions.budgetSimulator`. Clearly labelled a simplified educational model with visible assumptions.
-- **11. Monthly public finances explainer** — template driven by `monthlyUpdates.json`, answering the standard monthly questions.
-- **Glossary** and **Sources** pages, **README**, and data documentation.
+## Built
 
-All 13 pages pass a WCAG 2.2 AA audit (`npm run a11y:all`), and data-contract tests cover every data file (`npm test`).
+All 11 numbered sections from the brief:
 
-## Not yet built (from the brief)
+1. Homepage dashboard — five headline metrics, each with explanation, "what this means", source note, confidence badge.
+2. Historical timeline — inline-SVG chart with measure/period switching, neutral event markers, table fallback.
+3. Debt in context — sentence-led comparisons with proportion bars (debt and interest vs annual budgets).
+4. Big numbers translator — per-person/adult/taxpayer, % of GDP, % of budgets, months of interest.
+5. During your lifetime — birth-year debt/GDP vs now, events and prime ministers for context.
+6. Debt vs deficit explainer — plain-English terms, the household analogy with its limits.
+7. Interest costs — yearly/monthly/daily cost, % of revenue and GDP, historical trend.
+8. International comparison — debt, deficit, and growth for eight economies (IMF), with the measurement caveat.
+9. Public finance health — wider indicators with neutral rising/falling/stable markers.
+10. Budget simulator — "balance the budget" challenge: sliders → live borrowing and a 5-year debt path.
+11. Monthly public finances explainer — driven by `monthlyUpdates.json`.
 
-All numbered MVP sections (1–11) are now built. Remaining work is quality, data, and polish.
+Plus a glossary (33 terms), sources page, and privacy page.
 
-## Quality and verification
+Beyond the brief, the site also has:
 
-- **Replace placeholder figures with verified data** (see `UPDATING-DATA.md`). This is the top priority before any publication.
-- **Run an accessibility audit** (axe / pa11y / Lighthouse) on the built `_site` and fix findings.
-- Consider **per-figure footnotes** linking directly to the exact source table, not just the dataset homepage.
-- Add a **"last verified" stamp** per page once data is real.
+- **SEO and structured data** — canonical, Open Graph, Twitter Card, JSON-LD (`WebSite`/`Organization`/`WebPage`/`DefinedTermSet`/`FAQPage`), `sitemap.xml`, `robots.txt`, `llms.txt`, and an OG share image.
+- **Cookieless analytics** — Cloudflare Web Analytics (no consent banner) plus a privacy page.
+- **Security headers** — Content-Security-Policy and others via `netlify.toml`.
+- **GOV.UK alignment** — yellow focus state, larger type scale, and content style.
+- **Tested tool maths** — pure functions in `assets/js/lib/calc.js` with unit tests; 16 tests in total.
+
+All 14 routes pass a WCAG 2.2 AA audit (`npm run a11y:all`); `npm test` covers the data contract and the tool maths.
+
+## Data status
+
+Verified June 2026 against ONS, OBR, IMF, and HM Treasury sources: dashboard headlines, health indicators, the monthly update, spending comparisons, and the full international comparison (debt 2025; deficit and growth 2024). The only remaining estimates are the **long-run historical series before about 2010** — best-estimate reconstructions where exact pre-1900 figures are inherently uncertain. See [`UPDATING-DATA.md`](UPDATING-DATA.md).
+
+## Next steps
+
+- **Submit the sitemap to Google Search Console** — the one action that actually gets the site crawled and indexed.
+- Tighten the **pre-2010 historical series** against the Bank of England millennium dataset if exact figures are wanted.
+- Add a **"last verified" stamp** per page.
 
 ## Nice-to-haves
 
-- A tiny build-time fetch script to pull ONS/OBR data into the JSON shape automatically.
+- A small build-time fetch script to pull ONS/OBR data into the JSON shape automatically.
+- A search box across the glossary.
 - Print stylesheet for the explainer pages.
-- A simple search across the glossary.

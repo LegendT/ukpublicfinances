@@ -124,7 +124,7 @@ Every figure record carries provenance:
 
 ## Accessibility
 
-Built to WCAG 2.2 AA principles: semantic headings, keyboard-operable controls, visible focus, 4.5:1 text contrast, 44px touch targets, no chart-only information (every chart has a table), labelled form fields with clear errors, mobile-first responsive layout, and `prefers-reduced-motion` support.
+Built to WCAG 2.2 AA principles: semantic headings, keyboard-operable controls, the **GOV.UK-style yellow focus state** (yellow with a black companion, on every focusable element including the skip link), a **large type scale** (17px mobile, 19px from tablet up), 4.5:1 text contrast, 44px touch targets, no chart-only information (every chart has a table), labelled form fields with clear errors, mobile-first responsive layout, and `prefers-reduced-motion` support.
 
 Verify, don't assume — run `npm run a11y:all` (pa11y-ci, WCAG 2.2 AA across every page) before publishing.
 
@@ -154,7 +154,7 @@ The `jsonScript` filter escapes embedded JSON so data can't break out of a `<scr
 
 ## Editorial principles
 
-Neutral, factual, plain English. Facts are separated from interpretation. No party-political blame. National debt is not presented as updating second-by-second. The household-finance analogy is used only with its limits spelled out.
+Neutral, factual, plain English, following the [GOV.UK content style guide](https://www.gov.uk/guidance/style-guide). Facts are separated from interpretation. No party-political blame. National debt is not presented as updating second-by-second. The household-finance analogy is used only with its limits spelled out.
 
 ## Deployment
 

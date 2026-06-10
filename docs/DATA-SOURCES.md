@@ -9,7 +9,7 @@ The project is built to draw from official UK and international sources. The cat
 | [Public sector finances](https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance) | ONS | Net debt, borrowing, debt interest — the headline UK measures | Monthly |
 | [Public finances databank & forecasts](https://obr.uk/data/) | OBR | Long-run series and official forecasts | At fiscal events |
 | [Debt Management Office](https://www.dmo.gov.uk/) | DMO | Gilt issuance and who holds UK debt | Ongoing |
-| [Public spending statistics](https://www.gov.uk/government/collections/public-spending-statistics) | HM Treasury | Spending by function | Annual |
+| [Public Expenditure Statistical Analyses (PESA)](https://www.gov.uk/government/collections/public-expenditure-statistical-analyses-pesa) | HM Treasury | Spending by function | Annual |
 | [Population estimates](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates) | ONS | UK population for per-person figures | Annual |
 | [World Economic Outlook](https://www.imf.org/en/Publications/WEO) | IMF | Consistent international comparisons | Twice yearly |
 | [A millennium of macroeconomic data](https://www.bankofengland.co.uk/statistics/research-datasets) | Bank of England | Long-run historical series | Occasional |
@@ -22,6 +22,6 @@ The project is built to draw from official UK and international sources. The cat
 
 ## Keeping sources honest
 
-- Each record's `source_url` should point at the specific dataset, not just a homepage, once real data is in.
+- Each record's `source_url` should point at the specific dataset or release, not just a homepage (the dashboard and monthly figures already deep-link to the relevant ONS bulletin).
 - `retrieved_date` records when the figure was last pulled.
 - `confidence_level` must reflect reality: ONS monthly figures are `provisional`; anything interpolated for the timeline is `estimated`.

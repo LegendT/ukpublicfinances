@@ -9,9 +9,9 @@ All figures live in `src/_data/*.json`. Templates never hard-code numbers, so up
 3. **Be honest about confidence.** Use `official` only for a figure taken directly from a published release. Use `provisional`, `estimated`, or `calculated` otherwise. Definitions are in `meta.json`.
 4. **Run the tests.** `npm test` checks every record still has its required fields and a valid confidence level.
 
-## Replacing the placeholder figures
+## Refreshing the figures
 
-The project ships with illustrative placeholders. Replace them in this order — each is one official source.
+The headline, health, spending, monthly, and international figures were verified against source in June 2026; the pre-2010 historical series remains a best-estimate reconstruction. To bring any of it up to date, each file maps to one official source.
 
 | File | Replace with | From |
 | --- | --- | --- |
@@ -30,7 +30,7 @@ After editing: `npm run build` then `npm test`.
 2. Update `lastUpdated`, `referencePeriod`, and each metric's `value`, `date`, `retrieved_date`.
 3. Set `confidence_level` to `provisional` (ONS monthly figures are routinely revised).
 4. Add the new month's row to `debtTimeseries.json` if you keep the series current.
-5. Update the Monthly Public Finances explainer content (a future section — see NEXT-STEPS).
+5. Add a new entry to the top of `monthlyUpdates.json` for the month, which drives the monthly explainer page.
 6. `npm run build && npm test`, then run an accessibility check on `_site`.
 
 ## Moving to live/API data later
