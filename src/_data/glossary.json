@@ -26,6 +26,12 @@
     { "id": "inflation", "term": "Inflation", "definition": "The rate at which prices rise over time. The main measure is the Consumer Prices Index (CPI). High inflation raises the cost of index-linked debt." },
     { "id": "fiscal-rules", "term": "Fiscal rules", "definition": "Targets a government sets itself for borrowing or debt, such as having debt falling as a share of GDP within a set number of years." },
     { "id": "dmo", "term": "Debt Management Office (DMO)", "definition": "The agency that sells gilts and manages government borrowing on behalf of HM Treasury." },
-    { "id": "real-terms", "term": "Real terms", "definition": "Figures adjusted for inflation, so they reflect actual buying power rather than just cash amounts. The opposite is 'nominal' or 'cash' terms." }
+    { "id": "real-terms", "term": "Real terms", "definition": "Figures adjusted for inflation, so they reflect actual buying power rather than cash amounts. The opposite is 'nominal' or 'cash' terms." },
+    { "id": "liquid-assets", "term": "Liquid assets", "definition": "Things the government can quickly turn into cash, such as foreign currency reserves and short-term deposits. Net debt is total debt minus these, which is why it is lower than gross debt." },
+    { "id": "gross-debt", "term": "Gross debt", "definition": "Total government liabilities without subtracting any assets. It is higher than the UK's headline net debt, and is the measure used for international comparisons because countries report it consistently." },
+    { "id": "imf", "term": "IMF", "definition": "The International Monetary Fund, an international body that monitors the world economy and lends to countries in financial difficulty. Its data is used here to compare countries on a consistent basis." },
+    { "id": "tax-burden", "term": "Tax burden", "definition": "Total taxes measured as a share of GDP. It shows how much of the economy is taken in tax, and is close to a multi-decade high in the UK." },
+    { "id": "productivity", "term": "Productivity", "definition": "How much is produced for each hour worked. Weak productivity growth limits how fast the economy, and tax revenue, can rise without adding to inflation." },
+    { "id": "hm-treasury", "term": "HM Treasury", "definition": "His Majesty's Treasury, the UK government's economic and finance ministry. It controls public spending and sets tax policy." }
   ]
 }
