@@ -30,7 +30,7 @@ npm run a11y:all # build + serve + WCAG 2.2 AA audit of every page (see below)
 ### Accessibility audits
 
 ```bash
-npm run a11y:all   # one shot: build, serve _site, pa11y-ci over all 8 routes, tear down
+npm run a11y:all   # one shot: build, serve _site, pa11y-ci over all 14 routes, tear down
 npm run a11y       # quick single-page check — needs `npm run dev` running first
 ```
 
