@@ -25,9 +25,9 @@
     },
     "spendingRange": { "minFactor": 0.5, "maxFactor": 1.5, "step": 1, "note": "Each spending slider runs from half to one-and-a-half times today's figure." },
     "taxLevers": [
-      { "id": "income", "label": "Income tax (basic rate)", "rate": 20, "min": 15, "max": 25, "perPointGbpBillion": 8.0 },
-      { "id": "vat", "label": "VAT", "rate": 20, "min": 15, "max": 25, "perPointGbpBillion": 8.5 },
-      { "id": "corp", "label": "Corporation tax", "rate": 25, "min": 20, "max": 30, "perPointGbpBillion": 3.7 }
+      { "id": "income", "label": "Income tax (basic rate)", "rate": 20, "min": 10, "max": 40, "perPointGbpBillion": 8.0 },
+      { "id": "vat", "label": "VAT", "rate": 20, "min": 10, "max": 30, "perPointGbpBillion": 8.5 },
+      { "id": "corp", "label": "Corporation tax", "rate": 25, "min": 15, "max": 35, "perPointGbpBillion": 3.7 }
     ],
     "taxNote": "Each percentage point on a rate is worth roughly the amount shown (an HMRC 'ready reckoner' style estimate). Income tax shows the basic rate as a simple stand-in for the whole system.",
     "projection": {
