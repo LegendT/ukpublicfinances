@@ -6,6 +6,6 @@
     "official": "Taken directly from an official published release.",
     "provisional": "Official but flagged by the publisher as subject to revision.",
     "estimated": "An estimate, interpolation, or nowcast — not a published official figure.",
-    "calculated": "Derived by this site from other figures (e.g. debt per person)."
+    "calculated": "Derived by this site from other figures, such as debt per person."
   }
 }

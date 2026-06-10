@@ -21,7 +21,7 @@ description: The official data sources behind every figure on this site, and wha
     <p class="source-card__meta">
       Updated: {{ s.updateFrequency }}. {{ dataFreshnessBadge(s.confidence_level, "") }}
     </p>
-    <p><a href="{{ s.url }}" rel="noopener">Visit source</a></p>
+    <p><a href="{{ s.url }}" rel="noopener">Visit source<span class="visually-hidden">: {{ s.name }}</span></a></p>
   </article>
   {%- endfor %}
 </div>

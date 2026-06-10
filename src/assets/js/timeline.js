@@ -54,7 +54,11 @@
       if (v <= earliest && v > floor) floor = v;
     });
     opts.forEach((o) => {
+      if (!o.dataset.label) o.dataset.label = o.textContent;
       o.disabled = +o.value < floor;
+      // Make the disabled state explicit in the text — some browsers don't grey
+      // disabled options, which can look like broken functionality.
+      o.textContent = o.disabled ? `${o.dataset.label} — no data` : o.dataset.label;
     });
     if (periodSelect.options[periodSelect.selectedIndex].disabled) {
       periodSelect.value = String(floor);
