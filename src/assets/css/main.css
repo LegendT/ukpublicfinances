@@ -75,8 +75,10 @@ a:focus-visible {
 .skip-link:focus {
   position: fixed; top: 0.5rem; left: 0.5rem;
   width: auto; height: auto; clip: auto;
-  padding: 0.6rem 1rem; background: var(--card); z-index: 100;
-  border-radius: var(--radius); box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  padding: 0.6rem 1rem; z-index: 100;
+  background: var(--focus); color: var(--ink-black);
+  box-shadow: 0 -2px var(--focus), 0 4px var(--ink-black);
+  text-decoration: none;
 }
 
 /* Header / nav */
