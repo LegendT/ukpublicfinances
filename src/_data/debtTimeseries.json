@@ -12,7 +12,7 @@
   "series": [
     { "year": 1700, "debtToGdp": 14,  "debtGbp": null, "borrowingGbp": null, "interestGbp": null, "confidence_level": "estimated" },
     { "year": 1750, "debtToGdp": 99,  "debtGbp": null, "borrowingGbp": null, "interestGbp": null, "confidence_level": "estimated" },
-    { "year": 1815, "debtToGdp": 194, "debtGbp": null, "borrowingGbp": null, "interestGbp": null, "confidence_level": "estimated" },
+    { "year": 1816, "debtToGdp": 237, "debtGbp": null, "borrowingGbp": null, "interestGbp": null, "confidence_level": "estimated" },
     { "year": 1850, "debtToGdp": 102, "debtGbp": null, "borrowingGbp": null, "interestGbp": null, "confidence_level": "estimated" },
     { "year": 1900, "debtToGdp": 30,  "debtGbp": null, "borrowingGbp": null, "interestGbp": null, "confidence_level": "estimated" },
     { "year": 1918, "debtToGdp": 109, "debtGbp": null, "borrowingGbp": null, "interestGbp": null, "confidence_level": "estimated" },
