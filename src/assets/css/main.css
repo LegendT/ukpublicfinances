@@ -376,3 +376,15 @@ input[type="number"], select {
 
 /* Slider range hint (budget simulator) */
 .slider__range { font-weight: 400; color: var(--ink-soft); font-size: 0.8rem; }
+
+/* Debt-in-context: sentence-led comparisons with proportion bars */
+.compare { margin: 0 0 1.1rem; max-width: 46rem; }
+.compare__text { margin: 0 0 0.35rem; }
+.compare__amount { color: var(--ink-soft); font-size: 0.9rem; white-space: nowrap; }
+.compare__bar { height: 1rem; background: #e8ebef; border-radius: 999px; overflow: hidden; }
+.compare__bar > span { display: block; height: 100%; background: var(--brand); border-radius: 999px; min-width: 3px; }
+/* Interest that is more than the whole budget — full bar, striped to signal "over" */
+.compare__bar--over > span {
+  background-color: var(--brand-deep);
+  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.28) 0 6px, transparent 6px 12px);
+}

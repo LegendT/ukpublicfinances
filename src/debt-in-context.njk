@@ -1,58 +1,55 @@
 ---
 layout: layouts/base.njk
 title: Debt in context
-description: UK debt and annual debt interest set next to familiar areas of annual public spending.
+description: UK debt and annual debt interest set next to familiar areas of public spending, to show the scale.
 ---
 {% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
 
 {% set netDebt = dashboard.metrics | findBy("id", "net-debt") %}
 {% set interest = dashboard.metrics | findBy("id", "debt-interest") %}
+{% set smallest = (spendingComparisons.areas | sort(false, false, "value") | first).value %}
+{% set maxMult = netDebt.value / smallest %}
 
 <div class="page-intro prose">
   <h1>Debt in context</h1>
-  <p class="lede">Large sums mean more when set beside things we recognise. Here is the debt, and the yearly interest on it, next to annual spending areas.</p>
+  <p class="lede">Trillions and billions are hard to picture. Here we put the debt — and the interest paid on it each year — next to things the government spends on annually, just to show the scale.</p>
 </div>
 
 <section aria-labelledby="interest-context">
-  <h2 id="interest-context">Annual debt interest ({{ interest.value | poundsShort }}) compared with…</h2>
-  <div class="table-scroll" tabindex="0" role="region" aria-label="Debt interest compared with spending areas">
-    <table class="data-table">
-      <caption>Annual debt interest as a share of each spending area</caption>
-      <thead>
-        <tr><th scope="col">Spending area</th><th scope="col" class="num">Annual amount</th><th scope="col" class="num">Interest is about</th></tr>
-      </thead>
-      <tbody>
-        {%- for area in spendingComparisons.areas %}
-        <tr>
-          <th scope="row">{{ area.name }}</th>
-          <td class="num">£{{ area.value | number }} bn</td>
-          <td class="num">{{ (interest.value / area.value * 100) | round(0) }}% of it</td>
-        </tr>
-        {%- endfor %}
-      </tbody>
-    </table>
+  <h2 id="interest-context">A year of debt interest is {{ interest.value | poundsShort }}</h2>
+  <p class="prose">Servicing the debt costs about {{ interest.value | poundsShort }} a year. Compared with what the government spends on each of these in a year:</p>
+
+  {%- for area in spendingComparisons.areas %}
+    {%- set ratio = interest.value / area.value * 100 %}
+    {%- set barWidth = ratio if ratio < 100 else 100 %}
+    {%- set areaPhrase = "annual tax receipts" if area.id == "tax-receipts" else "the " + area.name + " budget" %}
+  <div class="compare">
+    <p class="compare__text">
+      {%- if ratio <= 110 %}About <strong>{{ ratio | round(0) }}%</strong> of {{ areaPhrase }}
+      {%- else %}About <strong>{{ (ratio / 100) | round(1) }}×</strong> {{ areaPhrase }}
+      {%- endif %}
+      <span class="compare__amount">(£{{ area.value | number }} bn a year)</span>
+    </p>
+    <div class="compare__bar{% if ratio > 100 %} compare__bar--over{% endif %}" aria-hidden="true"><span style="width: {{ barWidth | round(0) }}%"></span></div>
   </div>
+  {%- endfor %}
 </section>
 
 <section aria-labelledby="debt-context">
-  <h2 id="debt-context">Total debt ({{ netDebt.value | poundsShort }}) compared with…</h2>
-  <div class="table-scroll" tabindex="0" role="region" aria-label="Total debt compared with spending areas">
-    <table class="data-table">
-      <caption>Total net debt as a multiple of each annual spending area</caption>
-      <thead>
-        <tr><th scope="col">Spending area</th><th scope="col" class="num">Annual amount</th><th scope="col" class="num">Debt is about</th></tr>
-      </thead>
-      <tbody>
-        {%- for area in spendingComparisons.areas %}
-        <tr>
-          <th scope="row">{{ area.name }}</th>
-          <td class="num">£{{ area.value | number }} bn</td>
-          <td class="num">{{ (netDebt.value / area.value) | round(1) }}× a year</td>
-        </tr>
-        {%- endfor %}
-      </tbody>
-    </table>
+  <h2 id="debt-context">The whole debt is {{ netDebt.value | poundsShort }}</h2>
+  <p class="prose">That total has built up over many years. Next to a single year of each budget, it is:</p>
+
+  {%- for area in spendingComparisons.areas %}
+    {%- set mult = netDebt.value / area.value %}
+    {%- set spendPhrase = "a year's tax receipts" if area.id == "tax-receipts" else "a year's spending on " + area.name %}
+  <div class="compare">
+    <p class="compare__text">
+      About <strong>{{ mult | round(1) }}×</strong> {{ spendPhrase }}
+      <span class="compare__amount">(£{{ area.value | number }} bn a year)</span>
+    </p>
+    <div class="compare__bar" aria-hidden="true"><span style="width: {{ (mult / maxMult * 100) | round(0) }}%"></span></div>
   </div>
+  {%- endfor %}
 </section>
 
 <p class="source-note">
@@ -61,4 +58,26 @@ description: UK debt and annual debt interest set next to familiar areas of annu
   {{ dataFreshnessBadge("estimated", "") }}
 </p>
 
-{{ caveatBox("Based on latest available annual spending figures. These comparisons show scale only. They do not imply that any of these budgets could be redirected to pay down debt, or that debt could be swapped for spending. The state pension is also included within total welfare and social protection.", "How to read these comparisons") }}
+<details class="data-table-wrap">
+  <summary>Show the figures as a table</summary>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Debt and interest compared with spending areas">
+    <table class="data-table">
+      <caption>Annual debt interest and total debt, against each spending area</caption>
+      <thead>
+        <tr><th scope="col">Spending area</th><th scope="col" class="num">Per year</th><th scope="col" class="num">Interest is</th><th scope="col" class="num">Debt is</th></tr>
+      </thead>
+      <tbody>
+        {%- for area in spendingComparisons.areas %}
+        <tr>
+          <th scope="row">{{ area.name }}</th>
+          <td class="num">£{{ area.value | number }} bn</td>
+          <td class="num">{{ (interest.value / area.value * 100) | round(0) }}%</td>
+          <td class="num">{{ (netDebt.value / area.value) | round(1) }}×</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</details>
+
+{{ caveatBox("Based on the latest available annual spending figures. These comparisons show scale only. They do not mean any of these budgets could be redirected to pay down debt, or that debt could be swapped for spending. The state pension is also included within total welfare and social protection.", "How to read these comparisons") }}
