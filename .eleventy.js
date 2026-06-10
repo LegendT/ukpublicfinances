@@ -14,6 +14,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default function (eleventyConfig) {
   // Copy static assets straight through.
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  // Root-level icons and manifest (favicon.ico answers the default /favicon.ico request).
+  eleventyConfig.addPassthroughCopy({ "src/favicon.ico": "favicon.ico" });
+  eleventyConfig.addPassthroughCopy({ "src/site.webmanifest": "site.webmanifest" });
 
   // Find the first item in an array whose key matches a value.
   // Nunjucks' own selectattr(..., "equalto", ...) is unreliable here, so this

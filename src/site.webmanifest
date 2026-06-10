@@ -1,0 +1,13 @@
+{
+  "name": "UK Public Finances Explorer",
+  "short_name": "UK Finances",
+  "description": "Factual, data-led explorer for UK government debt and public finances.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f8fa",
+  "theme_color": "#123a51",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
