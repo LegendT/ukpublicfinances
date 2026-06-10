@@ -1,0 +1,28 @@
+{
+  "name": "uk-public-debt-explorer",
+  "version": "0.1.0",
+  "description": "A clean, factual, data-led explorer for UK government debt and public finances.",
+  "type": "module",
+  "scripts": {
+    "start": "eleventy --serve",
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "test": "node --test 'test/**/*.test.js'",
+    "a11y": "npx --yes pa11y --standard WCAG2AA http://localhost:8080",
+    "a11y:all": "npm run build && npx --yes start-server-and-test a11y:serve http://127.0.0.1:8081 a11y:ci",
+    "a11y:serve": "npx --yes http-server _site -p 8081 -s -c-1",
+    "a11y:ci": "npx --yes pa11y-ci"
+  },
+  "keywords": [
+    "uk",
+    "public-finance",
+    "national-debt",
+    "data",
+    "eleventy"
+  ],
+  "author": "Legendary Tone",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

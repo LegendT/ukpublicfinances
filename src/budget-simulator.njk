@@ -1,0 +1,93 @@
+---
+layout: layouts/base.njk
+title: Budget simulator
+description: A simplified educational model — adjust spending and tax, and see the effect on borrowing and debt.
+---
+{% from "components/macros.njk" import caveatBox %}
+{% set b = assumptions.budgetSimulator %}
+
+<div class="page-intro prose">
+  <h1>Budget simulator</h1>
+  <p class="lede">You are Chancellor. Move the sliders to change spending and tax, and watch the effect on borrowing and on debt over five years.</p>
+</div>
+
+{{ caveatBox(b.disclaimer, "This is a teaching model, not a forecast") }}
+
+<div class="simulator" id="simulator" role="group" aria-label="Budget controls">
+  <fieldset class="simulator__group">
+    <legend>Spending (£ billion per year)</legend>
+    {%- set sp = b.spendingLeversGbpBillion %}
+    {%- set ranges = { "health": [140,260], "education": [70,140], "defence": [30,90], "welfare": [140,300], "pensions": [90,160] } %}
+    {%- set labels = { "health": "Health", "education": "Education", "defence": "Defence", "welfare": "Welfare (excl. pension)", "pensions": "State pension" } %}
+    {%- for key, base in sp %}
+    <div class="slider">
+      <label for="sp-{{ key }}">{{ labels[key] }} <span class="slider__range">(£{{ ranges[key][0] }}–{{ ranges[key][1] }} bn)</span></label>
+      <input type="range" id="sp-{{ key }}" data-spend="{{ key }}" data-base="{{ base }}"
+             min="{{ ranges[key][0] }}" max="{{ ranges[key][1] }}" step="1" value="{{ base }}"
+             aria-describedby="sp-{{ key }}-out">
+      <output id="sp-{{ key }}-out" for="sp-{{ key }}">£{{ base }} bn</output>
+    </div>
+    {%- endfor %}
+  </fieldset>
+
+  <fieldset class="simulator__group">
+    <legend>Tax rates (change in percentage points)</legend>
+    {%- set tl = b.taxLevers %}
+    <div class="slider">
+      <label for="tax-income">Income tax <span class="slider__range">(−5 to +5 pts)</span></label>
+      <input type="range" id="tax-income" data-tax="income" data-perpoint="{{ tl.incomeTaxPointGbpBillion }}" min="-5" max="5" step="0.5" value="0" aria-describedby="tax-income-out">
+      <output id="tax-income-out" for="tax-income">no change</output>
+    </div>
+    <div class="slider">
+      <label for="tax-vat">VAT <span class="slider__range">(−5 to +5 pts)</span></label>
+      <input type="range" id="tax-vat" data-tax="vat" data-perpoint="{{ tl.vatPointGbpBillion }}" min="-5" max="5" step="0.5" value="0" aria-describedby="tax-vat-out">
+      <output id="tax-vat-out" for="tax-vat">no change</output>
+    </div>
+    <div class="slider">
+      <label for="tax-corp">Corporation tax <span class="slider__range">(−5 to +5 pts)</span></label>
+      <input type="range" id="tax-corp" data-tax="corp" data-perpoint="{{ tl.corporationTaxPointGbpBillion }}" min="-5" max="5" step="0.5" value="0" aria-describedby="tax-corp-out">
+      <output id="tax-corp-out" for="tax-corp">no change</output>
+    </div>
+  </fieldset>
+
+  <button type="button" class="btn btn--ghost" id="sim-reset">Reset to today</button>
+</div>
+
+<section class="simulator__results" aria-live="polite" aria-labelledby="results-heading">
+  <h2 id="results-heading">Result</h2>
+  <div class="metric-grid metric-grid--compact">
+    <article class="metric-card metric-card--mini"><p class="metric-card__value" id="r-spending">—</p><p class="metric-card__label">Total spending</p></article>
+    <article class="metric-card metric-card--mini"><p class="metric-card__value" id="r-revenue">—</p><p class="metric-card__label">Total revenue</p></article>
+    <article class="metric-card metric-card--mini"><p class="metric-card__value" id="r-borrowing">—</p><p class="metric-card__label" id="r-borrowing-label">Borrowing this year</p></article>
+  </div>
+
+  <h3>Debt over five years</h3>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Projected debt over five years">
+    <table class="data-table">
+      <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate * 100) | round(0) }}% interest rate and a fixed economy — see assumptions below.</caption>
+      <thead><tr><th scope="col">Year</th><th scope="col" class="num">Debt (£ bn)</th><th scope="col" class="num">Debt (% of GDP)</th></tr></thead>
+      <tbody id="r-trajectory"></tbody>
+    </table>
+  </div>
+</section>
+
+<details class="prose">
+  <summary>Assumptions used in this model</summary>
+  <ul>
+    <li>Baseline spending £{{ b.baselineGbpBillion.totalSpending | number }} bn, revenue £{{ b.baselineGbpBillion.totalRevenue | number }} bn, debt £{{ b.baselineGbpBillion.debt | number }} bn.</li>
+    <li>Each 1 percentage point of income tax ≈ £{{ tl.incomeTaxPointGbpBillion }} bn, VAT ≈ £{{ tl.vatPointGbpBillion }} bn, corporation tax ≈ £{{ tl.corporationTaxPointGbpBillion }} bn. {{ tl.note }}</li>
+    <li>{{ b.projection.note }}</li>
+  </ul>
+</details>
+
+<noscript><p class="caveat">This simulator needs JavaScript. The baseline figures are on the <a href="{{ '/' | url }}">dashboard</a>.</p></noscript>
+
+<script id="sim-config" type="application/json">
+{
+  "baseline": {{ b.baselineGbpBillion | dump | safe }},
+  "spendingBase": {{ b.spendingLeversGbpBillion | dump | safe }},
+  "projection": {{ b.projection | dump | safe }},
+  "gdp": {{ dashboard.supporting.gdp.value }}
+}
+</script>
+<script src="{{ '/assets/js/budget-simulator.js' | url }}" defer></script>

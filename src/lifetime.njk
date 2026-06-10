@@ -1,0 +1,44 @@
+---
+layout: layouts/base.njk
+title: During your lifetime
+description: How UK debt and debt-to-GDP have changed since the year you were born, with neutral context.
+---
+{% from "components/macros.njk" import caveatBox %}
+
+<div class="page-intro prose">
+  <h1>During your lifetime</h1>
+  <p class="lede">Enter the year you were born to see how UK debt has changed since, and what was happening along the way.</p>
+</div>
+
+<form class="translator" id="lifetime-form" novalidate>
+  <div class="field">
+    <label for="birth-year">Year of birth</label>
+    <input type="number" id="birth-year" name="birth-year" inputmode="numeric" min="1900" max="2026" step="1" value="1968" aria-describedby="by-hint">
+    <p id="by-hint" class="field__hint">Any year from 1900 to 2026.</p>
+    <p id="by-error" class="field__error" role="alert" hidden>Enter a year between 1900 and 2026.</p>
+  </div>
+  <button type="submit" class="btn">Show changes</button>
+  <p class="field__hint">Results also update as you type.</p>
+</form>
+
+<section id="lifetime-results" aria-live="polite">
+  <!-- Populated by JS. -->
+</section>
+
+<noscript>
+  <p class="caveat">This feature needs JavaScript. The underlying series is on the <a href="{{ '/timeline/' | url }}">timeline page</a> as a table.</p>
+</noscript>
+
+{{ caveatBox("Changes in debt reflect economic cycles, wars, crises, policy choices, inflation, and changes in measurement. The figure for your birth year is estimated from the nearest data points and is illustrative.", "Reading this fairly") }}
+
+{% set netDebt = dashboard.metrics | findBy("id", "net-debt") %}
+{% set debtGdp = dashboard.metrics | findBy("id", "debt-gdp") %}
+<script id="lifetime-data" type="application/json">
+{
+  "series": {{ debtTimeseries.series | dump | safe }},
+  "events": {{ events.events | dump | safe }},
+  "primeMinisters": {{ primeMinisters.list | dump | safe }},
+  "current": { "debtGbp": {{ netDebt.value }}, "debtToGdp": {{ debtGdp.value }}, "year": 2026 }
+}
+</script>
+<script src="{{ '/assets/js/lifetime.js' | url }}" defer></script>

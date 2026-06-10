@@ -1,0 +1,17 @@
+{
+  "terms": [
+    { "id": "psnd", "term": "Public sector net debt", "definition": "The UK government's preferred debt measure: total liabilities of the public sector, less its liquid assets. The headline version excludes public sector banks and is the main measure used in monthly statistics." },
+    { "id": "deficit", "term": "Deficit", "definition": "The amount by which government spending exceeds its income in a period. A deficit adds to debt; a surplus reduces it." },
+    { "id": "borrowing", "term": "Borrowing", "definition": "The cash the government raises to cover a deficit, mostly by selling gilts. Public sector net borrowing is the standard monthly measure." },
+    { "id": "gdp", "term": "GDP", "definition": "Gross domestic product — the total value of goods and services the economy produces. Used as the yardstick for the size of debt and borrowing." },
+    { "id": "debt-gdp", "term": "Debt-to-GDP ratio", "definition": "Debt measured as a percentage of GDP. It shows the scale of debt relative to the economy that supports it, which matters more than the cash total alone." },
+    { "id": "gilts", "term": "Gilts", "definition": "UK government bonds. The government sells them to investors and repays the value at a set date, paying interest in the meantime. Some are index-linked to inflation." },
+    { "id": "debt-interest", "term": "Debt interest", "definition": "The cost of servicing debt. It depends on both how much is owed and the interest rate paid, and includes inflation uplift on index-linked gilts." },
+    { "id": "tax-receipts", "term": "Tax receipts", "definition": "The money the government collects in taxes, such as income tax, National Insurance, VAT, and corporation tax." },
+    { "id": "public-spending", "term": "Public spending", "definition": "Total government spending, including services, benefits, investment, and debt interest." },
+    { "id": "obr", "term": "OBR", "definition": "The Office for Budget Responsibility, the independent body that produces the UK's official economic and fiscal forecasts." },
+    { "id": "ons", "term": "ONS", "definition": "The Office for National Statistics, the UK's official producer of statistics including the monthly public finances." },
+    { "id": "fiscal-year", "term": "Fiscal year", "definition": "The government's financial year, running from 1 April to 31 March. Also called the financial year." },
+    { "id": "current-budget-deficit", "term": "Current budget deficit", "definition": "Borrowing for day-to-day spending only, excluding investment. A narrower measure than total borrowing." }
+  ]
+}

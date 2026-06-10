@@ -1,0 +1,66 @@
+{#
+  Reusable components as Nunjucks macros.
+  Import in a template with:
+    {% from "components/macros.njk" import metricCard, sourceNote, caveatBox %}
+#}
+
+{# DataFreshnessBadge — confidence + last-updated marker. #}
+{% macro dataFreshnessBadge(confidence, date) %}
+<span class="badge badge--{{ confidence }}">
+  <span class="badge__dot" aria-hidden="true"></span>
+  {{ confidence }}{% if date %} · {{ date | readableDate }}{% endif %}
+</span>
+{% endmacro %}
+
+{# SourceNote — where a figure came from, and when. #}
+{% macro sourceNote(record) %}
+<p class="source-note">
+  Source:
+  {% if record.source_url %}<a href="{{ record.source_url }}" rel="noopener">{{ record.source_name }}</a>{% else %}{{ record.source_name }}{% endif %}.
+  {% if record.date %}Figure dated {{ record.date | readableDate }}.{% endif %}
+  {% if record.retrieved_date %}Retrieved {{ record.retrieved_date | readableDate }}.{% endif %}
+  {% if record.confidence_level %}{{ dataFreshnessBadge(record.confidence_level, "") }}{% endif %}
+</p>
+{% endmacro %}
+
+{# CaveatBox — a clearly flagged caution. #}
+{% macro caveatBox(text, heading) %}
+<aside class="caveat" role="note">
+  <p class="caveat__heading">{{ heading or "Important" }}</p>
+  <p>{{ text }}</p>
+</aside>
+{% endmacro %}
+
+{# MetricCard — a single headline figure with explanation, source, and an expandable note. #}
+{% macro metricCard(metric, formattedValue, extraClass) %}
+<article class="metric-card{% if extraClass %} {{ extraClass }}{% endif %}" aria-labelledby="m-{{ metric.id }}-label">
+  <h3 class="metric-card__label" id="m-{{ metric.id }}-label">{{ metric.shortLabel or metric.metric_name }}</h3>
+  <p class="metric-card__value">{{ formattedValue }}</p>
+  <p class="metric-card__explain">{{ metric.explanation }}</p>
+  {% if metric.whatThisMeans %}
+  <details class="metric-card__more">
+    <summary>What this means</summary>
+    <p>{{ metric.whatThisMeans }}</p>
+  </details>
+  {% endif %}
+  {{ sourceNote(metric) }}
+</article>
+{% endmacro %}
+
+{# GlossaryTerm — a defined term with its definition. #}
+{% macro glossaryTerm(term) %}
+<div class="glossary-term" id="term-{{ term.id }}">
+  <dt class="glossary-term__name">{{ term.term }}</dt>
+  <dd class="glossary-term__def">{{ term.definition }}</dd>
+</div>
+{% endmacro %}
+
+{# SpendingComparison — one row comparing an amount to an annual budget. #}
+{% macro spendingRow(area, amountBillion) %}
+{% set ratio = (amountBillion / area.value * 100) %}
+<tr>
+  <th scope="row">{{ area.name }}</th>
+  <td class="num">£{{ area.value | number }} bn</td>
+  <td class="num">{{ ratio | round(0) }}%</td>
+</tr>
+{% endmacro %}

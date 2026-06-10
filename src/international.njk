@@ -1,0 +1,51 @@
+---
+layout: layouts/base.njk
+title: International comparison
+description: How UK government debt compares with other major economies, using a consistent international measure.
+---
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+
+<div class="page-intro prose">
+  <h1>International comparison</h1>
+  <p class="lede">How the UK sits against other major economies — on a measure chosen to be comparable across countries.</p>
+</div>
+
+{{ caveatBox(internationalComparisons.caveat, "Comparing like with like") }}
+
+<section aria-labelledby="table-heading">
+  <h2 id="table-heading">{{ internationalComparisons.measure }}, {{ internationalComparisons.year }}</h2>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="International debt comparison table">
+    <table class="data-table">
+      <caption>Sorted from highest to lowest debt-to-GDP. Deficit and growth columns are illustrative estimates only.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Country</th>
+          <th scope="col" class="num">Debt %GDP</th>
+          <th scope="col" class="num">Deficit %GDP</th>
+          <th scope="col" class="num">Growth %</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for c in internationalComparisons.countries | sort(true, false, "debtToGdp") %}
+        <tr{% if c.id == "uk" %} class="is-highlight"{% endif %}>
+          <th scope="row">{{ c.name }}{% if c.id == "uk" %} <span class="tag">UK</span>{% endif %}</th>
+          <td class="num">{{ c.debtToGdp }}</td>
+          <td class="num">{{ c.deficitToGdp }}</td>
+          <td class="num">{{ c.gdpGrowth }}</td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<p class="source-note">
+  Debt figures: <a href="{{ internationalComparisons.source_url }}" rel="noopener">{{ internationalComparisons.source_name }}</a>, {{ internationalComparisons.year }}.
+  Retrieved {{ internationalComparisons.retrieved_date | readableDate }}.
+  {{ dataFreshnessBadge(internationalComparisons.confidence_level, "") }}
+</p>
+
+<section class="prose" aria-labelledby="note-heading">
+  <h2 id="note-heading">Why the UK number here differs from the headline</h2>
+  <p>This table uses <strong>general government gross debt</strong>, the most consistent measure across countries. The UK's own headline measure — public sector net debt, around 94% of GDP — is lower because it subtracts liquid assets and is defined slightly differently. Comparing countries fairly means using the same definition for all of them, even if it is not the one a country usually quotes at home.</p>
+</section>

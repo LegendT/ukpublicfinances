@@ -1,0 +1,63 @@
+---
+layout: layouts/base.njk
+title: Public finance health
+description: A wider set of public-finance and economic indicators, with neutral direction-of-travel markers.
+---
+{% from "components/macros.njk" import caveatBox %}
+
+{% set arrows = { "rising": "↑", "falling": "↓", "stable": "→" } %}
+
+<div class="page-intro prose">
+  <h1>Public finance health</h1>
+  <p class="lede">Debt is only part of the picture. Here is a wider set of indicators, each showing its recent direction of travel.</p>
+</div>
+
+{{ caveatBox("The arrows show which way each figure has been moving recently — not whether that movement is good or bad. A rising tax burden or falling inflation can be read different ways depending on your view. We show the direction and leave the judgement to you.", "Reading the arrows") }}
+
+{% set groups = [
+  { "title": "Public finances", "ids": ["debt-gdp", "borrowing-gdp", "interest", "tax-burden", "revenue", "spending"] },
+  { "title": "The wider economy", "ids": ["inflation", "unemployment", "gdp-growth", "productivity"] }
+] %}
+
+{%- for g in groups %}
+<section aria-labelledby="grp-{{ loop.index }}">
+  <h2 id="grp-{{ loop.index }}">{{ g.title }}</h2>
+  <div class="indicator-grid">
+    {%- for ind in indicators.indicators %}
+      {%- if ind.id in g.ids %}
+    <article class="indicator">
+      <div class="indicator__head">
+        <h3 class="indicator__name">{{ ind.name }}</h3>
+        <span class="status status--{{ ind.status }}" aria-label="Recent trend: {{ ind.status }}">
+          <span class="status__arrow" aria-hidden="true">{{ arrows[ind.status] }}</span> {{ ind.status }}
+        </span>
+      </div>
+      <p class="indicator__value">{{ ind.value | number }} <span class="indicator__unit">{{ ind.unit }}</span></p>
+      <p class="indicator__explain">{{ ind.explanation }}</p>
+      <p class="source-note">Source: <a href="{{ ind.source_url }}" rel="noopener">{{ ind.source_name }}</a>. {{ ind.date | readableDate }}.</p>
+    </article>
+      {%- endif %}
+    {%- endfor %}
+  </div>
+</section>
+{%- endfor %}
+
+<details class="data-table-wrap">
+  <summary>Show all indicators as a table</summary>
+  <table class="data-table">
+    <caption>Public finance and economic indicators. Last updated {{ indicators.lastUpdated | readableDate }}.</caption>
+    <thead>
+      <tr><th scope="col">Indicator</th><th scope="col" class="num">Latest</th><th scope="col">Trend</th><th scope="col">Confidence</th></tr>
+    </thead>
+    <tbody>
+      {%- for ind in indicators.indicators %}
+      <tr>
+        <th scope="row">{{ ind.name }}</th>
+        <td class="num">{{ ind.value | number }} {{ ind.unit }}</td>
+        <td>{{ ind.status }}</td>
+        <td>{{ ind.confidence_level }}</td>
+      </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</details>

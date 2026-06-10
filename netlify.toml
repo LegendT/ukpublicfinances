@@ -1,0 +1,16 @@
+# Netlify build configuration for the UK Public Finances / Debt Explorer.
+# Netlify runs the Eleventy build and serves the generated _site folder.
+
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# Long-cache the fingerprint-free static assets is avoided deliberately:
+# Eleventy output here is plain files, so let Netlify use its sensible defaults.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

@@ -1,0 +1,76 @@
+{
+  "note": "A wider set of public-finance and economic indicators. Status (rising/falling/stable) describes the recent direction of the figure itself, not whether that direction is good or bad — context matters and is left to the reader. Headline values were verified against ONS and OBR releases in June 2026; revenue and spending totals are estimates.",
+  "lastUpdated": "2026-05-22",
+  "indicators": [
+    {
+      "id": "debt-gdp",
+      "name": "Debt as a share of GDP",
+      "value": 94.2, "unit": "% of GDP", "status": "stable",
+      "explanation": "Net debt measured against the size of the economy.",
+      "date": "2026-04-30", "source_name": "ONS, Public sector finances", "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance", "retrieved_date": "2026-06-10", "confidence_level": "provisional"
+    },
+    {
+      "id": "borrowing-gdp",
+      "name": "Borrowing as a share of GDP",
+      "value": 4.2, "unit": "% of GDP", "status": "rising",
+      "explanation": "Annual public sector net borrowing relative to the economy.",
+      "date": "2026-03-31", "source_name": "OBR / ONS", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-06-10", "confidence_level": "estimated"
+    },
+    {
+      "id": "interest",
+      "name": "Debt interest",
+      "value": 3.6, "unit": "% of GDP", "status": "rising",
+      "explanation": "The cost of servicing debt, relative to the economy. About £111 billion a year.",
+      "date": "2026-03-31", "source_name": "OBR", "source_url": "https://obr.uk/forecasts-in-depth/tax-by-tax-spend-by-spend/debt-interest-central-government-net/", "retrieved_date": "2026-06-10", "confidence_level": "official"
+    },
+    {
+      "id": "inflation",
+      "name": "Inflation (CPI)",
+      "value": 2.8, "unit": "% per year", "status": "falling",
+      "explanation": "The rate at which consumer prices are rising over the year. Eased in April as household energy bills fell.",
+      "date": "2026-04-30", "source_name": "ONS, Consumer price inflation, UK: April 2026", "source_url": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/april2026", "retrieved_date": "2026-06-10", "confidence_level": "official"
+    },
+    {
+      "id": "unemployment",
+      "name": "Unemployment rate",
+      "value": 5.0, "unit": "% of workforce", "status": "rising",
+      "explanation": "The share of people who want to work and are looking for a job but cannot find one. Up from 4.5% a year earlier.",
+      "date": "2026-03-31", "source_name": "ONS, Labour market overview", "source_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/latest", "retrieved_date": "2026-06-10", "confidence_level": "provisional"
+    },
+    {
+      "id": "gdp-growth",
+      "name": "GDP growth",
+      "value": 1.1, "unit": "% per year", "status": "stable",
+      "explanation": "How fast the economy is growing, after adjusting for inflation. The 2026 forecast, down from 1.4% in 2025.",
+      "date": "2026-03-31", "source_name": "OBR / ONS, GDP", "source_url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp", "retrieved_date": "2026-06-10", "confidence_level": "estimated"
+    },
+    {
+      "id": "productivity",
+      "name": "Productivity (output per hour)",
+      "value": 0.4, "unit": "% growth per year", "status": "stable",
+      "explanation": "How much is produced per hour worked, versus a year earlier. Weak productivity growth has been a long-running UK challenge.",
+      "date": "2026-03-31", "source_name": "ONS, Productivity", "source_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity", "retrieved_date": "2026-06-10", "confidence_level": "provisional"
+    },
+    {
+      "id": "tax-burden",
+      "name": "Tax burden",
+      "value": 36.3, "unit": "% of GDP", "status": "rising",
+      "explanation": "Total taxes as a share of the economy. Forecast to keep rising to the highest level since records began in 1948.",
+      "date": "2026-03-31", "source_name": "OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-06-10", "confidence_level": "estimated"
+    },
+    {
+      "id": "revenue",
+      "name": "Government revenue",
+      "value": 1238, "unit": "£ billion per year", "status": "rising",
+      "explanation": "Total money the government receives, mostly from taxes.",
+      "date": "2026-03-31", "source_name": "ONS / OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-06-10", "confidence_level": "estimated"
+    },
+    {
+      "id": "spending",
+      "name": "Government spending",
+      "value": 1368, "unit": "£ billion per year", "status": "rising",
+      "explanation": "Total money the government spends on services, benefits, investment, and debt interest.",
+      "date": "2026-03-31", "source_name": "HM Treasury / OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-06-10", "confidence_level": "estimated"
+    }
+  ]
+}

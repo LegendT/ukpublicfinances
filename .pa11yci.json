@@ -1,0 +1,25 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "timeout": 30000,
+    "wait": 1000,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+    }
+  },
+  "urls": [
+    "http://127.0.0.1:8081/",
+    "http://127.0.0.1:8081/timeline/",
+    "http://127.0.0.1:8081/debt-in-context/",
+    "http://127.0.0.1:8081/interest/",
+    "http://127.0.0.1:8081/international/",
+    "http://127.0.0.1:8081/health/",
+    "http://127.0.0.1:8081/big-numbers/",
+    "http://127.0.0.1:8081/lifetime/",
+    "http://127.0.0.1:8081/budget-simulator/",
+    "http://127.0.0.1:8081/deficit-vs-debt/",
+    "http://127.0.0.1:8081/monthly/",
+    "http://127.0.0.1:8081/glossary/",
+    "http://127.0.0.1:8081/sources/"
+  ]
+}

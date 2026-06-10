@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="site-header__brand" href="{{ '/' | url }}">{{ site.title }}</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+        <ul id="primary-nav" class="site-nav__list">
+          {%- for item in site.nav %}
+            {%- if item.children %}
+            <li class="site-nav__group">
+              <details class="nav-group{% if item.children | findBy('url', page.url) %} is-active{% endif %}">
+                <summary>{{ item.text }}</summary>
+                <ul class="nav-group__menu">
+                  {%- for child in item.children %}
+                  <li><a href="{{ child.url | url }}"{% if page.url == child.url %} aria-current="page"{% endif %}>{{ child.text }}</a></li>
+                  {%- endfor %}
+                </ul>
+              </details>
+            </li>
+            {%- else %}
+            <li>
+              <a href="{{ item.url | url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.text }}</a>
+            </li>
+            {%- endif %}
+          {%- endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" tabindex="-1">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>{{ site.title }} — an educational project. Figures show their source and date, and may be revised.</p>
+      <p class="site-footer__warn">{{ meta.placeholderNotice }}</p>
+      <p><a href="{{ '/sources/' | url }}">All data sources</a> · <a href="{{ '/glossary/' | url }}">Glossary</a></p>
+    </div>
+  </footer>
+
+  <script src="{{ '/assets/js/nav.js' | url }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "note": "Structured monthly summaries of the ONS public sector finances release. The newest entry is shown first and drives the monthly explainer page. Add a new object to the top of 'updates' each month.",
+  "updates": [
+    {
+      "id": "2026-04",
+      "month": "April 2026",
+      "published": "2026-05-22",
+      "source_name": "ONS, Public sector finances, UK: April 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2026",
+      "retrieved_date": "2026-06-10",
+      "confidence_level": "provisional",
+      "headline": "Borrowing in April was higher than a year earlier and above the official forecast, the second-highest April on record.",
+      "borrowing": {
+        "value": 24.3,
+        "unit": "£ billion",
+        "direction": "rose",
+        "vsLastYear": "£4.9 billion more than April 2025",
+        "vsForecast": "£3.4 billion above the OBR forecast of £20.9 billion"
+      },
+      "answers": {
+        "whatChanged": "The government borrowed £24.3 billion in April 2026 — the gap between what it spent and what it raised. This was up on the same month last year and higher than the OBR had forecast.",
+        "borrowingWhy": "Spending grew faster than receipts, with higher debt interest and benefit costs among the pressures.",
+        "taxReceipts": "Receipts grew over the year, helped by income tax and National Insurance, but not enough to offset higher spending.",
+        "spending": "Day-to-day spending rose, including on benefits and public services.",
+        "debtInterest": "Central government debt interest payable was £10.3 billion in April — the highest for any April on record, reflecting inflation uplift on index-linked gilts and higher interest rates.",
+        "vsObr": "Borrowing came in above the OBR's March forecast for the month, an early sign the year may run higher than planned — though one month is a weak guide and figures are routinely revised."
+      }
+    }
+  ]
+}

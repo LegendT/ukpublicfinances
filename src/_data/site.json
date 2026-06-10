@@ -1,0 +1,27 @@
+{
+  "title": "UK Public Debt Explorer",
+  "tagline": "Understand UK government debt and public finances, using official data and plain English.",
+  "description": "A factual, data-led explorer for UK public sector debt, borrowing, and debt interest. Every figure shows its source and date.",
+  "lang": "en-GB",
+  "nav": [
+    { "text": "Dashboard", "url": "/" },
+    { "text": "The data", "children": [
+      { "text": "Historical timeline", "url": "/timeline/" },
+      { "text": "Debt in context", "url": "/debt-in-context/" },
+      { "text": "Interest costs", "url": "/interest/" },
+      { "text": "International comparison", "url": "/international/" },
+      { "text": "Public finance health", "url": "/health/" }
+    ] },
+    { "text": "Tools", "children": [
+      { "text": "Big numbers translator", "url": "/big-numbers/" },
+      { "text": "During your lifetime", "url": "/lifetime/" },
+      { "text": "Budget simulator", "url": "/budget-simulator/" }
+    ] },
+    { "text": "Learn", "children": [
+      { "text": "Debt vs deficit", "url": "/deficit-vs-debt/" },
+      { "text": "Monthly update", "url": "/monthly/" },
+      { "text": "Glossary", "url": "/glossary/" }
+    ] },
+    { "text": "Sources", "url": "/sources/" }
+  ]
+}

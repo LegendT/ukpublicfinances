@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+title: Monthly update
+description: A plain-English summary of the latest monthly public finances release — what changed and why.
+---
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+
+{% set u = monthlyUpdates.updates[0] %}
+
+<div class="page-intro prose">
+  <h1>Monthly update: {{ u.month }}</h1>
+  <p class="lede">{{ u.headline }}</p>
+  <p class="updated">Released {{ u.published | readableDate }}. {{ dataFreshnessBadge(u.confidence_level, "") }}</p>
+</div>
+
+<section aria-labelledby="borrowing-heading">
+  <h2 id="borrowing-heading" class="visually-hidden">Borrowing this month</h2>
+  <div class="metric-grid metric-grid--compact">
+    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ u.borrowing.value }} bn</p><p class="metric-card__label">Borrowed in {{ u.month }} — {{ u.borrowing.direction }}</p></article>
+    <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ u.borrowing.vsLastYear }}</p><p class="metric-card__label">Versus the same month last year</p></article>
+    <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ u.borrowing.vsForecast }}</p><p class="metric-card__label">Versus the official forecast</p></article>
+  </div>
+</section>
+
+<section class="prose" aria-labelledby="qa-heading">
+  <h2 id="qa-heading">What changed, and why</h2>
+  <dl class="def-list">
+    <dt>What changed this month?</dt>
+    <dd>{{ u.answers.whatChanged }}</dd>
+    <dt>Why did borrowing move?</dt>
+    <dd>{{ u.answers.borrowingWhy }}</dd>
+    <dt>What happened to tax receipts?</dt>
+    <dd>{{ u.answers.taxReceipts }}</dd>
+    <dt>What happened to spending?</dt>
+    <dd>{{ u.answers.spending }}</dd>
+    <dt>What happened to debt interest?</dt>
+    <dd>{{ u.answers.debtInterest }}</dd>
+    <dt>How does this compare with the OBR forecast?</dt>
+    <dd>{{ u.answers.vsObr }}</dd>
+  </dl>
+</section>
+
+<p class="source-note">
+  Source: <a href="{{ u.source_url }}" rel="noopener">{{ u.source_name }}</a>.
+  Retrieved {{ u.retrieved_date | readableDate }}.
+  {{ dataFreshnessBadge(u.confidence_level, "") }}
+</p>
+
+{{ caveatBox("One month is a weak guide to the year — monthly figures are volatile, seasonal, and routinely revised as fuller data arrives. Read the direction, not the decimal.", "A note on monthly figures") }}

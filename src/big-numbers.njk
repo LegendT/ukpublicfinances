@@ -1,0 +1,67 @@
+---
+layout: layouts/base.njk
+title: Big numbers translator
+description: Turn a large sum into per-person figures and comparisons with annual budgets and GDP.
+---
+{% from "components/macros.njk" import caveatBox %}
+
+<div class="page-intro prose">
+  <h1>Big numbers translator</h1>
+  <p class="lede">Billions are hard to picture. Enter an amount to see it per person, against the economy, and next to annual budgets.</p>
+</div>
+
+<form class="translator" id="translator" novalidate>
+  <div class="field">
+    <label for="amount">Amount in £ billion</label>
+    <div class="input-group">
+      <span class="input-group__prefix" aria-hidden="true">£</span>
+      <input type="number" id="amount" name="amount" inputmode="decimal" min="0" step="0.1" value="50" aria-describedby="amount-hint">
+      <span class="input-group__suffix" aria-hidden="true">billion</span>
+    </div>
+    <p id="amount-hint" class="field__hint">For example, enter 50 for £50 billion.</p>
+    <p id="amount-error" class="field__error" role="alert" hidden>Enter a positive number.</p>
+  </div>
+  <button type="submit" class="btn">Convert</button>
+  <p class="field__hint">Results also update as you type.</p>
+</form>
+
+<section aria-labelledby="result-heading" aria-live="polite">
+  <h2 id="result-heading">£<span id="echo-amount">50</span> billion is roughly…</h2>
+  <div class="metric-grid metric-grid--compact" id="results">
+    <!-- Populated by JS; the table below is the no-JS fallback. -->
+  </div>
+</section>
+
+<details class="data-table-wrap" id="results-table-wrap">
+  <summary>Show the figures as a table</summary>
+  <table class="data-table">
+    <caption>Translation of the entered amount</caption>
+    <thead>
+      <tr><th scope="col">Comparison</th><th scope="col" class="num">Result</th></tr>
+    </thead>
+    <tbody id="results-table-body"></tbody>
+  </table>
+</details>
+
+{{ caveatBox("Comparisons show scale only. They do not imply one budget could be swapped for another, or that debt could simply be redirected. Annual budgets are the latest available figures and may be revised.", "How to read these") }}
+
+<noscript>
+  <p class="caveat">This tool needs JavaScript to calculate. The underlying figures are listed on the <a href="{{ '/sources/' | url }}">sources page</a>.</p>
+</noscript>
+
+<script id="translator-assumptions" type="application/json">
+{
+  "population": {{ assumptions.translator.population }},
+  "adults": {{ assumptions.translator.adults }},
+  "taxpayers": {{ assumptions.translator.taxpayers }},
+  "gdpGbpBillion": {{ assumptions.translator.gdpGbpBillion }},
+  "annualBorrowingGbpBillion": {{ assumptions.translator.annualBorrowingGbpBillion }},
+  "annualDebtInterestGbpBillion": {{ assumptions.translator.annualDebtInterestGbpBillion }},
+  "budgets": [
+    {%- for area in spendingComparisons.areas %}
+    { "name": {{ area.name | dump | safe }}, "value": {{ area.value }} }{% if not loop.last %},{% endif %}
+    {%- endfor %}
+  ]
+}
+</script>
+<script src="{{ '/assets/js/big-numbers.js' | url }}" defer></script>

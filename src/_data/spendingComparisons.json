@@ -1,0 +1,72 @@
+{
+  "note": "Annual spending areas used to give scale to debt and debt interest. Comparisons help readers picture size only; they do not imply budgets could be redirected to or from debt. Scope varies by area (see each note) — figures are estimates pending line-by-line verification against HM Treasury statistics.",
+  "fiscalYear": "2025-26",
+  "areas": [
+    {
+      "id": "health",
+      "name": "NHS / health",
+      "value": 200,
+      "unit": "£ billion per year",
+      "source_name": "HM Treasury, Public spending statistics",
+      "source_url": "https://www.gov.uk/government/collections/public-expenditure-statistical-analyses-pesa",
+      "retrieved_date": "2026-06-10",
+      "confidence_level": "estimated",
+      "notes": "Total Department of Health and Social Care budget for England. The NHS England core budget alone is about £152bn."
+    },
+    {
+      "id": "education",
+      "name": "Education",
+      "value": 116,
+      "unit": "£ billion per year",
+      "source_name": "HM Treasury PESA / IFS education spending report",
+      "source_url": "https://www.gov.uk/government/collections/public-expenditure-statistical-analyses-pesa",
+      "retrieved_date": "2026-06-10",
+      "confidence_level": "estimated",
+      "notes": "Total UK public education spending. The DfE day-to-day budget for England alone is about £101bn."
+    },
+    {
+      "id": "defence",
+      "name": "Defence",
+      "value": 56,
+      "unit": "£ billion per year",
+      "source_name": "HM Treasury, Public spending statistics",
+      "source_url": "https://www.gov.uk/government/collections/public-expenditure-statistical-analyses-pesa",
+      "retrieved_date": "2026-06-10",
+      "confidence_level": "estimated",
+      "notes": "About 2% of GDP, meeting the NATO commitment."
+    },
+    {
+      "id": "state-pension",
+      "name": "State pension",
+      "value": 125,
+      "unit": "£ billion per year",
+      "source_name": "DWP / HM Treasury benefit expenditure tables",
+      "source_url": "https://www.gov.uk/government/collections/benefit-expenditure-tables",
+      "retrieved_date": "2026-06-10",
+      "confidence_level": "estimated",
+      "notes": "Paid to over 12 million pensioners."
+    },
+    {
+      "id": "social-protection",
+      "name": "Welfare and social protection (total)",
+      "value": 334,
+      "unit": "£ billion per year",
+      "source_name": "DWP benefit expenditure tables / HM Treasury",
+      "source_url": "https://www.gov.uk/government/collections/benefit-expenditure-tables",
+      "retrieved_date": "2026-06-10",
+      "confidence_level": "estimated",
+      "notes": "Total social security spending (DWP benefits, tax credits, Child Benefit). Includes the state pension shown separately above. The broader social-protection function is about £379bn."
+    },
+    {
+      "id": "tax-receipts",
+      "name": "Total tax receipts",
+      "value": 1120,
+      "unit": "£ billion per year",
+      "source_name": "ONS, Public sector finances / OBR",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance",
+      "retrieved_date": "2026-06-10",
+      "confidence_level": "estimated",
+      "notes": "Total tax receipts, about 36% of GDP. Total public sector current receipts (including non-tax income) are higher, around £1,240bn."
+    }
+  ]
+}

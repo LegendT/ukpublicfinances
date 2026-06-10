@@ -1,0 +1,60 @@
+---
+layout: layouts/base.njk
+title: Interest costs
+description: What the UK government pays to service its debt — yearly, monthly, and daily — and how that compares with revenue and the economy.
+---
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+
+{% set interest = dashboard.metrics | findBy("id", "debt-interest") %}
+{% set annual = interest.value %}
+{% set revenue = assumptions.budgetSimulator.baselineGbpBillion.totalRevenue %}
+{% set gdp = dashboard.supporting.gdp.value %}
+
+<div class="page-intro prose">
+  <h1>Interest costs</h1>
+  <p class="lede">Debt has to be serviced. Here is what that costs — and why the interest rate matters as much as the size of the debt.</p>
+</div>
+
+<section aria-labelledby="breakdown">
+  <h2 id="breakdown" class="visually-hidden">Interest cost breakdown</h2>
+  <div class="metric-grid metric-grid--compact">
+    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ annual | number }} bn</p><p class="metric-card__label">Per year</p></article>
+    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ (annual / 12) | round(1) }} bn</p><p class="metric-card__label">Per month (average)</p></article>
+    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ (annual * 1000 / 365) | round(0) | number }} m</p><p class="metric-card__label">Per day (average)</p></article>
+    <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ (annual / revenue * 100) | round(0) }}%</p><p class="metric-card__label">Of government revenue</p></article>
+    <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ (annual / gdp * 100) | round(1) }}%</p><p class="metric-card__label">Of GDP</p></article>
+  </div>
+  <p class="source-note">
+    Annual figure: <a href="{{ interest.source_url }}" rel="noopener">{{ interest.source_name }}</a>.
+    Monthly and daily are simple averages of the annual figure. Per cent of revenue and GDP are calculated.
+    {{ dataFreshnessBadge(interest.confidence_level, "") }}
+  </p>
+</section>
+
+<section class="prose" aria-labelledby="why-rates">
+  <h2 id="why-rates">Why the interest rate matters as much as the debt</h2>
+  <p>The same pile of debt can be cheap or expensive to hold, depending on the interest rate paid on it. Since 2021, two things pushed UK debt interest sharply higher: high inflation raised the cost of <strong>index-linked gilts</strong> (whose value rises with prices), and higher Bank of England interest rates raised the cost of new and refinanced borrowing.</p>
+  <p>That is why "how much is owed" and "at what rate" are both part of the story — and why the cost can rise even when the debt itself is broadly flat.</p>
+</section>
+
+<section aria-labelledby="trend">
+  <h2 id="trend">Historical trend</h2>
+  <details class="data-table-wrap" open>
+    <summary>Annual debt interest over time</summary>
+    <table class="data-table">
+      <caption>Approximate annual debt interest, £ billion (nominal). Recent years only; earlier figures are estimates.</caption>
+      <thead><tr><th scope="col">Year</th><th scope="col" class="num">Debt interest (£ bn)</th></tr></thead>
+      <tbody>
+        {%- for d in debtTimeseries.series %}
+          {%- if d.interestGbp !== null %}
+          <tr><th scope="row">{{ d.year }}</th><td class="num">{{ d.interestGbp | number }}</td></tr>
+          {%- endif %}
+        {%- endfor %}
+        <tr><th scope="row">2026</th><td class="num">{{ annual | number }}</td></tr>
+      </tbody>
+    </table>
+  </details>
+  <p class="source-note">Source: <a href="{{ debtTimeseries.source_url }}" rel="noopener">{{ debtTimeseries.source_name }}</a>. {{ dataFreshnessBadge("estimated", "") }}</p>
+</section>
+
+{{ caveatBox("Monthly and daily figures are simple averages for illustration — actual interest is uneven, with large peaks when index-linked gilts are uprated. Figures are provisional and may be revised.", "How to read these") }}

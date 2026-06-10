@@ -1,0 +1,19 @@
+{
+  "caveat": "Countries measure debt differently. This comparison uses general government gross debt as a share of GDP, the most consistent measure available internationally. The UK's headline national measure (net debt, about 94% of GDP) is lower and not directly comparable. Debt figures are IMF data for 2025; the deficit and growth columns are illustrative estimates and have not been individually verified.",
+  "measure": "General government gross debt (% of GDP)",
+  "source_name": "IMF World Economic Outlook database",
+  "source_url": "https://www.imf.org/external/datamapper/GGXWDG_NGDP@WEO",
+  "retrieved_date": "2026-06-10",
+  "year": 2025,
+  "confidence_level": "official",
+  "countries": [
+    { "id": "uk", "name": "United Kingdom", "debtToGdp": 103.9, "deficitToGdp": 4.1, "gdpGrowth": 1.2 },
+    { "id": "us", "name": "United States", "debtToGdp": 122.5, "deficitToGdp": 6.3, "gdpGrowth": 2.0 },
+    { "id": "jp", "name": "Japan", "debtToGdp": 234.9, "deficitToGdp": 4.8, "gdpGrowth": 0.7 },
+    { "id": "de", "name": "Germany", "debtToGdp": 65.4, "deficitToGdp": 1.6, "gdpGrowth": 0.8 },
+    { "id": "fr", "name": "France", "debtToGdp": 116.3, "deficitToGdp": 5.3, "gdpGrowth": 1.0 },
+    { "id": "it", "name": "Italy", "debtToGdp": 137.3, "deficitToGdp": 3.8, "gdpGrowth": 0.6 },
+    { "id": "ca", "name": "Canada", "debtToGdp": 112.5, "deficitToGdp": 1.5, "gdpGrowth": 1.4 },
+    { "id": "au", "name": "Australia", "debtToGdp": 50.9, "deficitToGdp": 1.1, "gdpGrowth": 1.8 }
+  ]
+}

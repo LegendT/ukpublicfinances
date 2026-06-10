@@ -1,0 +1,38 @@
+{
+  "note": "Assumptions used by the interactive tools. These are deliberately simple and visible. The budget simulator and translators are educational models, not forecasts.",
+  "translator": {
+    "population": 68300000,
+    "adults": 54200000,
+    "taxpayers": 36200000,
+    "gdpGbpBillion": 3097,
+    "annualBorrowingGbpBillion": 130,
+    "annualDebtInterestGbpBillion": 111
+  },
+  "budgetSimulator": {
+    "disclaimer": "A simplified educational model. It applies static, first-round effects only and does not model how the economy responds to changes. It is not a forecast and must not be read as one.",
+    "baselineGbpBillion": {
+      "totalSpending": 1368,
+      "totalRevenue": 1238,
+      "borrowing": 130,
+      "debt": 2917
+    },
+    "spendingLeversGbpBillion": {
+      "health": 200,
+      "education": 101,
+      "defence": 56,
+      "welfare": 210,
+      "pensions": 125
+    },
+    "taxLevers": {
+      "incomeTaxPointGbpBillion": 8.0,
+      "vatPointGbpBillion": 8.5,
+      "corporationTaxPointGbpBillion": 3.7,
+      "note": "Approximate revenue from a 1 percentage point change to each rate (HMRC 'ready reckoner' style, illustrative)."
+    },
+    "projection": {
+      "years": 5,
+      "assumedInterestRate": 0.04,
+      "note": "Debt in future years is the running total of borrowing plus assumed interest. Economic growth, behavioural responses, and inflation are not modelled."
+    }
+  }
+}

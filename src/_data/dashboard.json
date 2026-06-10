@@ -1,0 +1,89 @@
+{
+  "lastUpdated": "2026-05-22",
+  "referencePeriod": "April 2026",
+  "caveat": "Figures are official ONS and OBR data, the latest available for each measure. Public finance figures are provisional and routinely revised. Monthly borrowing is seasonal and should not be multiplied up to estimate a year.",
+  "metrics": [
+    {
+      "id": "net-debt",
+      "metric_name": "Public sector net debt (excluding public sector banks)",
+      "shortLabel": "Public sector net debt",
+      "value": 2917,
+      "unit": "£ billion",
+      "explanation": "The headline measure of how much the UK government owes, after subtracting liquid assets. This is the main measure used in the monthly public finance statistics.",
+      "whatThisMeans": "Think of it as everything the government has borrowed and not yet repaid, less the cash it holds. It is a stock — a total built up over many years — not a single year's spending. As a share of GDP this is around levels last seen in the early 1960s.",
+      "date": "2026-03-31",
+      "source_name": "ONS, Public sector finances, UK: April 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2026",
+      "retrieved_date": "2026-06-10",
+      "notes": "£2,917.2bn at end March 2026, the latest published cash figure. Excludes public sector banks.",
+      "confidence_level": "provisional"
+    },
+    {
+      "id": "debt-gdp",
+      "metric_name": "Debt as a share of GDP",
+      "shortLabel": "Debt as share of GDP",
+      "value": 94.2,
+      "unit": "% of GDP",
+      "explanation": "Net debt measured against the size of the economy for that period. This matters more than the cash total, because a bigger economy can support more debt.",
+      "whatThisMeans": "If debt is around 94% of GDP, the government owes a little less than the economy produces in a year. Economists watch the trend in this ratio rather than the cash figure alone.",
+      "date": "2026-04-30",
+      "source_name": "ONS, Public sector finances, UK: April 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2026",
+      "retrieved_date": "2026-06-10",
+      "notes": "94.2% of GDP at end April 2026, provisionally estimated.",
+      "confidence_level": "provisional"
+    },
+    {
+      "id": "debt-per-person",
+      "metric_name": "Debt per person",
+      "shortLabel": "Debt per person",
+      "value": 42709,
+      "unit": "£ per person",
+      "explanation": "Total net debt divided by the UK population. A way to picture the scale, not a bill anyone personally owes.",
+      "whatThisMeans": "This does not mean each person owes this amount. Government debt is repaid through taxes and borrowing over time, not split between residents.",
+      "date": "2026-03-31",
+      "source_name": "Calculated from ONS net debt and ONS population estimate",
+      "source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates",
+      "retrieved_date": "2026-06-10",
+      "notes": "Calculated at build time: net debt (£2,917bn) divided by population estimate (68.3m). Recomputed whenever either input changes.",
+      "confidence_level": "calculated"
+    },
+    {
+      "id": "debt-interest",
+      "metric_name": "Annual debt interest cost",
+      "shortLabel": "Debt interest",
+      "value": 111,
+      "unit": "£ billion per year",
+      "explanation": "What the government pays to service its debt over a year. Affected both by how much is owed and by the interest rate on it.",
+      "whatThisMeans": "Interest is a real cash cost competing with other spending — around 8% of total public spending. Some of it rises and falls with inflation, because a share of UK debt is index-linked. Central government interest payable was £10.3 billion in April 2026 alone.",
+      "date": "2026-03-31",
+      "source_name": "OBR, debt interest (central government, net of APF)",
+      "source_url": "https://obr.uk/forecasts-in-depth/tax-by-tax-spend-by-spend/debt-interest-central-government-net/",
+      "retrieved_date": "2026-06-10",
+      "notes": "About £111bn in 2025-26, roughly 3.7% of GDP. Includes the inflation uplift on index-linked gilts.",
+      "confidence_level": "official"
+    },
+    {
+      "id": "monthly-borrowing",
+      "metric_name": "Latest monthly borrowing",
+      "shortLabel": "Latest borrowing",
+      "value": 24.3,
+      "unit": "£ billion",
+      "explanation": "How much the government borrowed in the latest month — the gap between what it spent and what it raised.",
+      "whatThisMeans": "Borrowing is a flow (one period's gap), whereas debt is the stock that builds up over many periods. Monthly borrowing is seasonal — April is typically high — so it cannot simply be multiplied by twelve. Annual borrowing is around £130 billion.",
+      "date": "2026-04-30",
+      "source_name": "ONS, Public sector finances, UK: April 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2026",
+      "retrieved_date": "2026-06-10",
+      "notes": "£24.3bn in April 2026, the second-highest April on record and £3.4bn above the OBR forecast of £20.9bn. Excludes public sector banks.",
+      "confidence_level": "provisional"
+    }
+  ],
+  "supporting": {
+    "gdp": { "value": 3097, "unit": "£ billion", "notes": "Implied from net debt and the debt-to-GDP ratio (2917 / 0.942). Used for the translator's share-of-GDP figure." },
+    "population": { "value": 68300000, "unit": "people", "notes": "Mid-year population estimate." },
+    "adults": { "value": 54200000, "unit": "people", "notes": "Population aged 18 and over." },
+    "taxpayers": { "value": 36200000, "unit": "people", "notes": "Estimated number of income tax payers." },
+    "taxReceipts": { "value": 1120, "unit": "£ billion", "notes": "Total tax receipts, annual, estimated (about 36% of GDP). Total public sector current receipts are higher." }
+  }
+}

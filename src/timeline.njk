@@ -1,0 +1,114 @@
+---
+layout: layouts/base.njk
+title: Historical timeline
+description: How UK government debt, borrowing, and debt interest have changed over time, with neutral event markers.
+---
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+
+{# The current-year point comes from the dashboard, the single source of truth. #}
+{% set ndNow = dashboard.metrics | findBy("id", "net-debt") %}
+{% set dgNow = dashboard.metrics | findBy("id", "debt-gdp") %}
+{% set diNow = dashboard.metrics | findBy("id", "debt-interest") %}
+{% set bwNow = assumptions.translator.annualBorrowingGbpBillion %}
+
+<div class="page-intro prose">
+  <h1>Historical timeline</h1>
+  <p class="lede">UK debt over the long run. Switch the measure and the period; every point is also listed in the table below.</p>
+</div>
+
+<div class="chart-controls">
+  <fieldset>
+    <legend>Measure</legend>
+    <div class="radio-row" role="group">
+      <label><input type="radio" name="measure" value="debtToGdp" checked> Debt (% of GDP)</label>
+      <label><input type="radio" name="measure" value="debtGbp"> Debt (£)</label>
+      <label><input type="radio" name="measure" value="borrowingGbp"> Borrowing (£)</label>
+      <label><input type="radio" name="measure" value="interestGbp"> Interest (£)</label>
+    </div>
+  </fieldset>
+  <div class="field field--inline">
+    <label for="period">Period</label>
+    <select id="period" name="period">
+      <option value="1700">Since 1700</option>
+      <option value="1900">Since 1900</option>
+      <option value="1945">Since 1945</option>
+      <option value="1979" selected>Since 1979</option>
+      <option value="2008">Since 2008</option>
+    </select>
+  </div>
+</div>
+
+<figure class="chart" aria-labelledby="chart-caption">
+  <div id="chart" class="chart__canvas" role="img" aria-label="Line chart of UK debt over time. The same data is in the table below.">
+    <!-- SVG injected by JS. Hidden from assistive tech in favour of the table. -->
+  </div>
+  <figcaption id="chart-caption" class="chart__caption">
+    UK debt over time. <span id="chart-measure-label">Debt as a share of GDP</span>.
+  </figcaption>
+</figure>
+
+<section class="timeline-events" aria-labelledby="events-heading">
+  <h2 id="events-heading">Event markers</h2>
+  <ul class="event-list">
+    {%- for e in events.events %}
+    <li class="event-list__item">
+      <span class="event-list__year">{{ e.year }}</span>
+      <span class="event-list__body"><strong>{{ e.title }}</strong> — {{ e.summary }}</span>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<details class="data-table-wrap" open>
+  <summary>Show the data as a table</summary>
+  <table class="data-table">
+    <caption>UK debt time series. Pre-1900 values are approximate historical reconstructions.</caption>
+    <thead>
+      <tr>
+        <th scope="col">Year</th>
+        <th scope="col" class="num">Debt (% GDP)</th>
+        <th scope="col" class="num">Debt (£ bn)</th>
+        <th scope="col" class="num">Borrowing (£ bn)</th>
+        <th scope="col" class="num">Interest (£ bn)</th>
+        <th scope="col">Confidence</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for d in debtTimeseries.series %}
+      <tr>
+        <th scope="row">{{ d.year }}</th>
+        <td class="num">{{ d.debtToGdp if d.debtToGdp !== null else "—" }}</td>
+        <td class="num">{{ d.debtGbp | number if d.debtGbp !== null else "—" }}</td>
+        <td class="num">{{ d.borrowingGbp | number if d.borrowingGbp !== null else "—" }}</td>
+        <td class="num">{{ d.interestGbp | number if d.interestGbp !== null else "—" }}</td>
+        <td>{{ d.confidence_level }}</td>
+      </tr>
+      {%- endfor %}
+      <tr>
+        <th scope="row">2026</th>
+        <td class="num">{{ dgNow.value }}</td>
+        <td class="num">{{ ndNow.value | number }}</td>
+        <td class="num">{{ bwNow | number }}</td>
+        <td class="num">{{ diNow.value | number }}</td>
+        <td>provisional</td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+<p class="source-note">
+  Source: <a href="{{ debtTimeseries.source_url }}" rel="noopener">{{ debtTimeseries.source_name }}</a>.
+  Retrieved {{ debtTimeseries.retrieved_date | readableDate }}.
+  {{ dataFreshnessBadge("estimated", "") }}
+</p>
+
+{{ caveatBox(debtTimeseries.note, "About this series") }}
+
+<script id="timeline-data" type="application/json">
+{
+  "series": {{ debtTimeseries.series | dump | safe }},
+  "current": { "year": 2026, "debtToGdp": {{ dgNow.value }}, "debtGbp": {{ ndNow.value }}, "borrowingGbp": {{ bwNow }}, "interestGbp": {{ diNow.value }} },
+  "events": {{ events.events | dump | safe }}
+}
+</script>
+<script src="{{ '/assets/js/timeline.js' | url }}" defer></script>

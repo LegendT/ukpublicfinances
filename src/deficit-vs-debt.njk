@@ -1,0 +1,71 @@
+---
+layout: layouts/base.njk
+title: Debt vs deficit
+description: A plain-English explainer of debt, deficit, borrowing, GDP, gilts, and why interest rates matter.
+---
+{% from "components/macros.njk" import caveatBox %}
+
+<div class="page-intro prose">
+  <h1>Debt vs deficit, in plain English</h1>
+  <p class="lede">Two words that sound alike but mean different things. Get these straight and most public-finance news makes more sense.</p>
+</div>
+
+<div class="prose">
+  <h2>The one-sentence version</h2>
+  <p><strong>The deficit is the gap in a single year. The debt is the pile that gap adds to.</strong> Borrow £100 billion this year and you add £100 billion to a debt that already runs into trillions.</p>
+
+  <h2>The key terms</h2>
+  <dl class="def-list">
+    <dt>Debt</dt>
+    <dd>The total the government owes, built up over many years. A <em>stock</em> — a running total. The UK's headline measure is public sector net debt.</dd>
+
+    <dt>Deficit</dt>
+    <dd>The amount spending exceeds income in one year. A <em>flow</em>. A surplus is the opposite — income above spending.</dd>
+
+    <dt>Borrowing</dt>
+    <dd>The cash raised to cover a deficit, mostly by selling gilts. In the monthly statistics this is "public sector net borrowing".</dd>
+
+    <dt>GDP</dt>
+    <dd>The size of the economy in a year. Used as the yardstick: £100 billion means more to a small economy than a large one.</dd>
+
+    <dt>Gilts</dt>
+    <dd>UK government bonds. Investors lend money by buying them; the government pays interest and repays the value at a set date.</dd>
+
+    <dt>Debt interest</dt>
+    <dd>The cost of servicing the debt. Driven by how much is owed <em>and</em> the interest rate paid. Some UK debt is index-linked, so its cost rises with inflation.</dd>
+  </dl>
+
+  <h2>Who lends to the government?</h2>
+  <p>Buyers of gilts include UK pension funds and insurers, banks, overseas investors, and the Bank of England. The UK Debt Management Office runs the sales. Lenders are repaid with interest, which is why the interest rate on new debt matters so much.</p>
+
+  <h2>Why debt-to-GDP matters</h2>
+  <p>The cash total grabs headlines, but economists watch debt as a share of GDP. A growing economy can carry more debt comfortably; the ratio shows the burden relative to the means to service it. The trend matters more than any single month.</p>
+
+  <h2>Why interest rates matter</h2>
+  <p>When rates rise, new and maturing debt costs more to service, and index-linked gilts cost more when inflation is high. The same pile of debt can be cheap or expensive depending on rates. That is why "how much" and "at what rate" are both part of the story.</p>
+
+  <h2 id="household">The household analogy: where it helps, where it breaks</h2>
+  <div class="two-col">
+    <div class="panel panel--ok">
+      <h3>Where it helps</h3>
+      <ul>
+        <li>Spend more than you earn and the shortfall must be borrowed.</li>
+        <li>Borrowing adds to a total you carry forward.</li>
+        <li>Higher interest rates make that total more expensive to hold.</li>
+      </ul>
+    </div>
+    <div class="panel panel--break">
+      <h3>Where it breaks</h3>
+      <ul>
+        <li>A government that issues its own currency has options a household never has — though in practice money creation is controlled by the Bank of England, not by ministers.</li>
+        <li>Governments do not retire and need not clear debt in a lifetime — debt can be rolled over indefinitely.</li>
+        <li>Government spending and taxes change the size of the economy itself; a household's budget does not move national income.</li>
+        <li>Government borrowing costs are set in deep, global markets, not by a personal credit score.</li>
+      </ul>
+    </div>
+  </div>
+
+  {{ caveatBox("The household comparison is a starting point for intuition, not an accurate model of government finance. Treat it as a metaphor with limits.", "On the household analogy") }}
+
+  <p class="see-also">See also: <a href="{{ '/glossary/' | url }}">the full glossary</a>.</p>
+</div>

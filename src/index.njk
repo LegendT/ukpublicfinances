@@ -1,0 +1,57 @@
+---
+layout: layouts/base.njk
+title: Dashboard
+---
+{% from "components/macros.njk" import metricCard, caveatBox, dataFreshnessBadge %}
+
+<div class="page-intro">
+  <h1>UK Public Debt Explorer</h1>
+  <p class="lede">{{ site.tagline }}</p>
+  <p class="updated">
+    Latest figures for {{ dashboard.referencePeriod }}.
+    Last updated {{ dashboard.lastUpdated | readableDate }}.
+  </p>
+</div>
+
+<section aria-labelledby="headline-heading">
+  <h2 id="headline-heading" class="visually-hidden">Headline figures</h2>
+  <div class="metric-grid">
+    {%- for metric in dashboard.metrics %}
+      {%- if metric.id == "net-debt" %}
+        {% set formatted = metric.value | poundsShort %}
+      {%- elif metric.id == "debt-gdp" %}
+        {% set formatted = metric.value + "% of GDP" %}
+      {%- elif metric.id == "debt-per-person" %}
+        {%- set netDebtBn = (dashboard.metrics | findBy("id", "net-debt")).value %}
+        {%- set perPerson = (netDebtBn * 1000000000 / dashboard.supporting.population.value) | round(0) %}
+        {% set formatted = "£" + (perPerson | number) %}
+      {%- elif metric.id == "debt-interest" %}
+        {% set formatted = "£" + (metric.value | number) + " bn / year" %}
+      {%- elif metric.id == "monthly-borrowing" %}
+        {% set formatted = "£" + metric.value + " bn" %}
+      {%- else %}
+        {% set formatted = metric.value %}
+      {%- endif %}
+      {{ metricCard(metric, formatted, "metric-card--feature" if metric.id == "net-debt" else "") }}
+    {%- endfor %}
+  </div>
+</section>
+
+{{ caveatBox(dashboard.caveat, "About these figures") }}
+
+<section class="next-steps" aria-labelledby="explore-heading">
+  <h2 id="explore-heading">Explore further</h2>
+  <ul class="card-links">
+    <li><a href="{{ '/timeline/' | url }}"><strong>Historical timeline</strong><span>How debt has changed since 1700.</span></a></li>
+    <li><a href="{{ '/debt-in-context/' | url }}"><strong>Debt in context</strong><span>Debt and interest next to annual spending.</span></a></li>
+    <li><a href="{{ '/interest/' | url }}"><strong>Interest costs</strong><span>What servicing the debt costs each day.</span></a></li>
+    <li><a href="{{ '/international/' | url }}"><strong>International comparison</strong><span>The UK next to other major economies.</span></a></li>
+    <li><a href="{{ '/health/' | url }}"><strong>Public finance health</strong><span>A wider set of economic indicators.</span></a></li>
+    <li><a href="{{ '/big-numbers/' | url }}"><strong>Big numbers translator</strong><span>Turn a large sum into per-person figures.</span></a></li>
+    <li><a href="{{ '/lifetime/' | url }}"><strong>During your lifetime</strong><span>How debt has changed since you were born.</span></a></li>
+    <li><a href="{{ '/budget-simulator/' | url }}"><strong>Budget simulator</strong><span>You are Chancellor — try the trade-offs.</span></a></li>
+    <li><a href="{{ '/deficit-vs-debt/' | url }}"><strong>Debt vs deficit</strong><span>What the words actually mean.</span></a></li>
+    <li><a href="{{ '/monthly/' | url }}"><strong>Monthly update</strong><span>The latest release in plain English.</span></a></li>
+    <li><a href="{{ '/sources/' | url }}"><strong>Sources</strong><span>Where every figure comes from.</span></a></li>
+  </ul>
+</section>

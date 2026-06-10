@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+title: Sources
+description: The official data sources behind every figure on this site, and what each one covers.
+---
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+
+<div class="page-intro prose">
+  <h1>Sources</h1>
+  <p class="lede">Every figure on this site is meant to trace back to an official source. These are the sources this project is built to use.</p>
+</div>
+
+{{ caveatBox(meta.placeholderNotice, "Build status") }}
+
+<div class="source-grid">
+  {%- for s in sources.sources %}
+  <article class="source-card">
+    <h2 class="source-card__name">{{ s.name }}</h2>
+    <p class="source-card__publisher">{{ s.publisher }}</p>
+    <p>{{ s.covers }}</p>
+    <p class="source-card__meta">
+      Updated: {{ s.updateFrequency }}. {{ dataFreshnessBadge(s.confidence_level, "") }}
+    </p>
+    <p><a href="{{ s.url }}" rel="noopener">Visit source</a></p>
+  </article>
+  {%- endfor %}
+</div>
+
+<section class="prose">
+  <h2>Confidence levels</h2>
+  <dl class="def-list">
+    {%- for key, desc in meta.confidenceLevels %}
+    <dt>{{ key }}</dt>
+    <dd>{{ desc }}</dd>
+    {%- endfor %}
+  </dl>
+</section>

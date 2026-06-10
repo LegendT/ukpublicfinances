@@ -1,0 +1,12 @@
+{
+  "note": "Neutral context markers for the historical timeline. Each describes what happened, not who was to blame.",
+  "events": [
+    { "id": "napoleonic", "year": 1815, "title": "Napoleonic Wars end", "summary": "Decades of war left government debt above twice the size of the economy — among the highest ratios in British history." },
+    { "id": "ww1", "year": 1918, "title": "First World War ends", "summary": "Borrowing to fund the war pushed debt sharply higher, reshaping public finances for a generation." },
+    { "id": "ww2", "year": 1945, "title": "Second World War ends", "summary": "Debt peaked at well over 200% of GDP. It then fell over several decades as the economy grew." },
+    { "id": "1976", "year": 1976, "title": "1976 IMF loan", "summary": "Facing a sterling crisis, the UK borrowed from the International Monetary Fund — a notable moment in 1970s economic difficulty." },
+    { "id": "2008", "year": 2008, "title": "Global financial crisis", "summary": "A banking crisis and recession raised borrowing and debt as tax revenue fell and support measures were funded." },
+    { "id": "covid", "year": 2020, "title": "COVID-19 pandemic", "summary": "Emergency support for households and businesses, alongside a fall in the economy, pushed borrowing to peacetime records." },
+    { "id": "rates", "year": 2022, "title": "Interest rates rise", "summary": "Higher inflation and interest rates increased the cost of servicing debt, including index-linked gilts." }
+  ]
+}

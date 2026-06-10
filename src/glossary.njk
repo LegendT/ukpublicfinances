@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+title: Glossary
+description: Plain-English definitions of the key public-finance terms used across the site.
+---
+{% from "components/macros.njk" import glossaryTerm %}
+
+<div class="page-intro prose">
+  <h1>Glossary</h1>
+  <p class="lede">Plain-English definitions of the terms used across this site.</p>
+</div>
+
+<dl class="glossary">
+  {%- for term in glossary.terms %}
+    {{ glossaryTerm(term) }}
+  {%- endfor %}
+</dl>
