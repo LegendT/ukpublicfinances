@@ -3,6 +3,12 @@
   "tagline": "Understand UK government debt and public finances, using official data and plain English.",
   "description": "A factual, data-led explorer for UK public sector debt, borrowing, and debt interest. Every figure shows its source and date.",
   "lang": "en-GB",
+  "url": "https://ukpublicfinances.org",
+  "ogImage": "/assets/og-image.png",
+  "author": "Anthony George (Legendary Tone)",
+  "analytics": {
+    "cloudflareToken": ""
+  },
   "nav": [
     { "text": "Dashboard", "url": "/" },
     { "text": "The data", "children": [

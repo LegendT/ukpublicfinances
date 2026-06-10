@@ -31,6 +31,12 @@ export default function (eleventyConfig) {
     return new Intl.NumberFormat("en-GB").format(Number(value));
   });
 
+  // ISO date (YYYY-MM-DD) for sitemap lastmod and machine-readable output.
+  eleventyConfig.addFilter("isoDate", (value) => {
+    const date = value ? new Date(value) : new Date();
+    return Number.isNaN(date.getTime()) ? "" : date.toISOString().slice(0, 10);
+  });
+
   // Format an ISO date as a readable British date, e.g. "10 June 2026".
   eleventyConfig.addFilter("readableDate", (value) => {
     if (!value) return value;

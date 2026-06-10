@@ -15,3 +15,17 @@ description: Plain-English definitions of the key public-finance terms used acro
     {{ glossaryTerm(term) }}
   {%- endfor %}
 </dl>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "UK public finance glossary",
+  "url": "{{ site.url }}/glossary/",
+  "hasDefinedTerm": [
+    {%- for t in glossary.terms %}
+    { "@type": "DefinedTerm", "name": {{ t.term | dump | safe }}, "description": {{ t.definition | dump | safe }} }{% if not loop.last %},{% endif %}
+    {%- endfor %}
+  ]
+}
+</script>
