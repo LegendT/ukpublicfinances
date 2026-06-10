@@ -100,3 +100,33 @@ test("monthly updates are present and answer the standard questions", () => {
     assert.ok(u.answers[q], `update answers missing ${q}`);
   }
 });
+
+test("current figures are consistent across data files (no silent drift)", () => {
+  const dash = load("dashboard.json");
+  const a = load("assumptions.json");
+  const spend = load("spendingComparisons.json");
+  const intl = load("internationalComparisons.json");
+  const metric = (id) => dash.metrics.find((m) => m.id === id).value;
+  const area = (id) => spend.areas.find((s) => s.id === id).value;
+  const sup = dash.supporting;
+  const tr = a.translator;
+  const base = a.budgetSimulator.baselineGbpBillion;
+  const lever = a.budgetSimulator.spendingLeversGbpBillion;
+  const near = (x, y, tol) => Math.abs(x - y) <= tol;
+
+  // Figures that appear in more than one file must match.
+  assert.equal(sup.gdp.value, tr.gdpGbpBillion, "GDP differs: dashboard vs translator");
+  assert.equal(sup.population.value, tr.population, "population differs");
+  assert.equal(sup.adults.value, tr.adults, "adults differ");
+  assert.equal(sup.taxpayers.value, tr.taxpayers, "taxpayers differ");
+  assert.equal(base.debt, metric("net-debt"), "simulator debt != dashboard net debt");
+  assert.equal(tr.annualDebtInterestGbpBillion, metric("debt-interest"), "translator interest != dashboard interest");
+  assert.equal(area("defence"), lever.defence, "defence differs: spending vs simulator");
+  assert.equal(area("state-pension"), lever.pensions, "pension differs: spending vs simulator");
+
+  // Derived relationships must hold.
+  assert.ok(near(metric("net-debt") / (metric("debt-gdp") / 100), sup.gdp.value, 15), "implied GDP != stated GDP");
+  assert.equal(base.totalSpending - base.totalRevenue, base.borrowing, "simulator: spending - revenue != borrowing");
+  assert.ok(near(area("social-protection"), lever.welfare + lever.pensions, 6), "welfare total != welfare + pension");
+  assert.ok(intl.countries.find((c) => c.id === "uk").debtToGdp > metric("debt-gdp"), "intl gross UK should exceed national net");
+});

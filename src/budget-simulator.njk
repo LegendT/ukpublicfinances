@@ -84,10 +84,10 @@ description: A simplified educational model — adjust spending and tax, and see
 
 <script id="sim-config" type="application/json">
 {
-  "baseline": {{ b.baselineGbpBillion | dump | safe }},
-  "spendingBase": {{ b.spendingLeversGbpBillion | dump | safe }},
-  "projection": {{ b.projection | dump | safe }},
+  "baseline": {{ b.baselineGbpBillion | jsonScript | safe }},
+  "spendingBase": {{ b.spendingLeversGbpBillion | jsonScript | safe }},
+  "projection": {{ b.projection | jsonScript | safe }},
   "gdp": {{ dashboard.supporting.gdp.value }}
 }
 </script>
-<script src="{{ '/assets/js/budget-simulator.js' | url }}" defer></script>
+<script type="module" src="{{ '/assets/js/budget-simulator.js' | url }}"></script>

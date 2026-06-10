@@ -1,8 +1,3 @@
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 /**
  * Eleventy configuration.
  *
@@ -25,6 +20,12 @@ export default function (eleventyConfig) {
     if (!Array.isArray(arr)) return undefined;
     return arr.find((item) => item && item[key] === value);
   });
+
+  // JSON for embedding inside a <script> tag — escapes "<" so a value can never
+  // break out of the script element (defensive; the data is trusted).
+  eleventyConfig.addFilter("jsonScript", (value) =>
+    JSON.stringify(value).replace(/</g, "\\u003c")
+  );
 
   // Format a number with thousands separators (British locale).
   eleventyConfig.addFilter("number", (value) => {

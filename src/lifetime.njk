@@ -35,9 +35,9 @@ description: How UK debt and debt-to-GDP have changed since the year you were bo
 {% set debtGdp = dashboard.metrics | findBy("id", "debt-gdp") %}
 <script id="lifetime-data" type="application/json">
 {
-  "series": {{ debtTimeseries.series | dump | safe }},
-  "events": {{ events.events | dump | safe }},
-  "primeMinisters": {{ primeMinisters.list | dump | safe }},
+  "series": {{ debtTimeseries.series | jsonScript | safe }},
+  "events": {{ events.events | jsonScript | safe }},
+  "primeMinisters": {{ primeMinisters.list | jsonScript | safe }},
   "current": { "debtGbp": {{ netDebt.value }}, "debtToGdp": {{ debtGdp.value }}, "year": 2026 }
 }
 </script>

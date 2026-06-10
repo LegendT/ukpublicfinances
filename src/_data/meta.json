@@ -1,5 +1,6 @@
 {
   "placeholderNotice": "The dashboard headlines, health indicators, monthly update, spending comparisons, and the full international comparison (debt 2025, deficit and growth 2024) were verified against ONS, OBR, IMF and HM Treasury sources in June 2026, and all source links were checked. The only remaining estimates are the long-run historical timeline before about 2010 — best-estimate reconstructions of net debt as a share of GDP, where exact pre-1900 figures are inherently uncertain. They carry confidence_level 'estimated'. See docs/UPDATING-DATA.md.",
+  "footerNote": "Figures are official data and may be revised. Historical figures before about 2010 are best estimates. Every figure shows its source on the page.",
   "lastReviewed": "2026-06-10",
   "confidenceLevels": {
     "official": "Taken directly from an official published release.",

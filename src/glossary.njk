@@ -24,7 +24,7 @@ description: Plain-English definitions of the key public-finance terms used acro
   "url": "{{ site.url }}/glossary/",
   "hasDefinedTerm": [
     {%- for t in glossary.terms %}
-    { "@type": "DefinedTerm", "name": {{ t.term | dump | safe }}, "description": {{ t.definition | dump | safe }} }{% if not loop.last %},{% endif %}
+    { "@type": "DefinedTerm", "name": {{ t.term | jsonScript | safe }}, "description": {{ t.definition | jsonScript | safe }} }{% if not loop.last %},{% endif %}
     {%- endfor %}
   ]
 }

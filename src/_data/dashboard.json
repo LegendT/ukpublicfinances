@@ -5,6 +5,7 @@
   "metrics": [
     {
       "id": "net-debt",
+      "display": "poundsShort",
       "metric_name": "Public sector net debt (excluding public sector banks)",
       "shortLabel": "Public sector net debt",
       "value": 2917,
@@ -20,6 +21,7 @@
     },
     {
       "id": "debt-gdp",
+      "display": "percentGdp",
       "metric_name": "Debt as a share of GDP",
       "shortLabel": "Debt as share of GDP",
       "value": 94.2,
@@ -35,6 +37,7 @@
     },
     {
       "id": "debt-per-person",
+      "display": "perPerson",
       "metric_name": "Debt per person",
       "shortLabel": "Debt per person",
       "value": 42709,
@@ -50,6 +53,7 @@
     },
     {
       "id": "debt-interest",
+      "display": "perYear",
       "metric_name": "Annual debt interest cost",
       "shortLabel": "Debt interest",
       "value": 111,
@@ -65,6 +69,7 @@
     },
     {
       "id": "monthly-borrowing",
+      "display": "billions",
       "metric_name": "Latest monthly borrowing",
       "shortLabel": "Latest borrowing",
       "value": 24.3,

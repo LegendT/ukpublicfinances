@@ -16,7 +16,7 @@
   <link rel="canonical" href="{{ canonical }}">
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="{{ pageTitle }}">
@@ -46,26 +46,26 @@
         "@type": "WebSite",
         "@id": "{{ site.url }}/#website",
         "url": "{{ site.url }}/",
-        "name": {{ site.title | dump | safe }},
-        "description": {{ site.description | dump | safe }},
+        "name": {{ site.title | jsonScript | safe }},
+        "description": {{ site.description | jsonScript | safe }},
         "inLanguage": "en-GB",
         "publisher": { "@id": "{{ site.url }}/#publisher" }
       },
       {
         "@type": "Organization",
         "@id": "{{ site.url }}/#publisher",
-        "name": {{ site.title | dump | safe }},
+        "name": {{ site.title | jsonScript | safe }},
         "url": "{{ site.url }}/",
         "logo": "{{ site.url }}{{ site.ogImage }}",
-        "sameAs": [{{ site.repo | dump | safe }}],
-        "founder": { "@type": "Person", "name": {{ site.author | dump | safe }} }
+        "sameAs": [{{ site.repo | jsonScript | safe }}],
+        "founder": { "@type": "Person", "name": {{ site.author | jsonScript | safe }} }
       },
       {
         "@type": "WebPage",
         "@id": "{{ canonical }}#webpage",
         "url": "{{ canonical }}",
-        "name": {{ pageTitle | dump | safe }},
-        "description": {{ pageDesc | dump | safe }},
+        "name": {{ pageTitle | jsonScript | safe }},
+        "description": {{ pageDesc | jsonScript | safe }},
         "isPartOf": { "@id": "{{ site.url }}/#website" },
         "inLanguage": "en-GB",
         "dateModified": "{{ page.date | isoDate }}"
@@ -118,7 +118,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>{{ site.title }} — an educational project. Figures show their source and date, and may be revised.</p>
-      <p class="site-footer__warn">{{ meta.placeholderNotice }}</p>
+      <p class="site-footer__warn">{{ meta.footerNote }}</p>
       <p><a href="{{ '/sources/' | url }}">All data sources</a> · <a href="{{ '/glossary/' | url }}">Glossary</a> · <a href="{{ '/privacy/' | url }}">Privacy</a></p>
     </div>
   </footer>

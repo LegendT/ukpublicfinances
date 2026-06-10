@@ -106,9 +106,9 @@ description: How UK government debt, borrowing, and debt interest have changed o
 
 <script id="timeline-data" type="application/json">
 {
-  "series": {{ debtTimeseries.series | dump | safe }},
+  "series": {{ debtTimeseries.series | jsonScript | safe }},
   "current": { "year": 2026, "debtToGdp": {{ dgNow.value }}, "debtGbp": {{ ndNow.value }}, "borrowingGbp": {{ bwNow }}, "interestGbp": {{ diNow.value }} },
-  "events": {{ events.events | dump | safe }}
+  "events": {{ events.events | jsonScript | safe }}
 }
 </script>
 <script src="{{ '/assets/js/timeline.js' | url }}" defer></script>

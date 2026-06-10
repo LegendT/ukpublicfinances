@@ -32,7 +32,13 @@ description: A wider set of public-finance and economic indicators, with neutral
           <span class="status__arrow" aria-hidden="true">{{ arrows[ind.status] }}</span> {{ ind.status }}
         </span>
       </div>
+      {%- if ind.unit.startsWith("£") %}
+      <p class="indicator__value">£{{ ind.value | number }} <span class="indicator__unit">{{ ind.unit | replace("£ ", "") }}</span></p>
+      {%- elif ind.unit.startsWith("%") %}
+      <p class="indicator__value">{{ ind.value | number }}<span class="indicator__unit">{{ ind.unit }}</span></p>
+      {%- else %}
       <p class="indicator__value">{{ ind.value | number }} <span class="indicator__unit">{{ ind.unit }}</span></p>
+      {%- endif %}
       <p class="indicator__explain">{{ ind.explanation }}</p>
       <p class="source-note">Source: <a href="{{ ind.source_url }}" rel="noopener">{{ ind.source_name }}</a>. {{ ind.date | readableDate }}.</p>
     </article>

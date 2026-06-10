@@ -16,17 +16,17 @@ layout: layouts/base.njk
   <h2 id="headline-heading" class="visually-hidden">Headline figures</h2>
   <div class="metric-grid">
     {%- for metric in dashboard.metrics %}
-      {%- if metric.id == "net-debt" %}
+      {%- if metric.display == "poundsShort" %}
         {% set formatted = metric.value | poundsShort %}
-      {%- elif metric.id == "debt-gdp" %}
+      {%- elif metric.display == "percentGdp" %}
         {% set formatted = metric.value + "% of GDP" %}
-      {%- elif metric.id == "debt-per-person" %}
+      {%- elif metric.display == "perPerson" %}
         {%- set netDebtBn = (dashboard.metrics | findBy("id", "net-debt")).value %}
         {%- set perPerson = (netDebtBn * 1000000000 / dashboard.supporting.population.value) | round(0) %}
         {% set formatted = "£" + (perPerson | number) %}
-      {%- elif metric.id == "debt-interest" %}
+      {%- elif metric.display == "perYear" %}
         {% set formatted = "£" + (metric.value | number) + " bn / year" %}
-      {%- elif metric.id == "monthly-borrowing" %}
+      {%- elif metric.display == "billions" %}
         {% set formatted = "£" + metric.value + " bn" %}
       {%- else %}
         {% set formatted = metric.value %}

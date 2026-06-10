@@ -1,4 +1,4 @@
-# Netlify build configuration for the UK Public Finances / Debt Explorer.
+# Netlify build and headers for UK Public Finances Explorer.
 # Netlify runs the Eleventy build and serves the generated _site folder.
 
 [build]
@@ -8,9 +8,16 @@
 [build.environment]
   NODE_VERSION = "24"
 
-# Long-cache the fingerprint-free static assets is avoided deliberately:
-# Eleventy output here is plain files, so let Netlify use its sensible defaults.
+# Security headers on every response.
 [[headers]]
-  for = "/assets/*"
+  for = "/*"
   [headers.values]
-    Cache-Control = "public, max-age=3600"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
+
+# Assets are not fingerprinted, so we deliberately do NOT set a long max-age:
+# Netlify's CDN invalidates on every deploy and browsers revalidate cheaply via
+# ETag, which avoids serving stale CSS/JS after a deploy.

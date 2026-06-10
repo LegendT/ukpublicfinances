@@ -59,9 +59,9 @@ description: Turn a large sum into per-person figures and comparisons with annua
   "annualDebtInterestGbpBillion": {{ assumptions.translator.annualDebtInterestGbpBillion }},
   "budgets": [
     {%- for area in spendingComparisons.areas %}
-    { "name": {{ area.name | dump | safe }}, "value": {{ area.value }} }{% if not loop.last %},{% endif %}
+    { "name": {{ area.name | jsonScript | safe }}, "value": {{ area.value }} }{% if not loop.last %},{% endif %}
     {%- endfor %}
   ]
 }
 </script>
-<script src="{{ '/assets/js/big-numbers.js' | url }}" defer></script>
+<script type="module" src="{{ '/assets/js/big-numbers.js' | url }}"></script>
