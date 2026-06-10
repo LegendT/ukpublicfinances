@@ -23,6 +23,7 @@
       "welfare": 210,
       "pensions": 125
     },
+    "spendingRange": { "minFactor": 0.5, "maxFactor": 1.5, "step": 1, "note": "Each spending slider runs from half to one-and-a-half times today's figure." },
     "taxLevers": [
       { "id": "income", "label": "Income tax (basic rate)", "rate": 20, "min": 15, "max": 25, "perPointGbpBillion": 8.0 },
       { "id": "vat", "label": "VAT", "rate": 20, "min": 15, "max": 25, "perPointGbpBillion": 8.5 },
