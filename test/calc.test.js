@@ -37,7 +37,7 @@ test("translateAmount: scales linearly with the amount", () => {
 const CFG = {
   baseline: { totalSpending: 1368, totalRevenue: 1238, borrowing: 130, debt: 2917 },
   spendingBase: { health: 200, education: 101, defence: 56, welfare: 210, pensions: 125 },
-  projection: { years: 5, assumedInterestRate: 0.04 },
+  projection: { years: 10, assumedInterestRate: 0.04 },
   gdp: 3097,
 };
 
@@ -46,7 +46,7 @@ test("simulateBudget: baseline (no change) reproduces £130bn borrowing", () => 
   assert.equal(r.totalSpending, 1368);
   assert.equal(r.totalRevenue, 1238);
   assert.equal(r.borrowing, 130);
-  assert.equal(r.trajectory.length, 5);
+  assert.equal(r.trajectory.length, 10);
 });
 
 test("simulateBudget: +£60bn health and +5pts income tax", () => {
@@ -61,6 +61,14 @@ test("simulateBudget: deep cuts can produce a surplus (negative borrowing)", () 
   const spend = { ...CFG.spendingBase, health: 140, welfare: 140 };
   const r = simulateBudget(CFG, spend, [{ perpoint: 8.5, points: 5 }]);
   assert.ok(r.borrowing < 0, "spending cuts + tax rise => surplus");
+});
+
+test("simulateBudget: a large surplus clears debt but never goes negative", () => {
+  const spend = { health: 100, education: 50, defence: 28, welfare: 105, pensions: 63 };
+  const r = simulateBudget(CFG, spend, [{ perpoint: 8.5, points: 30 }]);
+  assert.ok(r.borrowing < 0, "deep cuts + big tax rise => surplus");
+  assert.ok(r.trajectory.every((t) => t.debt >= 0), "debt is floored at zero");
+  assert.equal(r.trajectory[r.trajectory.length - 1].debt, 0, "debt reaches zero");
 });
 
 test("simulateBudget: debt path compounds interest then adds borrowing", () => {

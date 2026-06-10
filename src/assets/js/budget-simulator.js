@@ -47,10 +47,15 @@ if (cfgEl && form) {
     } else {
       bEl.textContent = gbpBn(-r.borrowing);
       bLabel.textContent = r.borrowing === 0 ? "Balanced this year" : "Surplus this year";
-      if (endDebt.debt < cfg.baseline.debt) {
+      const cleared = r.trajectory.find((t) => t.debt <= 0);
+      if (cleared) {
+        // Stage 3 (best): the surplus wipes the debt out entirely.
+        status.className = "sim-goal sim-goal--win";
+        status.textContent = `Debt cleared — your surplus wipes it out by year ${cleared.year}.`;
+      } else if (endDebt.debt < cfg.baseline.debt) {
         // Stage 3: surplus beats the interest, so debt actually falls.
         status.className = "sim-goal sim-goal--win";
-        status.textContent = `Debt is falling — your surplus now outweighs the interest. It reaches ${endDebt.pctGdp.toFixed(0)}% of GDP by year 5.`;
+        status.textContent = `Debt is falling — your surplus now outweighs the interest. It reaches ${endDebt.pctGdp.toFixed(0)}% of GDP by year ${cfg.projection.years}.`;
       } else {
         // Stage 2: balanced or in surplus, but interest still outpaces it.
         status.className = "sim-goal sim-goal--mid";

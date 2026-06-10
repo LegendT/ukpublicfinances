@@ -31,9 +31,9 @@
     ],
     "taxNote": "Each percentage point on a rate is worth roughly the amount shown (an HMRC 'ready reckoner' style estimate). Income tax shows the basic rate as a simple stand-in for the whole system.",
     "projection": {
-      "years": 5,
+      "years": 10,
       "assumedInterestRate": 0.04,
-      "note": "Debt in future years is the running total of borrowing plus assumed interest. Economic growth, behavioural responses, and inflation are not modelled."
+      "note": "Debt in future years is the running total of borrowing plus assumed interest, held to zero once cleared. Economic growth, behavioural responses, and inflation are not modelled."
     }
   }
 }

@@ -9,7 +9,7 @@ pageClass: has-sticky-status
 
 <div class="page-intro prose">
   <h1>Budget simulator</h1>
-  <p class="lede">You are Chancellor. Your challenge: <strong>balance the budget</strong> — get borrowing down to zero — by changing spending and tax. Watch the effect on debt over five years.</p>
+  <p class="lede">You are Chancellor. Your challenge: <strong>balance the budget</strong> — get borrowing down to zero — by changing spending and tax. Watch the effect on debt over {{ b.projection.years }} years.</p>
 </div>
 
 {{ caveatBox(b.disclaimer, "This is a teaching model, not a forecast") }}
@@ -59,7 +59,7 @@ pageClass: has-sticky-status
       <article class="metric-card metric-card--mini"><p class="metric-card__value" id="r-borrowing">—</p><p class="metric-card__label" id="r-borrowing-label">Borrowing this year</p></article>
     </div>
 
-    <h3>Debt over five years</h3>
+    <h3>Debt over {{ b.projection.years }} years</h3>
     <div class="table-scroll" tabindex="0" role="region" aria-label="Projected debt over five years">
       <table class="data-table">
         <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate * 100) | round(0) }}% interest rate and a fixed economy — see assumptions below.</caption>
