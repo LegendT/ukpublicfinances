@@ -37,16 +37,25 @@ if (cfgEl && form) {
     const bEl = document.getElementById("r-borrowing");
     const bLabel = document.getElementById("r-borrowing-label");
     const status = document.getElementById("sim-status");
+    const endDebt = r.trajectory[r.trajectory.length - 1];
     if (r.borrowing > 0) {
+      // Stage 1: still in deficit.
       bEl.textContent = gbpBn(r.borrowing);
       bLabel.textContent = "Borrowing this year (deficit)";
       status.className = "sim-goal sim-goal--todo";
       status.textContent = `Not balanced yet — a deficit of ${gbpBn(r.borrowing)} left to close.`;
     } else {
       bEl.textContent = gbpBn(-r.borrowing);
-      bLabel.textContent = "Surplus this year";
-      status.className = "sim-goal sim-goal--win";
-      status.textContent = `Budget balanced — a surplus of ${gbpBn(-r.borrowing)}. (Debt still rises with interest for now.)`;
+      bLabel.textContent = r.borrowing === 0 ? "Balanced this year" : "Surplus this year";
+      if (endDebt.debt < cfg.baseline.debt) {
+        // Stage 3: surplus beats the interest, so debt actually falls.
+        status.className = "sim-goal sim-goal--win";
+        status.textContent = `Debt is falling — your surplus now outweighs the interest. It reaches ${endDebt.pctGdp.toFixed(0)}% of GDP by year 5.`;
+      } else {
+        // Stage 2: balanced or in surplus, but interest still outpaces it.
+        status.className = "sim-goal sim-goal--mid";
+        status.textContent = `Budget balanced, but debt is still rising — the interest bill outweighs your surplus. A bigger surplus would bring it down.`;
+      }
     }
 
     document.getElementById("r-trajectory").innerHTML = r.trajectory

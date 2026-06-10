@@ -415,6 +415,7 @@ input[type="number"], select {
   font-weight: 600;
 }
 .sim-goal--todo { background: #f4efdc; border-color: var(--warn-line); color: #5a4a14; }
+.sim-goal--mid { background: #e6eef2; border-color: var(--brand); color: #173a4f; }
 .sim-goal--win { background: #e7f0e9; border-color: var(--c-official); color: #1f4a2b; }
 
 /* On mobile the result panel stacks below the sliders, so pin the goal banner
