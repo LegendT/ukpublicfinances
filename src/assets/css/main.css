@@ -416,3 +416,15 @@ input[type="number"], select {
 }
 .sim-goal--todo { background: #f4efdc; border-color: var(--warn-line); color: #5a4a14; }
 .sim-goal--win { background: #e7f0e9; border-color: var(--c-official); color: #1f4a2b; }
+
+/* On mobile the result panel stacks below the sliders, so pin the goal banner
+   to the bottom of the screen — the balance status stays visible while you drag
+   the sliders. (On desktop the banner is already visible in the sticky panel.) */
+@media (max-width: 55.99rem) {
+  body.has-sticky-status { padding-bottom: 5rem; }
+  .has-sticky-status .sim-goal {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    margin: 0; border-radius: 0; border-width: 4px 0 0 0;
+    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.18);
+  }
+}

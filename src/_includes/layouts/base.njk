@@ -79,7 +79,7 @@
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.analytics.cloudflareToken }}"}'></script>
   {%- endif %}
 </head>
-<body>
+<body{% if pageClass %} class="{{ pageClass }}"{% endif %}>
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <header class="site-header">

@@ -46,7 +46,7 @@ if (cfgEl && form) {
       bEl.textContent = gbpBn(-r.borrowing);
       bLabel.textContent = "Surplus this year";
       status.className = "sim-goal sim-goal--win";
-      status.textContent = `Budget balanced — a surplus of ${gbpBn(-r.borrowing)}. (Debt still grows with interest until the surplus outweighs it.)`;
+      status.textContent = `Budget balanced — a surplus of ${gbpBn(-r.borrowing)}. (Debt still rises with interest for now.)`;
     }
 
     document.getElementById("r-trajectory").innerHTML = r.trajectory
