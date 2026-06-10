@@ -13,7 +13,8 @@
   --accent: #5a6b3b;      /* muted olive for the chart line */
   --warn-bg: #fdf6e3;
   --warn-line: #c99a06;
-  --focus: #b8860b;
+  --focus: #ffdd00;       /* GOV.UK-style yellow focus */
+  --ink-black: #0b0c0c;   /* GOV.UK near-black, paired with the focus yellow */
 
   /* confidence badges — muted, never alarmist */
   --c-official: #2f5d3a;
@@ -45,11 +46,22 @@ h2 { font-size: clamp(1.3rem, 3.5vw, 1.7rem); margin-top: 2.5rem; }
 h3 { font-size: 1.15rem; }
 
 a { color: var(--brand); }
-a:hover { color: var(--brand-deep); }
+a:hover { color: var(--brand-deep); text-decoration-thickness: 2px; text-underline-offset: 0.12em; }
 
+/* GOV.UK-style focus: yellow with a near-black companion so it shows on any
+   background. Controls get a yellow outline + black inset; links get the
+   yellow highlight with a black underline. */
 :focus-visible {
   outline: 3px solid var(--focus);
-  outline-offset: 2px;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 2px var(--ink-black);
+}
+a:focus-visible {
+  outline: 3px solid transparent;
+  color: var(--ink-black);
+  background-color: var(--focus);
+  box-shadow: 0 -2px var(--focus), 0 4px var(--ink-black);
+  text-decoration: none;
 }
 
 .wrap { width: min(100% - 2rem, var(--wrap)); margin-inline: auto; }
@@ -345,7 +357,6 @@ input[type="number"], select {
 
 /* Horizontally scrollable table regions (keyboard-focusable) */
 .table-scroll { overflow-x: auto; }
-.table-scroll:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .data-table-wrap { overflow-x: auto; }
 
 /* Featured headline metric (net debt) — more prominent, balances the grid */

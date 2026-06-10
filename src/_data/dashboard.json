@@ -1,7 +1,7 @@
 {
   "lastUpdated": "2026-05-22",
   "referencePeriod": "April 2026",
-  "caveat": "Figures are official ONS and OBR data, the latest available for each measure. Public finance figures are provisional and routinely revised. Monthly borrowing is seasonal and should not be multiplied up to estimate a year.",
+  "caveat": "Figures are official data from the Office for National Statistics (ONS) and the Office for Budget Responsibility (OBR), the latest available for each measure. Public finance figures are provisional and routinely revised. Monthly borrowing is seasonal and should not be multiplied up to estimate a year.",
   "metrics": [
     {
       "id": "net-debt",
@@ -75,7 +75,7 @@
       "value": 24.3,
       "unit": "£ billion",
       "explanation": "How much the government borrowed in the latest month — the gap between what it spent and what it raised.",
-      "whatThisMeans": "Borrowing is a flow (one period's gap), whereas debt is the stock that builds up over many periods. Monthly borrowing is seasonal — April is typically high — so it cannot simply be multiplied by twelve. Annual borrowing is around £130 billion.",
+      "whatThisMeans": "Borrowing is a flow (one period's gap), while debt is the stock that builds up over many periods. Monthly borrowing is seasonal — April is typically high — so it cannot be multiplied by 12 to get the year. Annual borrowing is around £130 billion.",
       "date": "2026-04-30",
       "source_name": "ONS, Public sector finances, UK: April 2026",
       "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2026",
