@@ -23,9 +23,10 @@ if (cfgEl && form) {
       document.getElementById(el.id + "-out").textContent = gbpBn(val);
     });
     const taxPoints = taxInputs.map((el) => {
-      const pts = parseFloat(el.value);
+      const rate = parseFloat(el.value);
+      const pts = rate - parseFloat(el.dataset.base);
       document.getElementById(el.id + "-out").textContent =
-        pts === 0 ? "no change" : `${pts > 0 ? "+" : ""}${pts} pts`;
+        pts === 0 ? `${rate}%` : `${rate}% (${pts > 0 ? "+" : ""}${pts})`;
       return { perpoint: parseFloat(el.dataset.perpoint), points: pts };
     });
 
@@ -35,12 +36,17 @@ if (cfgEl && form) {
     document.getElementById("r-revenue").textContent = gbpBn(r.totalRevenue);
     const bEl = document.getElementById("r-borrowing");
     const bLabel = document.getElementById("r-borrowing-label");
+    const status = document.getElementById("sim-status");
     if (r.borrowing > 0) {
       bEl.textContent = gbpBn(r.borrowing);
       bLabel.textContent = "Borrowing this year (deficit)";
+      status.className = "sim-goal sim-goal--todo";
+      status.textContent = `Not balanced yet — a deficit of ${gbpBn(r.borrowing)} left to close.`;
     } else {
       bEl.textContent = gbpBn(-r.borrowing);
       bLabel.textContent = "Surplus this year";
+      status.className = "sim-goal sim-goal--win";
+      status.textContent = `Budget balanced — a surplus of ${gbpBn(-r.borrowing)}. (Debt still grows with interest until the surplus outweighs it.)`;
     }
 
     document.getElementById("r-trajectory").innerHTML = r.trajectory
@@ -54,7 +60,7 @@ if (cfgEl && form) {
   form.addEventListener("input", compute);
   document.getElementById("sim-reset").addEventListener("click", () => {
     spendInputs.forEach((el) => (el.value = el.dataset.base));
-    taxInputs.forEach((el) => (el.value = 0));
+    taxInputs.forEach((el) => (el.value = el.dataset.base));
     compute();
   });
 

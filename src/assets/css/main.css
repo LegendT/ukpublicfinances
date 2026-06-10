@@ -388,3 +388,18 @@ input[type="number"], select {
   background-color: var(--brand-deep);
   background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.28) 0 6px, transparent 6px 12px);
 }
+
+/* Budget simulator: side-by-side layout with sticky results + goal banner */
+.sim-layout { display: grid; gap: 1.5rem; }
+@media (min-width: 56rem) {
+  .sim-layout { grid-template-columns: 1.05fr 0.95fr; align-items: start; }
+  .sim-results { position: sticky; top: 1rem; }
+}
+.sim-results .simulator__results { margin: 0; }
+.sim-goal {
+  margin: 0 0 1rem; padding: 0.85rem 1rem;
+  border: 1px solid var(--line); border-left-width: 5px; border-radius: var(--radius);
+  font-weight: 600;
+}
+.sim-goal--todo { background: #f4efdc; border-color: var(--warn-line); color: #5a4a14; }
+.sim-goal--win { background: #e7f0e9; border-color: var(--c-official); color: #1f4a2b; }

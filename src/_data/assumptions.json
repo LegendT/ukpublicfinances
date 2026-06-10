@@ -23,12 +23,12 @@
       "welfare": 210,
       "pensions": 125
     },
-    "taxLevers": {
-      "incomeTaxPointGbpBillion": 8.0,
-      "vatPointGbpBillion": 8.5,
-      "corporationTaxPointGbpBillion": 3.7,
-      "note": "Approximate revenue from a 1 percentage point change to each rate (HMRC 'ready reckoner' style, illustrative)."
-    },
+    "taxLevers": [
+      { "id": "income", "label": "Income tax (basic rate)", "rate": 20, "min": 15, "max": 25, "perPointGbpBillion": 8.0 },
+      { "id": "vat", "label": "VAT", "rate": 20, "min": 15, "max": 25, "perPointGbpBillion": 8.5 },
+      { "id": "corp", "label": "Corporation tax", "rate": 25, "min": 20, "max": 30, "perPointGbpBillion": 3.7 }
+    ],
+    "taxNote": "Each percentage point on a rate is worth roughly the amount shown (an HMRC 'ready reckoner' style estimate). Income tax shows the basic rate as a simple stand-in for the whole system.",
     "projection": {
       "years": 5,
       "assumedInterestRate": 0.04,
