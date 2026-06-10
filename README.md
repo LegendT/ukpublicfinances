@@ -4,18 +4,18 @@ A clean, factual, data-led website that helps people understand UK government de
 
 It is **not** a political commentary site and **not** a gimmicky debt clock. Every major figure shows its source and date, and figures are clearly marked when estimated, provisional, or calculated.
 
-## Build status — read this first
+## Data status
 
-Headline dashboard figures and the international debt comparison were **verified against ONS, OBR and IMF sources in June 2026** (see each record's `source_url`). The long-run historical series (especially pre-2010), some annual spending figures, and the deficit/growth columns are still **estimates or carry scope caveats** — each is marked with its `confidence_level` and a `notes` field. Re-verify everything against the live source before any public use. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md).
+Live at **[ukpublicfinances.org](https://ukpublicfinances.org)**. The dashboard headlines, health indicators, monthly update, spending comparisons, and the full international comparison (debt, deficit, and growth) were **verified against ONS, OBR, IMF and HM Treasury sources in June 2026** — see each record's `source_url`. The only remaining estimates are the **long-run historical series before about 2010** — best-estimate reconstructions of net debt as a share of GDP, where exact pre-1900 figures are inherently uncertain; these are marked `confidence_level: estimated`. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) for how to refresh figures.
 
 ## Stack
 
 - **[Eleventy](https://www.11ty.dev/) 3.x** — static site generator. No client framework.
-- **Vanilla JavaScript** for the interactive tools (translator, timeline chart, lifetime calculator). Each is progressive enhancement over a working no-JS baseline.
+- **Vanilla JavaScript** for the interactive tools (translator, timeline chart, lifetime calculator, budget simulator). Each is progressive enhancement over a working no-JS baseline; the maths lives in a testable ESM module (`assets/js/lib/calc.js`).
 - **Hand-rolled inline-SVG charts** with a full data-table fallback — no charting library, keyboard- and screen-reader-friendly.
 - **JSON data files** as the single source of truth. No figure is hard-coded into a template.
 
-Requires Node.js 18+ (developed on Node 25).
+Requires Node.js 18+ (developed on Node 24 LTS, pinned in `.node-version`).
 
 ## Getting started
 
@@ -23,7 +23,7 @@ Requires Node.js 18+ (developed on Node 25).
 npm install      # install Eleventy
 npm run dev      # local dev server with live reload, usually http://localhost:8080
 npm run build    # production build to ./_site
-npm test         # data-integrity tests
+npm test         # data-integrity + tool-maths tests (node:test)
 npm run a11y:all # build + serve + WCAG 2.2 AA audit of every page (see below)
 ```
 
@@ -35,7 +35,7 @@ npm run a11y       # quick single-page check — needs `npm run dev` running fir
 ```
 
 `a11y:all` is self-contained: it builds, starts a static server on port 8081, runs
-[pa11y-ci](https://github.com/pa11y/pa11y-ci) against every route listed in
+[pa11y-ci](https://github.com/pa11y/pa11y-ci) against all 14 routes listed in
 `.pa11yci.json` at the WCAG 2.2 AA standard, then stops the server. The audit tools are
 fetched on demand via `npx` (kept out of the dependency tree to stay lean); **the first
 run downloads a headless Chromium**, so expect it to take a minute. To audit a specific
@@ -52,42 +52,38 @@ npx lighthouse http://localhost:8080 --only-categories=accessibility --view
 
 ```
 .
-├── .eleventy.js              # Eleventy config + custom filters (number, readableDate, poundsShort, findBy)
+├── .eleventy.js              # Eleventy config + filters (number, readableDate, isoDate, poundsShort, findBy, jsonScript)
+├── netlify.toml              # build settings + security headers (CSP, etc.)
+├── .pa11yci.json             # routes for the WCAG audit
+├── .node-version             # Node 24 (fnm locally, Netlify in CI)
 ├── src/
 │   ├── _data/                # SOURCE OF TRUTH — all figures live here as JSON
 │   │   ├── dashboard.json            # homepage headline metrics
 │   │   ├── debtTimeseries.json       # long-run series for the timeline
 │   │   ├── spendingComparisons.json  # annual budgets for context
 │   │   ├── internationalComparisons.json
+│   │   ├── indicators.json           # wider economic indicators (health page)
+│   │   ├── monthlyUpdates.json       # monthly explainer entries
 │   │   ├── events.json               # neutral timeline markers
 │   │   ├── primeMinisters.json       # context for the lifetime tool
 │   │   ├── assumptions.json          # tool assumptions (translator, simulator)
-│   │   ├── indicators.json           # wider economic indicators (health page)
-│   │   ├── monthlyUpdates.json       # monthly explainer entries
 │   │   ├── sources.json              # data source catalogue
 │   │   ├── glossary.json             # glossary terms
-│   │   ├── meta.json                 # placeholder notice, confidence definitions
-│   │   └── site.json                 # site title, nav
+│   │   ├── meta.json                 # confidence definitions, footer note
+│   │   └── site.json                 # title, nav, url, analytics token, publisher
 │   ├── _includes/
-│   │   ├── layouts/base.njk          # page shell, header, footer
+│   │   ├── layouts/base.njk          # page shell: head meta, OG, JSON-LD, header, footer
 │   │   └── components/macros.njk     # reusable components (see below)
 │   ├── assets/
 │   │   ├── css/main.css              # mobile-first, single stylesheet
-│   │   └── js/                       # nav, big-numbers, timeline, lifetime, budget-simulator
-│   ├── index.njk                     # 1. Homepage dashboard
-│   ├── timeline.njk                  # 2. Historical timeline
-│   ├── debt-in-context.njk           # 3. Debt in context
-│   ├── interest.njk                  # 7. Interest costs
-│   ├── international.njk             # 8. International comparison
-│   ├── health.njk                    # 9. Public finance health
-│   ├── big-numbers.njk               # 4. Big numbers translator
-│   ├── lifetime.njk                  # 5. During your lifetime
-│   ├── budget-simulator.njk          # 10. Budget simulator
-│   ├── deficit-vs-debt.njk           # 6. Debt vs deficit explainer
-│   ├── monthly.njk                   # 11. Monthly update explainer
-│   ├── glossary.njk                  # glossary
-│   └── sources.njk                   # sources
-├── test/data.test.js          # data contract tests
+│   │   ├── js/                       # nav, big-numbers, timeline, lifetime, budget-simulator
+│   │   │   └── lib/calc.js           # pure tool maths (ESM) — unit-tested
+│   │   ├── favicon.svg, og-image.png, icon-*.png, apple-touch-icon.png
+│   ├── favicon.ico, site.webmanifest # root icons + manifest (passthrough)
+│   ├── index.njk … sources.njk       # the 13 content pages (numbered MVP sections)
+│   ├── 404.njk, privacy.njk          # error page, privacy notice
+│   └── robots.njk, sitemap.njk, llms.njk  # crawl files (robots.txt, sitemap.xml, llms.txt)
+├── test/                      # data.test.js (data contract) + calc.test.js (tool maths)
 └── docs/                      # data sourcing, updating, next steps
 ```
 
@@ -113,7 +109,7 @@ Every figure record carries provenance:
 ```json
 {
   "metric_name": "Public sector net debt",
-  "value": 2810,
+  "value": 2917,
   "unit": "£ billion",
   "date": "2026-04-30",
   "source_name": "ONS, Public sector finances",
@@ -131,6 +127,24 @@ Every figure record carries provenance:
 Built to WCAG 2.2 AA principles: semantic headings, keyboard-operable controls, visible focus, 4.5:1 text contrast, 44px touch targets, no chart-only information (every chart has a table), labelled form fields with clear errors, mobile-first responsive layout, and `prefers-reduced-motion` support.
 
 Verify, don't assume — run `npm run a11y:all` (pa11y-ci, WCAG 2.2 AA across every page) before publishing.
+
+## Discoverability (SEO + LLMs)
+
+Built into the layout and a few generated files:
+
+- Per-page **canonical**, **Open Graph**, and **Twitter Card** meta, with a branded 1200×630 share image (`og-image.png`).
+- **JSON-LD** structured data: `WebSite` + `Organization` + `WebPage` site-wide, `DefinedTermSet` on the glossary, `FAQPage` on the debt-vs-deficit explainer.
+- **`robots.txt`** (welcomes AI crawlers and links the sitemap), **`sitemap.xml`**, and **`llms.txt`** (a curated content guide for LLMs).
+
+The `jsonScript` filter escapes embedded JSON so data can't break out of a `<script>` tag.
+
+## Analytics & privacy
+
+[Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/) — cookieless, no consent banner, no personal data. The beacon renders only when `site.analytics.cloudflareToken` is set in `src/_data/site.json` (the token is public, so it lives in the repo). See the `/privacy/` page.
+
+## Security
+
+`netlify.toml` sets security headers on every response: a **Content-Security-Policy** (allows `self`, inline data/JSON-LD, and the Cloudflare beacon), plus `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, and `Permissions-Policy`. Assets are unfingerprinted, so caching is left to Netlify's deploy-aware revalidation (no long `max-age`) to avoid serving stale CSS/JS after a deploy.
 
 ## Documentation
 
