@@ -14,6 +14,9 @@ if (dataEl) {
   const echo = document.getElementById("echo-amount");
   const resultsEl = document.getElementById("results");
   const tableBody = document.getElementById("results-table-body");
+  const section = document.getElementById("results-section");
+  const tableWrap = document.getElementById("results-table-wrap");
+  const statusEl = document.getElementById("amount-status");
 
   const gbp = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 });
   const fmt = (r) => {
@@ -42,22 +45,61 @@ if (dataEl) {
     tableBody.innerHTML = rows
       .map((r) => `<tr><th scope="row">${r.label}</th><td class="num">${r.value}</td></tr>`)
       .join("");
+    return rows;
   }
 
-  function update() {
+  // The results grid is not a live region (ten cards re-announced per
+  // keystroke); a short status line carries the announcement, debounced so
+  // typing "100" produces one message, not three.
+  // The first render happens on page load; announcing it would talk over the
+  // page title before the user has done anything.
+  let firstRun = true;
+  let statusTimer;
+  function announce(message) {
+    if (firstRun) return;
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => {
+      statusEl.textContent = message;
+    }, 400);
+  }
+
+  // Errors wait for blur or submit; "ten" or a cleared field mid-edit should
+  // not interrupt with an alert on every keystroke.
+  function update(showError) {
     const raw = parseFloat(input.value);
     const valid = Number.isFinite(raw) && raw >= 0;
-    errorEl.hidden = valid;
-    input.setAttribute("aria-invalid", valid ? "false" : "true");
-    if (!valid) return;
-    echo.textContent = raw.toLocaleString("en-GB");
-    render(raw);
+    // The fallback table holds the same results, so it goes stale together
+    // with the cards and must hide with them.
+    section.hidden = !valid;
+    tableWrap.hidden = !valid;
+    if (valid) {
+      errorEl.hidden = true;
+      input.setAttribute("aria-invalid", "false");
+      // Referenced text is exposed even while hidden, so the error id is only
+      // linked when the error is actually showing.
+      input.setAttribute("aria-describedby", "amount-hint");
+      echo.textContent = raw.toLocaleString("en-GB");
+      const rows = render(raw);
+      const first = rows[0];
+      announce(
+        `Results updated. £${raw.toLocaleString("en-GB")} billion is roughly ${first.value} ${first.label.charAt(0).toLowerCase()}${first.label.slice(1)}.`
+      );
+      return;
+    }
+    announce("");
+    if (showError) {
+      errorEl.hidden = false;
+      input.setAttribute("aria-invalid", "true");
+      input.setAttribute("aria-describedby", "amount-hint amount-error");
+    }
   }
 
-  input.addEventListener("input", update);
+  input.addEventListener("input", () => update(false));
+  input.addEventListener("blur", () => update(true));
   document.getElementById("translator").addEventListener("submit", (e) => {
     e.preventDefault();
-    update();
+    update(true);
   });
-  update();
+  update(false);
+  firstRun = false;
 }

@@ -13,7 +13,7 @@ description: How UK debt and debt-to-GDP have changed since the year you were bo
 <form class="translator" id="lifetime-form" novalidate>
   <div class="field">
     <label for="birth-year">Year of birth</label>
-    <input type="number" id="birth-year" name="birth-year" inputmode="numeric" min="1900" max="2026" step="1" value="1968" aria-describedby="by-hint">
+    <input type="number" id="birth-year" name="birth-year" inputmode="numeric" autocomplete="bday-year" min="1900" max="2026" step="1" value="1968" aria-describedby="by-hint">
     <p id="by-hint" class="field__hint">Any year from 1900 to 2026.</p>
     <p id="by-error" class="field__error" role="alert" hidden>Enter a year between 1900 and 2026.</p>
   </div>
@@ -21,8 +21,11 @@ description: How UK debt and debt-to-GDP have changed since the year you were bo
   <p class="field__hint">Results also update as you type.</p>
 </form>
 
-<section id="lifetime-results" aria-live="polite">
-  <!-- Populated by JS. -->
+<p id="lifetime-status" class="visually-hidden" role="status"></p>
+
+<section id="lifetime-results">
+  <!-- Populated by JS. The status line above carries the announcement, so the
+       full results are not re-read on every change. -->
 </section>
 
 <noscript>

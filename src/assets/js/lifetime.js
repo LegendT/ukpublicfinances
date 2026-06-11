@@ -11,6 +11,7 @@
   const out = document.getElementById("lifetime-results");
   const input = document.getElementById("birth-year");
   const errorEl = document.getElementById("by-error");
+  const statusEl = document.getElementById("lifetime-status");
   if (!dataEl || !out || !input) return;
 
   const { series, events, primeMinisters, current } = JSON.parse(dataEl.textContent);
@@ -79,22 +80,58 @@
     `;
   }
 
-  function update() {
-    const year = parseInt(input.value, 10);
-    const valid = Number.isFinite(year) && year >= 1900 && year <= 2026;
-    errorEl.hidden = valid;
-    input.setAttribute("aria-invalid", valid ? "false" : "true");
-    if (!valid) {
-      out.innerHTML = "";
-      return;
-    }
-    render(year);
+  // The full results section is not a live region (re-reading four cards and
+  // two lists per keystroke would drown screen reader users), so a short
+  // status line carries the announcement, debounced across rapid edits.
+  // The first render happens on page load; announcing it would talk over the
+  // page title before the user has done anything.
+  let firstRun = true;
+  let statusTimer;
+  function announce(message) {
+    if (firstRun) return;
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => {
+      statusEl.textContent = message;
+    }, 400);
   }
 
-  input.addEventListener("input", update);
+  // Errors only show once the user has finished with the field (blur or
+  // submit); flagging "196" as invalid mid-way through typing "1968" would
+  // fire the alert on every keystroke.
+  function update(showError) {
+    const year = parseInt(input.value, 10);
+    const valid = Number.isFinite(year) && year >= 1900 && year <= 2026;
+    if (valid) {
+      errorEl.hidden = true;
+      input.setAttribute("aria-invalid", "false");
+      // Referenced text is exposed even while hidden, so the error id is only
+      // linked when the error is actually showing.
+      input.setAttribute("aria-describedby", "by-hint");
+      render(year);
+      const birthGdp = valueAt(year, "debtToGdp");
+      const ppChange = birthGdp !== null ? (current.debtToGdp - birthGdp).toFixed(1) : null;
+      announce(
+        ppChange !== null
+          ? `Results updated for ${year}. Debt-to-GDP was about ${birthGdp}% then and is ${current.debtToGdp}% now, a change of ${ppChange} percentage points.`
+          : `Results updated for ${year}.`
+      );
+      return;
+    }
+    out.innerHTML = "";
+    announce("");
+    if (showError) {
+      errorEl.hidden = false;
+      input.setAttribute("aria-invalid", "true");
+      input.setAttribute("aria-describedby", "by-hint by-error");
+    }
+  }
+
+  input.addEventListener("input", () => update(false));
+  input.addEventListener("blur", () => update(true));
   document.getElementById("lifetime-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    update();
+    update(true);
   });
-  update();
+  update(false);
+  firstRun = false;
 })();

@@ -14,6 +14,21 @@ if (cfgEl && form) {
   const spendInputs = Array.from(form.querySelectorAll("[data-spend]"));
   const taxInputs = Array.from(form.querySelectorAll("[data-tax]"));
 
+  // The visible banner updates instantly; the screen reader mirror waits for
+  // the drag to settle, so one message is announced rather than dozens.
+  const statusSr = document.getElementById("sim-status-sr");
+  // The first compute happens on page load; announcing it would talk over the
+  // page title before the user has touched a slider.
+  let firstRun = true;
+  let statusTimer;
+  function announce(message) {
+    if (firstRun) return;
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => {
+      statusSr.textContent = message;
+    }, 500);
+  }
+
   function compute() {
     // Gather slider state and update each slider's own label.
     const spendValues = {};
@@ -21,12 +36,15 @@ if (cfgEl && form) {
       const val = parseFloat(el.value);
       spendValues[el.dataset.spend] = val;
       document.getElementById(el.id + "-out").textContent = gbpBn(val);
+      // Screen readers otherwise announce the bare number while dragging.
+      el.setAttribute("aria-valuetext", `£${Math.round(val).toLocaleString("en-GB")} billion`);
     });
     const taxPoints = taxInputs.map((el) => {
       const rate = parseFloat(el.value);
       const pts = rate - parseFloat(el.dataset.base);
       document.getElementById(el.id + "-out").textContent =
         pts === 0 ? `${rate}%` : `${rate}% (${pts > 0 ? "+" : ""}${pts})`;
+      el.setAttribute("aria-valuetext", `${rate}%`);
       return { perpoint: parseFloat(el.dataset.perpoint), points: pts };
     });
 
@@ -63,6 +81,8 @@ if (cfgEl && form) {
       }
     }
 
+    announce(status.textContent);
+
     document.getElementById("r-trajectory").innerHTML = r.trajectory
       .map(
         (t) =>
@@ -79,4 +99,5 @@ if (cfgEl && form) {
   });
 
   compute();
+  firstRun = false;
 }

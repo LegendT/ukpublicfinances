@@ -50,7 +50,10 @@ pageClass: has-sticky-status
   </div>
 
   <div class="sim-results">
-    <p class="sim-goal" id="sim-status" aria-live="polite">Move the sliders to balance the budget.</p>
+    <p class="sim-goal" id="sim-status">Move the sliders to balance the budget.</p>
+    <!-- Announcements come from this mirror, debounced in JS, so a slider drag
+         does not queue dozens of repeats of the visible banner text. -->
+    <p id="sim-status-sr" class="visually-hidden" role="status"></p>
 
     <h2 class="visually-hidden">Result</h2>
     <div class="metric-grid metric-grid--compact">

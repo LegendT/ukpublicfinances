@@ -25,7 +25,9 @@ description: Turn a large sum into per-person figures and comparisons with annua
   <p class="field__hint">Results also update as you type.</p>
 </form>
 
-<section aria-labelledby="result-heading" aria-live="polite">
+<p id="amount-status" class="visually-hidden" role="status"></p>
+
+<section id="results-section" aria-labelledby="result-heading">
   <h2 id="result-heading">£<span id="echo-amount">50</span> billion is roughly…</h2>
   <div class="metric-grid metric-grid--compact" id="results">
     <!-- Populated by JS; the table below is the no-JS fallback. -->
