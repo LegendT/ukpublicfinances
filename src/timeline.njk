@@ -19,7 +19,7 @@ description: How UK government debt, borrowing, and debt interest have changed o
 <div class="chart-controls">
   <fieldset>
     <legend>Measure</legend>
-    <div class="radio-row" role="group">
+    <div class="radio-row">
       <label><input type="radio" name="measure" value="debtToGdp" checked> Debt (% of GDP)</label>
       <label><input type="radio" name="measure" value="debtGbp"> Debt (£)</label>
       <label><input type="radio" name="measure" value="borrowingGbp"> Borrowing (£)</label>
@@ -37,6 +37,8 @@ description: How UK government debt, borrowing, and debt interest have changed o
     </select>
   </div>
 </div>
+
+<p id="period-note" class="visually-hidden" role="status"></p>
 
 <figure class="chart" aria-labelledby="chart-caption">
   <div id="chart" class="chart__canvas" role="img" aria-label="Line chart of UK debt over time. The same data is in the table below.">
@@ -61,6 +63,7 @@ description: How UK government debt, borrowing, and debt interest have changed o
 
 <details class="data-table-wrap" open>
   <summary>Show the data as a table</summary>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="UK debt time series">
   <table class="data-table">
     <caption>UK debt time series. Pre-1900 values are approximate historical reconstructions.</caption>
     <thead>
@@ -94,6 +97,7 @@ description: How UK government debt, borrowing, and debt interest have changed o
       </tr>
     </tbody>
   </table>
+  </div>
 </details>
 
 <p class="source-note">

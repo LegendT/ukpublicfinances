@@ -60,8 +60,14 @@
       // disabled options, which can look like broken functionality.
       o.textContent = o.disabled ? `${o.dataset.label} (no data)` : o.dataset.label;
     });
+    const note = document.getElementById("period-note");
     if (periodSelect.options[periodSelect.selectedIndex].disabled) {
       periodSelect.value = String(floor);
+      // The user's period choice was just discarded; say so, since the select
+      // changes value without any interaction with it.
+      if (note) note.textContent = `Period changed to "Since ${floor}" because earlier years have no data for this measure.`;
+    } else if (note) {
+      note.textContent = "";
     }
   }
 
@@ -72,20 +78,27 @@
     const startYear = parseInt(periodSelect.value, 10);
     const startNote = earliest > 1700 && earliest !== Infinity ? ` (data from ${earliest})` : "";
     document.getElementById("chart-measure-label").textContent = measureLabels[measure] + startNote;
-    chartEl.setAttribute(
-      "aria-label",
-      `Line chart: ${measureLabels[measure]}, since ${startYear}. The same data is in the table below.`
-    );
 
     const points = series
       .filter((d) => d.year >= startYear && d[measure] !== null && d[measure] !== undefined)
       .map((d) => ({ year: d.year, value: d[measure] }));
 
     chartEl.innerHTML = "";
+    // The container is role="img", so its children are presentational; the
+    // label must describe the empty state too, or assistive tech is told
+    // there is a chart when there is not.
     if (points.length < 2) {
+      chartEl.setAttribute(
+        "aria-label",
+        `No chart: not enough data for ${measureLabels[measure]} since ${startYear}. See the table below.`
+      );
       chartEl.innerHTML = '<p class="chart__empty">Not enough data for this combination. See the table below.</p>';
       return;
     }
+    chartEl.setAttribute(
+      "aria-label",
+      `Line chart: ${measureLabels[measure]}, since ${startYear}. The same data is in the table below.`
+    );
 
     const years = points.map((p) => p.year);
     const values = points.map((p) => p.value);

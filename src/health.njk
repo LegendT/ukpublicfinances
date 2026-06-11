@@ -28,8 +28,8 @@ description: A wider set of public-finance and economic indicators, with neutral
     <article class="indicator">
       <div class="indicator__head">
         <h3 class="indicator__name">{{ ind.name }}</h3>
-        <span class="status status--{{ ind.status }}" aria-label="Recent trend: {{ ind.status }}">
-          <span class="status__arrow" aria-hidden="true">{{ arrows[ind.status] }}</span> {{ ind.status }}
+        <span class="status status--{{ ind.status }}">
+          <span class="status__arrow" aria-hidden="true">{{ arrows[ind.status] }}</span> <span class="visually-hidden">Recent trend:</span> {{ ind.status }}
         </span>
       </div>
       {%- if ind.unit.startsWith("£") %}
@@ -50,6 +50,7 @@ description: A wider set of public-finance and economic indicators, with neutral
 
 <details class="data-table-wrap">
   <summary>Show all indicators as a table</summary>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="All indicators">
   <table class="data-table">
     <caption>Public finance and economic indicators. Last updated {{ indicators.lastUpdated | readableDate }}.</caption>
     <thead>
@@ -66,4 +67,5 @@ description: A wider set of public-finance and economic indicators, with neutral
       {%- endfor %}
     </tbody>
   </table>
+  </div>
 </details>
