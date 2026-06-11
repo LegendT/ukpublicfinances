@@ -12,12 +12,21 @@
 
   function closeMenu() {
     if (!toggle) return;
+    // Hiding the list while focus is inside it would strand keyboard users
+    // on <body>, so hand focus back to the toggle first.
+    if (list.classList.contains("is-open") && list.contains(document.activeElement)) {
+      toggle.focus();
+    }
     toggle.setAttribute("aria-expanded", "false");
     list.classList.remove("is-open");
   }
   function closeGroups(except) {
     groups.forEach((g) => {
-      if (g !== except) g.open = false;
+      if (g === except || !g.open) return;
+      if (g.contains(document.activeElement)) {
+        g.querySelector("summary").focus();
+      }
+      g.open = false;
     });
   }
 
@@ -39,6 +48,13 @@
   // Close dropdowns when clicking outside the nav.
   document.addEventListener("click", function (e) {
     if (!list.contains(e.target)) closeGroups(null);
+  });
+
+  // Close dropdowns when keyboard focus leaves the nav, so an open menu
+  // cannot sit over whatever is focused next. relatedTarget is null when the
+  // window itself loses focus; keep the menu open in that case.
+  list.addEventListener("focusout", function (e) {
+    if (e.relatedTarget && !list.contains(e.relatedTarget)) closeGroups(null);
   });
 
   // Escape closes the mobile menu and any open dropdown.
