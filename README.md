@@ -30,12 +30,12 @@ npm run a11y:all # build + serve + WCAG 2.2 AA audit of every page (see below)
 ### Accessibility audits
 
 ```bash
-npm run a11y:all   # one shot: build, serve _site, pa11y-ci over all 15 routes, tear down
+npm run a11y:all   # one shot: build, serve _site, pa11y-ci over all 16 routes, tear down
 npm run a11y       # quick single-page check, needs `npm run dev` running first
 ```
 
 `a11y:all` is self-contained: it builds, starts a static server on port 8081, runs
-[pa11y-ci](https://github.com/pa11y/pa11y-ci) against all 15 routes listed in
+[pa11y-ci](https://github.com/pa11y/pa11y-ci) against all 16 routes listed in
 `.pa11yci.json` at the WCAG 2.2 AA standard, then stops the server. The audit tools are
 fetched on demand via `npx` (kept out of the dependency tree to stay lean); **the first
 run downloads a headless Chromium**, so expect it to take a minute. To audit a specific

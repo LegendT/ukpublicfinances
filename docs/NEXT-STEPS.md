@@ -28,7 +28,7 @@ Beyond the brief, the site also has:
 - **GOV.UK alignment:** yellow focus state, larger type scale, and content style.
 - **Tested tool maths:** pure functions in `assets/js/lib/calc.js` with unit tests. 18 tests in total, including a guard that fails the build if an em-dash returns to the source.
 
-All 15 routes pass a WCAG 2.2 AA audit (`npm run a11y:all`); `npm test` covers the data contract, the tool maths, and the style guard.
+All 16 routes pass a WCAG 2.2 AA audit (`npm run a11y:all`); `npm test` covers the data contract, the tool maths, and the style guard.
 
 ## Data status
 
