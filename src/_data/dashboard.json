@@ -40,7 +40,7 @@
       "display": "perPerson",
       "metric_name": "Debt per person",
       "shortLabel": "Debt per person",
-      "value": 42709,
+      "value": 41971,
       "unit": "£ per person",
       "explanation": "Total net debt divided by the UK population. A way to picture the scale, not a bill anyone personally owes.",
       "whatThisMeans": "This does not mean each person owes this amount. Government debt is repaid through taxes and borrowing over time, not split between residents.",
@@ -48,7 +48,7 @@
       "source_name": "Calculated from ONS net debt and ONS population estimate",
       "source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates",
       "retrieved_date": "2026-06-10",
-      "notes": "Calculated at build time: net debt (£2,917bn) divided by population estimate (68.3m). Recomputed whenever either input changes.",
+      "notes": "Calculated at build time: net debt (£2,917bn) divided by population estimate (69.5m). Recomputed whenever either input changes.",
       "confidence_level": "calculated"
     },
     {
@@ -56,16 +56,16 @@
       "display": "perYear",
       "metric_name": "Annual debt interest cost",
       "shortLabel": "Debt interest",
-      "value": 111,
+      "value": 110,
       "unit": "£ billion per year",
       "explanation": "What the government pays to service its debt over a year. Affected both by how much is owed and by the interest rate on it.",
       "whatThisMeans": "Interest is a real cash cost competing with other spending — around 8% of total public spending. Some of it rises and falls with inflation, because a share of UK debt is index-linked. Central government interest payable was £10.3 billion in April 2026 alone.",
       "date": "2026-03-31",
-      "source_name": "OBR, debt interest (central government, net of APF)",
-      "source_url": "https://obr.uk/forecasts-in-depth/tax-by-tax-spend-by-spend/debt-interest-central-government-net/",
-      "retrieved_date": "2026-06-10",
-      "notes": "About £111bn in 2025-26, roughly 3.7% of GDP. Includes the inflation uplift on index-linked gilts.",
-      "confidence_level": "official"
+      "source_name": "OBR, Economic and Fiscal Outlook November 2025 (central government debt interest, net of APF)",
+      "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-november-2025/",
+      "retrieved_date": "2026-06-11",
+      "notes": "About £110bn in 2025-26 (OBR November 2025 forecast), roughly 3.6% of GDP. Includes the inflation uplift on index-linked gilts.",
+      "confidence_level": "provisional"
     },
     {
       "id": "monthly-borrowing",
@@ -86,9 +86,9 @@
   ],
   "supporting": {
     "gdp": { "value": 3097, "unit": "£ billion", "notes": "Implied from net debt and the debt-to-GDP ratio (2917 / 0.942). Used for the translator's share-of-GDP figure." },
-    "population": { "value": 68300000, "unit": "people", "notes": "Mid-year population estimate." },
-    "adults": { "value": 54200000, "unit": "people", "notes": "Population aged 18 and over." },
-    "taxpayers": { "value": 36200000, "unit": "people", "notes": "Estimated number of income tax payers." },
+    "population": { "value": 69500000, "unit": "people", "notes": "Provisional UK mid-2025 population estimate (ONS)." },
+    "adults": { "value": 54200000, "unit": "people", "notes": "Population aged 18 and over. ONS has not yet published a mid-2025 age breakdown." },
+    "taxpayers": { "value": 36700000, "unit": "people", "notes": "Number of income tax payers (HMRC, tax year 2023-24)." },
     "taxReceipts": { "value": 1120, "unit": "£ billion", "notes": "Total tax receipts, annual, estimated (about 36% of GDP). Total public sector current receipts are higher." }
   }
 }

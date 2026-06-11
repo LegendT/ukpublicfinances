@@ -20,7 +20,7 @@
       "id": "interest",
       "name": "Debt interest",
       "value": 3.6, "unit": "% of GDP", "status": "rising",
-      "explanation": "The cost of servicing debt, relative to the economy. About £111 billion a year.",
+      "explanation": "The cost of servicing debt, relative to the economy. About £110 billion a year.",
       "date": "2026-03-31", "source_name": "OBR", "source_url": "https://obr.uk/forecasts-in-depth/tax-by-tax-spend-by-spend/debt-interest-central-government-net/", "retrieved_date": "2026-06-10", "confidence_level": "official"
     },
     {

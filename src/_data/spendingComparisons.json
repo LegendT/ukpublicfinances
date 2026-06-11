@@ -5,13 +5,13 @@
     {
       "id": "health",
       "name": "NHS / health",
-      "value": 200,
+      "value": 222,
       "unit": "£ billion per year",
-      "source_name": "HM Treasury, Public spending statistics",
-      "source_url": "https://www.gov.uk/government/collections/public-expenditure-statistical-analyses-pesa",
-      "retrieved_date": "2026-06-10",
-      "confidence_level": "estimated",
-      "notes": "Total Department of Health and Social Care budget for England. The NHS England core budget alone is about £152bn."
+      "source_name": "House of Commons Library, Main Estimates 2025-26 (DHSC)",
+      "source_url": "https://commonslibrary.parliament.uk/research-briefings/cdp-2025-0140/",
+      "retrieved_date": "2026-06-11",
+      "confidence_level": "official",
+      "notes": "Total Department of Health and Social Care budget for England, 2025-26 (Resource DEL about £208bn plus Capital DEL about £14bn). The NHS England core budget alone is about £152bn."
     },
     {
       "id": "education",
