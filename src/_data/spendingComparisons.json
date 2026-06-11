@@ -27,13 +27,13 @@
     {
       "id": "defence",
       "name": "Defence",
-      "value": 56,
+      "value": 62,
       "unit": "£ billion per year",
-      "source_name": "HM Treasury, Public spending statistics",
-      "source_url": "https://www.gov.uk/government/collections/public-expenditure-statistical-analyses-pesa",
-      "retrieved_date": "2026-06-10",
-      "confidence_level": "estimated",
-      "notes": "About 2% of GDP, meeting the NATO commitment."
+      "source_name": "HM Treasury Spending Review 2025 / House of Commons Library (CBP-8175)",
+      "source_url": "https://commonslibrary.parliament.uk/research-briefings/cbp-8175/",
+      "retrieved_date": "2026-06-11",
+      "confidence_level": "official",
+      "notes": "The MoD departmental budget for 2025/26 (about 2% of GDP). On the broader NATO definition, which adds items such as pensions and security funds, UK spending is about 2.4% of GDP; the government plans to reach 2.5% by 2027 and 3.5% by 2035."
     },
     {
       "id": "state-pension",
