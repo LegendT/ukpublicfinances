@@ -53,7 +53,7 @@ description: How UK government debt, borrowing, and debt interest have changed o
     {%- for e in events.events %}
     <li class="event-list__item">
       <span class="event-list__year">{{ e.year }}</span>
-      <span class="event-list__body"><strong>{{ e.title }}</strong> — {{ e.summary }}</span>
+      <span class="event-list__body"><strong>{{ e.title }}</strong>: {{ e.summary }}</span>
     </li>
     {%- endfor %}
   </ul>
@@ -77,10 +77,10 @@ description: How UK government debt, borrowing, and debt interest have changed o
       {%- for d in debtTimeseries.series %}
       <tr>
         <th scope="row">{{ d.year }}</th>
-        <td class="num">{{ d.debtToGdp if d.debtToGdp !== null else "—" }}</td>
-        <td class="num">{{ d.debtGbp | number if d.debtGbp !== null else "—" }}</td>
-        <td class="num">{{ d.borrowingGbp | number if d.borrowingGbp !== null else "—" }}</td>
-        <td class="num">{{ d.interestGbp | number if d.interestGbp !== null else "—" }}</td>
+        <td class="num">{{ d.debtToGdp if d.debtToGdp !== null else "n/a" }}</td>
+        <td class="num">{{ d.debtGbp | number if d.debtGbp !== null else "n/a" }}</td>
+        <td class="num">{{ d.borrowingGbp | number if d.borrowingGbp !== null else "n/a" }}</td>
+        <td class="num">{{ d.interestGbp | number if d.interestGbp !== null else "n/a" }}</td>
         <td>{{ d.confidence_level }}</td>
       </tr>
       {%- endfor %}

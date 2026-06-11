@@ -11,7 +11,7 @@
     { "id": "fiscal-drag", "term": "Fiscal drag", "definition": "When tax thresholds are frozen while incomes rise, pulling more people into paying tax, or higher rates, without the rates themselves changing." },
     { "id": "fiscal-rules", "term": "Fiscal rules", "definition": "Targets a government sets itself for borrowing or debt, such as having debt falling as a share of GDP within a set number of years." },
     { "id": "fiscal-year", "term": "Fiscal year", "definition": "The government's financial year, running from 1 April to 31 March. Also called the financial year." },
-    { "id": "gdp", "term": "GDP", "definition": "Gross domestic product — the total value of goods and services the economy produces. Used as the yardstick for the size of debt and borrowing." },
+    { "id": "gdp", "term": "GDP", "definition": "Gross domestic product, the total value of goods and services the economy produces. Used as the yardstick for the size of debt and borrowing." },
     { "id": "gilt-yield", "term": "Gilt yield", "definition": "The return an investor gets on a gilt. When yields rise, new government borrowing costs more." },
     { "id": "gilts", "term": "Gilts", "definition": "UK government bonds. The government sells them to investors and repays the value at a set date, paying interest in the meantime. Some are index-linked to inflation." },
     { "id": "gross-debt", "term": "Gross debt", "definition": "Total government liabilities without subtracting any assets. It is higher than the UK's headline net debt, and is the measure used for international comparisons because countries report it consistently." },

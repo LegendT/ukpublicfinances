@@ -1,4 +1,4 @@
-/* UK Public Finances Explorer — calm, civic, readable.
+/* UK Public Finances Explorer, calm, civic, readable.
    Mobile first; min-width media queries scale up. WCAG 2.2 AA target:
    semantic structure, 4.5:1 text contrast, visible focus, 44px touch targets. */
 
@@ -16,7 +16,7 @@
   --focus: #ffdd00;       /* GOV.UK-style yellow focus */
   --ink-black: #0b0c0c;   /* GOV.UK near-black, paired with the focus yellow */
 
-  /* confidence badges — muted, never alarmist */
+  /* confidence badges, muted, never alarmist */
   --c-official: #2f5d3a;
   --c-provisional: #6b5a1e;
   --c-estimated: #4a4f5a;
@@ -308,7 +308,7 @@ input[type="number"], select {
   padding: 0.1rem 0.5rem; border-radius: 999px; background: #eceef1; color: var(--ink-soft);
   white-space: nowrap;
 }
-/* Neutral, non-alarmist — direction shown by arrow, not by red/green */
+/* Neutral, non-alarmist, direction shown by arrow, not by red/green */
 .status--rising { background: #eef1f4; color: #3a4a5a; }
 .status--falling { background: #eef1f4; color: #3a4a5a; }
 .status--stable { background: #eef1f4; color: #3a4a5a; }
@@ -361,7 +361,7 @@ input[type="number"], select {
 .table-scroll { overflow-x: auto; }
 .data-table-wrap { overflow-x: auto; }
 
-/* Featured headline metric (net debt) — more prominent, balances the grid */
+/* Featured headline metric (net debt), more prominent, balances the grid */
 @media (min-width: 38rem) {
   .metric-card--feature { grid-column: 1 / -1; }
 }
@@ -370,7 +370,7 @@ input[type="number"], select {
 }
 .metric-card--feature .metric-card__value { font-size: clamp(2rem, 5vw, 2.7rem); }
 
-/* Expander affordance — a caret that turns on open */
+/* Expander affordance, a caret that turns on open */
 .metric-card__more summary,
 .data-table-wrap > summary { list-style: none; }
 .metric-card__more summary::-webkit-details-marker,
@@ -383,7 +383,7 @@ input[type="number"], select {
 .metric-card__more[open] summary::before,
 .data-table-wrap[open] > summary::before { transform: rotate(90deg); }
 
-/* Health status arrow — a touch more prominent (colour stays neutral) */
+/* Health status arrow, a touch more prominent (colour stays neutral) */
 .status { font-size: 0.82rem; }
 .status__arrow { font-weight: 700; font-size: 1.4em; line-height: 1; vertical-align: -0.05em; }
 
@@ -396,7 +396,7 @@ input[type="number"], select {
 .compare__amount { color: var(--ink-soft); font-size: 0.9rem; white-space: nowrap; }
 .compare__bar { height: 1rem; background: #e8ebef; border-radius: 999px; overflow: hidden; }
 .compare__bar > span { display: block; height: 100%; background: var(--brand); border-radius: 999px; min-width: 3px; }
-/* Interest that is more than the whole budget — full bar, striped to signal "over" */
+/* Interest that is more than the whole budget, full bar, striped to signal "over" */
 .compare__bar--over > span {
   background-color: var(--brand-deep);
   background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.28) 0 6px, transparent 6px 12px);
@@ -419,7 +419,7 @@ input[type="number"], select {
 .sim-goal--win { background: #e7f0e9; border-color: var(--c-official); color: #1f4a2b; }
 
 /* On mobile the result panel stacks below the sliders, so pin the goal banner
-   to the bottom of the screen — the balance status stays visible while you drag
+   to the bottom of the screen, the balance status stays visible while you drag
    the sliders. (On desktop the banner is already visible in the sticky panel.) */
 @media (max-width: 55.99rem) {
   body.has-sticky-status { padding-bottom: 5rem; }

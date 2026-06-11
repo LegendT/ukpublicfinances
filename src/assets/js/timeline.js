@@ -44,7 +44,7 @@
 
   // Disable period options that can't show anything different for this measure.
   // Cash-£ measures only run from 1979, so "Since 1700/1900/1945" would all be
-  // identical to "Since 1979" — disabling them stops the period looking broken.
+  // identical to "Since 1979", so disabling them stops the period looking broken.
   // If the current selection becomes disabled, snap to the earliest valid one.
   function syncPeriodOptions(earliest) {
     const opts = Array.from(periodSelect.options);
@@ -56,9 +56,9 @@
     opts.forEach((o) => {
       if (!o.dataset.label) o.dataset.label = o.textContent;
       o.disabled = +o.value < floor;
-      // Make the disabled state explicit in the text — some browsers don't grey
+      // Make the disabled state explicit in the text, since some browsers don't grey
       // disabled options, which can look like broken functionality.
-      o.textContent = o.disabled ? `${o.dataset.label} — no data` : o.dataset.label;
+      o.textContent = o.disabled ? `${o.dataset.label} (no data)` : o.dataset.label;
     });
     if (periodSelect.options[periodSelect.selectedIndex].disabled) {
       periodSelect.value = String(floor);

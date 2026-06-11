@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: Monthly update
-description: A plain-English summary of the latest monthly public finances release — what changed and why.
+description: A plain-English summary of what changed in the latest monthly public finances release, and why.
 ---
 {% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
 
@@ -16,7 +16,7 @@ description: A plain-English summary of the latest monthly public finances relea
 <section aria-labelledby="borrowing-heading">
   <h2 id="borrowing-heading" class="visually-hidden">Borrowing this month</h2>
   <div class="metric-grid metric-grid--compact">
-    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ u.borrowing.value }} bn</p><p class="metric-card__label">Borrowed in {{ u.month }} — {{ u.borrowing.direction }}</p></article>
+    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ u.borrowing.value }} bn</p><p class="metric-card__label">Borrowed in {{ u.month }} ({{ u.borrowing.direction }})</p></article>
     <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ u.borrowing.vsLastYear }}</p><p class="metric-card__label">Versus the same month last year</p></article>
     <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ u.borrowing.vsForecast }}</p><p class="metric-card__label">Versus the official forecast</p></article>
   </div>
@@ -46,4 +46,4 @@ description: A plain-English summary of the latest monthly public finances relea
   {{ dataFreshnessBadge(u.confidence_level, "") }}
 </p>
 
-{{ caveatBox("One month is a weak guide to the year — monthly figures are volatile, seasonal, and routinely revised as fuller data arrives. Read the direction, not the decimal.", "A note on monthly figures") }}
+{{ caveatBox("One month is a weak guide to the year. Monthly figures are volatile, seasonal, and routinely revised as fuller data arrives. Read the direction, not the decimal.", "A note on monthly figures") }}

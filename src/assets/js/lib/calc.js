@@ -47,7 +47,7 @@ export function simulateBudget(cfg, spendValues, taxPoints) {
   const trajectory = [];
   for (let y = 1; y <= cfg.projection.years; y++) {
     // Floor at zero: once the debt is cleared it stays cleared. We don't model
-    // a surplus building up into net assets — this tool is about debt.
+    // a surplus building up into net assets. This tool is about debt.
     debt = Math.max(0, debt * (1 + rate) + borrowing);
     trajectory.push({ year: y, debt, pctGdp: (debt / cfg.gdp) * 100 });
   }

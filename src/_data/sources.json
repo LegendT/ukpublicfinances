@@ -3,7 +3,7 @@
   "sources": [
     {
       "id": "ons-psf",
-      "name": "ONS — Public sector finances",
+      "name": "ONS: Public sector finances",
       "publisher": "Office for National Statistics",
       "url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance",
       "covers": "Net debt, borrowing, debt interest, monthly public finances. The headline UK measures.",
@@ -12,7 +12,7 @@
     },
     {
       "id": "obr",
-      "name": "OBR — Public finances databank and forecasts",
+      "name": "OBR: Public finances databank and forecasts",
       "publisher": "Office for Budget Responsibility",
       "url": "https://obr.uk/data/",
       "covers": "Long-run public finance series and official forecasts to compare outturn against.",
@@ -30,7 +30,7 @@
     },
     {
       "id": "hmt-spending",
-      "name": "HM Treasury — Public spending statistics",
+      "name": "HM Treasury: Public spending statistics",
       "publisher": "HM Treasury",
       "url": "https://www.gov.uk/government/collections/public-expenditure-statistical-analyses-pesa",
       "covers": "Spending by function (health, education, defence, welfare).",
@@ -39,7 +39,7 @@
     },
     {
       "id": "ons-pop",
-      "name": "ONS — Population estimates",
+      "name": "ONS: Population estimates",
       "publisher": "Office for National Statistics",
       "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates",
       "covers": "UK population, used for per-person figures.",
@@ -48,7 +48,7 @@
     },
     {
       "id": "imf-weo",
-      "name": "IMF — World Economic Outlook database",
+      "name": "IMF: World Economic Outlook database",
       "publisher": "International Monetary Fund",
       "url": "https://www.imf.org/en/Publications/WEO",
       "covers": "Consistent international debt and deficit comparisons.",
@@ -57,7 +57,7 @@
     },
     {
       "id": "boe-millennium",
-      "name": "Bank of England — A millennium of macroeconomic data",
+      "name": "Bank of England: A millennium of macroeconomic data",
       "publisher": "Bank of England",
       "url": "https://www.bankofengland.co.uk/statistics/research-datasets",
       "covers": "Long-run historical series for the timeline.",

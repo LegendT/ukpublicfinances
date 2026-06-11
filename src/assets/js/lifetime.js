@@ -45,7 +45,7 @@
       <h2>Since ${year}</h2>
       <div class="metric-grid metric-grid--compact">
         <article class="metric-card metric-card--mini">
-          <p class="metric-card__value">${birthGdp !== null ? birthGdp + "%" : "—"}</p>
+          <p class="metric-card__value">${birthGdp !== null ? birthGdp + "%" : "n/a"}</p>
           <p class="metric-card__label">Debt-to-GDP in ${year} (estimated)</p>
         </article>
         <article class="metric-card metric-card--mini">
@@ -53,7 +53,7 @@
           <p class="metric-card__label">Debt-to-GDP now (${current.year})</p>
         </article>
         <article class="metric-card metric-card--mini">
-          <p class="metric-card__value">${ppChange !== null ? (ppChange >= 0 ? "+" : "") + ppChange + " pts" : "—"}</p>
+          <p class="metric-card__value">${ppChange !== null ? (ppChange >= 0 ? "+" : "") + ppChange + " pts" : "n/a"}</p>
           <p class="metric-card__label">Change in the ratio</p>
         </article>
         <article class="metric-card metric-card--mini">
@@ -65,7 +65,7 @@
       <h3>Events during your lifetime</h3>
       <ul class="event-list">
         ${livedEvents
-          .map((e) => `<li class="event-list__item"><span class="event-list__year">${e.year}</span><span class="event-list__body"><strong>${e.title}</strong> — ${e.summary}</span></li>`)
+          .map((e) => `<li class="event-list__item"><span class="event-list__year">${e.year}</span><span class="event-list__body"><strong>${e.title}</strong>: ${e.summary}</span></li>`)
           .join("") || "<li>No marked events in this range.</li>"}
       </ul>
 

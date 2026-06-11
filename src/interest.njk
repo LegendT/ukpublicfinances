@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: Interest costs
-description: What the UK government pays to service its debt — yearly, monthly, and daily — and how that compares with revenue and the economy.
+description: What the UK government pays to service its debt (yearly, monthly, and daily) and how that compares with revenue and the economy.
 ---
 {% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
 
@@ -12,7 +12,7 @@ description: What the UK government pays to service its debt — yearly, monthly
 
 <div class="page-intro prose">
   <h1>Interest costs</h1>
-  <p class="lede">Debt has to be serviced. Here is what that costs — and why the interest rate matters as much as the size of the debt.</p>
+  <p class="lede">Debt has to be serviced. Here is what that costs, and why the interest rate matters as much as the size of the debt.</p>
 </div>
 
 <section aria-labelledby="breakdown">
@@ -34,7 +34,7 @@ description: What the UK government pays to service its debt — yearly, monthly
 <section class="prose" aria-labelledby="why-rates">
   <h2 id="why-rates">Why the interest rate matters as much as the debt</h2>
   <p>The same pile of debt can be cheap or expensive to hold, depending on the interest rate paid on it. Since 2021, two things pushed UK debt interest sharply higher: high inflation raised the cost of <strong>index-linked gilts</strong> (whose value rises with prices), and higher Bank of England interest rates raised the cost of new and refinanced borrowing.</p>
-  <p>That is why "how much is owed" and "at what rate" are both part of the story — and why the cost can rise even when the debt itself is broadly flat.</p>
+  <p>That is why "how much is owed" and "at what rate" are both part of the story, and why the cost can rise even when the debt itself is broadly flat.</p>
 </section>
 
 <section aria-labelledby="trend">
@@ -57,4 +57,4 @@ description: What the UK government pays to service its debt — yearly, monthly
   <p class="source-note">Source: <a href="{{ debtTimeseries.source_url }}" rel="noopener">{{ debtTimeseries.source_name }}</a>. {{ dataFreshnessBadge("estimated", "") }}</p>
 </section>
 
-{{ caveatBox("Monthly and daily figures are simple averages for illustration — actual interest is uneven, with large peaks when index-linked gilts are uprated. Figures are provisional and may be revised.", "How to read these") }}
+{{ caveatBox("Monthly and daily figures are simple averages for illustration. Actual interest is uneven, with large peaks when index-linked gilts are uprated. Figures are provisional and may be revised.", "How to read these") }}

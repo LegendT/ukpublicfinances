@@ -10,7 +10,7 @@ description: Who runs this site, where the figures come from, how they are check
 
 <div class="prose">
   <h2>What this is</h2>
-  <p>{{ site.title }} pulls together the headline measures of the UK public finances — debt, borrowing, and the interest bill — from official sources, and presents them factually. The aim is to help people understand the numbers behind the debate, not to argue a position within it. Every figure on the site shows its source and the date it refers to.</p>
+  <p>{{ site.title }} pulls together the headline measures of the UK public finances (debt, borrowing, and the interest bill) from official sources, and presents them factually. The aim is to help people understand the numbers behind the debate, not to argue a position within it. Every figure on the site shows its source and the date it refers to.</p>
 
   <h2>What this is not</h2>
   <ul>
@@ -23,7 +23,7 @@ description: Who runs this site, where the figures come from, how they are check
   <p>The site is built and maintained by {{ site.author }} as an independent educational project. It has no funding from, and no affiliation with, any party, think tank, or government body. The full source code is public on <a href="{{ site.repo }}" rel="noopener">GitHub</a>, so anyone can inspect exactly how a figure is calculated or a chart is drawn.</p>
 
   <h2>Where the figures come from</h2>
-  <p>The data is drawn from primary official sources — chiefly the <abbr title="Office for National Statistics">ONS</abbr>, the <abbr title="Office for Budget Responsibility">OBR</abbr>, the UK Debt Management Office, HM Treasury, and the <abbr title="International Monetary Fund">IMF</abbr> for international comparisons. The <a href="{{ '/sources/' | url }}">sources page</a> lists each one and what it covers.</p>
+  <p>The data is drawn from primary official sources, chiefly the <abbr title="Office for National Statistics">ONS</abbr>, the <abbr title="Office for Budget Responsibility">OBR</abbr>, the UK Debt Management Office, HM Treasury, and the <abbr title="International Monetary Fund">IMF</abbr> for international comparisons. The <a href="{{ '/sources/' | url }}">sources page</a> lists each one and what it covers.</p>
   <p>Every figure carries its provenance in the underlying data: the value, its unit, the date it refers to, the named source, a link, and the date it was retrieved. The headline figures were last reviewed on {{ meta.lastReviewed | readableDate }}.</p>
 
   <h2>How confident each figure is</h2>
@@ -37,13 +37,13 @@ description: Who runs this site, where the figures come from, how they are check
   <p>{{ meta.footerNote }}</p>
 
   <h2>The interactive tools are models, not forecasts</h2>
-  <p>The budget simulator and the big-numbers translator are deliberately simple teaching models. They apply static, first-round arithmetic only — they do not model how the economy responds to changes in tax or spending, and they ignore growth, inflation, and behavioural effects. They are built to give an intuition for the scale of the numbers and the trade-offs involved, not to predict anything. The assumptions behind each one are shown on its own page.</p>
+  <p>The budget simulator and the big-numbers translator are deliberately simple teaching models. They apply static, first-round arithmetic only. They do not model how the economy responds to changes in tax or spending, and they ignore growth, inflation, and behavioural effects. They are built to give an intuition for the scale of the numbers and the trade-offs involved, not to predict anything. The assumptions behind each one are shown on its own page.</p>
 
   <h2 id="corrections">Corrections</h2>
-  <p>Accuracy matters more than anything else here. If you spot an error — a wrong figure, a broken or outdated source link, or a misleading description — please tell us and it will be fixed promptly, with the change recorded in the project's public history.</p>
+  <p>Accuracy matters more than anything else here. If you spot an error (a wrong figure, a broken or outdated source link, or a misleading description), please tell us and it will be fixed promptly, with the change recorded in the project's public history.</p>
   <ul>
-    <li>Email <a href="mailto:corrections@ukpublicfinances.org?subject=Correction%20%E2%80%94%20UK%20Public%20Finances%20Explorer">corrections@ukpublicfinances.org</a>, ideally with the page and the figure in question.</li>
+    <li>Email <a href="mailto:corrections@ukpublicfinances.org?subject=Correction%3A%20UK%20Public%20Finances%20Explorer">corrections@ukpublicfinances.org</a>, ideally with the page and the figure in question.</li>
     <li>Or, if you prefer, open an issue on <a href="{{ site.repo }}/issues" rel="noopener">GitHub</a>.</li>
   </ul>
-  <p>Because the site is open source, every correction is visible in the <a href="{{ site.repo }}/commits" rel="noopener">commit history</a> — there is no quiet editing.</p>
+  <p>Because the site is open source, every correction is visible in the <a href="{{ site.repo }}/commits" rel="noopener">commit history</a>. There is no quiet editing.</p>
 </div>

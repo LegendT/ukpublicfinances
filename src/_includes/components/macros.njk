@@ -4,7 +4,7 @@
     {% from "components/macros.njk" import metricCard, sourceNote, caveatBox %}
 #}
 
-{# DataFreshnessBadge — confidence + last-updated marker. #}
+{# DataFreshnessBadge: confidence + last-updated marker. #}
 {% macro dataFreshnessBadge(confidence, date) %}
 <span class="badge badge--{{ confidence }}">
   <span class="badge__dot" aria-hidden="true"></span>
@@ -12,7 +12,7 @@
 </span>
 {% endmacro %}
 
-{# SourceNote — where a figure came from, and when. #}
+{# SourceNote: where a figure came from, and when. #}
 {% macro sourceNote(record) %}
 <p class="source-note">
   Source:
@@ -23,7 +23,7 @@
 </p>
 {% endmacro %}
 
-{# CaveatBox — a clearly flagged caution. #}
+{# CaveatBox: a clearly flagged caution. #}
 {% macro caveatBox(text, heading) %}
 <aside class="caveat" role="note">
   <p class="caveat__heading">{{ heading or "Important" }}</p>
@@ -31,7 +31,7 @@
 </aside>
 {% endmacro %}
 
-{# MetricCard — a single headline figure with explanation, source, and an expandable note. #}
+{# MetricCard: a single headline figure with explanation, source, and an expandable note. #}
 {% macro metricCard(metric, formattedValue, extraClass) %}
 <article class="metric-card{% if extraClass %} {{ extraClass }}{% endif %}" aria-labelledby="m-{{ metric.id }}-label">
   <h3 class="metric-card__label" id="m-{{ metric.id }}-label">{{ metric.shortLabel or metric.metric_name }}</h3>
@@ -47,7 +47,7 @@
 </article>
 {% endmacro %}
 
-{# GlossaryTerm — a defined term with its definition. #}
+{# GlossaryTerm: a defined term with its definition. #}
 {% macro glossaryTerm(term) %}
 <div class="glossary-term" id="term-{{ term.id }}">
   <dt class="glossary-term__name">{{ term.term }}</dt>
@@ -55,7 +55,7 @@
 </div>
 {% endmacro %}
 
-{# SpendingComparison — one row comparing an amount to an annual budget. #}
+{# SpendingComparison: one row comparing an amount to an annual budget. #}
 {% macro spendingRow(area, amountBillion) %}
 {% set ratio = (amountBillion / area.value * 100) %}
 <tr>

@@ -1,5 +1,5 @@
 {
-  "note": "A wider set of public-finance and economic indicators. Status (rising/falling/stable) describes the recent direction of the figure itself, not whether that direction is good or bad — context matters and is left to the reader. Headline values were verified against ONS and OBR releases in June 2026; revenue and spending totals are estimates.",
+  "note": "A wider set of public-finance and economic indicators. Status (rising/falling/stable) describes the recent direction of the figure itself, not whether that direction is good or bad. Context matters and is left to the reader. Headline values were verified against ONS and OBR releases in June 2026; revenue and spending totals are estimates.",
   "lastUpdated": "2026-05-22",
   "indicators": [
     {

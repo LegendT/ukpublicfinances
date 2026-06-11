@@ -1,5 +1,5 @@
 {
-  "note": "Long-run series for the historical timeline. Pre-1900 values are best-estimate historical reconstructions and are necessarily approximate. Cash (£) figures are only meaningful for recent decades; debt-to-GDP is the comparable measure across the whole period. The latest (current-year) point is not stored here — it is taken from the dashboard data so there is a single source of truth for the current figure.",
+  "note": "Long-run series for the historical timeline. Pre-1900 values are best-estimate historical reconstructions and are necessarily approximate. Cash (£) figures are only meaningful for recent decades; debt-to-GDP is the comparable measure across the whole period. The latest (current-year) point is not stored here. It is taken from the dashboard data so there is a single source of truth for the current figure.",
   "source_name": "Bank of England 'A millennium of macroeconomic data', ONS and OBR for recent years",
   "source_url": "https://www.bankofengland.co.uk/statistics/research-datasets",
   "retrieved_date": "2026-06-10",
