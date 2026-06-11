@@ -1,6 +1,6 @@
 {
   "name": "uk-public-finances-explorer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A clean, factual, data-led explorer for UK government debt and public finances.",
   "type": "module",
   "scripts": {
@@ -20,7 +20,7 @@
     "data",
     "eleventy"
   ],
-  "author": "Legendary Tone",
+  "author": "Anthony George (Legendary Tone)",
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0"
