@@ -6,13 +6,13 @@ It is **not** a political commentary site and **not** a gimmicky debt clock. Eve
 
 ## Data status
 
-Live at **[ukpublicfinances.org](https://ukpublicfinances.org)**. The dashboard headlines, health indicators, monthly update, spending comparisons, and the full international comparison (debt, deficit, and growth) were **verified against ONS, OBR, IMF and HM Treasury sources in June 2026** — see each record's `source_url`. The only remaining estimates are the **long-run historical series before about 2010** — best-estimate reconstructions of net debt as a share of GDP, where exact pre-1900 figures are inherently uncertain; these are marked `confidence_level: estimated`. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) for how to refresh figures.
+Live at **[ukpublicfinances.org](https://ukpublicfinances.org)**. Every public-facing figure was re-audited against its primary source (ONS, OBR, HMRC, House of Commons Library, IMF, and DWP) on 11 June 2026, with the international comparison pulled directly from the IMF DataMapper. Each record shows its own `source_url`, `date`, and `confidence_level`. Known caveats: the **long-run historical series before about 2010** is a best-estimate reconstruction (`confidence_level: estimated`); the UK adults (18+) figure predates the ONS mid-2025 age breakdown (due summer 2026); and the GDP figure is the denominator consistent with the published debt-to-GDP ratio rather than a single published release. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) for how to refresh figures.
 
 ## Stack
 
-- **[Eleventy](https://www.11ty.dev/) 3.x** — static site generator. No client framework.
+- **[Eleventy](https://www.11ty.dev/) 3.x** is the static site generator. No client framework.
 - **Vanilla JavaScript** for the interactive tools (translator, timeline chart, lifetime calculator, budget simulator). Each is progressive enhancement over a working no-JS baseline; the maths lives in a testable ESM module (`assets/js/lib/calc.js`).
-- **Hand-rolled inline-SVG charts** with a full data-table fallback — no charting library, keyboard- and screen-reader-friendly.
+- **Hand-rolled inline-SVG charts** with a full data-table fallback, with no charting library, keyboard- and screen-reader-friendly.
 - **JSON data files** as the single source of truth. No figure is hard-coded into a template.
 
 Requires Node.js 18+ (developed on Node 24 LTS, pinned in `.node-version`).
@@ -30,16 +30,16 @@ npm run a11y:all # build + serve + WCAG 2.2 AA audit of every page (see below)
 ### Accessibility audits
 
 ```bash
-npm run a11y:all   # one shot: build, serve _site, pa11y-ci over all 14 routes, tear down
-npm run a11y       # quick single-page check — needs `npm run dev` running first
+npm run a11y:all   # one shot: build, serve _site, pa11y-ci over all 15 routes, tear down
+npm run a11y       # quick single-page check, needs `npm run dev` running first
 ```
 
 `a11y:all` is self-contained: it builds, starts a static server on port 8081, runs
-[pa11y-ci](https://github.com/pa11y/pa11y-ci) against all 14 routes listed in
+[pa11y-ci](https://github.com/pa11y/pa11y-ci) against all 15 routes listed in
 `.pa11yci.json` at the WCAG 2.2 AA standard, then stops the server. The audit tools are
 fetched on demand via `npx` (kept out of the dependency tree to stay lean); **the first
 run downloads a headless Chromium**, so expect it to take a minute. To audit a specific
-page while developing, run `npm run dev` and `npm run a11y` (defaults to the homepage —
+page while developing, run `npm run dev` and `npm run a11y` (defaults to the homepage,
 edit the URL in the script for others).
 
 For performance and best-practices scores too, run Lighthouse against the dev server:
@@ -57,7 +57,7 @@ npx lighthouse http://localhost:8080 --only-categories=accessibility --view
 ├── .pa11yci.json             # routes for the WCAG audit
 ├── .node-version             # Node 24 (fnm locally, Netlify in CI)
 ├── src/
-│   ├── _data/                # SOURCE OF TRUTH — all figures live here as JSON
+│   ├── _data/                # SOURCE OF TRUTH: all figures live here as JSON
 │   │   ├── dashboard.json            # homepage headline metrics
 │   │   ├── debtTimeseries.json       # long-run series for the timeline
 │   │   ├── spendingComparisons.json  # annual budgets for context
@@ -77,13 +77,13 @@ npx lighthouse http://localhost:8080 --only-categories=accessibility --view
 │   ├── assets/
 │   │   ├── css/main.css              # mobile-first, single stylesheet
 │   │   ├── js/                       # nav, big-numbers, timeline, lifetime, budget-simulator
-│   │   │   └── lib/calc.js           # pure tool maths (ESM) — unit-tested
+│   │   │   └── lib/calc.js           # pure tool maths (ESM), unit-tested
 │   │   ├── favicon.svg, og-image.png, icon-*.png, apple-touch-icon.png
 │   ├── favicon.ico, site.webmanifest # root icons + manifest (passthrough)
-│   ├── index.njk … sources.njk       # the 13 content pages (numbered MVP sections)
+│   ├── index.njk … sources.njk       # the content pages
 │   ├── 404.njk, privacy.njk          # error page, privacy notice
 │   └── robots.njk, sitemap.njk, llms.njk  # crawl files (robots.txt, sitemap.xml, llms.txt)
-├── test/                      # data.test.js (data contract) + calc.test.js (tool maths)
+├── test/                      # data.test.js (data contract), calc.test.js (maths), no-emdash.test.js (style)
 └── docs/                      # data sourcing, updating, next steps
 ```
 
@@ -126,7 +126,7 @@ Every figure record carries provenance:
 
 Built to WCAG 2.2 AA principles: semantic headings, keyboard-operable controls, the **GOV.UK-style yellow focus state** (yellow with a black companion, on every focusable element including the skip link), a **large type scale** (17px mobile, 19px from tablet up), 4.5:1 text contrast, 44px touch targets, no chart-only information (every chart has a table), labelled form fields with clear errors, mobile-first responsive layout, and `prefers-reduced-motion` support.
 
-Verify, don't assume — run `npm run a11y:all` (pa11y-ci, WCAG 2.2 AA across every page) before publishing.
+Verify, don't assume: run `npm run a11y:all` (pa11y-ci, WCAG 2.2 AA across every page) before publishing.
 
 ## Discoverability (SEO + LLMs)
 
@@ -140,7 +140,7 @@ The `jsonScript` filter escapes embedded JSON so data can't break out of a `<scr
 
 ## Analytics & privacy
 
-[Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/) — cookieless, no consent banner, no personal data. The beacon renders only when `site.analytics.cloudflareToken` is set in `src/_data/site.json` (the token is public, so it lives in the repo). See the `/privacy/` page.
+[Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/): cookieless, no consent banner, no personal data. The beacon renders only when `site.analytics.cloudflareToken` is set in `src/_data/site.json` (the token is public, so it lives in the repo). See the `/privacy/` page.
 
 ## Security
 
@@ -148,9 +148,9 @@ The `jsonScript` filter escapes embedded JSON so data can't break out of a `<scr
 
 ## Documentation
 
-- [`docs/DATA-SOURCES.md`](docs/DATA-SOURCES.md) — every source and what it covers.
-- [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) — how to replace placeholder figures with live data.
-- [`docs/NEXT-STEPS.md`](docs/NEXT-STEPS.md) — what is built and what comes next.
+- [`docs/DATA-SOURCES.md`](docs/DATA-SOURCES.md): every source and what it covers.
+- [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md): how to refresh the figures.
+- [`docs/NEXT-STEPS.md`](docs/NEXT-STEPS.md): what is built and what comes next.
 
 ## Editorial principles
 
@@ -162,7 +162,7 @@ The site is a static Eleventy build, hosted on **Netlify**. Config is in `netlif
 
 **Connect the repo (recommended):**
 1. In Netlify, *Add new site → Import from Git* and choose this repository.
-2. Netlify reads `netlify.toml` — no manual build settings needed.
+2. Netlify reads `netlify.toml`, so no manual build settings needed.
 3. Every push to `main` builds and deploys automatically; pull requests get deploy previews.
 
 **Custom domain:** *Site settings → Domain management → Add a custom domain*, then point your registrar's DNS at Netlify (or use Netlify DNS). HTTPS is automatic.
@@ -173,4 +173,4 @@ Node version is pinned in `.node-version` (24), so local (via fnm) and Netlify u
 
 ## Licence
 
-MIT — see [`LICENSE`](LICENSE).
+MIT. See [`LICENSE`](LICENSE).
