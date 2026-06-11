@@ -75,7 +75,7 @@
       "value": 24.3,
       "unit": "£ billion",
       "explanation": "How much the government borrowed in the latest month — the gap between what it spent and what it raised.",
-      "whatThisMeans": "Borrowing is a flow (one period's gap), while debt is the stock that builds up over many periods. Monthly borrowing is seasonal — April is typically high — so it cannot be multiplied by 12 to get the year. Annual borrowing is around £130 billion.",
+      "whatThisMeans": "Borrowing is a flow (one period's gap), while debt is the stock that builds up over many periods. Monthly borrowing is seasonal — April is typically high — so it cannot be multiplied by 12 to get the year. Annual borrowing is around £129 billion.",
       "date": "2026-04-30",
       "source_name": "ONS, Public sector finances, UK: April 2026",
       "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2026",
@@ -85,10 +85,10 @@
     }
   ],
   "supporting": {
-    "gdp": { "value": 3097, "unit": "£ billion", "notes": "Implied from net debt and the debt-to-GDP ratio (2917 / 0.942). Used for the translator's share-of-GDP figure." },
+    "gdp": { "value": 3097, "unit": "£ billion", "notes": "The nominal GDP consistent with the published debt-to-GDP ratio (net debt 2917 / 0.942). Calendar-year 2025 nominal GDP outturn is about £3,037bn; this measure is used for the translator's share-of-GDP figure." },
     "population": { "value": 69500000, "unit": "people", "notes": "Provisional UK mid-2025 population estimate (ONS)." },
     "adults": { "value": 54200000, "unit": "people", "notes": "Population aged 18 and over. ONS has not yet published a mid-2025 age breakdown." },
     "taxpayers": { "value": 36700000, "unit": "people", "notes": "Number of income tax payers (HMRC, tax year 2023-24)." },
-    "taxReceipts": { "value": 1120, "unit": "£ billion", "notes": "Total tax receipts, annual, estimated (about 36% of GDP). Total public sector current receipts are higher." }
+    "taxReceipts": { "value": 1122, "unit": "£ billion", "notes": "Total tax receipts for 2025-26 (about 36% of GDP). Total public sector current receipts are higher, around £1,239bn." }
   }
 }

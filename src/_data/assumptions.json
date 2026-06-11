@@ -5,23 +5,23 @@
     "adults": 54200000,
     "taxpayers": 36700000,
     "gdpGbpBillion": 3097,
-    "annualBorrowingGbpBillion": 130,
+    "annualBorrowingGbpBillion": 129,
     "annualDebtInterestGbpBillion": 110
   },
   "budgetSimulator": {
     "disclaimer": "A simplified educational model. It applies static, first-round effects only and does not model how the economy responds to changes. It is not a forecast and must not be read as one.",
     "baselineGbpBillion": {
       "totalSpending": 1368,
-      "totalRevenue": 1238,
-      "borrowing": 130,
+      "totalRevenue": 1239,
+      "borrowing": 129,
       "debt": 2917
     },
     "spendingLeversGbpBillion": {
       "health": 222,
       "education": 101,
       "defence": 62,
-      "welfare": 210,
-      "pensions": 125
+      "welfare": 188,
+      "pensions": 146
     },
     "spendingRange": { "minFactor": 0.5, "maxFactor": 1.5, "step": 1, "note": "Each spending slider runs from half to one-and-a-half times today's figure." },
     "taxLevers": [

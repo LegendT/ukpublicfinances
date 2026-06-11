@@ -61,7 +61,7 @@
     {
       "id": "revenue",
       "name": "Government revenue",
-      "value": 1238, "unit": "£ billion per year", "status": "rising",
+      "value": 1239, "unit": "£ billion per year", "status": "rising",
       "explanation": "Total money the government receives, mostly from taxes.",
       "date": "2026-03-31", "source_name": "ONS / OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-06-10", "confidence_level": "estimated"
     },

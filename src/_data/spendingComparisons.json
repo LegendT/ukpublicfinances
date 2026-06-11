@@ -16,13 +16,13 @@
     {
       "id": "education",
       "name": "Education",
-      "value": 116,
+      "value": 121,
       "unit": "£ billion per year",
-      "source_name": "HM Treasury PESA / IFS education spending report",
-      "source_url": "https://www.gov.uk/government/collections/public-expenditure-statistical-analyses-pesa",
-      "retrieved_date": "2026-06-10",
-      "confidence_level": "estimated",
-      "notes": "Total UK public education spending. The DfE day-to-day budget for England alone is about £101bn."
+      "source_name": "HM Treasury PESA 2025 / IFS education spending report 2025-26",
+      "source_url": "https://ifs.org.uk/publications/annual-report-education-spending-england-2025-26",
+      "retrieved_date": "2026-06-11",
+      "confidence_level": "official",
+      "notes": "Total UK public education spending, 2025-26 (about £120.8bn). The DfE day-to-day budget for England alone is about £101bn."
     },
     {
       "id": "defence",
@@ -38,13 +38,13 @@
     {
       "id": "state-pension",
       "name": "State pension",
-      "value": 125,
+      "value": 146,
       "unit": "£ billion per year",
-      "source_name": "DWP / HM Treasury benefit expenditure tables",
-      "source_url": "https://www.gov.uk/government/collections/benefit-expenditure-tables",
-      "retrieved_date": "2026-06-10",
-      "confidence_level": "estimated",
-      "notes": "Paid to over 12 million pensioners."
+      "source_name": "DWP benefit expenditure tables / OBR November 2025",
+      "source_url": "https://obr.uk/forecasts-in-depth/tax-by-tax-spend-by-spend/welfare-spending-pensioner-benefits/",
+      "retrieved_date": "2026-06-11",
+      "confidence_level": "official",
+      "notes": "State pension expenditure forecast for 2025-26 (about £146.1bn), paid to over 12 million pensioners. Up sharply on earlier years, driven by the triple lock."
     },
     {
       "id": "social-protection",
@@ -60,13 +60,13 @@
     {
       "id": "tax-receipts",
       "name": "Total tax receipts",
-      "value": 1120,
+      "value": 1122,
       "unit": "£ billion per year",
       "source_name": "ONS, Public sector finances / OBR",
       "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance",
-      "retrieved_date": "2026-06-10",
-      "confidence_level": "estimated",
-      "notes": "Total tax receipts, about 36% of GDP. Total public sector current receipts (including non-tax income) are higher, around £1,240bn."
+      "retrieved_date": "2026-06-11",
+      "confidence_level": "official",
+      "notes": "Total tax receipts for 2025-26 (about £1,122bn), around 36% of GDP. Total public sector current receipts (including non-tax income) are higher, around £1,239bn."
     }
   ]
 }
