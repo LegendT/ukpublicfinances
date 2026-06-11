@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123a51">
+  <!-- Before the stylesheet so the class is set by first paint: the mobile
+       nav list is only hidden behind it, and adding it any later would flash
+       the open list at visitors with JS enabled. -->
+  <script>document.documentElement.classList.add("js");</script>
   <link rel="icon" href="{{ '/favicon.ico' | url }}" sizes="any">
   <link rel="icon" href="{{ '/assets/favicon.svg' | url }}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | url }}">

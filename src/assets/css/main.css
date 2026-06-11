@@ -8,6 +8,7 @@
   --paper: #f7f8fa;
   --card: #ffffff;
   --line: #d8dde4;
+  --line-strong: #767d87; /* form control borders: 4.2:1 on white, WCAG 1.4.11 needs 3:1 */
   --brand: #1d4e6b;       /* calm civic teal-blue */
   --brand-deep: #123a51;
   --accent: #5a6b3b;      /* muted olive for the chart line */
@@ -63,6 +64,14 @@ a:focus-visible {
   box-shadow: 0 -2px var(--focus), 0 4px var(--ink-black);
   text-decoration: none;
 }
+/* Native range and radio widgets render inset box-shadows inconsistently, so
+   give them a black ring with the yellow outline outside it instead. */
+input[type="range"]:focus-visible,
+input[type="radio"]:focus-visible {
+  box-shadow: 0 0 0 2px var(--ink-black);
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
 
 .wrap { width: min(100% - 2rem, var(--wrap)); margin-inline: auto; }
 
@@ -71,6 +80,7 @@ a:focus-visible {
   width: 1px; height: 1px;
   margin: -1px; padding: 0; border: 0;
   clip: rect(0 0 0 0); overflow: hidden;
+  white-space: nowrap;
 }
 .skip-link:focus {
   position: fixed; top: 0.5rem; left: 0.5rem;
@@ -86,18 +96,25 @@ a:focus-visible {
 .site-header__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; padding-block: 0.75rem; }
 .site-header__brand { color: #fff; font-weight: 700; text-decoration: none; font-size: 1.1rem; }
 .site-header a { color: #fff; }
+/* Re-assert black-on-yellow focus: the white header link colour above ties on
+   specificity with a:focus-visible and would otherwise win the cascade. */
+.site-header a:focus-visible { color: var(--ink-black); }
 
+/* Without JS the toggle is dead weight, so the list stays visible and the
+   button stays hidden; the .js class (set inline in the head) flips both. */
 .site-nav__toggle {
-  display: inline-block;
+  display: none;
   min-height: 44px; padding: 0.4rem 0.9rem;
   background: transparent; color: #fff;
   border: 1px solid rgba(255,255,255,.6); border-radius: var(--radius);
   font: inherit; cursor: pointer;
 }
+.js .site-nav__toggle { display: inline-block; }
 .site-nav__list {
   list-style: none; margin: 0; padding: 0;
-  display: none; width: 100%;
+  width: 100%;
 }
+.js .site-nav__list { display: none; }
 .site-nav__list.is-open { display: block; }
 .site-nav__list li { border-top: 1px solid rgba(255,255,255,.15); }
 .site-nav__list a {
@@ -107,11 +124,13 @@ a:focus-visible {
 .site-nav__list a[aria-current="page"] { font-weight: 700; text-decoration: underline; }
 
 @media (min-width: 48rem) {
-  .site-nav__toggle { display: none; }
+  .js .site-nav__toggle { display: none; }
   .site-nav__list { display: flex !important; width: auto; gap: 0.25rem; flex-wrap: wrap; }
   .site-nav__list li { border-top: 0; }
   .site-nav__list a { padding: 0.4rem 0.7rem; border-radius: var(--radius); }
-  .site-nav__list a:hover { background: rgba(255,255,255,.12); }
+  /* :not(:focus-visible) keeps the hover background from beating the yellow
+     focus fill when a focused link is also under the pointer. */
+  .site-nav__list a:hover:not(:focus-visible) { background: rgba(255,255,255,.12); }
 }
 
 /* Layout blocks */
@@ -178,6 +197,9 @@ main { padding-block: 1.5rem 3rem; }
   border-radius: var(--radius); text-decoration: none; color: var(--ink);
 }
 .card-links a:hover { border-color: var(--brand); }
+/* Same cascade tie as the header links: the card background and ink colour
+   above would otherwise override the yellow focus fill. */
+.card-links a:focus-visible { background-color: var(--focus); color: var(--ink-black); }
 .card-links strong { display: block; color: var(--brand-deep); }
 .card-links span { font-size: 0.9rem; color: var(--ink-soft); }
 
@@ -188,7 +210,7 @@ main { padding-block: 1.5rem 3rem; }
 .field--inline label { margin: 0; }
 input[type="number"], select {
   font: inherit; min-height: 44px; padding: 0.5rem 0.7rem;
-  border: 1px solid var(--line); border-radius: var(--radius); background: #fff; color: var(--ink);
+  border: 1px solid var(--line-strong); border-radius: var(--radius); background: #fff; color: var(--ink);
   max-width: 16rem; width: 100%;
 }
 .field__hint { font-size: 0.85rem; color: var(--ink-soft); margin: 0.3rem 0 0; }
@@ -196,7 +218,7 @@ input[type="number"], select {
 .input-group { display: flex; align-items: stretch; max-width: 18rem; }
 .input-group__prefix, .input-group__suffix {
   display: flex; align-items: center; padding: 0 0.6rem;
-  background: #eef1f4; border: 1px solid var(--line);
+  background: #eef1f4; border: 1px solid var(--line-strong);
 }
 .input-group__prefix { border-right: 0; border-radius: var(--radius) 0 0 var(--radius); }
 .input-group__suffix { border-left: 0; border-radius: 0 var(--radius) var(--radius) 0; }
@@ -227,11 +249,11 @@ input[type="number"], select {
 .chart__caption { font-size: 0.9rem; color: var(--ink-soft); margin-top: 0.5rem; }
 .chart__empty { padding: 2rem 1rem; text-align: center; color: var(--ink-soft); }
 .chart__grid { stroke: #e8ebef; stroke-width: 1; }
-.chart__axis-label { fill: var(--ink-soft); font-size: 11px; }
+.chart__axis-label { fill: var(--ink-soft); font-size: 12px; }
 .chart__line { stroke: var(--accent); stroke-width: 2.5; }
 .chart__dot { fill: var(--accent); }
 .chart__event { stroke: #b9a06a; stroke-width: 1; stroke-dasharray: 3 3; }
-.chart__event-label { fill: #8a7330; font-size: 10px; }
+.chart__event-label { fill: #7a6526; font-size: 12px; }
 
 /* Tables */
 .data-table-wrap { margin: 1.5rem 0; }
@@ -336,15 +358,18 @@ input[type="number"], select {
   color: #fff; list-style: none;
 }
 .nav-group summary::-webkit-details-marker { display: none; }
-.nav-group summary::after { content: "▾"; font-size: 0.7em; opacity: 0.85; }
-.nav-group[open] summary::after { content: "▴"; }
+/* The doubled content declarations are deliberate: the second uses the
+   alt-text syntax so screen readers skip the caret; older browsers that do
+   not parse it fall back to the first. */
+.nav-group summary::after { content: "▾"; content: "▾" / ""; font-size: 0.7em; opacity: 0.85; }
+.nav-group[open] summary::after { content: "▴"; content: "▴" / ""; }
 .nav-group__menu { list-style: none; margin: 0; padding: 0 0 0.3rem 1rem; }
 .nav-group.is-active > summary { font-weight: 700; text-decoration: underline; }
 .site-nav__list a[aria-current="page"] { font-weight: 700; text-decoration: underline; }
 
 @media (min-width: 48rem) {
   .site-nav__group { position: relative; }
-  .nav-group summary { min-height: auto; padding: 0.4rem 0.7rem; border-radius: var(--radius); }
+  .nav-group summary { padding: 0.4rem 0.7rem; border-radius: var(--radius); }
   .nav-group summary:hover { background: rgba(255, 255, 255, 0.12); }
   .nav-group__menu {
     position: absolute; top: 100%; left: 0; z-index: 60;
@@ -377,7 +402,7 @@ input[type="number"], select {
 .data-table-wrap > summary::-webkit-details-marker { display: none; }
 .metric-card__more summary::before,
 .data-table-wrap > summary::before {
-  content: "\25B8"; display: inline-block; margin-right: 0.4rem;
+  content: "\25B8"; content: "\25B8" / ""; display: inline-block; margin-right: 0.4rem;
   color: var(--brand); transition: transform 0.15s ease;
 }
 .metric-card__more[open] summary::before,
@@ -423,6 +448,9 @@ input[type="number"], select {
    the sliders. (On desktop the banner is already visible in the sticky panel.) */
 @media (max-width: 55.99rem) {
   body.has-sticky-status { padding-bottom: 5rem; }
+  /* Keeps elements scrolled into view (focus, anchors) clear of the fixed
+     banner, which would otherwise sit directly over them. */
+  html:has(body.has-sticky-status) { scroll-padding-bottom: 8rem; }
   .has-sticky-status .sim-goal {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
     margin: 0; border-radius: 0; border-width: 4px 0 0 0;
