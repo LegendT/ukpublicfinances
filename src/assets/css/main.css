@@ -414,7 +414,7 @@ input[type="number"], select {
   border: 1px solid var(--line); border-left-width: 5px; border-radius: var(--radius);
   font-weight: 600;
 }
-.sim-goal--todo { background: #f4efdc; border-color: var(--warn-line); color: #5a4a14; }
+.sim-goal--todo { background: #eaecef; border-color: #6b7682; color: #2e353f; }
 .sim-goal--mid { background: #e6eef2; border-color: var(--brand); color: #173a4f; }
 .sim-goal--win { background: #e7f0e9; border-color: var(--c-official); color: #1f4a2b; }
 

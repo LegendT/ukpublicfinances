@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: Budget simulator
-description: A simplified educational model — adjust spending and tax, try to balance the budget, and see the effect on debt.
+description: A simplified educational model. Adjust spending and tax, try to balance the budget, and see the effect on debt.
 pageClass: has-sticky-status
 ---
 {% from "components/macros.njk" import caveatBox %}
@@ -9,7 +9,7 @@ pageClass: has-sticky-status
 
 <div class="page-intro prose">
   <h1>Budget simulator</h1>
-  <p class="lede">You are Chancellor. Your challenge: <strong>balance the budget</strong> — get borrowing down to zero — by changing spending and tax. Watch the effect on debt over {{ b.projection.years }} years.</p>
+  <p class="lede">You are Chancellor. Your challenge: <strong>balance the budget</strong> (get borrowing down to zero) by changing spending and tax. Watch the effect on debt over {{ b.projection.years }} years.</p>
 </div>
 
 {{ caveatBox(b.disclaimer, "This is a teaching model, not a forecast") }}
@@ -62,7 +62,7 @@ pageClass: has-sticky-status
     <h3>Debt over {{ b.projection.years }} years</h3>
     <div class="table-scroll" tabindex="0" role="region" aria-label="Projected debt over five years">
       <table class="data-table">
-        <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate * 100) | round(0) }}% interest rate and a fixed economy — see assumptions below.</caption>
+        <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate * 100) | round(0) }}% interest rate and a fixed economy. See the assumptions below.</caption>
         <thead><tr><th scope="col">Year</th><th scope="col" class="num">Debt (£ bn)</th><th scope="col" class="num">Debt (% of GDP)</th></tr></thead>
         <tbody id="r-trajectory"></tbody>
       </table>
@@ -73,7 +73,7 @@ pageClass: has-sticky-status
 <details class="prose">
   <summary>Assumptions used in this model</summary>
   <ul>
-    <li>Baseline spending £{{ b.baselineGbpBillion.totalSpending | number }} bn, revenue £{{ b.baselineGbpBillion.totalRevenue | number }} bn, debt £{{ b.baselineGbpBillion.debt | number }} bn — so today's starting point is a deficit of £{{ b.baselineGbpBillion.borrowing | number }} bn.</li>
+    <li>Baseline spending £{{ b.baselineGbpBillion.totalSpending | number }} bn, revenue £{{ b.baselineGbpBillion.totalRevenue | number }} bn, debt £{{ b.baselineGbpBillion.debt | number }} bn, so today's starting point is a deficit of £{{ b.baselineGbpBillion.borrowing | number }} bn.</li>
     <li>{{ b.taxNote }}</li>
     <li>{{ b.projection.note }}</li>
   </ul>
