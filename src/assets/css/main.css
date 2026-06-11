@@ -414,9 +414,9 @@ input[type="number"], select {
   border: 1px solid var(--line); border-left-width: 5px; border-radius: var(--radius);
   font-weight: 600;
 }
-.sim-goal--todo { background: #eaecef; border-color: #6b7682; color: #2e353f; }
-.sim-goal--mid { background: #e6eef2; border-color: var(--brand); color: #173a4f; }
-.sim-goal--win { background: #e7f0e9; border-color: var(--c-official); color: #1f4a2b; }
+.sim-goal--todo { background: #e9e9ea; border-color: #6e747c; color: #30343a; }
+.sim-goal--mid { background: #d4e4f4; border-color: var(--brand); color: #123a54; }
+.sim-goal--win { background: #d7eede; border-color: var(--c-official); color: #1f4a2b; }
 
 /* On mobile the result panel stacks below the sliders, so pin the goal banner
    to the bottom of the screen, the balance status stays visible while you drag
