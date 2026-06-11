@@ -4,3 +4,6 @@ _site/
 *.log
 .cache/
 .vscode/
+
+# Internal outreach strategy — keep out of the public repo
+docs/OUTREACH.md
