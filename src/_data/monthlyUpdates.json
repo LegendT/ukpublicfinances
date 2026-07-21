@@ -2,6 +2,56 @@
   "note": "Structured monthly summaries of the ONS public sector finances release. The newest entry is shown first and drives the monthly explainer page. Add a new object to the top of 'updates' each month.",
   "updates": [
     {
+      "id": "2026-06",
+      "month": "June 2026",
+      "published": "2026-07-21",
+      "source_name": "ONS, Public sector finances, UK: June 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/june2026",
+      "retrieved_date": "2026-07-21",
+      "confidence_level": "provisional",
+      "headline": "Borrowing in June was sharply lower than a year earlier and slightly below the official forecast, helped by cheaper debt interest.",
+      "borrowing": {
+        "value": 16.0,
+        "unit": "£ billion",
+        "direction": "fell",
+        "vsLastYear": "£7.9 billion less than June 2025",
+        "vsForecast": "£0.3 billion below the OBR forecast"
+      },
+      "answers": {
+        "whatChanged": "The government borrowed £16.0 billion in June 2026, the gap between what it spent and what it raised. This was £7.9 billion less than the same month last year and slightly below the OBR forecast.",
+        "borrowingWhy": "Tax receipts grew strongly while debt interest costs fell sharply, more than offsetting higher spending on public services and benefits.",
+        "taxReceipts": "Receipts grew strongly over the year, led by income tax, corporation tax and VAT.",
+        "spending": "Debt interest fell sharply, but spending on public services, benefits and other costs rose, leaving overall spending slightly lower than a year earlier.",
+        "debtInterest": "Central government debt interest payable was £11.8 billion in June, £5.3 billion less than a year earlier, as the inflation uplift on index-linked gilts was far smaller than in June 2025.",
+        "vsObr": "Borrowing came in £0.3 billion below the OBR's forecast for the month, largely because of lower inflation-linked debt interest costs, though one month is a weak guide and figures are routinely revised."
+      }
+    },
+    {
+      "id": "2026-05",
+      "month": "May 2026",
+      "published": "2026-06-19",
+      "source_name": "ONS, Public sector finances, UK: May 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/may2026",
+      "retrieved_date": "2026-07-21",
+      "confidence_level": "provisional",
+      "headline": "Borrowing in May was higher than a year earlier and well above the official forecast, the second-highest May on record.",
+      "borrowing": {
+        "value": 23.3,
+        "unit": "£ billion",
+        "direction": "rose",
+        "vsLastYear": "£5.4 billion more than May 2025",
+        "vsForecast": "£5.6 billion above the OBR forecast of £17.7 billion"
+      },
+      "answers": {
+        "whatChanged": "The government borrowed £23.3 billion in May 2026, the gap between what it spent and what it raised. This was up on the same month last year and well above the OBR forecast.",
+        "borrowingWhy": "Spending grew faster than receipts, with a sharp rise in debt interest the biggest single pressure.",
+        "taxReceipts": "Receipts grew over the year, helped by VAT, income tax and corporation tax, but not enough to offset higher spending.",
+        "spending": "Day-to-day spending rose, including on debt interest, departmental services and benefits.",
+        "debtInterest": "Central government debt interest payable was £11.7 billion in May, the highest for any May on record, largely reflecting inflation uplift on index-linked gilts.",
+        "vsObr": "Borrowing came in £5.6 billion above the OBR's forecast of £17.7 billion for the month, though one month is a weak guide and figures are routinely revised."
+      }
+    },
+    {
       "id": "2026-04",
       "month": "April 2026",
       "published": "2026-05-22",
