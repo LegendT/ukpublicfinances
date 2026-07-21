@@ -66,6 +66,12 @@ export default function (eleventyConfig) {
     return `£${billions.toLocaleString("en-GB")} billion`;
   });
 
+  // Hold one decimal place so a whole-number figure keeps the precision ONS published.
+  eleventyConfig.addFilter("oneDp", (value) => {
+    const n = Number(value);
+    return Number.isNaN(n) ? value : n.toFixed(1);
+  });
+
   return {
     dir: {
       input: "src",
