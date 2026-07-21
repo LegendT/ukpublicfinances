@@ -16,9 +16,9 @@ description: A plain-English summary of what changed in the latest monthly publi
 <section aria-labelledby="borrowing-heading">
   <h2 id="borrowing-heading" class="visually-hidden">Borrowing this month</h2>
   <div class="metric-grid metric-grid--compact">
-    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ u.borrowing.value | oneDp }} bn</p><p class="metric-card__label">Borrowed in {{ u.month }} ({{ u.borrowing.direction }})</p></article>
-    <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ u.borrowing.vsLastYear }}</p><p class="metric-card__label">Versus the same month last year</p></article>
-    <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ u.borrowing.vsForecast }}</p><p class="metric-card__label">Versus the official forecast</p></article>
+    <article class="metric-card metric-card--mini" aria-labelledby="mu-borrowed"><p class="metric-card__value">£{{ u.borrowing.value | oneDp }} bn</p><p class="metric-card__label" id="mu-borrowed">Borrowing {{ u.borrowing.direction }} in {{ u.month }}</p></article>
+    <article class="metric-card metric-card--mini" aria-labelledby="mu-vs-year"><p class="metric-card__value">{{ u.borrowing.vsLastYear }}</p><p class="metric-card__label" id="mu-vs-year">Versus the same month last year</p></article>
+    <article class="metric-card metric-card--mini" aria-labelledby="mu-vs-forecast"><p class="metric-card__value">{{ u.borrowing.vsForecast }}</p><p class="metric-card__label" id="mu-vs-forecast">Versus the official forecast</p></article>
   </div>
 </section>
 

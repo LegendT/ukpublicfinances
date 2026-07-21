@@ -18,11 +18,11 @@ description: What the UK government pays to service its debt (yearly, monthly, a
 <section aria-labelledby="breakdown">
   <h2 id="breakdown" class="visually-hidden">Interest cost breakdown</h2>
   <div class="metric-grid metric-grid--compact">
-    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ annual | number }} bn</p><p class="metric-card__label">Per year</p></article>
-    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ (annual / 12) | round(1) }} bn</p><p class="metric-card__label">Per month (average)</p></article>
-    <article class="metric-card metric-card--mini"><p class="metric-card__value">£{{ (annual * 1000 / 365) | round(0) | number }} m</p><p class="metric-card__label">Per day (average)</p></article>
-    <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ (annual / revenue * 100) | round(0) }}%</p><p class="metric-card__label">Of government revenue</p></article>
-    <article class="metric-card metric-card--mini"><p class="metric-card__value">{{ (annual / gdp * 100) | round(1) }}%</p><p class="metric-card__label">Of GDP</p></article>
+    <article class="metric-card metric-card--mini" aria-labelledby="int-year"><p class="metric-card__value">£{{ annual | number }} bn</p><p class="metric-card__label" id="int-year">Per year</p></article>
+    <article class="metric-card metric-card--mini" aria-labelledby="int-month"><p class="metric-card__value">£{{ (annual / 12) | oneDp }} bn</p><p class="metric-card__label" id="int-month">Per month (average)</p></article>
+    <article class="metric-card metric-card--mini" aria-labelledby="int-day"><p class="metric-card__value">£{{ (annual * 1000 / 365) | round(0) | number }} m</p><p class="metric-card__label" id="int-day">Per day (average)</p></article>
+    <article class="metric-card metric-card--mini" aria-labelledby="int-revenue"><p class="metric-card__value">{{ (annual / revenue * 100) | round(0) }}%</p><p class="metric-card__label" id="int-revenue">Of government revenue</p></article>
+    <article class="metric-card metric-card--mini" aria-labelledby="int-gdp"><p class="metric-card__value">{{ (annual / gdp * 100) | oneDp }}%</p><p class="metric-card__label" id="int-gdp">Of GDP</p></article>
   </div>
   <p class="source-note">
     Annual figure: <a href="{{ interest.source_url }}" rel="noopener">{{ interest.source_name }}</a>.
