@@ -2,19 +2,19 @@
   "note": "Assumptions used by the interactive tools. These are deliberately simple and visible. The budget simulator and translators are educational models, not forecasts.",
   "translator": {
     "population": 69500000,
-    "adults": 54200000,
+    "adults": 55000000,
     "taxpayers": 36700000,
-    "gdpGbpBillion": 3097,
-    "annualBorrowingGbpBillion": 129,
+    "gdpGbpBillion": 3151,
+    "annualBorrowingGbpBillion": 128,
     "annualDebtInterestGbpBillion": 110
   },
   "budgetSimulator": {
     "disclaimer": "A simplified educational model. It applies static, first-round effects only and does not model how the economy responds to changes. It is not a forecast and must not be read as one.",
     "baselineGbpBillion": {
-      "totalSpending": 1368,
-      "totalRevenue": 1239,
-      "borrowing": 129,
-      "debt": 2917
+      "totalSpending": 1360,
+      "totalRevenue": 1232,
+      "borrowing": 128,
+      "debt": 2990
     },
     "spendingLeversGbpBillion": {
       "health": 222,

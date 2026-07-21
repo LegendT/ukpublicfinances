@@ -16,13 +16,13 @@
     {
       "id": "education",
       "name": "Education",
-      "value": 121,
+      "value": 126,
       "unit": "£ billion per year",
-      "source_name": "HM Treasury PESA 2025 / IFS education spending report 2025-26",
-      "source_url": "https://ifs.org.uk/publications/annual-report-education-spending-england-2025-26",
-      "retrieved_date": "2026-06-11",
+      "source_name": "HM Treasury, Public Expenditure Statistical Analyses 2026 (Table 5.2)",
+      "source_url": "https://www.gov.uk/government/statistics/public-spending-statistics-release-july-2026",
+      "retrieved_date": "2026-07-21",
       "confidence_level": "official",
-      "notes": "Total UK public education spending, 2025-26 (about £120.8bn). The DfE day-to-day budget for England alone is about £101bn."
+      "notes": "Total UK public education spending, 2025-26 outturn (£125.7bn), published in PESA 2026 on 8 July 2026. Part of the rise on the previous £120.8bn figure is revision between PESA editions rather than higher spending. The DfE day-to-day budget for England alone is about £101bn."
     },
     {
       "id": "defence",
@@ -55,18 +55,18 @@
       "source_url": "https://www.gov.uk/government/collections/benefit-expenditure-tables",
       "retrieved_date": "2026-06-10",
       "confidence_level": "estimated",
-      "notes": "Total social security spending (DWP benefits, tax credits, Child Benefit). Includes the state pension shown separately above. The broader social-protection function is about £379bn."
+      "notes": "Total social security spending (DWP benefits, tax credits, Child Benefit). Includes the state pension shown separately above. The broader social-protection function is about £407bn (PESA 2026, 2025-26 outturn)."
     },
     {
       "id": "tax-receipts",
-      "name": "Total tax receipts",
+      "name": "Central government receipts",
       "value": 1122,
       "unit": "£ billion per year",
-      "source_name": "ONS, Public sector finances / OBR",
-      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance",
-      "retrieved_date": "2026-06-11",
+      "source_name": "ONS, Public sector finances, UK: April 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2026",
+      "retrieved_date": "2026-07-21",
       "confidence_level": "official",
-      "notes": "Total tax receipts for 2025-26 (about £1,122bn), around 36% of GDP. Total public sector current receipts (including non-tax income) are higher, around £1,239bn."
+      "notes": "Central government total current receipts, financial year ending March 2026 (£1,122.8bn). This is everything central government took in, so it is more than total tax receipts, which are around £1,110bn on a National Accounts basis, and less than total public sector current receipts, which are around £1,235bn."
     }
   ]
 }
