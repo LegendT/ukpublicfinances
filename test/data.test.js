@@ -89,16 +89,31 @@ test("health indicators carry status, source, and valid confidence", () => {
   }
 });
 
-test("monthly updates are present and answer the standard questions", () => {
+test("monthly updates are well formed, newest first, and match the dashboard", () => {
   const m = load("monthlyUpdates.json");
+  const dash = load("dashboard.json");
   assert.ok(m.updates.length >= 1, "need at least one monthly update");
-  const u = m.updates[0];
-  for (const field of ["month", "published", "source_url", "headline", "borrowing", "answers"]) {
-    assert.ok(u[field] !== undefined && u[field] !== "", `latest update missing ${field}`);
+
+  // Archived entries get edited too, so check every one, not just the newest.
+  for (const u of m.updates) {
+    for (const field of ["month", "published", "source_url", "headline", "borrowing", "answers"]) {
+      assert.ok(u[field] !== undefined && u[field] !== "", `${u.id} missing ${field}`);
+    }
+    for (const q of ["whatChanged", "borrowingWhy", "taxReceipts", "spending", "debtInterest", "vsObr"]) {
+      assert.ok(u.answers[q], `${u.id} answers missing ${q}`);
+    }
+    assert.equal(typeof u.borrowing.value, "number", `${u.id} borrowing value must be a number`);
+    assert.equal(u.borrowing.unit, "£ billion", `${u.id} unit drifted from the unit the template renders`);
   }
-  for (const q of ["whatChanged", "borrowingWhy", "taxReceipts", "spending", "debtInterest", "vsObr"]) {
-    assert.ok(u.answers[q], `update answers missing ${q}`);
-  }
+
+  // ids are YYYY-MM, so a reverse lexical sort is newest first. The page renders updates[0].
+  const ids = m.updates.map((u) => u.id);
+  assert.deepEqual(ids, [...ids].sort().reverse(), "updates must be newest first");
+
+  // The homepage and the monthly page must not tell different stories about the same month.
+  const latest = dash.metrics.find((x) => x.id === "monthly-borrowing");
+  assert.equal(latest.value, m.updates[0].borrowing.value, "dashboard latest borrowing != newest monthly update");
+  assert.equal(dash.referencePeriod, m.updates[0].month, "dashboard referencePeriod != newest monthly update");
 });
 
 test("current figures are consistent across data files (no silent drift)", () => {

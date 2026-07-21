@@ -27,7 +27,7 @@ layout: layouts/base.njk
       {%- elif metric.display == "perYear" %}
         {% set formatted = "£" + (metric.value | number) + " bn / year" %}
       {%- elif metric.display == "billions" %}
-        {% set formatted = "£" + metric.value + " bn" %}
+        {% set formatted = "£" + (metric.value | oneDp) + " bn" %}
       {%- else %}
         {% set formatted = metric.value %}
       {%- endif %}

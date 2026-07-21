@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-05-22",
-  "referencePeriod": "April 2026",
+  "lastUpdated": "2026-07-21",
+  "referencePeriod": "June 2026",
   "caveat": "Figures are official data from the Office for National Statistics (ONS) and the Office for Budget Responsibility (OBR), the latest available for each measure. Public finance figures are provisional and routinely revised. Monthly borrowing is seasonal and should not be multiplied up to estimate a year.",
   "metrics": [
     {
@@ -72,15 +72,15 @@
       "display": "billions",
       "metric_name": "Latest monthly borrowing",
       "shortLabel": "Latest borrowing",
-      "value": 24.3,
+      "value": 16.0,
       "unit": "£ billion",
       "explanation": "How much the government borrowed in the latest month, the gap between what it spent and what it raised.",
       "whatThisMeans": "Borrowing is a flow (one period's gap), while debt is the stock that builds up over many periods. Monthly borrowing is seasonal (April is typically high), so it cannot be multiplied by 12 to get the year. Annual borrowing is around £129 billion.",
-      "date": "2026-04-30",
-      "source_name": "ONS, Public sector finances, UK: April 2026",
-      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2026",
-      "retrieved_date": "2026-06-10",
-      "notes": "£24.3bn in April 2026, the second-highest April on record and £3.4bn above the OBR forecast of £20.9bn. Excludes public sector banks.",
+      "date": "2026-06-30",
+      "source_name": "ONS, Public sector finances, UK: June 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/june2026",
+      "retrieved_date": "2026-07-21",
+      "notes": "£16.0bn in June 2026, the seventh-highest June on record and £0.3bn below the OBR forecast of £16.3bn. Borrowing in the financial year to June was £57.6bn, £2.7bn above forecast. Excludes public sector banks.",
       "confidence_level": "provisional"
     }
   ],
