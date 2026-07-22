@@ -9,19 +9,28 @@ layout: layouts/base.njk
   "@type": "Dataset",
   "@id": "{{ site.url }}/#dataset",
   "name": "UK public finances: headline figures",
-  "description": "Public sector net debt, borrowing, debt interest and related figures for the UK, each carrying its own source, date and confidence level. Compiled from ONS, OBR, HMRC, HM Treasury, DWP and the IMF.",
+  "description": "Public sector net debt, borrowing, debt interest and related figures for the UK, plus a long-run debt-to-GDP series, each carrying its own source, date and confidence level. Compiled from ONS, OBR, HMRC and the Bank of England.",
   "url": "{{ site.url }}/",
   "inLanguage": "en-GB",
   "isAccessibleForFree": true,
-  "license": "https://opensource.org/licenses/MIT",
+  "license": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
   "creator": { "@id": "{{ site.url }}/#publisher" },
+  "spatialCoverage": "United Kingdom",
   "temporalCoverage": "1700/..",
+  "dateModified": "{{ dashboard.lastUpdated }}",
   "keywords": ["UK national debt", "public sector net debt", "government borrowing", "debt interest", "public finances", "OBR", "ONS"],
   "distribution": [
     {
       "@type": "DataDownload",
+      "name": "Headline figures (current)",
       "encodingFormat": "application/json",
       "contentUrl": "https://raw.githubusercontent.com/LegendT/ukpublicfinances/main/src/_data/dashboard.json"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Long-run debt series (1700 to present)",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://raw.githubusercontent.com/LegendT/ukpublicfinances/main/src/_data/debtTimeseries.json"
     }
   ]
 }

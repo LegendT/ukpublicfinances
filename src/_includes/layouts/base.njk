@@ -14,7 +14,7 @@
   <link rel="manifest" href="{{ '/site.webmanifest' | url }}">
   {%- set pageTitle = (title + " | " + site.title) if title else site.title %}
   {%- set pageDesc = description or site.description %}
-  {%- set canonical = site.url + page.url %}
+  {%- set canonical = canonicalUrl or (site.url + page.url) %}
   <title>{{ pageTitle }}</title>
   <meta name="description" content="{{ pageDesc }}">
   <link rel="canonical" href="{{ canonical }}">

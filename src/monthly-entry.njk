@@ -6,9 +6,10 @@ pagination:
   alias: u
 permalink: "/monthly/{{ u.id }}/"
 ogType: article
+eleventyExcludeFromCollections: true
 eleventyComputed:
-  title: "Monthly update: {{ u.month }}"
-  description: "{{ u.headline }}"
+  title: "Monthly update: {{ u.month | safe }}"
+  description: "{{ u.headline | safe }}"
 ---
 {% from "components/macros.njk" import monthlyBody, dataFreshnessBadge %}
 
@@ -30,7 +31,8 @@ eleventyComputed:
       "@type": "NewsArticle",
       "@id": "{{ site.url }}{{ page.url }}#article",
       "headline": {{ u.headline | jsonScript | safe }},
-      "description": {{ u.headline | jsonScript | safe }},
+      "description": {{ u.answers.whatChanged | jsonScript | safe }},
+      "image": "{{ site.url }}{{ site.ogImage }}",
       "datePublished": "{{ u.published }}",
       "dateModified": "{{ u.retrieved_date }}",
       "url": "{{ site.url }}{{ page.url }}",
