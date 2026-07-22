@@ -2,7 +2,7 @@
   "note": "Long-run series for the historical timeline. Pre-1900 values are best-estimate historical reconstructions and are necessarily approximate. Cash (£) figures are only meaningful for recent decades; debt-to-GDP is the comparable measure across the whole period. The latest (current-year) point is not stored here. It is taken from the dashboard data so there is a single source of truth for the current figure.",
   "source_name": "Bank of England 'A millennium of macroeconomic data', ONS and OBR for recent years",
   "source_url": "https://www.bankofengland.co.uk/statistics/research-datasets",
-  "retrieved_date": "2026-06-10",
+  "retrieved_date": "2026-07-22",
   "units": {
     "debtGbp": "£ billion (nominal)",
     "debtToGdp": "% of GDP",
@@ -27,10 +27,10 @@
     { "year": 2010, "debtToGdp": 69,  "debtGbp": 1030, "borrowingGbp": 150, "interestGbp": 44,   "confidence_level": "estimated" },
     { "year": 2015, "debtToGdp": 81,  "debtGbp": 1590, "borrowingGbp": 76,  "interestGbp": 45,   "confidence_level": "estimated" },
     { "year": 2019, "debtToGdp": 84,  "debtGbp": 1820, "borrowingGbp": 56,  "interestGbp": 48,   "confidence_level": "estimated" },
-    { "year": 2020, "debtToGdp": 96,  "debtGbp": 2110, "borrowingGbp": 315, "interestGbp": 39,   "confidence_level": "estimated" },
-    { "year": 2021, "debtToGdp": 100, "debtGbp": 2280, "borrowingGbp": 122, "interestGbp": 70,   "confidence_level": "estimated" },
-    { "year": 2022, "debtToGdp": 99,  "debtGbp": 2490, "borrowingGbp": 130, "interestGbp": 110,  "confidence_level": "estimated" },
-    { "year": 2023, "debtToGdp": 98,  "debtGbp": 2650, "borrowingGbp": 121, "interestGbp": 108,  "confidence_level": "estimated" },
-    { "year": 2024, "debtToGdp": 97,  "debtGbp": 2740, "borrowingGbp": 122, "interestGbp": 105,  "confidence_level": "provisional" }
+    { "year": 2020, "debtToGdp": 95,  "debtGbp": 2160, "borrowingGbp": 315, "interestGbp": 39,   "confidence_level": "estimated" },
+    { "year": 2021, "debtToGdp": 94,  "debtGbp": 2380, "borrowingGbp": 122, "interestGbp": 70,   "confidence_level": "estimated" },
+    { "year": 2022, "debtToGdp": 93,  "debtGbp": 2550, "borrowingGbp": 130, "interestGbp": 110,  "confidence_level": "estimated" },
+    { "year": 2023, "debtToGdp": 94,  "debtGbp": 2690, "borrowingGbp": 121, "interestGbp": 108,  "confidence_level": "estimated" },
+    { "year": 2024, "debtToGdp": 93,  "debtGbp": 2810, "borrowingGbp": 122, "interestGbp": 105,  "confidence_level": "provisional" }
   ]
 }
