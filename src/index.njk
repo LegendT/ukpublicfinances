@@ -3,6 +3,30 @@ layout: layouts/base.njk
 ---
 {% from "components/macros.njk" import metricCard, caveatBox, dataFreshnessBadge %}
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "@id": "{{ site.url }}/#dataset",
+  "name": "UK public finances: headline figures",
+  "description": "Public sector net debt, borrowing, debt interest and related figures for the UK, each carrying its own source, date and confidence level. Compiled from ONS, OBR, HMRC, HM Treasury, DWP and the IMF.",
+  "url": "{{ site.url }}/",
+  "inLanguage": "en-GB",
+  "isAccessibleForFree": true,
+  "license": "https://opensource.org/licenses/MIT",
+  "creator": { "@id": "{{ site.url }}/#publisher" },
+  "temporalCoverage": "1700/..",
+  "keywords": ["UK national debt", "public sector net debt", "government borrowing", "debt interest", "public finances", "OBR", "ONS"],
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://raw.githubusercontent.com/LegendT/ukpublicfinances/main/src/_data/dashboard.json"
+    }
+  ]
+}
+</script>
+
 <div class="page-intro">
   <h1>{{ site.title }}</h1>
   <p class="lede">{{ site.tagline }}</p>
