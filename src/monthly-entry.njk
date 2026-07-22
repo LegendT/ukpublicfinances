@@ -1,0 +1,59 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: monthlyUpdates.updates
+  size: 1
+  alias: u
+permalink: "/monthly/{{ u.id }}/"
+ogType: article
+eleventyComputed:
+  title: "Monthly update: {{ u.month }}"
+  description: "{{ u.headline }}"
+---
+{% from "components/macros.njk" import monthlyBody, dataFreshnessBadge %}
+
+<div class="page-intro prose">
+  <h1>Monthly update: {{ u.month }}</h1>
+  <p class="lede">{{ u.headline }}</p>
+  <p class="updated">Released {{ u.published | readableDate }}. {{ dataFreshnessBadge(u.confidence_level, "") }}</p>
+</div>
+
+{{ monthlyBody(u, monthlyQuestions.questions) }}
+
+<p class="prose"><a href="{{ '/monthly/' | url }}">All monthly updates</a></p>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NewsArticle",
+      "@id": "{{ site.url }}{{ page.url }}#article",
+      "headline": {{ u.headline | jsonScript | safe }},
+      "description": {{ u.headline | jsonScript | safe }},
+      "datePublished": "{{ u.published }}",
+      "dateModified": "{{ u.retrieved_date }}",
+      "url": "{{ site.url }}{{ page.url }}",
+      "mainEntityOfPage": "{{ site.url }}{{ page.url }}",
+      "inLanguage": "en-GB",
+      "isAccessibleForFree": true,
+      "author": { "@id": "{{ site.url }}/#publisher" },
+      "publisher": { "@id": "{{ site.url }}/#publisher" },
+      "about": {{ ("UK public sector finances, " + u.month) | jsonScript | safe }}
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "{{ site.url }}{{ page.url }}#faq",
+      "mainEntity": [
+        {%- for q in monthlyQuestions.questions %}
+        {
+          "@type": "Question",
+          "name": {{ q.question | jsonScript | safe }},
+          "acceptedAnswer": { "@type": "Answer", "text": {{ u.answers[q.key] | jsonScript | safe }} }
+        }{% if not loop.last %},{% endif %}
+        {%- endfor %}
+      ]
+    }
+  ]
+}
+</script>

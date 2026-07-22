@@ -19,6 +19,7 @@
     "http://127.0.0.1:8081/budget-simulator/",
     "http://127.0.0.1:8081/deficit-vs-debt/",
     "http://127.0.0.1:8081/monthly/",
+    "http://127.0.0.1:8081/monthly/2026-06/",
     "http://127.0.0.1:8081/glossary/",
     "http://127.0.0.1:8081/about/",
     "http://127.0.0.1:8081/privacy/",

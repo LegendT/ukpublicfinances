@@ -5,11 +5,19 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- for item in collections.all %}
-  {%- if item.url and item.url.endsWith("/") %}
+  {%- if item.url and item.url.endsWith("/") and not item.inputPath.endsWith("monthly-entry.njk") %}
   <url>
     <loc>{{ site.url }}{{ item.url }}</loc>
     <lastmod>{{ item.date | isoDate }}</lastmod>
   </url>
   {%- endif %}
+{%- endfor %}
+{#- Monthly permalinks come from a paginated template; Eleventy adds only its
+    first page to collections.all, so emit each month explicitly from the data. -#}
+{%- for u in monthlyUpdates.updates %}
+  <url>
+    <loc>{{ site.url }}/monthly/{{ u.id }}/</loc>
+    <lastmod>{{ u.published | isoDate }}</lastmod>
+  </url>
 {%- endfor %}
 </urlset>

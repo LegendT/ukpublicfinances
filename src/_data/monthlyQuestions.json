@@ -1,0 +1,11 @@
+{
+  "note": "The fixed questions the monthly update answers, in display order. Keys map to the 'answers' object in monthlyUpdates.json. Drives both the visible Q&A list and the FAQPage structured data, so the two cannot drift.",
+  "questions": [
+    { "key": "whatChanged", "question": "What changed this month?" },
+    { "key": "borrowingWhy", "question": "Why did borrowing move?" },
+    { "key": "taxReceipts", "question": "What happened to tax receipts?" },
+    { "key": "spending", "question": "What happened to spending?" },
+    { "key": "debtInterest", "question": "What happened to debt interest?" },
+    { "key": "vsObr", "question": "How does this compare with the OBR forecast?" }
+  ]
+}
