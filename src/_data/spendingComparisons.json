@@ -29,11 +29,11 @@
       "name": "Defence",
       "value": 62,
       "unit": "£ billion per year",
-      "source_name": "HM Treasury Spending Review 2025 / House of Commons Library (CBP-8175)",
-      "source_url": "https://commonslibrary.parliament.uk/research-briefings/cbp-8175/",
-      "retrieved_date": "2026-06-11",
+      "source_name": "HM Treasury, Public Expenditure Statistical Analyses 2026 (Table 1.9)",
+      "source_url": "https://www.gov.uk/government/statistics/public-spending-statistics-release-july-2026",
+      "retrieved_date": "2026-07-22",
       "confidence_level": "official",
-      "notes": "The MoD departmental budget for 2025/26 (about 2% of GDP). On the broader NATO definition, which adds items such as pensions and security funds, UK spending is about 2.4% of GDP; the government plans to reach 2.5% by 2027 and 3.5% by 2035."
+      "notes": "MoD total departmental budget (Total DEL) for 2025-26, £61,994m outturn (about 2% of GDP). On the broader NATO definition, which adds items such as pensions and security funds, UK spending is higher; the government plans to reach 2.5% of GDP by 2027 and 3.5% by 2035. The COFOG defence function is different again, at £65.4bn."
     },
     {
       "id": "state-pension",
@@ -66,7 +66,7 @@
       "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/april2026",
       "retrieved_date": "2026-07-21",
       "confidence_level": "official",
-      "notes": "Central government total current receipts, financial year ending March 2026 (£1,122.8bn). This is everything central government took in, so it is more than total tax receipts, which are around £1,110bn on a National Accounts basis, and less than total public sector current receipts, which are around £1,235bn."
+      "notes": "Central government total current receipts, financial year ending March 2026 (£1,122.8bn). This is everything central government took in, so it is more than total tax receipts, which are £1,108bn on a National Accounts basis (OBR March 2026), and less than total public sector current receipts, which are around £1,235bn."
     }
   ]
 }

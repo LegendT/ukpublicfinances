@@ -19,23 +19,23 @@
     {
       "id": "interest",
       "name": "Debt interest",
-      "value": 3.5, "unit": "% of GDP", "status": "rising",
+      "value": 3.6, "unit": "% of GDP", "status": "rising",
       "explanation": "The cost of servicing debt, relative to the economy. About £110 billion a year.",
-      "date": "2026-03-31", "source_name": "OBR", "source_url": "https://obr.uk/forecasts-in-depth/tax-by-tax-spend-by-spend/debt-interest-central-government-net/", "retrieved_date": "2026-07-21", "confidence_level": "official"
+      "date": "2026-03-31", "source_name": "OBR, Economic and Fiscal Outlook March 2026", "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/", "retrieved_date": "2026-07-22", "confidence_level": "official"
     },
     {
       "id": "inflation",
       "name": "Inflation (CPI)",
-      "value": 2.8, "unit": "% per year", "status": "falling",
-      "explanation": "The rate at which consumer prices are rising over the year. Eased in April as household energy bills fell.",
-      "date": "2026-04-30", "source_name": "ONS, Consumer price inflation, UK: April 2026", "source_url": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/april2026", "retrieved_date": "2026-06-10", "confidence_level": "official"
+      "value": 2.6, "unit": "% per year", "status": "falling",
+      "explanation": "The rate at which consumer prices are rising over the year. Eased to 2.6% in June, down from 2.8% the month before.",
+      "date": "2026-06-30", "source_name": "ONS, Consumer price inflation, UK: June 2026", "source_url": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/june2026", "retrieved_date": "2026-07-22", "confidence_level": "official"
     },
     {
       "id": "unemployment",
       "name": "Unemployment rate",
-      "value": 5.0, "unit": "% of workforce", "status": "rising",
-      "explanation": "The share of people who want to work and are looking for a job but cannot find one. Up from 4.5% a year earlier.",
-      "date": "2026-03-31", "source_name": "ONS, Labour market overview", "source_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/latest", "retrieved_date": "2026-06-10", "confidence_level": "provisional"
+      "value": 4.9, "unit": "% of workforce", "status": "stable",
+      "explanation": "The share of people who want to work and are looking for a job but cannot find one. Up 0.2 percentage points on a year earlier, but down 0.1 on the previous quarter.",
+      "date": "2026-05-31", "source_name": "ONS, Labour market overview, UK: July 2026", "source_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/july2026", "retrieved_date": "2026-07-22", "confidence_level": "provisional"
     },
     {
       "id": "gdp-growth",

@@ -64,7 +64,7 @@
       "source_name": "OBR, Economic and Fiscal Outlook March 2026 (central government debt interest, net of APF)",
       "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/",
       "retrieved_date": "2026-07-21",
-      "notes": "£109.7bn in 2025-26 (OBR March 2026 forecast), roughly 3.5% of GDP. Includes the inflation uplift on index-linked gilts. The ONS outturn measure of central government net interest payable is narrower and lower, at £96.9bn for the same year.",
+      "notes": "£109.7bn in 2025-26 (OBR March 2026 forecast), 3.6% of GDP on the OBR's own basis. Includes the inflation uplift on index-linked gilts. The ONS outturn measure of central government net interest payable is narrower and lower, at £96.9bn for the same year.",
       "confidence_level": "provisional"
     },
     {
@@ -89,6 +89,6 @@
     "population": { "value": 69500000, "unit": "people", "notes": "Provisional UK mid-2025 population estimate (ONS)." },
     "adults": { "value": 55000000, "unit": "people", "notes": "Population aged 18 and over, UK mid-2024 estimate, the latest published age breakdown. ONS publishes the mid-2025 age breakdown from 29 July 2026 (England and Wales first), so this sits one vintage behind the population figure above." },
     "taxpayers": { "value": 36700000, "unit": "people", "notes": "Number of income tax payers (HMRC, tax year 2023-24 outturn, published 15 July 2026). Later years are projections and run several million higher." },
-    "taxReceipts": { "value": 1122, "unit": "£ billion", "notes": "Central government total current receipts, financial year ending March 2026 (ONS). This is not the same as total tax receipts, which are lower at around £1,110bn on a National Accounts basis, because it includes interest, dividends and other non-tax income. Total public sector current receipts are higher, around £1,235bn." }
+    "taxReceipts": { "value": 1122, "unit": "£ billion", "notes": "Central government total current receipts, financial year ending March 2026 (ONS). This is not the same as total tax receipts, which are lower at £1,108bn on a National Accounts basis (OBR March 2026), because it includes interest, dividends and other non-tax income. Total public sector current receipts are higher, around £1,235bn." }
   }
 }
