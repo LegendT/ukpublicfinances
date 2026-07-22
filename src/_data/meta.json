@@ -1,7 +1,7 @@
 {
   "placeholderNotice": "Every public-facing figure was re-audited against its primary source (ONS, OBR, HMRC, HM Treasury, House of Commons Library, IMF and DWP) on 21 July 2026, following the June 2026 public sector finances release and PESA 2026, and the international comparison was re-pulled directly from the IMF DataMapper. Each figure carries its own source, date and confidence level on the page. Known caveats: the long-run historical timeline before about 2010 is a best-estimate reconstruction (confidence 'estimated'); the UK adults (18+) figure is the mid-2024 age breakdown and so sits one vintage behind the mid-2025 population estimate, with the mid-2025 age breakdown expected from late July 2026; and the GDP figure is the denominator consistent with the published debt-to-GDP ratio rather than a single published release. See docs/UPDATING-DATA.md for the refresh process.",
   "footerNote": "Figures are official data and may be revised. Historical figures before about 2010 are best estimates. Every figure shows its source on the page.",
-  "lastReviewed": "2026-06-11",
+  "lastReviewed": "2026-07-22",
   "confidenceLevels": {
     "official": "Taken directly from an official published release.",
     "provisional": "Official but flagged by the publisher as subject to revision.",

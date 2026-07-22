@@ -1,9 +1,9 @@
 {
-  "caveat": "Countries measure debt differently. This comparison uses general government gross debt as a share of GDP, the most consistent measure available internationally. The UK's headline national measure (net debt, about 94% of GDP) is lower and not directly comparable. The deficit shown is the IMF general government measure for 2024, which is broader than the UK's own public sector net borrowing (about 4.8% of GDP). Debt is the IMF's 2025 estimate; deficit and growth are 2024 outturn (the latest full year). All figures are from the IMF World Economic Outlook, taken from the IMF DataMapper in June 2026.",
+  "caveat": "Countries measure debt differently. This comparison uses general government gross debt as a share of GDP, the most consistent measure available internationally. The UK's headline national measure (net debt, about 95% of GDP) is lower and not directly comparable. The deficit shown is the IMF general government measure for 2024, which is broader than the UK's own public sector net borrowing (about 4.2% of GDP in the year to March 2026). Debt is the IMF's 2025 estimate; deficit and growth are 2024 outturn (the latest full year). All figures are from the IMF World Economic Outlook, taken from the IMF DataMapper and re-verified in July 2026.",
   "measure": "General government gross debt (% of GDP)",
   "source_name": "IMF World Economic Outlook database",
   "source_url": "https://www.imf.org/external/datamapper/GGXWDG_NGDP@WEO",
-  "retrieved_date": "2026-06-11",
+  "retrieved_date": "2026-07-22",
   "year": 2025,
   "deficitGrowthYear": 2024,
   "confidence_level": "official",

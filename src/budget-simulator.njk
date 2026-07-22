@@ -20,7 +20,7 @@ pageClass: has-sticky-status
       <legend>Spending (£ billion per year)</legend>
       {%- set sp = b.spendingLeversGbpBillion %}
       {%- set sr = b.spendingRange %}
-      {%- set labels = { "health": "Health", "education": "Education", "defence": "Defence", "welfare": "Welfare (excl. pension)", "pensions": "State pension" } %}
+      {%- set labels = { "health": "Health", "education": "Education (England, day-to-day)", "defence": "Defence", "welfare": "Welfare (excl. pension)", "pensions": "State pension" } %}
       {%- for key, base in sp %}
       {%- set min = (base * sr.minFactor) | round(0) %}
       {%- set max = (base * sr.maxFactor) | round(0) %}
