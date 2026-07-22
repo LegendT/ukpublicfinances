@@ -121,8 +121,10 @@ test("current figures are consistent across data files (no silent drift)", () =>
   const a = load("assumptions.json");
   const spend = load("spendingComparisons.json");
   const intl = load("internationalComparisons.json");
+  const ind = load("indicators.json");
   const metric = (id) => dash.metrics.find((m) => m.id === id).value;
   const area = (id) => spend.areas.find((s) => s.id === id).value;
+  const indicator = (id) => ind.indicators.find((i) => i.id === id).value;
   const sup = dash.supporting;
   const tr = a.translator;
   const base = a.budgetSimulator.baselineGbpBillion;
@@ -138,6 +140,11 @@ test("current figures are consistent across data files (no silent drift)", () =>
   assert.equal(tr.annualDebtInterestGbpBillion, metric("debt-interest"), "translator interest != dashboard interest");
   assert.equal(area("defence"), lever.defence, "defence differs: spending vs simulator");
   assert.equal(area("state-pension"), lever.pensions, "pension differs: spending vs simulator");
+
+  // The health-page indicators repeat figures held elsewhere; they must not drift apart.
+  assert.equal(indicator("debt-gdp"), metric("debt-gdp"), "debt-gdp differs: indicators vs dashboard");
+  assert.equal(indicator("revenue"), base.totalRevenue, "revenue differs: indicators vs simulator");
+  assert.equal(indicator("spending"), base.totalSpending, "spending differs: indicators vs simulator");
 
   // Derived relationships must hold.
   assert.ok(near(metric("net-debt") / (metric("debt-gdp") / 100), sup.gdp.value, 15), "implied GDP != stated GDP");
