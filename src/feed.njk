@@ -1,0 +1,24 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }}: monthly updates</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ site.url }}/feed.xml" rel="self"/>
+  <link href="{{ site.url }}/monthly/"/>
+  <id>{{ site.url }}/feed.xml</id>
+  <updated>{{ monthlyUpdates.updates[0].published }}T00:00:00Z</updated>
+  <author><name>{{ site.author }}</name></author>
+{%- for u in monthlyUpdates.updates %}
+  <entry>
+    <title>Monthly update: {{ u.month }}</title>
+    <link href="{{ site.url }}/monthly/{{ u.id }}/"/>
+    <id>{{ site.url }}/monthly/{{ u.id }}/</id>
+    <updated>{{ u.published }}T00:00:00Z</updated>
+    <published>{{ u.published }}T00:00:00Z</published>
+    <summary>{{ u.headline }}</summary>
+  </entry>
+{%- endfor %}
+</feed>
