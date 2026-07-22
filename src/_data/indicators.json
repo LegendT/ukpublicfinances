@@ -1,13 +1,13 @@
 {
-  "note": "A wider set of public-finance and economic indicators. Status (rising/falling/stable) describes the recent direction of the figure itself, not whether that direction is good or bad. Context matters and is left to the reader. Headline values were verified against ONS and OBR releases in June 2026; revenue and spending totals are estimates.",
-  "lastUpdated": "2026-05-22",
+  "note": "A wider set of public-finance and economic indicators. Status (rising/falling/stable) describes the recent direction of the figure itself, not whether that direction is good or bad. Context matters and is left to the reader. Headline values were re-verified against ONS, OBR and PESA releases in July 2026; revenue and spending totals are estimates.",
+  "lastUpdated": "2026-07-21",
   "indicators": [
     {
       "id": "debt-gdp",
       "name": "Debt as a share of GDP",
-      "value": 94.2, "unit": "% of GDP", "status": "stable",
+      "value": 94.9, "unit": "% of GDP", "status": "rising",
       "explanation": "Net debt measured against the size of the economy.",
-      "date": "2026-04-30", "source_name": "ONS, Public sector finances", "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance", "retrieved_date": "2026-06-10", "confidence_level": "provisional"
+      "date": "2026-06-30", "source_name": "ONS, Public sector finances", "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance", "retrieved_date": "2026-07-21", "confidence_level": "provisional"
     },
     {
       "id": "borrowing-gdp",
@@ -19,9 +19,9 @@
     {
       "id": "interest",
       "name": "Debt interest",
-      "value": 3.6, "unit": "% of GDP", "status": "rising",
+      "value": 3.5, "unit": "% of GDP", "status": "rising",
       "explanation": "The cost of servicing debt, relative to the economy. About £110 billion a year.",
-      "date": "2026-03-31", "source_name": "OBR", "source_url": "https://obr.uk/forecasts-in-depth/tax-by-tax-spend-by-spend/debt-interest-central-government-net/", "retrieved_date": "2026-06-10", "confidence_level": "official"
+      "date": "2026-03-31", "source_name": "OBR", "source_url": "https://obr.uk/forecasts-in-depth/tax-by-tax-spend-by-spend/debt-interest-central-government-net/", "retrieved_date": "2026-07-21", "confidence_level": "official"
     },
     {
       "id": "inflation",
@@ -61,16 +61,16 @@
     {
       "id": "revenue",
       "name": "Government revenue",
-      "value": 1239, "unit": "£ billion per year", "status": "rising",
+      "value": 1232, "unit": "£ billion per year", "status": "rising",
       "explanation": "Total money the government receives, mostly from taxes.",
-      "date": "2026-03-31", "source_name": "ONS / OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-06-10", "confidence_level": "estimated"
+      "date": "2026-03-31", "source_name": "ONS / OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-07-21", "confidence_level": "estimated"
     },
     {
       "id": "spending",
       "name": "Government spending",
-      "value": 1368, "unit": "£ billion per year", "status": "rising",
+      "value": 1360, "unit": "£ billion per year", "status": "rising",
       "explanation": "Total money the government spends on services, benefits, investment, and debt interest.",
-      "date": "2026-03-31", "source_name": "HM Treasury / OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-06-10", "confidence_level": "estimated"
+      "date": "2026-03-31", "source_name": "HM Treasury / OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-07-21", "confidence_level": "estimated"
     }
   ]
 }

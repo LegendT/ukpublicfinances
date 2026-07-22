@@ -22,7 +22,7 @@ description: UK debt and annual debt interest set next to familiar areas of publ
   {%- for area in spendingComparisons.areas %}
     {%- set ratio = interest.value / area.value * 100 %}
     {%- set barWidth = ratio if ratio < 100 else 100 %}
-    {%- set areaPhrase = "annual tax receipts" if area.id == "tax-receipts" else "the " + area.name + " budget" %}
+    {%- set areaPhrase = "annual central government receipts" if area.id == "tax-receipts" else "the " + area.name + " budget" %}
   <div class="compare">
     <p class="compare__text">
       {%- if ratio <= 110 %}About <strong>{{ ratio | round(0) }}%</strong> of {{ areaPhrase }}
@@ -41,7 +41,7 @@ description: UK debt and annual debt interest set next to familiar areas of publ
 
   {%- for area in spendingComparisons.areas %}
     {%- set mult = netDebt.value / area.value %}
-    {%- set spendPhrase = "a year's tax receipts" if area.id == "tax-receipts" else "a year's spending on " + area.name %}
+    {%- set spendPhrase = "a year's central government receipts" if area.id == "tax-receipts" else "a year's spending on " + area.name %}
   <div class="compare">
     <p class="compare__text">
       About <strong>{{ mult | round(1) }}×</strong> {{ spendPhrase }}
