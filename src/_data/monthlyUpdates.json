@@ -2,6 +2,31 @@
   "note": "Structured monthly summaries of the ONS public sector finances release. The newest entry is shown first and drives the monthly explainer page. Add a new object to the top of 'updates' each month. Figures are as first published in that month's release and are deliberately not updated for later ONS revisions, so older entries will differ from today's estimates. Fetch the current vintage from the ONS time series (series J5II, dataset PUSF) if you need the latest figure.",
   "updates": [
     {
+      "id": "2026-07",
+      "month": "July 2026",
+      "published": "2026-08-21",
+      "source_name": "ONS, Public sector finances, UK: July 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/july2026",
+      "retrieved_date": "2026-08-21",
+      "confidence_level": "provisional",
+      "headline": "July is usually one of the strongest months for the public finances, and borrowing was close to balance, but it still came in above both last year and the official forecast.",
+      "borrowing": {
+        "value": 1.8,
+        "unit": "£ billion",
+        "direction": "rose",
+        "vsLastYear": "£0.7 billion more than July 2025",
+        "vsForecast": "£2.3 billion above the OBR forecast, which had expected a small surplus"
+      },
+      "answers": {
+        "whatChanged": "The government borrowed £1.8 billion in July 2026, the gap between what it spent and what it raised. July is usually one of the strongest months for receipts, because self-assessment income tax lands then, so the public finances came close to balance. Even so, borrowing was £0.7 billion higher than in July 2025 and £2.3 billion more than the OBR had forecast.",
+        "borrowingWhy": "Spending grew faster than receipts. Central government spending rose £5.7 billion on the year while receipts rose £4.6 billion, so the gap widened even in a strong month for tax.",
+        "taxReceipts": "Central government receipts were £104.3 billion, up £4.6 billion (4.6%) on July 2025, with VAT up 6.0%, income-related taxes up 5.9% and corporation tax up 7.7%. Self-assessment income tax brought in £17.1 billion, £1.7 billion more than a year earlier, though the ONS advises reading July and August together because some payments arrive late.",
+        "spending": "Central government spending was £110.7 billion, up £5.7 billion (5.4%) on the year. Net social benefits rose £2.0 billion and spending on goods and services rose £1.2 billion, both outpacing the growth in receipts.",
+        "debtInterest": "Central government interest payable was £7.7 billion in July, £0.7 billion more than a year earlier. That is well below recent months, but the RPI-linked capital uplift on index-linked gilts still added £1.3 billion, reflecting a 0.2% rise in RPI between April and May 2026.",
+        "vsObr": "Borrowing was £2.3 billion above the OBR's forecast for the month. For the financial year so far, borrowing of £56.7 billion is £6.0 billion lower than the same period last year but £2.3 billion above the OBR's forecast. Revisions in this release removed the overshoot previously reported for April to June, so July now accounts for the whole of the year-to-date gap. One month is a weak guide and figures are routinely revised."
+      }
+    },
+    {
       "id": "2026-06",
       "month": "June 2026",
       "published": "2026-07-21",
