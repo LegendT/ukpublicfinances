@@ -2,6 +2,8 @@
 layout: layouts/base.njk
 title: International comparison
 description: How UK government debt compares with other major economies, using a consistent international measure.
+eleventyComputed:
+  dataUpdated: "{{ internationalComparisons.retrieved_date }}"
 ---
 {% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
 

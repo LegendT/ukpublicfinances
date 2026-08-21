@@ -53,6 +53,20 @@ export default function (eleventyConfig) {
     }).format(date);
   });
 
+  // Latest of several date-ish values, as YYYY-MM-DD. A page's content changes
+  // when its TEMPLATE changes or when the DATA it renders changes, and Eleventy's
+  // reserved page.date only knows the first, so sitemap lastmod and the WebPage
+  // dateModified need both. Nulls are ignored so a page with no data date still works.
+  eleventyConfig.addFilter("latestDate", (...values) => {
+    const times = values
+      .flat()
+      .filter(Boolean)
+      .map((v) => new Date(v).getTime())
+      .filter((n) => !Number.isNaN(n));
+    if (!times.length) return "";
+    return new Date(Math.max(...times)).toISOString().slice(0, 10);
+  });
+
   // Render a number of pounds in trillions/billions where it aids reading.
   eleventyConfig.addFilter("poundsShort", (valueInBillions) => {
     const billions = Number(valueInBillions);

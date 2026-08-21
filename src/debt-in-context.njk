@@ -2,6 +2,8 @@
 layout: layouts/base.njk
 title: Debt in context
 description: UK debt and annual debt interest set next to familiar areas of public spending, to show the scale.
+eleventyComputed:
+  dataUpdated: "{{ dashboard.lastUpdated }}"
 ---
 {% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
 

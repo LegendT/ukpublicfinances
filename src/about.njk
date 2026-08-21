@@ -2,6 +2,8 @@
 layout: layouts/base.njk
 title: About and methodology
 description: Who runs this site, where the figures come from, how they are checked, and how to report an error.
+eleventyComputed:
+  dataUpdated: "{{ meta.lastReviewed }}"
 ---
 <div class="page-intro prose">
   <h1>About this site</h1>

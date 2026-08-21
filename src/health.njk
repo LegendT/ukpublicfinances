@@ -2,6 +2,8 @@
 layout: layouts/base.njk
 title: Public finance health
 description: A wider set of public-finance and economic indicators, with neutral direction-of-travel markers.
+eleventyComputed:
+  dataUpdated: "{{ indicators.lastUpdated }}"
 ---
 {% from "components/macros.njk" import caveatBox %}
 

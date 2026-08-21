@@ -1,5 +1,7 @@
 ---
 layout: layouts/base.njk
+eleventyComputed:
+  dataUpdated: "{{ dashboard.lastUpdated }}"
 ---
 {% from "components/macros.njk" import metricCard, caveatBox, dataFreshnessBadge %}
 

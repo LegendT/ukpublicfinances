@@ -2,6 +2,8 @@
 layout: layouts/base.njk
 title: During your lifetime
 description: How UK debt and debt-to-GDP have changed since the year you were born, with neutral context.
+eleventyComputed:
+  dataUpdated: "{{ dashboard.lastUpdated }}"
 ---
 {% from "components/macros.njk" import caveatBox %}
 
