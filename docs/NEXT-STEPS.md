@@ -43,7 +43,6 @@ Ordered by priority: the accuracy of what is already published first, then what 
 - Refresh the figures on each monthly ONS release, the natural cadence (see `UPDATING-DATA.md`). Next release: 22 September 2026.
 - **Watch the sources for a new release**, so a missed refresh is noticed by something other than memory. Nothing in this repo fetches anything, so when a publisher moves ahead of the figures the site cites, no test fails and nothing complains: `npm test` proves the figures are consistent, not current. `UK-Migration-Explorer` does this in `scripts/check-releases.mjs` and is the working precedent, including two lessons it paid for twice: retry HTTP 429 with backoff and send a `User-Agent`, because ONS throttles anonymous datacentre traffic and a throttle otherwise reads as a missed release; and keep the failing source out of the issue title, or one flapping source opens a fresh issue every run. This is the detection half only, distinct from the fetch script under Nice-to-haves, which would write the JSON.
 - Update the **UK adults (18+)** figure once the ONS publishes the UK-wide mid-2025 age breakdown. Blocked on the ONS: England and Wales was published on 29 July 2026, the UK-wide figure is still outstanding, and population and adults should move together when it lands.
-- **Submit the sitemap to Google Search Console**, the one action that actually gets the site crawled and indexed.
 - Add a **"last verified" stamp** per page.
 
 ## Nice-to-haves
