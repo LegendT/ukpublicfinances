@@ -40,6 +40,7 @@ Every public-facing figure was re-audited against its primary source (ONS, OBR, 
 - Refresh the figures on each monthly ONS release, the natural cadence (see `UPDATING-DATA.md`).
 - Update the **UK adults (18+)** figure once the ONS publishes the mid-2025 age breakdown (expected summer 2026).
 - Add a **"last verified" stamp** per page.
+- **Watch the sources for a new release**, so a missed refresh is noticed by something other than memory. Nothing in this repo fetches anything, so when a publisher moves ahead of the figures the site cites, no test fails and nothing complains: `npm test` proves the figures are consistent, not current. `UK-Migration-Explorer` does this in `scripts/check-releases.mjs` and is the working precedent, including two lessons it paid for twice: retry HTTP 429 with backoff and send a `User-Agent`, because ONS throttles anonymous datacentre traffic and a throttle otherwise reads as a missed release; and keep the failing source out of the issue title, or one flapping source opens a fresh issue every run. This is the detection half only, distinct from the fetch script under Nice-to-haves, which would write the JSON.
 
 ## Nice-to-haves
 
