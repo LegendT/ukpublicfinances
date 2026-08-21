@@ -11,7 +11,7 @@
     "a11y": "npx --yes pa11y --standard WCAG2AA http://localhost:8080",
     "a11y:all": "npm run build && npx --yes start-server-and-test a11y:serve http://127.0.0.1:8081 a11y:ci",
     "a11y:serve": "npx --yes http-server _site -p 8081 -s -c-1",
-    "a11y:ci": "npx --yes pa11y-ci"
+    "a11y:ci": "npx --yes pa11y-ci --sitemap http://127.0.0.1:8081/sitemap.xml --sitemap-find \"https://[^/]+\" --sitemap-replace http://127.0.0.1:8081"
   },
   "keywords": [
     "uk",
