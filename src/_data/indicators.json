@@ -1,20 +1,20 @@
 {
-  "note": "A wider set of public-finance and economic indicators. Status (rising/falling/stable) describes the recent direction of the figure itself, not whether that direction is good or bad. Context matters and is left to the reader. Headline values were re-verified against ONS, OBR and PESA releases in July 2026; revenue and spending totals are estimates.",
-  "lastUpdated": "2026-07-21",
+  "note": "A wider set of public-finance and economic indicators. Status (rising/falling/stable) describes the recent direction of the figure itself, not whether that direction is good or bad. Context matters and is left to the reader. Headline values were re-verified against ONS, OBR and PESA releases in August 2026; revenue and spending totals are estimates.",
+  "lastUpdated": "2026-08-21",
   "indicators": [
     {
       "id": "debt-gdp",
       "name": "Debt as a share of GDP",
-      "value": 94.9, "unit": "% of GDP", "status": "rising",
-      "explanation": "Net debt measured against the size of the economy.",
-      "date": "2026-06-30", "source_name": "ONS, Public sector finances", "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance", "retrieved_date": "2026-07-21", "confidence_level": "provisional"
+      "value": 94.1, "unit": "% of GDP", "status": "stable",
+      "explanation": "Net debt measured against the size of the economy. Down 0.8 percentage points on a year earlier, but up from 92.3% in January; the ratio has moved within a 92% to 95% band for over a year.",
+      "date": "2026-07-31", "source_name": "ONS, Public sector finances, UK: July 2026", "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/july2026", "retrieved_date": "2026-08-21", "confidence_level": "provisional"
     },
     {
       "id": "borrowing-gdp",
       "name": "Borrowing as a share of GDP",
       "value": 4.2, "unit": "% of GDP", "status": "rising",
-      "explanation": "Annual public sector net borrowing relative to the economy.",
-      "date": "2026-03-31", "source_name": "OBR / ONS", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-06-10", "confidence_level": "estimated"
+      "explanation": "Annual public sector net borrowing relative to the economy. The published outturn ratio for the financial year ending March 2026, on borrowing of £129.8bn.",
+      "date": "2026-03-31", "source_name": "ONS, Public sector finances (series J5IJ, dataset PUSF)", "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/timeseries/j5ij/pusf", "retrieved_date": "2026-08-21", "confidence_level": "official"
     },
     {
       "id": "interest",
@@ -26,16 +26,16 @@
     {
       "id": "inflation",
       "name": "Inflation (CPI)",
-      "value": 2.6, "unit": "% per year", "status": "falling",
-      "explanation": "The rate at which consumer prices are rising over the year. Eased to 2.6% in June, down from 2.8% the month before.",
-      "date": "2026-06-30", "source_name": "ONS, Consumer price inflation, UK: June 2026", "source_url": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/june2026", "retrieved_date": "2026-07-22", "confidence_level": "official"
+      "value": 2.9, "unit": "% per year", "status": "rising",
+      "explanation": "The rate at which consumer prices are rising over the year. Rose to 2.9% in July, up from 2.6% the month before.",
+      "date": "2026-07-31", "source_name": "ONS, Consumer price inflation, UK: July 2026", "source_url": "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/july2026", "retrieved_date": "2026-08-21", "confidence_level": "official"
     },
     {
       "id": "unemployment",
       "name": "Unemployment rate",
       "value": 4.9, "unit": "% of workforce", "status": "stable",
       "explanation": "The share of people who want to work and are looking for a job but cannot find one. Up 0.2 percentage points on a year earlier, but down 0.1 on the previous quarter.",
-      "date": "2026-05-31", "source_name": "ONS, Labour market overview, UK: July 2026", "source_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/july2026", "retrieved_date": "2026-07-22", "confidence_level": "provisional"
+      "date": "2026-06-30", "source_name": "ONS, Labour market overview, UK: August 2026", "source_url": "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/uklabourmarket/august2026", "retrieved_date": "2026-08-21", "confidence_level": "provisional"
     },
     {
       "id": "gdp-growth",
@@ -61,9 +61,9 @@
     {
       "id": "revenue",
       "name": "Government revenue",
-      "value": 1232, "unit": "£ billion per year", "status": "rising",
+      "value": 1230, "unit": "£ billion per year", "status": "rising",
       "explanation": "Total money the government receives, mostly from taxes.",
-      "date": "2026-03-31", "source_name": "ONS / OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-07-21", "confidence_level": "estimated"
+      "date": "2026-03-31", "source_name": "ONS / OBR", "source_url": "https://obr.uk/data/", "retrieved_date": "2026-08-21", "confidence_level": "estimated"
     },
     {
       "id": "spending",
