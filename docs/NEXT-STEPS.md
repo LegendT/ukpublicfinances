@@ -16,23 +16,23 @@ All 11 numbered sections from the brief:
 8. International comparison: debt, deficit, and growth for eight economies (IMF), with the measurement caveat.
 9. Public finance health: wider indicators with neutral rising, falling, or stable markers.
 10. Budget simulator: the "balance the budget" challenge, sliders driving live borrowing and a 10-year debt path.
-11. Monthly public finances explainer, driven by `monthlyUpdates.json`.
+11. Monthly public finances explainer, driven by `monthlyUpdates.json`, with a permanent URL per month and an Atom feed at `/feed.xml`.
 
 Plus an About and methodology page, a glossary (33 terms), a sources page, and a privacy page.
 
 Beyond the brief, the site also has:
 
-- **SEO and structured data:** canonical, Open Graph, Twitter Card, JSON-LD (`WebSite`, `Organization`, `WebPage`, `DefinedTermSet`, `FAQPage`), `sitemap.xml`, `robots.txt`, `llms.txt`, and an OG share image.
+- **SEO and structured data:** canonical, Open Graph, Twitter Card, JSON-LD (`WebSite`, `Organization`, `WebPage`, `DefinedTermSet`, `FAQPage`, `NewsArticle`, `Dataset`), `sitemap.xml`, `robots.txt`, `llms.txt`, and an OG share image.
 - **Cookieless analytics:** Cloudflare Web Analytics (no consent banner) plus a privacy page.
 - **Security headers:** Content-Security-Policy and others via `netlify.toml`.
 - **GOV.UK alignment:** yellow focus state, larger type scale, and content style.
 - **Tested tool maths:** pure functions in `assets/js/lib/calc.js` with unit tests. 18 tests in total, including a guard that fails the build if an em-dash returns to the source.
 
-All 16 routes pass a WCAG 2.2 AA audit (`npm run a11y:all`); `npm test` covers the data contract, the tool maths, and the style guard.
+Every route the site builds passes a WCAG 2.2 AA audit (`npm run a11y:all`, 20 routes at the time of writing). The route list comes from `sitemap.xml` at run time, so the audit follows the site rather than a hand-kept list. `npm test` covers the data contract, the tool maths, and the style guard.
 
 ## Data status
 
-Every public-facing figure was re-audited against its primary source (ONS, OBR, HMRC, House of Commons Library, IMF, and DWP) on 11 June 2026, with the international comparison pulled directly from the IMF DataMapper. Known caveats: the long-run historical series before about 2010 is a best-estimate reconstruction (`confidence_level: estimated`); the UK adults (18+) figure predates the ONS mid-2025 age breakdown (due summer 2026); and the GDP figure is the denominator consistent with the published debt-to-GDP ratio rather than a single published release. See [`UPDATING-DATA.md`](UPDATING-DATA.md).
+The headline, monthly, and indicator figures were refreshed on 21 August 2026 for the ONS July 2026 public sector finances release. The whole figure set was last re-audited against its primary sources (ONS, OBR, HMRC, HM Treasury, House of Commons Library, IMF, and DWP) on 21 July 2026, when the international comparison was pulled directly from the IMF DataMapper. Known caveats: the long-run historical series before about 2010 is a best-estimate reconstruction (`confidence_level: estimated`); the UK adults (18+) figure is the mid-2024 age breakdown, because the UK-wide mid-2025 breakdown is still unpublished; and both the GDP figure and total revenue are derived rather than published, the first as the denominator consistent with the debt-to-GDP ratio and the second as spending minus borrowing. See [`UPDATING-DATA.md`](UPDATING-DATA.md).
 
 ## Next steps
 

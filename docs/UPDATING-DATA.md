@@ -12,7 +12,7 @@ All figures live in `src/_data/*.json`. Templates never hard-code numbers, so up
 
 ## Refreshing the figures
 
-Every figure was re-audited against its primary source on 11 June 2026. The pre-2010 historical series remains a best-estimate reconstruction. Each file maps to one official source:
+The whole figure set was last re-audited against its primary sources on 21 July 2026; the headline, monthly and indicator figures were refreshed on 21 August 2026. The pre-2010 historical series remains a best-estimate reconstruction. Each file maps to one official source:
 
 | File | Replace with | From |
 | --- | --- | --- |
@@ -24,6 +24,16 @@ Every figure was re-audited against its primary source on 11 June 2026. The pre-
 | `assumptions.json` | Tool assumptions and tax ready-reckoner values | HMRC ready reckoner, OBR |
 
 After editing: `npm run build` then `npm test`.
+
+### Reading the ONS figures from the time series
+
+The monthly bulletin is prose and easy to misread, and its summary can restate the same figure in two places. The underlying time series are JSON and settle it, appending `/data` to the series URL:
+
+```
+curl -s "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/timeseries/hf6w/pusf/data"
+```
+
+Useful series: `HF6W` (net debt, £bn), `HF6X` (net debt as % of GDP), `J5II` (net borrowing, £m, where a negative value is borrowing), `J5IJ` (borrowing as % of GDP, financial years stamped at Q1), `NMFX` (central government net interest payable). Financial-year totals are the twelve months from April, summed.
 
 ### Pulling the international figures from the IMF
 
@@ -43,7 +53,9 @@ Indicators: `GGXWDG_NGDP` (general government gross debt, % of GDP), `GGXCNL_NGD
 4. Add the new month's row to `debtTimeseries.json` if you keep the series current.
 5. Add a new entry to the top of `monthlyUpdates.json` for the month, which drives the monthly explainer page.
 6. Keep the cross-file figures in step: `data.test.js` enforces that values shared across files (population, taxpayers, debt interest, defence, pension) match, and that the simulator's accounting identities still hold.
-7. `npm run build && npm test`, then run an accessibility check on `_site`.
+7. Check the figures no test binds. `assumptions.json` `translator.annualBorrowingGbpBillion` and `indicators.json` `borrowing-gdp` both describe the financial year's borrowing, and nothing fails if they go stale. The August 2026 refresh found the ONS had revised financial year 2025-26 borrowing from £128.0bn to £129.8bn, which moved the simulator baseline and both of these; only the baseline was test-enforced.
+8. Take a published ratio from its publisher rather than dividing it yourself. Debt interest as a share of GDP was broken once by dividing by the debt-ratio denominator, and borrowing as a share of GDP would break the same way: the ONS publishes it as series J5IJ, stamped at Q1 of the year it ends.
+9. `npm run build && npm test`, then `npm run a11y:all`. The accessibility audit reads `sitemap.xml`, so the new month's page is picked up with nothing to configure.
 
 ## Moving to live or API data later
 
