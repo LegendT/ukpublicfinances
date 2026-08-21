@@ -3,6 +3,7 @@ layout: layouts/base.njk
 title: Monthly update
 description: A plain-English summary of what changed in the latest monthly public finances release, and why.
 eleventyComputed:
+  dataUpdated: "{{ monthlyUpdates.updates[0].published }}"
   canonicalUrl: "{{ site.url }}/monthly/{{ monthlyUpdates.updates[0].id }}/"
 ---
 {% from "components/macros.njk" import monthlyBody, dataFreshnessBadge %}

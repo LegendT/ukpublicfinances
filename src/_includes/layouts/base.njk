@@ -73,7 +73,7 @@
         "description": {{ pageDesc | jsonScript | safe }},
         "isPartOf": { "@id": "{{ site.url }}/#website" },
         "inLanguage": "en-GB",
-        "dateModified": "{{ page.date | isoDate }}"
+        "dateModified": "{{ page.date | latestDate(dataUpdated) }}"
       }
     ]
   }

@@ -8,7 +8,7 @@ eleventyExcludeFromCollections: true
   {%- if item.url and item.url.endsWith("/") %}
   <url>
     <loc>{{ site.url }}{{ item.url }}</loc>
-    <lastmod>{{ item.date | isoDate }}</lastmod>
+    <lastmod>{{ item.date | latestDate(item.data.dataUpdated) }}</lastmod>
   </url>
   {%- endif %}
 {%- endfor %}
