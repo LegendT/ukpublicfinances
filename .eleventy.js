@@ -36,8 +36,11 @@ export default function (eleventyConfig) {
   });
 
   // ISO date (YYYY-MM-DD) for sitemap lastmod and machine-readable output.
+  // Empty for a missing or unparseable value. It must never fall back to
+  // today: a date the site did not have is worse than no date at all.
   eleventyConfig.addFilter("isoDate", (value) => {
-    const date = value ? new Date(value) : new Date();
+    if (!value) return "";
+    const date = new Date(value);
     return Number.isNaN(date.getTime()) ? "" : date.toISOString().slice(0, 10);
   });
 
@@ -51,20 +54,6 @@ export default function (eleventyConfig) {
       month: "long",
       year: "numeric",
     }).format(date);
-  });
-
-  // Latest of several date-ish values, as YYYY-MM-DD. A page's content changes
-  // when its TEMPLATE changes or when the DATA it renders changes, and Eleventy's
-  // reserved page.date only knows the first, so sitemap lastmod and the WebPage
-  // dateModified need both. Nulls are ignored so a page with no data date still works.
-  eleventyConfig.addFilter("latestDate", (...values) => {
-    const times = values
-      .flat()
-      .filter(Boolean)
-      .map((v) => new Date(v).getTime())
-      .filter((n) => !Number.isNaN(n));
-    if (!times.length) return "";
-    return new Date(Math.max(...times)).toISOString().slice(0, 10);
   });
 
   // Render a number of pounds in trillions/billions where it aids reading.
