@@ -72,8 +72,8 @@
         "name": {{ pageTitle | jsonScript | safe }},
         "description": {{ pageDesc | jsonScript | safe }},
         "isPartOf": { "@id": "{{ site.url }}/#website" },
-        "inLanguage": "en-GB",
-        "dateModified": "{{ page.date | latestDate(dataUpdated) }}"
+        "inLanguage": "en-GB"{% if dataUpdated %},
+        "dateModified": "{{ dataUpdated | isoDate }}"{% endif %}
       }
     ]
   }

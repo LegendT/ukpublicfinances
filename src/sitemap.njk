@@ -8,7 +8,12 @@ eleventyExcludeFromCollections: true
   {%- if item.url and item.url.endsWith("/") %}
   <url>
     <loc>{{ site.url }}{{ item.url }}</loc>
-    <lastmod>{{ item.date | latestDate(item.data.dataUpdated) }}</lastmod>
+    {#- Only pages backed by dated data carry a lastmod. Falling back to the
+        file date restamped every page on every deploy, because Netlify builds
+        from a fresh clone. No date is better than a date that is not true. -#}
+    {%- if item.data.dataUpdated %}
+    <lastmod>{{ item.data.dataUpdated | isoDate }}</lastmod>
+    {%- endif %}
   </url>
   {%- endif %}
 {%- endfor %}

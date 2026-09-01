@@ -97,10 +97,13 @@ test("monthly updates are well formed, newest first, and match the dashboard", (
   // Archived entries get edited too, so check every one, not just the newest.
   for (const u of m.updates) {
     for (const field of ["id", "month", "published", "source_url", "headline", "borrowing", "answers"]) {
-      assert.ok(u[field] !== undefined && u[field] !== "", `${u.id} missing ${field}`);
+      assert.ok(u[field] !== undefined && u[field] !== null && u[field] !== "", `${u.id} missing ${field}`);
     }
     // id must be YYYY-MM: it drives the /monthly/<id>/ permalink and the newest-first sort.
     assert.match(u.id, /^\d{4}-\d{2}$/, `${u.id} id must be YYYY-MM`);
+    // The sitemap dates this month's page from published, unguarded, so an
+    // unparseable value would emit an empty lastmod rather than a wrong one.
+    assert.match(u.published, /^\d{4}-\d{2}-\d{2}$/, `${u.id} published must be YYYY-MM-DD`);
     for (const q of ["whatChanged", "borrowingWhy", "taxReceipts", "spending", "debtInterest", "vsObr"]) {
       assert.ok(u.answers[q], `${u.id} answers missing ${q}`);
     }
