@@ -169,3 +169,35 @@ test("the dashboard reference period yields the year the templates label figures
     "referencePeriod year differs from the net debt metric's date"
   );
 });
+
+// Nothing in this repo can tell you that the Prime Minister changed, or that a
+// figure it cites has been superseded. Only a person checking can. These dates
+// record when someone last did, and this test fails once one goes stale, so a
+// missed refresh surfaces on the next `npm test` rather than on the live site.
+// The window is a little longer than the monthly ONS cycle, so an ordinary
+// refresh never trips it and a skipped one always does.
+const MAX_CHECK_AGE_DAYS = 45;
+
+test("every human-checked date is current", () => {
+  const checks = [
+    ["dashboard.json", load("dashboard.json").lastUpdated],
+    ["indicators.json", load("indicators.json").lastUpdated],
+    ["primeMinisters.json", load("primeMinisters.json").checkedOn],
+  ];
+  // Compared as whole local days. Date.parse on a date-only string gives UTC
+  // midnight, so measuring against the current instant reads a date stamped
+  // today as a day in the future for the first hour of a BST morning.
+  const now = new Date();
+  const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  checks.forEach(([file, date]) => {
+    assert.match(String(date), /^\d{4}-\d{2}-\d{2}$/, `${file}: check date missing or malformed`);
+    const ageDays = Math.round((Date.parse(todayIso) - Date.parse(date)) / 86400000);
+    // A date typed with the wrong year would otherwise switch the check off
+    // for as long as it stayed in the future.
+    assert.ok(ageDays >= 0, `${file}: check date ${date} is in the future.`);
+    assert.ok(
+      ageDays <= MAX_CHECK_AGE_DAYS,
+      `${file}: check date ${date} is ${ageDays} days old, past the ${MAX_CHECK_AGE_DAYS} day limit. Re-verify the file against its source, then set the date to today. See docs/UPDATING-DATA.md.`
+    );
+  });
+});
