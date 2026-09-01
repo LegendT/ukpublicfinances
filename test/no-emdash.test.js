@@ -23,7 +23,8 @@ const TEXT_EXT = new Set([
 ]);
 // Gitignored, local-only working documents.
 const SKIP = new Set([
-  "DATA-AUDIT.md", "DATA-AUDIT-INTL.md", "OUTREACH.md", "EMAIL-SETUP-ZOHO.md",
+  "DATA-AUDIT.md", "DATA-AUDIT-INTL.md", "OUTREACH.md", "OUTREACH-ARCHIVE.md",
+  "EMAIL-SETUP-ZOHO.md",
 ]);
 const EM_DASH = "—";
 const EM_DASH_ENCODED = /%e2%80%94/gi;
