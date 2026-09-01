@@ -32,6 +32,7 @@
     { "name": "Boris Johnson", "party": "Conservative", "from": 2019, "to": 2022 },
     { "name": "Liz Truss", "party": "Conservative", "from": 2022, "to": 2022 },
     { "name": "Rishi Sunak", "party": "Conservative", "from": 2022, "to": 2024 },
-    { "name": "Keir Starmer", "party": "Labour", "from": 2024, "to": null }
+    { "name": "Keir Starmer", "party": "Labour", "from": 2024, "to": 2026 },
+    { "name": "Andy Burnham", "party": "Labour", "from": 2026, "to": null }
   ]
 }
