@@ -86,6 +86,20 @@ export default function (eleventyConfig) {
     return Number.isNaN(n) ? value : n.toFixed(1);
   });
 
+  // The year the published figures describe, read off the dashboard's
+  // reference period ("July 2026"), so no template pins it as a literal.
+  // Deliberately throws on a period with no year rather than returning a
+  // blank: Netlify deploys run the build alone, so this is the only check
+  // between malformed data and a live page.
+  eleventyConfig.addFilter("yearOf", (period) =>
+    Number(String(period).match(/(\d{4})\s*$/)[1])
+  );
+
+  // The calendar year at build time. Deliberately not the same value as
+  // yearOf(referencePeriod): the figures describe a past month, whereas the
+  // birth-year input has to accept someone born this year.
+  eleventyConfig.addGlobalData("buildYear", () => new Date().getFullYear());
+
   return {
     dir: {
       input: "src",

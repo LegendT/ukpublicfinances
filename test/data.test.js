@@ -154,3 +154,18 @@ test("current figures are consistent across data files (no silent drift)", () =>
   assert.ok(near(area("social-protection"), lever.welfare + lever.pensions, 6), "welfare total != welfare + pension");
   assert.ok(intl.countries.find((c) => c.id === "uk").debtToGdp > metric("debt-gdp"), "intl gross UK should exceed national net");
 });
+
+// The timeline, interest and lifetime pages label their latest row with the
+// year taken from referencePeriod, so a period that does not end in a year
+// renders an empty table heading and nothing else complains.
+test("the dashboard reference period yields the year the templates label figures with", () => {
+  const dash = load("dashboard.json");
+  const match = String(dash.referencePeriod).match(/(\d{4})\s*$/);
+  assert.ok(match, `referencePeriod must end in a four-digit year: "${dash.referencePeriod}"`);
+  const netDebt = dash.metrics.find((m) => m.id === "net-debt");
+  assert.equal(
+    Number(match[1]),
+    Number(netDebt.date.slice(0, 4)),
+    "referencePeriod year differs from the net debt metric's date"
+  );
+});

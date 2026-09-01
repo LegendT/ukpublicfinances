@@ -14,7 +14,7 @@
   const statusEl = document.getElementById("lifetime-status");
   if (!dataEl || !out || !input) return;
 
-  const { series, events, primeMinisters, current } = JSON.parse(dataEl.textContent);
+  const { series, events, primeMinisters, current, maxBirthYear } = JSON.parse(dataEl.textContent);
   const gbpBn = (v) => (v === null ? "no comparable figure" : `£${v.toLocaleString("en-GB")} bn`);
 
   // Linear interpolation of a field at a given year, from the sparse series.
@@ -100,7 +100,7 @@
   // fire the alert on every keystroke.
   function update(showError) {
     const year = parseInt(input.value, 10);
-    const valid = Number.isFinite(year) && year >= 1900 && year <= 2026;
+    const valid = Number.isFinite(year) && year >= 1900 && year <= maxBirthYear;
     if (valid) {
       errorEl.hidden = true;
       input.setAttribute("aria-invalid", "false");
