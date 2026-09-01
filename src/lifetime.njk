@@ -15,9 +15,9 @@ eleventyComputed:
 <form class="translator" id="lifetime-form" novalidate>
   <div class="field">
     <label for="birth-year">Year of birth</label>
-    <input type="number" id="birth-year" name="birth-year" inputmode="numeric" autocomplete="bday-year" min="1900" max="2026" step="1" value="1968" aria-describedby="by-hint">
-    <p id="by-hint" class="field__hint">Any year from 1900 to 2026.</p>
-    <p id="by-error" class="field__error" role="alert" hidden>Enter a year between 1900 and 2026.</p>
+    <input type="number" id="birth-year" name="birth-year" inputmode="numeric" autocomplete="bday-year" min="1900" max="{{ buildYear }}" step="1" value="1968" aria-describedby="by-hint">
+    <p id="by-hint" class="field__hint">Any year from 1900 to {{ buildYear }}.</p>
+    <p id="by-error" class="field__error" role="alert" hidden>Enter a year between 1900 and {{ buildYear }}.</p>
   </div>
   <button type="submit" class="btn">Show changes</button>
   <p class="field__hint">Results also update as you type.</p>
@@ -43,7 +43,8 @@ eleventyComputed:
   "series": {{ debtTimeseries.series | jsonScript | safe }},
   "events": {{ events.events | jsonScript | safe }},
   "primeMinisters": {{ primeMinisters.list | jsonScript | safe }},
-  "current": { "debtGbp": {{ netDebt.value }}, "debtToGdp": {{ debtGdp.value }}, "year": 2026 }
+  "current": { "debtGbp": {{ netDebt.value }}, "debtToGdp": {{ debtGdp.value }}, "year": {{ dashboard.referencePeriod | yearOf }} },
+  "maxBirthYear": {{ buildYear }}
 }
 </script>
 <script src="{{ '/assets/js/lifetime.js' | url }}" defer></script>

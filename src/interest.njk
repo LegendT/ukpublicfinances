@@ -52,7 +52,7 @@ eleventyComputed:
           <tr><th scope="row">{{ d.year }}</th><td class="num">{{ d.interestGbp | number }}</td></tr>
           {%- endif %}
         {%- endfor %}
-        <tr><th scope="row">2026</th><td class="num">{{ annual | number }}</td></tr>
+        <tr><th scope="row">{{ dashboard.referencePeriod | yearOf }}</th><td class="num">{{ annual | number }}</td></tr>
       </tbody>
     </table>
   </details>

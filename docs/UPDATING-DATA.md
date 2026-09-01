@@ -48,7 +48,7 @@ Indicators: `GGXWDG_NGDP` (general government gross debt, % of GDP), `GGXCNL_NGD
 ## When the monthly ONS release lands
 
 1. Open `src/_data/dashboard.json`.
-2. Update `lastUpdated`, `referencePeriod`, and each metric's `value`, `date`, and `retrieved_date`.
+2. Update `lastUpdated`, `referencePeriod`, and each metric's `value`, `date`, and `retrieved_date`. `referencePeriod` must stay in the form "July 2026": the timeline, interest and lifetime pages take the year they label the latest figures with from its last four digits, and the build fails if it does not end in a year.
 3. Set `confidence_level` to `provisional` (ONS monthly figures are routinely revised).
 4. Add the new month's row to `debtTimeseries.json` if you keep the series current.
 5. Add a new entry to the top of `monthlyUpdates.json` for the month, which drives the monthly explainer page.
