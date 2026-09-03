@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: Big numbers translator
 description: Turn a large sum into per-person figures and comparisons with annual budgets and GDP.
 eleventyComputed:
-  dataUpdated: "{{ [dashboard.lastUpdated, assumptions.lastUpdated] | sort | last }}"
+  dataUpdated: "{{ [dashboard.lastUpdated, assumptions.translator.lastUpdated] | latestOf }}"
 ---
 {% from "components/macros.njk" import caveatBox %}
 

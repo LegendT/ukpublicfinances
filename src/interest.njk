@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: Interest costs
 description: What the UK government pays to service its debt (yearly, monthly, and daily) and how that compares with revenue and the economy.
 eleventyComputed:
-  dataUpdated: "{{ [dashboard.lastUpdated, assumptions.lastUpdated] | sort | last }}"
+  dataUpdated: "{{ [dashboard.lastUpdated, assumptions.budgetSimulator.lastUpdated] | latestOf }}"
 ---
 {% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
 

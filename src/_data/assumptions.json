@@ -1,7 +1,7 @@
 {
-  "lastUpdated": "2026-09-03",
   "note": "Assumptions used by the interactive tools. These are deliberately simple and visible. The budget simulator and translators are educational models, not forecasts.",
   "translator": {
+    "lastUpdated": "2026-08-21",
     "population": 69500000,
     "adults": 55000000,
     "taxpayers": 36700000,
@@ -10,6 +10,7 @@
     "annualDebtInterestGbpBillion": 110
   },
   "budgetSimulator": {
+    "lastUpdated": "2026-09-03",
     "disclaimer": "A simplified educational model. It applies static, first-round effects only and does not model how the economy responds to changes. It is not a forecast and must not be read as one.",
     "baselineGbpBillion": {
       "totalSpending": 1360,

@@ -35,13 +35,23 @@ test("every published figure carries source and provenance fields", () => {
   }
 });
 
-test("data files that date a page carry a lastUpdated", () => {
-  // budget-simulator, big-numbers, interest, timeline and sources take their dateModified
-  // and sitemap lastmod from these. Drop the field and the page silently reports the older
-  // date of its other data file, or no date at all, which is worse than a wrong one.
-  for (const file of ["dashboard.json", "indicators.json", "assumptions.json", "sources.json"]) {
-    const value = load(file).lastUpdated;
-    assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(value ?? ""), `${file} needs an ISO lastUpdated, got: ${value}`);
+test("every field that dates a page is a well-formed ISO date", () => {
+  // These set dateModified in the JSON-LD and lastmod in the sitemap. They do not
+  // share a name, so listing them by accessor is the only honest way to cover them.
+  // The check is presence and shape; nothing can prove someone remembered to move one.
+  const dated = [
+    ["dashboard.json", "lastUpdated", (d) => d.lastUpdated],
+    ["indicators.json", "lastUpdated", (d) => d.lastUpdated],
+    ["sources.json", "lastUpdated", (d) => d.lastUpdated],
+    ["meta.json", "lastReviewed", (d) => d.lastReviewed],
+    ["assumptions.json", "translator.lastUpdated", (d) => d.translator.lastUpdated],
+    ["assumptions.json", "budgetSimulator.lastUpdated", (d) => d.budgetSimulator.lastUpdated],
+    ["internationalComparisons.json", "retrieved_date", (d) => d.retrieved_date],
+    ["monthlyUpdates.json", "updates[0].published", (d) => d.updates[0].published],
+  ];
+  for (const [file, label, read] of dated) {
+    const value = read(load(file));
+    assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(value ?? ""), `${file} ${label} must be an ISO date, got: ${value}`);
   }
 });
 
