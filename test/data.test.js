@@ -119,6 +119,12 @@ test("monthly updates are well formed, newest first, and match the dashboard", (
 
   // Archived entries get edited too, so check every one, not just the newest.
   for (const u of m.updates) {
+    // monthly-entry.njk builds the JSON-LD article headline as "Monthly update: <month>".
+    // Search engines truncate an Article headline past 110 characters, which is why it is
+    // not u.headline: those run 118 to 173 characters and belong in the description.
+    const articleHeadline = `Monthly update: ${u.month}`;
+    assert.ok(articleHeadline.length <= 110, `${u.id}: article headline is ${articleHeadline.length} chars`);
+
     for (const field of ["id", "month", "published", "source_url", "headline", "borrowing", "answers"]) {
       assert.ok(u[field] !== undefined && u[field] !== null && u[field] !== "", `${u.id} missing ${field}`);
     }
