@@ -4,9 +4,9 @@ title: Budget simulator
 description: A simplified educational model. Adjust spending and tax, try to balance the budget, and see the effect on debt.
 pageClass: has-sticky-status
 eleventyComputed:
-  dataUpdated: "{{ dashboard.lastUpdated }}"
+  dataUpdated: "{{ [dashboard.lastUpdated, assumptions.budgetSimulator.lastUpdated] | latestOf }}"
 ---
-{% from "components/macros.njk" import caveatBox %}
+{% from "components/macros.njk" import caveatBox, sourceNote %}
 {% set b = assumptions.budgetSimulator %}
 
 <div class="page-intro prose">
@@ -67,7 +67,7 @@ eleventyComputed:
     <h3>Debt over {{ b.projection.years }} years</h3>
     <div class="table-scroll" tabindex="0" role="region" aria-label="Projected debt over five years">
       <table class="data-table">
-        <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate * 100) | round(0) }}% interest rate and a fixed economy. See the assumptions below.</caption>
+        <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate.value * 100) | round(0) }}% interest rate (an average for the whole debt stock, not today's market rate) and a fixed economy. See the assumptions below.</caption>
         <thead><tr><th scope="col">Year</th><th scope="col" class="num">Debt (£ bn)</th><th scope="col" class="num">Debt (% of GDP)</th></tr></thead>
         <tbody id="r-trajectory"></tbody>
       </table>
@@ -81,7 +81,9 @@ eleventyComputed:
     <li>Baseline spending £{{ b.baselineGbpBillion.totalSpending | number }} bn, revenue £{{ b.baselineGbpBillion.totalRevenue | number }} bn, debt £{{ b.baselineGbpBillion.debt | number }} bn, so today's starting point is a deficit of £{{ b.baselineGbpBillion.borrowing | number }} bn.</li>
     <li>{{ b.taxNote }}</li>
     <li>{{ b.projection.note }}</li>
+    <li>Interest rate: {{ b.projection.assumedInterestRate.notes }}</li>
   </ul>
+  {{ sourceNote(b.projection.assumedInterestRate) }}
 </details>
 
 <noscript><p class="caveat">This simulator needs JavaScript. The baseline figures are on the <a href="{{ '/' | url }}">dashboard</a>.</p></noscript>

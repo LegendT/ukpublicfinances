@@ -22,13 +22,36 @@ test("dashboard has the five required headline metrics", () => {
   });
 });
 
-test("every dashboard metric carries source and provenance fields", () => {
+test("every published figure carries source and provenance fields", () => {
   const d = load("dashboard.json");
-  for (const m of d.metrics) {
+  // The simulator's interest-rate assumption is shown to readers as a figure on the page,
+  // so it answers to the same provenance rules as any dashboard metric.
+  const rate = load("assumptions.json").budgetSimulator.projection.assumedInterestRate;
+  for (const m of [...d.metrics, { id: "assumedInterestRate", ...rate }]) {
     for (const field of ["metric_name", "value", "unit", "source_name", "source_url", "retrieved_date", "confidence_level"]) {
       assert.ok(m[field] !== undefined && m[field] !== "", `${m.id} missing ${field}`);
     }
     assert.ok(VALID_CONFIDENCE.includes(m.confidence_level), `${m.id} bad confidence: ${m.confidence_level}`);
+  }
+});
+
+test("every field that dates a page is a well-formed ISO date", () => {
+  // These set dateModified in the JSON-LD and lastmod in the sitemap. They do not
+  // share a name, so listing them by accessor is the only honest way to cover them.
+  // The check is presence and shape; nothing can prove someone remembered to move one.
+  const dated = [
+    ["dashboard.json", "lastUpdated", (d) => d.lastUpdated],
+    ["indicators.json", "lastUpdated", (d) => d.lastUpdated],
+    ["sources.json", "lastUpdated", (d) => d.lastUpdated],
+    ["meta.json", "lastReviewed", (d) => d.lastReviewed],
+    ["assumptions.json", "translator.lastUpdated", (d) => d.translator.lastUpdated],
+    ["assumptions.json", "budgetSimulator.lastUpdated", (d) => d.budgetSimulator.lastUpdated],
+    ["internationalComparisons.json", "retrieved_date", (d) => d.retrieved_date],
+    ["monthlyUpdates.json", "updates[0].published", (d) => d.updates[0].published],
+  ];
+  for (const [file, label, read] of dated) {
+    const value = read(load(file));
+    assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(value ?? ""), `${file} ${label} must be an ISO date, got: ${value}`);
   }
 });
 
@@ -96,6 +119,12 @@ test("monthly updates are well formed, newest first, and match the dashboard", (
 
   // Archived entries get edited too, so check every one, not just the newest.
   for (const u of m.updates) {
+    // monthly-entry.njk builds the JSON-LD article headline as "Monthly update: <month>".
+    // Search engines truncate an Article headline past 110 characters, which is why it is
+    // not u.headline: those run 118 to 173 characters and belong in the description.
+    const articleHeadline = `Monthly update: ${u.month}`;
+    assert.ok(articleHeadline.length <= 110, `${u.id}: article headline is ${articleHeadline.length} chars`);
+
     for (const field of ["id", "month", "published", "source_url", "headline", "borrowing", "answers"]) {
       assert.ok(u[field] !== undefined && u[field] !== null && u[field] !== "", `${u.id} missing ${field}`);
     }
@@ -155,6 +184,17 @@ test("current figures are consistent across data files (no silent drift)", () =>
   assert.ok(near(metric("net-debt") / (metric("debt-gdp") / 100), sup.gdp.value, 15), "implied GDP != stated GDP");
   assert.equal(base.totalSpending - base.totalRevenue, base.borrowing, "simulator: spending - revenue != borrowing");
   assert.ok(near(area("social-protection"), lever.welfare + lever.pensions, 6), "welfare total != welfare + pension");
+
+  // The simulator's assumed interest rate is the effective rate on the debt stock, so it must
+  // stay near the two figures it is derived from. This is a drift alarm, not a proof of
+  // correctness: a fabricated rate would satisfy it just as well, which is the lesson the
+  // total-revenue figure taught (see NEXT-STEPS.md). The source field does the real work.
+  const impliedRate = metric("debt-interest") / metric("net-debt");
+  const assumedRate = a.budgetSimulator.projection.assumedInterestRate.value;
+  assert.ok(
+    near(assumedRate, impliedRate, 0.0075),
+    `assumed interest rate ${assumedRate} has drifted from the implied ${impliedRate.toFixed(4)}`,
+  );
   assert.ok(intl.countries.find((c) => c.id === "uk").debtToGdp > metric("debt-gdp"), "intl gross UK should exceed national net");
 });
 

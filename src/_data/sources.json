@@ -1,4 +1,5 @@
 {
+  "lastUpdated": "2026-09-03",
   "note": "Primary data sources this project is built to use. Replace placeholder figures with verified values pulled from these sources.",
   "sources": [
     {
@@ -62,6 +63,15 @@
       "url": "https://www.bankofengland.co.uk/statistics/research-datasets",
       "covers": "Long-run historical series for the timeline.",
       "updateFrequency": "Occasional",
+      "confidence_level": "official"
+    },
+    {
+      "id": "commons-library",
+      "name": "House of Commons Library: What are government debt and debt interest?",
+      "publisher": "House of Commons Library",
+      "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-10842/",
+      "covers": "Secondary analysis rather than a primary statistical release: plain-English context on debt, debt interest and borrowing costs, including the market gilt yields this site does not publish itself.",
+      "updateFrequency": "Revised periodically",
       "confidence_level": "official"
     }
   ]

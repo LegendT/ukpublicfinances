@@ -44,6 +44,16 @@ export default function (eleventyConfig) {
     return Number.isNaN(date.getTime()) ? "" : date.toISOString().slice(0, 10);
   });
 
+  // The newest of several ISO dates, for a page whose figures come from more than
+  // one data file. Anything not YYYY-MM-DD is skipped rather than sorted as text,
+  // and an empty list gives undefined so the page renders no dateModified at all.
+  // Same rule as isoDate: a date the site did not have is worse than no date.
+  eleventyConfig.addFilter("latestOf", (values) => {
+    if (!Array.isArray(values)) return undefined;
+    const dates = values.filter((v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v));
+    return dates.length ? dates.sort().at(-1) : undefined;
+  });
+
   // Format an ISO date as a readable British date, e.g. "10 June 2026".
   eleventyConfig.addFilter("readableDate", (value) => {
     if (!value) return value;

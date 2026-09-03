@@ -1,6 +1,7 @@
 {
   "note": "Assumptions used by the interactive tools. These are deliberately simple and visible. The budget simulator and translators are educational models, not forecasts.",
   "translator": {
+    "lastUpdated": "2026-08-21",
     "population": 69500000,
     "adults": 55000000,
     "taxpayers": 36700000,
@@ -9,6 +10,7 @@
     "annualDebtInterestGbpBillion": 110
   },
   "budgetSimulator": {
+    "lastUpdated": "2026-09-03",
     "disclaimer": "A simplified educational model. It applies static, first-round effects only and does not model how the economy responds to changes. It is not a forecast and must not be read as one.",
     "baselineGbpBillion": {
       "totalSpending": 1360,
@@ -32,7 +34,17 @@
     "taxNote": "Each percentage point on a rate is worth roughly the amount shown (an HMRC 'ready reckoner' style estimate). Income tax shows the basic rate as a simple stand-in for the whole system.",
     "projection": {
       "years": 10,
-      "assumedInterestRate": 0.04,
+      "assumedInterestRate": {
+        "metric_name": "Assumed average interest rate on the debt stock",
+        "value": 0.04,
+        "unit": "share of the debt stock per year",
+        "date": "2026-09-03",
+        "source_name": "Modelling assumption for this tool, checked against OBR debt interest and ONS net debt",
+        "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/",
+        "retrieved_date": "2026-09-03",
+        "notes": "An assumption for this model, not a published rate. Neither the OBR nor the House of Commons Library publishes a single effective interest rate on the UK debt stock; the Library briefing of 12 August 2026 describes the effective rate only as a trend. So this is set to a round 4% and checked against figures the site already carries: OBR debt interest of £110bn (March 2026 forecast) over ONS net debt of £2,985bn (end July 2026) gives 3.7%. That check follows the OBR's illustrative method in The outlook for debt interest spending (25 August 2017), and the OBR calls the method illustrative for good reason: the perimeters differ, because the interest figure is central government interest net of APF while net debt is public sector net debt excluding banks. The rate is an average across the whole stock and sits well below the market rate on new borrowing, which the Commons Library put at 5.05% for 10-year and 5.7% for 30-year gilts in mid-August 2026. Part of the stock is effectively financed at Bank Rate, 3.75% at that date, which is one reason the average is nearer 4% than 5%. Revisit at each OBR forecast, not on market moves.",
+        "confidence_level": "estimated"
+      },
       "note": "Debt in future years is the running total of borrowing plus assumed interest, held to zero once cleared. Economic growth, behavioural responses, and inflation are not modelled."
     }
   }

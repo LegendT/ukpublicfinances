@@ -31,7 +31,10 @@ eleventyComputed:
     {
       "@type": "NewsArticle",
       "@id": "{{ site.url }}{{ page.url }}#article",
-      "headline": {{ u.headline | jsonScript | safe }},
+      {#- The page title, not u.headline: search engines truncate an Article
+          headline past 110 characters, and u.headline is a lede sentence. It
+          still carries the page description and the visible lede below. -#}
+      "headline": {{ title | jsonScript | safe }},
       "description": {{ u.answers.whatChanged | jsonScript | safe }},
       "image": "{{ site.url }}{{ site.ogImage }}",
       "datePublished": "{{ u.published }}",

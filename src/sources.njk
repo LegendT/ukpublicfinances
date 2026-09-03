@@ -2,6 +2,8 @@
 layout: layouts/base.njk
 title: Sources
 description: The official data sources behind every figure on this site, and what each one covers.
+eleventyComputed:
+  dataUpdated: "{{ sources.lastUpdated }}"
 ---
 {% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
 

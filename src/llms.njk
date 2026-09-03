@@ -6,9 +6,11 @@ eleventyExcludeFromCollections: true
 
 > {{ site.description }} The site is neutral and source-led, not a debt clock and not party-political. Every figure shows its source, date, and a confidence level (official, provisional, estimated, or calculated).
 
+Last updated: {{ [dashboard.lastUpdated, indicators.lastUpdated, meta.lastReviewed, assumptions.translator.lastUpdated, assumptions.budgetSimulator.lastUpdated, sources.lastUpdated] | latestOf | readableDate }}.
+
 ## About the data
 
-Figures are drawn from official UK and international sources: the Office for National Statistics (ONS), the Office for Budget Responsibility (OBR), the UK Debt Management Office (DMO), HM Treasury, and the IMF for international comparisons. Headline, health, spending, monthly, and international figures were verified against these sources in July 2026, and the headline, monthly and indicator figures were refreshed in August 2026 for the ONS July 2026 public sector finances release. The pre-2010 historical series is a best-estimate reconstruction and is labelled as such.
+Figures are drawn from official UK and international sources: the Office for National Statistics (ONS), the Office for Budget Responsibility (OBR), the UK Debt Management Office (DMO), HM Treasury, and the IMF for international comparisons. Every figure carries its own source, date and confidence level on the page it appears on, which is where verification dates belong rather than restated here. The pre-2010 historical series is a best-estimate reconstruction and is labelled as such.
 
 ## Pages
 
