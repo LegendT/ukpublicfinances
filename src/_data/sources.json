@@ -63,6 +63,15 @@
       "covers": "Long-run historical series for the timeline.",
       "updateFrequency": "Occasional",
       "confidence_level": "official"
+    },
+    {
+      "id": "commons-library",
+      "name": "House of Commons Library: What are government debt and debt interest?",
+      "publisher": "House of Commons Library",
+      "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-10842/",
+      "covers": "Plain-English context on debt, debt interest and borrowing costs, including the market gilt yields this site does not publish itself.",
+      "updateFrequency": "Revised periodically",
+      "confidence_level": "official"
     }
   ]
 }
