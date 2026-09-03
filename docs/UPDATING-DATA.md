@@ -5,7 +5,7 @@ All figures live in `src/_data/*.json`. Templates never hard-code numbers, so up
 ## Golden rules
 
 1. **One source of truth.** Change the figure in `src/_data`, rebuild, done.
-2. **Always update provenance.** When you change a `value`, also update `date`, `retrieved_date`, and `confidence_level`.
+2. **Always update provenance.** When you change a `value`, also update `date`, `retrieved_date`, and `confidence_level`. Where the file carries its own top-level date, update that too: `dashboard.json`, `indicators.json`, `assumptions.json` and `sources.json` use `lastUpdated`, and `meta.json` uses `lastReviewed`. Those fields set the page's `dateModified` in the JSON-LD and its `lastmod` in the sitemap, so leaving one stale tells search engines and language models the page did not change when it did. `npm test` checks the field is present and well formed, not that you moved it.
 3. **Be honest about confidence.** Use `official` only for a figure taken directly from a published release. Use `provisional`, `estimated`, or `calculated` otherwise. Definitions are in `meta.json`.
 4. **Name the exact measure.** Most errors come from a figure that is self-consistent but the wrong measure or year, for example the MoD departmental budget versus NATO-definition defence spending, or net versus gross debt. State the measure in the record's `notes`.
 5. **Run the tests.** `npm test` checks that every record still has its required fields and a valid confidence level, that figures shared across files still match, that no em-dash has crept into the copy, and that the three files carrying a check date (`dashboard.json`, `indicators.json`, `primeMinisters.json`) have all been checked within the last 45 days.
