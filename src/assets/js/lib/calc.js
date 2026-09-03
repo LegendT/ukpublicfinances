@@ -42,7 +42,7 @@ export function simulateBudget(cfg, spendValues, taxPoints) {
   const totalRevenue = cfg.baseline.totalRevenue + revDelta;
 
   const borrowing = totalSpending - totalRevenue;
-  const rate = cfg.projection.assumedInterestRate;
+  const rate = cfg.projection.assumedInterestRate.value;
   let debt = cfg.baseline.debt;
   const trajectory = [];
   for (let y = 1; y <= cfg.projection.years; y++) {

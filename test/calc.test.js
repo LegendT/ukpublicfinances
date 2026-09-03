@@ -39,7 +39,7 @@ test("translateAmount: scales linearly with the amount", () => {
 const CFG = {
   baseline: { totalSpending: 1000, totalRevenue: 900, borrowing: 100, debt: 2000 },
   spendingBase: { health: 100, education: 50, defence: 40, welfare: 150, pensions: 60 },
-  projection: { years: 10, assumedInterestRate: 0.04 },
+  projection: { years: 10, assumedInterestRate: { value: 0.04 } },
   gdp: 2000,
 };
 
@@ -75,7 +75,7 @@ test("simulateBudget: a large surplus clears debt but never goes negative", () =
 
 test("simulateBudget: debt path compounds interest then adds borrowing", () => {
   const r = simulateBudget(CFG, { ...CFG.spendingBase }, [{ perpoint: 8, points: 0 }]);
-  const grown = CFG.baseline.debt * (1 + CFG.projection.assumedInterestRate) + CFG.baseline.borrowing;
+  const grown = CFG.baseline.debt * (1 + CFG.projection.assumedInterestRate.value) + CFG.baseline.borrowing;
   assert.ok(near(r.trajectory[0].debt, grown, 0.5), "year 1 debt");
   assert.ok(r.trajectory[4].debt > r.trajectory[0].debt, "debt grows over the path");
 });

@@ -32,7 +32,17 @@
     "taxNote": "Each percentage point on a rate is worth roughly the amount shown (an HMRC 'ready reckoner' style estimate). Income tax shows the basic rate as a simple stand-in for the whole system.",
     "projection": {
       "years": 10,
-      "assumedInterestRate": 0.04,
+      "assumedInterestRate": {
+        "metric_name": "Assumed average interest rate on the debt stock",
+        "value": 0.04,
+        "unit": "share of the debt stock per year",
+        "date": "2026-09-03",
+        "source_name": "Modelling assumption for this tool, checked against OBR debt interest and ONS net debt",
+        "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/",
+        "retrieved_date": "2026-09-03",
+        "notes": "An assumption for this model, not a published rate. No official body publishes a single effective interest rate on UK debt, so this is set to a round 4% and checked against the figures the site already carries: OBR debt interest of £110bn (March 2026 forecast) over ONS net debt of £2,985bn (end July 2026) gives 3.7%. That check follows the OBR's illustrative method in The outlook for debt interest spending (25 August 2017), and the OBR calls the method illustrative for good reason: the perimeters differ, because the interest figure is central government interest net of APF while net debt is public sector net debt excluding banks. The rate is an average across the whole stock and sits well below the market rate on new borrowing. Revisit at each OBR forecast, not on market moves.",
+        "confidence_level": "estimated"
+      },
       "note": "Debt in future years is the running total of borrowing plus assumed interest, held to zero once cleared. Economic growth, behavioural responses, and inflation are not modelled."
     }
   }
