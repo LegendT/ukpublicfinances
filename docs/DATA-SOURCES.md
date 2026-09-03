@@ -11,6 +11,7 @@ The project draws from official UK and international sources. The catalogue live
 | [Debt Management Office](https://www.dmo.gov.uk/) | DMO | Gilt issuance and who holds UK debt | Ongoing |
 | [Public Expenditure Statistical Analyses (PESA)](https://www.gov.uk/government/collections/public-expenditure-statistical-analyses-pesa) | HM Treasury | Spending by function | Annual |
 | [UK defence spending (CBP-8175)](https://commonslibrary.parliament.uk/research-briefings/cbp-8175/) | House of Commons Library | Defence budget and commitments | Updated as needed |
+| [What are government debt and debt interest? (CBP-10842)](https://commonslibrary.parliament.uk/research-briefings/cbp-10842/) | House of Commons Library | Plain-English context on debt interest and borrowing costs, plus the market gilt yields this site does not publish | Revised periodically |
 | [Benefit expenditure tables](https://www.gov.uk/government/collections/benefit-expenditure-tables) | DWP | State pension and welfare spending | Annual, with forecasts |
 | [Personal incomes statistics](https://www.gov.uk/government/collections/personal-incomes-statistics) | HMRC | Income tax payers and the tax ready reckoner | Annual |
 | [Population estimates](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates) | ONS | UK population for per-person figures | Annual |
