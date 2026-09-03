@@ -11,7 +11,8 @@
     }
   },
   "urls": [
-    "http://127.0.0.1:8081/404.html"
+    "http://127.0.0.1:8081/404.html",
+    "http://127.0.0.1:8081/monthly/"
   ],
-  "_note": "Routes come from the sitemap at run time (see the a11y:ci script), so every page the site builds is audited and no list needs maintaining. 404.html is listed here because it is deliberately absent from the sitemap."
+  "_note": "Routes come from the sitemap at run time (see the a11y:ci script), so every page the site builds is audited and no list needs maintaining. Listed here are the pages the sitemap deliberately omits: 404.html, which is not a real route, and /monthly/, which canonicalises to the latest dated entry. A test enforces that pairing."
 }

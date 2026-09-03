@@ -1,5 +1,5 @@
 /*
- * Style guard: no page is dated by its file timestamp.
+ * Style guards for sitemap.xml: how pages are dated, and what may be left out.
  *
  * Netlify builds from a fresh clone, so every file carries the checkout time.
  * Dating a page by it restamped all fifteen pages as modified on every deploy,
@@ -30,4 +30,19 @@ test("no page is dated by its file timestamp", () => {
     }
   }
   assert.equal(offenders.length, 0, `dated by file timestamp: ${offenders.join("; ")}`);
+});
+
+test("a page left out of the sitemap is still audited for accessibility", () => {
+  // a11y:ci takes its route list from sitemap.xml, so omitting a page there drops
+  // it from the WCAG audit as well, silently. .pa11yci.json is where such pages are
+  // named, as 404.html already is. This pairs the two so neither can move alone.
+  const pa11y = JSON.parse(fs.readFileSync(path.join(ROOT, ".pa11yci.json"), "utf8"));
+  const listed = pa11y.urls.join(" ");
+  const src = path.join(ROOT, "src");
+  for (const file of fs.readdirSync(src).filter((f) => f.endsWith(".njk"))) {
+    const text = fs.readFileSync(path.join(src, file), "utf8");
+    if (!/^\s*canonicalUrl:/m.test(text)) continue;
+    const route = `/${file.replace(/\.njk$/, "")}/`;
+    assert.ok(listed.includes(route), `${file} canonicalises elsewhere, so the sitemap omits it; add ${route} to .pa11yci.json`);
+  }
 });

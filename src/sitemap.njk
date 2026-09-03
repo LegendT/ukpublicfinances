@@ -6,6 +6,13 @@ eleventyExcludeFromCollections: true
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- for item in collections.all %}
   {%- if item.url and item.url.endsWith("/") %}
+  {#- Same expression as base.njk, so a page's canonical and its sitemap entry
+      cannot disagree. A page that canonicalises elsewhere is left out: its real
+      address is already listed, and naming both invites a duplicate. Anything
+      dropped here must be named in .pa11yci.json, because the accessibility run
+      takes its routes from this file. -#}
+  {%- set canonical = item.data.canonicalUrl or (site.url + item.url) %}
+  {%- if canonical == site.url + item.url %}
   <url>
     <loc>{{ site.url }}{{ item.url }}</loc>
     {#- Only pages backed by dated data carry a lastmod. Falling back to the
@@ -15,6 +22,7 @@ eleventyExcludeFromCollections: true
     <lastmod>{{ item.data.dataUpdated | isoDate }}</lastmod>
     {%- endif %}
   </url>
+  {%- endif %}
   {%- endif %}
 {%- endfor %}
 {#- The monthly permalinks are excluded from collections (they are a paginated
