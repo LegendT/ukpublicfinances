@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: Historical timeline
 description: How UK government debt, borrowing, and debt interest have changed over time, with neutral event markers.
 eleventyComputed:
-  dataUpdated: "{{ dashboard.lastUpdated }}"
+  dataUpdated: "{{ [dashboard.lastUpdated, assumptions.lastUpdated] | sort | last }}"
 ---
 {% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
 

@@ -4,7 +4,7 @@ title: Budget simulator
 description: A simplified educational model. Adjust spending and tax, try to balance the budget, and see the effect on debt.
 pageClass: has-sticky-status
 eleventyComputed:
-  dataUpdated: "{{ dashboard.lastUpdated }}"
+  dataUpdated: "{{ [dashboard.lastUpdated, assumptions.lastUpdated] | sort | last }}"
 ---
 {% from "components/macros.njk" import caveatBox, sourceNote %}
 {% set b = assumptions.budgetSimulator %}

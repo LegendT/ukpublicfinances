@@ -35,6 +35,16 @@ test("every published figure carries source and provenance fields", () => {
   }
 });
 
+test("data files that date a page carry a lastUpdated", () => {
+  // budget-simulator, big-numbers, interest, timeline and sources take their dateModified
+  // and sitemap lastmod from these. Drop the field and the page silently reports the older
+  // date of its other data file, or no date at all, which is worse than a wrong one.
+  for (const file of ["dashboard.json", "indicators.json", "assumptions.json", "sources.json"]) {
+    const value = load(file).lastUpdated;
+    assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(value ?? ""), `${file} needs an ISO lastUpdated, got: ${value}`);
+  }
+});
+
 test("timeseries years are ascending and ratios are plausible", () => {
   const t = load("debtTimeseries.json");
   let prev = -Infinity;
