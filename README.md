@@ -36,10 +36,11 @@ npm run a11y       # quick single-page check, needs `npm run dev` running first
 
 `a11y:all` is self-contained: it builds, starts a static server on port 8081, runs
 [pa11y-ci](https://github.com/pa11y/pa11y-ci) at the WCAG 2.2 AA standard, then stops the
-server. Routes come from `sitemap.xml` at run time rather than a hand-kept list, so every
-page the site builds is audited and a new monthly update needs no change here.
-`.pa11yci.json` holds the shared settings plus `404.html`, which is deliberately absent
-from the sitemap. The audit tools are
+server. Routes come from `sitemap.xml` at run time rather than a hand-kept list, so a new
+monthly update needs no change here. `.pa11yci.json` holds the shared settings plus the
+pages the sitemap deliberately omits: `404.html`, which is not a real route, and
+`/monthly/`, which canonicalises to the latest dated entry. A test pairs the two, because
+a page dropped from the sitemap otherwise leaves the audit silently. The audit tools are
 fetched on demand via `npx` (kept out of the dependency tree to stay lean); **the first
 run downloads a headless Chromium**, so expect it to take a minute. To audit a specific
 page while developing, run `npm run dev` and `npm run a11y` (defaults to the homepage,
@@ -55,7 +56,7 @@ npx lighthouse http://localhost:8080 --only-categories=accessibility --view
 
 ```
 .
-├── .eleventy.js              # Eleventy config + filters (number, readableDate, isoDate, poundsShort, findBy, jsonScript)
+├── .eleventy.js              # Eleventy config + filters (number, oneDp, readableDate, isoDate, latestOf, poundsShort, findBy, jsonScript, yearOf)
 ├── netlify.toml              # build settings + security headers (CSP, etc.)
 ├── .pa11yci.json             # routes for the WCAG audit
 ├── .node-version             # Node 24 (fnm locally, Netlify in CI)
@@ -86,7 +87,7 @@ npx lighthouse http://localhost:8080 --only-categories=accessibility --view
 │   ├── index.njk … sources.njk       # the content pages
 │   ├── 404.njk, privacy.njk          # error page, privacy notice
 │   └── robots.njk, sitemap.njk, llms.njk  # crawl files (robots.txt, sitemap.xml, llms.txt)
-├── test/                      # data.test.js (data contract), calc.test.js (maths), no-emdash.test.js (style)
+├── test/                      # data.test.js (data contract), calc.test.js (maths), lastmod.test.js (sitemap), no-emdash.test.js (style)
 └── docs/                      # data sourcing, updating, next steps
 ```
 
