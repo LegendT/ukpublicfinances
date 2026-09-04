@@ -34,7 +34,7 @@ eleventyComputed:
   <p class="caveat">This feature needs JavaScript. The underlying series is on the <a href="{{ '/timeline/' | url }}">timeline page</a> as a table.</p>
 </noscript>
 
-{{ caveatBox("Changes in debt reflect economic cycles, wars, crises, policy choices, inflation, and changes in measurement. The figure for your birth year is estimated from the nearest data points and is illustrative.", "Reading this fairly") }}
+{{ caveatBox("Changes in debt reflect economic cycles, wars, crises, policy choices, inflation, and changes in measurement. The figure for your birth year comes from the nearest data points either side, so treat it as illustrative.", "Reading this fairly") }}
 
 {% set netDebt = dashboard.metrics | findBy("id", "net-debt") %}
 {% set debtGdp = dashboard.metrics | findBy("id", "debt-gdp") %}
