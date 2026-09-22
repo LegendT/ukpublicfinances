@@ -47,7 +47,9 @@ eleventyComputed:
   </table>
 </details>
 
-{{ caveatBox("Comparisons show scale only. They do not imply one budget could be swapped for another, or that debt could be redirected. Annual budgets are the latest available figures and may be revised.", "How to read these") }}
+{%- set toolShare = (assumptions.translator.annualBorrowingGbpBillion / assumptions.translator.gdpGbpBillion * 100) | oneDp %}
+{%- set publishedShare = (indicators.indicators | findBy("id", "borrowing-gdp")).value %}
+{{ caveatBox("Comparisons show scale only. They do not imply one budget could be swapped for another, or that debt could be redirected. Annual budgets are the latest available figures and may be revised. Share of GDP divides by the GDP figure implied by the published debt ratio, so it will not exactly match a ratio the ONS publishes itself. The debt ratio uses GDP for the twelve months centred on the month, while the ONS borrowing ratio uses GDP for the financial year, so the year's borrowing shows here as " ~ toolShare ~ "% of GDP against the published " ~ publishedShare ~ "%.", "How to read these") }}
 
 <noscript>
   <p class="caveat">This tool needs JavaScript to calculate. The underlying figures are listed on the <a href="{{ '/sources/' | url }}">sources page</a>.</p>
@@ -63,7 +65,7 @@ eleventyComputed:
   "annualDebtInterestGbpBillion": {{ assumptions.translator.annualDebtInterestGbpBillion }},
   "budgets": [
     {%- for area in spendingComparisons.areas %}
-    { "name": {{ area.name | jsonScript | safe }}, "value": {{ area.value }} }{% if not loop.last %},{% endif %}
+    { "name": {{ area.name | jsonScript | safe }}, "value": {{ area.value }}{% if area.noun is defined %}, "noun": {{ area.noun | jsonScript | safe }}{% endif %} }{% if not loop.last %},{% endif %}
     {%- endfor %}
   ]
 }

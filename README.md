@@ -6,7 +6,7 @@ It is **not** a political commentary site and **not** a gimmicky debt clock. Eve
 
 ## Data status
 
-Live at **[ukpublicfinances.org](https://ukpublicfinances.org)**. The headline, monthly, and indicator figures were refreshed on 21 August 2026 against the ONS July 2026 public sector finances release. Every public-facing figure was last re-audited in full against its primary source (ONS, OBR, HMRC, HM Treasury, House of Commons Library, IMF, and DWP) on 21 July 2026, following the June 2026 release and PESA 2026, with the international comparison pulled directly from the IMF DataMapper. Each record shows its own `source_url`, `date`, and `confidence_level`. Known caveats: the **long-run historical series before about 2010** is a best-estimate reconstruction (`confidence_level: estimated`); the UK adults (18+) figure is the mid-2024 age breakdown, because the UK-wide mid-2025 breakdown is still unpublished, so it sits one vintage behind the population estimate; and the GDP figure is the denominator consistent with the published debt-to-GDP ratio rather than a single published release. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) for how to refresh figures.
+Live at **[ukpublicfinances.org](https://ukpublicfinances.org)**. The headline, monthly, and indicator figures were refreshed on 22 September 2026 against the ONS August 2026 public sector finances release. Every public-facing figure was last re-audited in full against its primary source (ONS, OBR, HMRC, HM Treasury, House of Commons Library, IMF, and DWP) on 21 July 2026, following the June 2026 release and PESA 2026, with the international comparison pulled directly from the IMF DataMapper. Each record shows its own `source_url`, `date`, and `confidence_level`. Known caveats: the **long-run historical series before about 2010** is a best-estimate reconstruction (`confidence_level: estimated`); the UK adults (18+) figure is the mid-2024 age breakdown, because the UK-wide mid-2025 breakdown is still unpublished, so it sits one vintage behind the population estimate; and the GDP figure is the denominator consistent with the published debt-to-GDP ratio rather than a single published release. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) for how to refresh figures.
 
 ## Stack
 
@@ -104,7 +104,7 @@ Reusable Nunjucks macros in `src/_includes/components/macros.njk`:
 | `glossaryTerm` | A defined term |
 | `spendingRow` | One comparison row against an annual budget |
 
-The timeline chart and translator render a `<table>` fallback server-side, then enhance with SVG/JS.
+The timeline chart renders a `<table>` fallback server-side, then enhances with SVG. The translator calculates in JavaScript and shows a `<noscript>` notice pointing at the sources page instead of results.
 
 ## Data model
 
