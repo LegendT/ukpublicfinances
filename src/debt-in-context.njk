@@ -56,7 +56,7 @@ eleventyComputed:
 
 <p class="source-note">
   Spending figures: HM Treasury and related departmental sources, fiscal year {{ spendingComparisons.fiscalYear }}.
-  Retrieved {{ (spendingComparisons.areas | sort(false, false, "retrieved_date") | last).retrieved_date | readableDate }}.
+  Retrieved {{ (spendingComparisons.areas | sort(false, false, "retrieved_date") | last).retrieved_date | timeTag | safe }}.
   {{ dataFreshnessBadge("estimated", "") }}
 </p>
 

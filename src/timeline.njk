@@ -42,9 +42,9 @@ eleventyComputed:
 
 <p id="period-note" class="visually-hidden" role="status"></p>
 
-<figure class="chart" aria-labelledby="chart-caption">
+<figure class="chart">
   <div id="chart" class="chart__canvas" role="img" aria-label="Line chart of UK debt over time. The same data is in the table below.">
-    <!-- SVG injected by JS. Hidden from assistive tech in favour of the table. -->
+    <!-- SVG injected by JS with aria-hidden; this container is the image, named by aria-label, and the table below is the accessible alternative. -->
   </div>
   <figcaption id="chart-caption" class="chart__caption">
     UK debt over time. <span id="chart-measure-label">Debt as a share of GDP</span>.
@@ -56,7 +56,7 @@ eleventyComputed:
   <ul class="event-list">
     {%- for e in events.events %}
     <li class="event-list__item">
-      <span class="event-list__year">{{ e.year }}</span>
+      <time class="event-list__year" datetime="{{ e.year }}">{{ e.year }}</time>
       <span class="event-list__body"><strong>{{ e.title }}</strong>: {{ e.summary }}</span>
     </li>
     {%- endfor %}
@@ -104,7 +104,7 @@ eleventyComputed:
 
 <p class="source-note">
   Source: <a href="{{ debtTimeseries.source_url }}" rel="noopener">{{ debtTimeseries.source_name }}</a>.
-  Retrieved {{ debtTimeseries.retrieved_date | readableDate }}.
+  Retrieved {{ debtTimeseries.retrieved_date | timeTag | safe }}.
   {{ dataFreshnessBadge("estimated", "") }}
 </p>
 

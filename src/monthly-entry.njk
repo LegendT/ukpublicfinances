@@ -14,13 +14,15 @@ eleventyComputed:
 ---
 {% from "components/macros.njk" import monthlyBody, dataFreshnessBadge %}
 
+<article>
 <div class="page-intro prose">
   <h1>Monthly update: {{ u.month }}</h1>
   <p class="lede">{{ u.headline }}</p>
-  <p class="updated">Released {{ u.published | readableDate }}. {{ dataFreshnessBadge(u.confidence_level, "") }}</p>
+  <p class="updated">Released {{ u.published | timeTag | safe }}. {{ dataFreshnessBadge(u.confidence_level, "") }}</p>
 </div>
 
 {{ monthlyBody(u, monthlyQuestions.questions) }}
+</article>
 
 <p class="prose"><a href="{{ '/monthly/' | url }}">All monthly updates</a></p>
 

@@ -42,7 +42,7 @@ eleventyComputed:
       <p class="indicator__value">{{ ind.value | number }} <span class="indicator__unit">{{ ind.unit }}</span></p>
       {%- endif %}
       <p class="indicator__explain">{{ ind.explanation }}</p>
-      <p class="source-note">Source: <a href="{{ ind.source_url }}" rel="noopener">{{ ind.source_name }}</a>. {{ ind.date | readableDate }}.</p>
+      <p class="source-note">Source: <a href="{{ ind.source_url }}" rel="noopener">{{ ind.source_name }}</a>. {{ ind.date | timeTag | safe }}.</p>
     </article>
       {%- endif %}
     {%- endfor %}
@@ -54,7 +54,7 @@ eleventyComputed:
   <summary>Show all indicators as a table</summary>
   <div class="table-scroll" tabindex="0" role="region" aria-label="All indicators">
   <table class="data-table">
-    <caption>Public finance and economic indicators. Last updated {{ indicators.lastUpdated | readableDate }}.</caption>
+    <caption>Public finance and economic indicators. Last updated {{ indicators.lastUpdated | timeTag | safe }}.</caption>
     <thead>
       <tr><th scope="col">Indicator</th><th scope="col" class="num">Latest</th><th scope="col">Trend</th><th scope="col">Confidence</th></tr>
     </thead>

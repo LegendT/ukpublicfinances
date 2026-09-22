@@ -55,6 +55,16 @@ export default function (eleventyConfig) {
   });
 
   // Format an ISO date as a readable British date, e.g. "10 June 2026".
+  // timeTag: the readable date inside <time datetime="YYYY-MM-DD">, for HTML templates.
+  // readableDate stays plain text for llms.txt, captions inside JSON and anywhere else markup cannot go.
+  eleventyConfig.addFilter("timeTag", (value) => {
+    if (!value) return value;
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return value;
+    const iso = date.toISOString().slice(0, 10);
+    const readable = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(date);
+    return `<time datetime="${iso}">${readable}</time>`;
+  });
   eleventyConfig.addFilter("readableDate", (value) => {
     if (!value) return value;
     const date = new Date(value);

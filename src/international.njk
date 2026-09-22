@@ -43,7 +43,7 @@ eleventyComputed:
 
 <p class="source-note">
   Debt figures: <a href="{{ internationalComparisons.source_url }}" rel="noopener">{{ internationalComparisons.source_name }}</a>, {{ internationalComparisons.year }}.
-  Retrieved {{ internationalComparisons.retrieved_date | readableDate }}.
+  Retrieved {{ internationalComparisons.retrieved_date | timeTag | safe }}.
   {{ dataFreshnessBadge(internationalComparisons.confidence_level, "") }}
 </p>
 

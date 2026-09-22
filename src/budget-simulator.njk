@@ -17,7 +17,9 @@ eleventyComputed:
 {{ caveatBox(b.disclaimer, "This is a teaching model, not a forecast") }}
 
 <div class="sim-layout">
-  <div class="simulator" id="simulator" role="group" aria-label="Budget controls">
+  {# A div, not a form: there is nothing to submit, the two fieldsets already group the controls,
+     and pa11y rightly refuses a form with no submit button (WCAG 3.2.2, H32.2). #}
+  <div class="simulator" id="simulator">
     <fieldset class="simulator__group">
       <legend>Spending (£ billion per year)</legend>
       {%- set sp = b.spendingLeversGbpBillion %}
@@ -58,11 +60,20 @@ eleventyComputed:
     <p id="sim-status-sr" class="visually-hidden" role="status"></p>
 
     <h2 class="visually-hidden">Result</h2>
-    <div class="metric-grid metric-grid--compact">
-      <article class="metric-card metric-card--mini"><p class="metric-card__value" id="r-spending">…</p><p class="metric-card__label">Total spending</p></article>
-      <article class="metric-card metric-card--mini"><p class="metric-card__value" id="r-revenue">…</p><p class="metric-card__label">Total revenue</p></article>
-      <article class="metric-card metric-card--mini"><p class="metric-card__value" id="r-borrowing">…</p><p class="metric-card__label" id="r-borrowing-label">Borrowing this year</p></article>
-    </div>
+    <dl class="metric-grid metric-grid--compact">
+      <div class="metric-card metric-card--mini">
+        <dt class="metric-card__label">Total spending</dt>
+        <dd class="metric-card__value" id="r-spending">…</dd>
+      </div>
+      <div class="metric-card metric-card--mini">
+        <dt class="metric-card__label">Total revenue</dt>
+        <dd class="metric-card__value" id="r-revenue">…</dd>
+      </div>
+      <div class="metric-card metric-card--mini">
+        <dt class="metric-card__label" id="r-borrowing-label">Borrowing this year</dt>
+        <dd class="metric-card__value" id="r-borrowing">…</dd>
+      </div>
+    </dl>
 
     <h3>Debt over {{ b.projection.years }} years</h3>
     <div class="table-scroll" tabindex="0" role="region" aria-label="Projected debt over five years">

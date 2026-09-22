@@ -161,8 +161,10 @@ main { padding-block: 1.5rem 3rem; }
 .metric-card__more { margin-bottom: 0.5rem; }
 .metric-card__more summary { cursor: pointer; color: var(--brand); font-size: 0.9rem; min-height: 44px; display: flex; align-items: center; }
 .metric-card--mini { padding: 0.9rem; }
-.metric-card--mini .metric-card__value { font-size: 1.4rem; margin-bottom: 0.2rem; }
-.metric-card--mini .metric-card__label { margin: 0; }
+/* Mini cards are dt/dd pairs inside a dl grid: label, then value, on every page. */
+dl.metric-grid { margin: 0; }
+.metric-card--mini .metric-card__label { margin: 0 0 0.2rem; }
+.metric-card--mini .metric-card__value { font-size: 1.4rem; margin: 0; }
 
 /* Source note + badges */
 .source-note { font-size: 0.82rem; color: var(--ink-soft); margin: 0.5rem 0 0; }
@@ -184,7 +186,7 @@ main { padding-block: 1.5rem 3rem; }
   border-left-width: 5px; border-radius: var(--radius);
   padding: 1rem 1.1rem; margin: 1.5rem 0; max-width: 70ch;
 }
-.caveat__heading { margin: 0 0 0.3rem; font-weight: 700; }
+.caveat__heading { margin: 0 0 0.3rem; font-size: 1rem; font-weight: 700; }
 .caveat p { margin: 0.3rem 0; }
 
 /* Card links */
@@ -200,8 +202,8 @@ main { padding-block: 1.5rem 3rem; }
 /* Same cascade tie as the header links: the card background and ink colour
    above would otherwise override the yellow focus fill. */
 .card-links a:focus-visible { background-color: var(--focus); color: var(--ink-black); }
-.card-links strong { display: block; color: var(--brand-deep); }
-.card-links span { font-size: 0.9rem; color: var(--ink-soft); }
+.card-links__title { display: block; font-weight: 700; color: var(--brand-deep); }
+.card-links span:not(.card-links__title) { font-size: 0.9rem; color: var(--ink-soft); }
 
 /* Forms */
 .field { margin-bottom: 1rem; }
@@ -297,6 +299,8 @@ input[type="number"], select {
 /* Footer */
 .site-footer { background: #eef1f4; border-top: 1px solid var(--line); margin-top: 3rem; padding-block: 1.5rem; font-size: 0.9rem; color: var(--ink-soft); }
 .site-footer__warn { color: #6b5a1e; }
+.site-footer__links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; }
+.site-footer__links li + li::before { content: "· "; }
 
 .see-also { margin-top: 2rem; }
 
@@ -383,6 +387,8 @@ input[type="number"], select {
 }
 
 /* Horizontally scrollable table regions (keyboard-focusable) */
+/* Scroll wrappers keep tabindex="0" so keyboard users can scroll a wide table, and a focusable
+   element needs a role and a name, hence role="region" with aria-label on each one. Not redundant. */
 .table-scroll { overflow-x: auto; }
 .data-table-wrap { overflow-x: auto; }
 
