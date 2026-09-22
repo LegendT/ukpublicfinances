@@ -91,9 +91,7 @@
     <div class="wrap site-header__inner">
       <a class="site-header__brand" href="{{ '/' | url }}">{{ site.title }}</a>
       <nav class="site-nav" aria-label="Primary">
-        {# aria-label repeats the visible text: the button is already named by it, but
-           some audit tools only look for an explicit labelling attribute. #}
-        <button class="site-nav__toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+        <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
         <ul id="primary-nav" class="site-nav__list">
           {%- for item in site.nav %}
             {%- if item.children %}
@@ -118,6 +116,8 @@
     </div>
   </header>
 
+  {# Sections: a page uses <section aria-labelledby> only where a block needs a heading the design
+     hides, or where it is a distinct labelled region such as a tool. Prose pages run bare h2s. #}
   <main id="main" class="wrap" tabindex="-1">
     {{ content | safe }}
   </main>
@@ -126,7 +126,7 @@
     <div class="wrap">
       <p>{{ site.title }} is an educational project. Figures show their source and date, and may be revised.</p>
       <p class="site-footer__warn">{{ meta.footerNote }}</p>
-      <p><a href="{{ '/about/' | url }}">About &amp; methodology</a> · <a href="{{ '/sources/' | url }}">All data sources</a> · <a href="{{ '/glossary/' | url }}">Glossary</a> · <a href="{{ '/privacy/' | url }}">Privacy</a></p>
+      <nav aria-label="Footer"><ul class="site-footer__links"><li><a href="{{ '/about/' | url }}">About &amp; methodology</a></li><li><a href="{{ '/sources/' | url }}">All data sources</a></li><li><a href="{{ '/glossary/' | url }}">Glossary</a></li><li><a href="{{ '/privacy/' | url }}">Privacy</a></li></ul></nav>
       <p>Sister site: <a href="https://ukmigrationexplorer.org" rel="noopener">UK Migration Explorer</a>, a plain-English guide to what UK migration and asylum statistics do, and do not, show.</p>
     </div>
   </footer>

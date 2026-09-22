@@ -132,6 +132,19 @@ Built to WCAG 2.2 AA principles: semantic headings, keyboard-operable controls, 
 
 Verify, don't assume: run `npm run a11y:all` (pa11y-ci, WCAG 2.2 AA across every page) before publishing.
 
+### Markup conventions
+
+The audit is a regression guard, not a proof: it cannot tell a `strong` doing a title's job from a title, or a card that should be a list from one that is. These are checked by hand when a template changes.
+
+- A headline figure with an explanation and a details block is an `article` with an `h3` (the dashboard and health cards).
+- A label with one value is a `dl` of `dt`/`dd` pairs, label first, on every page and in every script that injects cards.
+- A caveat is a `div` with `role="note"` and a real heading, not an `aside`.
+- Dates in prose go through the `timeTag` filter, so they carry `datetime`; `readableDate` is for text-only output.
+- A `section` with `aria-labelledby` appears only where a block needs a heading the design hides, or is a distinct labelled region such as a tool. Prose pages run bare `h2`s.
+- Scrollable table wrappers keep `tabindex="0"` with `role="region"` and a name, because a focusable element needs both.
+- ARIA never repeats a name native HTML already gives: no `aria-labelledby` on an `article` with its own heading, no `aria-label` on a button with visible text.
+- Abbreviations are expanded in the glossary, not inline.
+
 ## Discoverability (SEO + LLMs)
 
 Built into the layout and a few generated files:

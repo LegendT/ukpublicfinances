@@ -44,24 +44,24 @@
 
     out.innerHTML = `
       <h2>Since ${year}</h2>
-      <div class="metric-grid metric-grid--compact">
-        <article class="metric-card metric-card--mini">
-          <p class="metric-card__value">${birthGdp !== null ? birthGdp + "%" : "n/a"}</p>
-          <p class="metric-card__label">Debt-to-GDP in ${year} (estimated)</p>
-        </article>
-        <article class="metric-card metric-card--mini">
-          <p class="metric-card__value">${nowGdp}%</p>
-          <p class="metric-card__label">Debt-to-GDP now (${current.year})</p>
-        </article>
-        <article class="metric-card metric-card--mini">
-          <p class="metric-card__value">${ppChange !== null ? (ppChange >= 0 ? "+" : "") + ppChange + " pts" : "n/a"}</p>
-          <p class="metric-card__label">Change in the ratio</p>
-        </article>
-        <article class="metric-card metric-card--mini">
-          <p class="metric-card__value">${gbpBn(current.debtGbp)}</p>
-          <p class="metric-card__label">Cash debt now (${current.year})</p>
-        </article>
-      </div>
+      <dl class="metric-grid metric-grid--compact">
+        <div class="metric-card metric-card--mini">
+          <dt class="metric-card__label">Debt-to-GDP in ${year} (estimated)</dt>
+          <dd class="metric-card__value">${birthGdp !== null ? birthGdp + "%" : "n/a"}</dd>
+          </div>
+        <div class="metric-card metric-card--mini">
+          <dt class="metric-card__label">Debt-to-GDP now (${current.year})</dt>
+          <dd class="metric-card__value">${nowGdp}%</dd>
+          </div>
+        <div class="metric-card metric-card--mini">
+          <dt class="metric-card__label">Change in the ratio</dt>
+          <dd class="metric-card__value">${ppChange !== null ? (ppChange >= 0 ? "+" : "") + ppChange + " pts" : "n/a"}</dd>
+          </div>
+        <div class="metric-card metric-card--mini">
+          <dt class="metric-card__label">Cash debt now (${current.year})</dt>
+          <dd class="metric-card__value">${gbpBn(current.debtGbp)}</dd>
+          </div>
+      </dl>
 
       <h3>Events during your lifetime</h3>
       <ul class="event-list">

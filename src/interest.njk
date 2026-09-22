@@ -19,13 +19,28 @@ eleventyComputed:
 
 <section aria-labelledby="breakdown">
   <h2 id="breakdown" class="visually-hidden">Interest cost breakdown</h2>
-  <div class="metric-grid metric-grid--compact">
-    <article class="metric-card metric-card--mini" aria-labelledby="int-year"><p class="metric-card__value">£{{ annual | number }} bn</p><p class="metric-card__label" id="int-year">Per year</p></article>
-    <article class="metric-card metric-card--mini" aria-labelledby="int-month"><p class="metric-card__value">£{{ (annual / 12) | oneDp }} bn</p><p class="metric-card__label" id="int-month">Per month (average)</p></article>
-    <article class="metric-card metric-card--mini" aria-labelledby="int-day"><p class="metric-card__value">£{{ (annual * 1000 / 365) | round(0) | number }} m</p><p class="metric-card__label" id="int-day">Per day (average)</p></article>
-    <article class="metric-card metric-card--mini" aria-labelledby="int-revenue"><p class="metric-card__value">{{ (annual / revenue * 100) | round(0) }}%</p><p class="metric-card__label" id="int-revenue">Of government revenue</p></article>
-    <article class="metric-card metric-card--mini" aria-labelledby="int-gdp"><p class="metric-card__value">{{ (annual / gdp * 100) | oneDp }}%</p><p class="metric-card__label" id="int-gdp">Of GDP</p></article>
-  </div>
+  <dl class="metric-grid metric-grid--compact">
+    <div class="metric-card metric-card--mini">
+      <dt class="metric-card__label">Per year</dt>
+      <dd class="metric-card__value">£{{ annual | number }} bn</dd>
+    </div>
+    <div class="metric-card metric-card--mini">
+      <dt class="metric-card__label">Per month (average)</dt>
+      <dd class="metric-card__value">£{{ (annual / 12) | oneDp }} bn</dd>
+    </div>
+    <div class="metric-card metric-card--mini">
+      <dt class="metric-card__label">Per day (average)</dt>
+      <dd class="metric-card__value">£{{ (annual * 1000 / 365) | round(0) | number }} m</dd>
+    </div>
+    <div class="metric-card metric-card--mini">
+      <dt class="metric-card__label">Of government revenue</dt>
+      <dd class="metric-card__value">{{ (annual / revenue * 100) | round(0) }}%</dd>
+    </div>
+    <div class="metric-card metric-card--mini">
+      <dt class="metric-card__label">Of GDP</dt>
+      <dd class="metric-card__value">{{ (annual / gdp * 100) | oneDp }}%</dd>
+    </div>
+  </dl>
   <p class="source-note">
     Annual figure: <a href="{{ interest.source_url }}" rel="noopener">{{ interest.source_name }}</a>.
     Monthly and daily are simple averages of the annual figure. Per cent of revenue and GDP are calculated.

@@ -8,7 +8,7 @@
 {% macro dataFreshnessBadge(confidence, date) %}
 <span class="badge badge--{{ confidence }}">
   <span class="badge__dot" aria-hidden="true"></span>
-  {{ confidence }}{% if date %} · {{ date | readableDate }}{% endif %}
+  {{ confidence }}{% if date %} · {{ date | timeTag | safe }}{% endif %}
 </span>
 {% endmacro %}
 
@@ -17,24 +17,27 @@
 <p class="source-note">
   Source:
   {% if record.source_url %}<a href="{{ record.source_url }}" rel="noopener">{{ record.source_name }}</a>{% else %}{{ record.source_name }}{% endif %}.
-  {% if record.date %}Figure dated {{ record.date | readableDate }}.{% endif %}
-  {% if record.retrieved_date %}Retrieved {{ record.retrieved_date | readableDate }}.{% endif %}
+  {% if record.date %}Figure dated {{ record.date | timeTag | safe }}.{% endif %}
+  {% if record.retrieved_date %}Retrieved {{ record.retrieved_date | timeTag | safe }}.{% endif %}
   {% if record.confidence_level %}{{ dataFreshnessBadge(record.confidence_level, "") }}{% endif %}
 </p>
 {% endmacro %}
 
-{# CaveatBox: a clearly flagged caution. #}
-{% macro caveatBox(text, heading) %}
-<aside class="caveat" role="note">
-  <p class="caveat__heading">{{ heading or "Important" }}</p>
+{# CaveatBox: a clearly flagged caution. A div with role="note", not an aside, because a caveat about
+   the figures is part of the content rather than tangential to it. The title is a real heading so it
+   sits in the outline; callers pass the level that fits where the box lands (default h2). #}
+{% macro caveatBox(text, heading, level) %}
+{%- set tag = level or "h2" %}
+<div class="caveat" role="note">
+  <{{ tag }} class="caveat__heading">{{ heading or "Important" }}</{{ tag }}>
   <p>{{ text }}</p>
-</aside>
+</div>
 {% endmacro %}
 
 {# MetricCard: a single headline figure with explanation, source, and an expandable note. #}
 {% macro metricCard(metric, formattedValue, extraClass) %}
-<article class="metric-card{% if extraClass %} {{ extraClass }}{% endif %}" aria-labelledby="m-{{ metric.id }}-label">
-  <h3 class="metric-card__label" id="m-{{ metric.id }}-label">{{ metric.shortLabel or metric.metric_name }}</h3>
+<article class="metric-card{% if extraClass %} {{ extraClass }}{% endif %}">
+  <h3 class="metric-card__label">{{ metric.shortLabel or metric.metric_name }}</h3>
   <p class="metric-card__value">{{ formattedValue }}</p>
   <p class="metric-card__explain">{{ metric.explanation }}</p>
   {% if metric.whatThisMeans %}
@@ -53,11 +56,21 @@
 {% macro monthlyBody(u, questions) %}
 <section aria-labelledby="borrowing-heading">
   <h2 id="borrowing-heading" class="visually-hidden">Borrowing this month</h2>
-  <div class="metric-grid metric-grid--compact">
-    <article class="metric-card metric-card--mini" aria-labelledby="mu-borrowed"><p class="metric-card__value">£{{ u.borrowing.value | oneDp }} bn</p><p class="metric-card__label" id="mu-borrowed">Borrowing {{ u.borrowing.direction }} in {{ u.month }}</p></article>
-    <article class="metric-card metric-card--mini" aria-labelledby="mu-vs-year"><p class="metric-card__value">{{ u.borrowing.vsLastYear }}</p><p class="metric-card__label" id="mu-vs-year">Versus the same month last year</p></article>
-    <article class="metric-card metric-card--mini" aria-labelledby="mu-vs-forecast"><p class="metric-card__value">{{ u.borrowing.vsForecast }}</p><p class="metric-card__label" id="mu-vs-forecast">Versus the official forecast</p></article>
-  </div>
+  {# A label and one value is a name-value pair, so a description list, not a run of articles. #}
+  <dl class="metric-grid metric-grid--compact">
+    <div class="metric-card metric-card--mini">
+      <dt class="metric-card__label">Borrowing {{ u.borrowing.direction }} in {{ u.month }}</dt>
+      <dd class="metric-card__value">£{{ u.borrowing.value | oneDp }} bn</dd>
+    </div>
+    <div class="metric-card metric-card--mini">
+      <dt class="metric-card__label">Versus the same month last year</dt>
+      <dd class="metric-card__value">{{ u.borrowing.vsLastYear }}</dd>
+    </div>
+    <div class="metric-card metric-card--mini">
+      <dt class="metric-card__label">Versus the official forecast</dt>
+      <dd class="metric-card__value">{{ u.borrowing.vsForecast }}</dd>
+    </div>
+  </dl>
 </section>
 
 <section class="prose" aria-labelledby="qa-heading">
@@ -72,7 +85,7 @@
 
 <p class="source-note">
   Source: <a href="{{ u.source_url }}" rel="noopener">{{ u.source_name }}</a>.
-  Retrieved {{ u.retrieved_date | readableDate }}.
+  Retrieved {{ u.retrieved_date | timeTag | safe }}.
   {{ dataFreshnessBadge(u.confidence_level, "") }}
 </p>
 
