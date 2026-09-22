@@ -19,7 +19,8 @@ export function translateAmount(billions, a) {
     { label: "Months of debt interest", kind: "months", value: (billions / a.annualDebtInterestGbpBillion) * 12 },
   ];
   for (const b of a.budgets) {
-    rows.push({ label: `Share of annual ${b.name} spending`, kind: "pct", value: (billions / b.value) * 100 });
+    // noun defaults to " spending"; a receipts row passes "" so it is not called spending.
+    rows.push({ label: `Share of annual ${b.name}${b.noun ?? " spending"}`, kind: "pct", value: (billions / b.value) * 100 });
   }
   return rows;
 }

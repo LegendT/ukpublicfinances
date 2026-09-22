@@ -17,7 +17,7 @@ const A = {
   gdpGbpBillion: 2000,
   annualBorrowingGbpBillion: 100,
   annualDebtInterestGbpBillion: 50,
-  budgets: [{ name: "NHS / health", value: 100 }],
+  budgets: [{ name: "NHS / health", value: 100 }, { name: "Central government receipts", value: 200, noun: "" }],
 };
 
 test("translateAmount: £50bn per-person and shares are correct", () => {
@@ -28,6 +28,8 @@ test("translateAmount: £50bn per-person and shares are correct", () => {
   assert.ok(near(by("Months of debt interest").value, (50 / A.annualDebtInterestGbpBillion) * 12), "months of interest");
   assert.equal(by("In millions").value, 50000, "£50bn = 50,000 million");
   assert.ok(near(by("Share of annual NHS").value, (50 / A.budgets[0].value) * 100), "share of NHS budget");
+  assert.ok(rows.some((r) => r.label === "Share of annual NHS / health spending"), "a budget row says spending");
+  assert.ok(rows.some((r) => r.label === "Share of annual Central government receipts"), "receipts are not called spending");
 });
 
 test("translateAmount: scales linearly with the amount", () => {

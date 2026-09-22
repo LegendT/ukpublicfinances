@@ -2,6 +2,31 @@
   "note": "Structured monthly summaries of the ONS public sector finances release. The newest entry is shown first and drives the monthly explainer page. Add a new object to the top of 'updates' each month. Figures are as first published in that month's release and are deliberately not updated for later ONS revisions, so older entries will differ from today's estimates. Fetch the current vintage from the ONS time series (series J5II, dataset PUSF) if you need the latest figure.",
   "updates": [
     {
+      "id": "2026-08",
+      "month": "August 2026",
+      "published": "2026-09-22",
+      "source_name": "ONS, Public sector finances, UK: August 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/august2026",
+      "retrieved_date": "2026-09-22",
+      "confidence_level": "provisional",
+      "headline": "Borrowing in August was the second highest for the month on record, up a fifth on last year and well above the official forecast, as spending grew faster than receipts.",
+      "borrowing": {
+        "value": 18.3,
+        "unit": "£ billion",
+        "direction": "rose",
+        "vsLastYear": "£2.9 billion more than August 2025",
+        "vsForecast": "£3.5 billion above the OBR forecast of £14.8 billion"
+      },
+      "answers": {
+        "whatChanged": "The government borrowed £18.3 billion in August 2026, the gap between what it spent and what it raised. That was £2.9 billion (19.0%) more than in August 2025 and the second-highest August since monthly records began, behind only 2020. It was also £3.5 billion more than the OBR had forecast for the month.",
+        "borrowingWhy": "Spending grew faster than receipts. Total central government spending, including investment, rose £4.9 billion on the year while receipts rose £3.3 billion, so central government borrowing rose £1.6 billion, and local government borrowed £1.5 billion more than a year earlier.",
+        "taxReceipts": "Central government receipts were £89.8 billion, up £3.3 billion (3.8%) on August 2025. Income-related taxes rose 6.6% and corporation tax 4.7%, but VAT rose only 1.7%. The ONS notes that a temporary cut in the VAT rate on certain family-focused activities and children's meals, from 25 July to 1 September 2026, reduced VAT receipts while it ran. Self-assessment income tax for July and August together was £18.6 billion, £1.9 billion more than a year earlier but £0.4 billion below forecast.",
+        "spending": "Central government day-to-day spending was £93.9 billion, up £3.8 billion (4.3%) on the year. Net social benefits rose £1.9 billion and spending on goods and services rose £2.2 billion, both outpacing the growth in receipts.",
+        "debtInterest": "Central government interest payable was £8.8 billion in August, £0.4 billion more than a year earlier and the highest August since monthly records began in 1997, though lower than in each of the first three months of the financial year. The RPI-linked capital uplift on index-linked gilts accounted for £2.1 billion of it, reflecting a 0.3% rise in RPI between May and June 2026.",
+        "vsObr": "Borrowing was £3.5 billion above the OBR's forecast for the month. For the financial year so far, borrowing of £77.3 billion is £2.2 billion lower than the same period last year but £8.1 billion above the OBR's forecast, mostly because central government spending is running £7.4 billion above profile, with social benefits and debt interest the largest parts. This release also carried the ONS annual data alignment, which revised borrowing for the whole of 2025-26 up by £4.5 billion to £134.3 billion, or 4.4% of GDP. One month is a weak guide and figures are routinely revised."
+      }
+    },
+    {
       "id": "2026-07",
       "month": "July 2026",
       "published": "2026-08-21",

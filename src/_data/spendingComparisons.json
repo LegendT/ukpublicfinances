@@ -60,6 +60,7 @@
     {
       "id": "tax-receipts",
       "name": "Central government receipts",
+      "noun": "",
       "value": 1122,
       "unit": "£ billion per year",
       "source_name": "ONS, Public sector finances, UK: April 2026",
