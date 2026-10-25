@@ -24,10 +24,14 @@ test("dashboard has the five required headline metrics", () => {
 
 test("every published figure carries source and provenance fields", () => {
   const d = load("dashboard.json");
-  // The simulator's interest-rate assumption is shown to readers as a figure on the page,
-  // so it answers to the same provenance rules as any dashboard metric.
-  const rate = load("assumptions.json").budgetSimulator.projection.assumedInterestRate;
-  for (const m of [...d.metrics, { id: "assumedInterestRate", ...rate }]) {
+  // The simulator's interest-rate and growth assumptions are shown to readers as figures on
+  // the page, so they answer to the same provenance rules as any dashboard metric.
+  const proj = load("assumptions.json").budgetSimulator.projection;
+  const assumed = [
+    { id: "assumedInterestRate", ...proj.assumedInterestRate },
+    { id: "assumedNominalGdpGrowth", ...proj.assumedNominalGdpGrowth },
+  ];
+  for (const m of [...d.metrics, ...assumed]) {
     for (const field of ["metric_name", "value", "unit", "source_name", "source_url", "retrieved_date", "confidence_level"]) {
       assert.ok(m[field] !== undefined && m[field] !== "", `${m.id} missing ${field}`);
     }

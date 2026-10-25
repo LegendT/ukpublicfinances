@@ -8,6 +8,7 @@ eleventyComputed:
 ---
 {% from "components/macros.njk" import caveatBox, sourceNote %}
 {% set b = assumptions.budgetSimulator %}
+{% set interest = dashboard.metrics | findBy("id", "debt-interest") %}
 
 <div class="page-intro prose">
   <h1>Budget simulator</h1>
@@ -76,9 +77,9 @@ eleventyComputed:
     </dl>
 
     <h3>Debt over {{ b.projection.years }} years</h3>
-    <div class="table-scroll" tabindex="0" role="region" aria-label="Projected debt over five years">
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Projected debt over {{ b.projection.years }} years">
       <table class="data-table">
-        <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate.value * 100) | round(0) }}% interest rate (an average for the whole debt stock, not today's market rate) and a fixed economy. See the assumptions below.</caption>
+        <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate.value * 100) | round(1) }}% interest rate (an average for the whole debt stock, not today's market rate) and an economy growing {{ (b.projection.assumedNominalGdpGrowth.value * 100) | round(1) }}% a year in cash terms. See the assumptions below.</caption>
         <thead><tr><th scope="col">Year</th><th scope="col" class="num">Debt (£ bn)</th><th scope="col" class="num">Debt (% of GDP)</th></tr></thead>
         <tbody id="r-trajectory"></tbody>
       </table>
@@ -89,12 +90,14 @@ eleventyComputed:
 <details class="prose">
   <summary>Assumptions used in this model</summary>
   <ul>
-    <li>Baseline spending £{{ b.baselineGbpBillion.totalSpending | number }} bn, revenue £{{ b.baselineGbpBillion.totalRevenue | number }} bn, debt £{{ b.baselineGbpBillion.debt | number }} bn, so today's starting point is a deficit of £{{ b.baselineGbpBillion.borrowing | number }} bn.</li>
+    <li>Baseline spending £{{ b.baselineGbpBillion.totalSpending | number }} bn, revenue £{{ b.baselineGbpBillion.totalRevenue | number }} bn, debt £{{ b.baselineGbpBillion.debt | number }} bn, so today's starting point is a deficit of £{{ b.baselineGbpBillion.borrowing | number }} bn. That spending includes roughly £{{ interest.value | number }} bn of debt interest (the OBR's central government figure).</li>
     <li>{{ b.taxNote }}</li>
     <li>{{ b.projection.note }}</li>
     <li>Interest rate: {{ b.projection.assumedInterestRate.notes }}</li>
+    <li>Growth: {{ b.projection.assumedNominalGdpGrowth.notes }}</li>
   </ul>
   {{ sourceNote(b.projection.assumedInterestRate) }}
+  {{ sourceNote(b.projection.assumedNominalGdpGrowth) }}
 </details>
 
 <noscript><p class="caveat">This simulator needs JavaScript. The baseline figures are on the <a href="{{ '/' | url }}">dashboard</a>.</p></noscript>
@@ -103,6 +106,7 @@ eleventyComputed:
 {
   "baseline": {{ b.baselineGbpBillion | jsonScript | safe }},
   "spendingBase": {{ b.spendingLeversGbpBillion | jsonScript | safe }},
+  "debtInterest": {{ interest.value }},
   "projection": {{ b.projection | jsonScript | safe }},
   "gdp": {{ dashboard.supporting.gdp.value }}
 }

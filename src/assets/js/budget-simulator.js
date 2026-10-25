@@ -1,7 +1,7 @@
 /*
  * Budget simulator (DOM + presentation): a deliberately simple, static model.
  * The maths lives in lib/calc.js; this reads the sliders, recomputes on change,
- * and shows borrowing plus a five-year debt path. No economic feedback is
+ * and shows borrowing plus a ten-year debt path. No economic feedback is
  * modelled; this is for intuition, not forecasting.
  */
 import { simulateBudget } from "./lib/calc.js";
@@ -63,21 +63,23 @@ if (cfgEl && form) {
       status.className = "sim-goal sim-goal--todo";
       status.textContent = `Not balanced yet: a deficit of ${gbpBn(r.borrowing)} left to close.`;
     } else {
-      bEl.textContent = gbpBn(-r.borrowing);
+      bEl.textContent = gbpBn(Math.abs(r.borrowing));
       bLabel.textContent = r.borrowing === 0 ? "Balanced this year" : "Surplus this year";
       const cleared = r.trajectory.find((t) => t.debt <= 0);
       if (cleared) {
         // Stage 3 (best): the surplus wipes the debt out entirely.
         status.className = "sim-goal sim-goal--win";
         status.textContent = `Debt cleared: your surplus wipes it out by year ${cleared.year}.`;
-      } else if (endDebt.debt < cfg.baseline.debt) {
-        // Stage 3: surplus beats the interest, so debt actually falls.
+      } else if (r.borrowing < 0 && endDebt.debt < cfg.baseline.debt) {
+        // Stage 3: the surplus pays debt down, and the interest bill shrinks with it.
         status.className = "sim-goal sim-goal--win";
-        status.textContent = `Debt is falling: your surplus now outweighs the interest. It reaches ${endDebt.pctGdp.toFixed(0)}% of GDP by year ${cfg.projection.years}.`;
+        status.textContent = `Debt is falling: your surplus pays it down, and the interest bill shrinks as it goes. It reaches ${endDebt.pctGdp.toFixed(0)}% of GDP by year ${cfg.projection.years}.`;
       } else {
-        // Stage 2: balanced or in surplus, but interest still outpaces it.
+        // Stage 2: balanced, or a surplus too small to move the debt. Later years
+        // charge the assumed rate on the debt, which can differ slightly from this
+        // year's interest, so the debt can drift a little either way.
         status.className = "sim-goal sim-goal--mid";
-        status.textContent = `Budget balanced, but debt is still rising: the interest bill outweighs your surplus. A bigger surplus would bring it down.`;
+        status.textContent = `${r.borrowing === 0 ? "Budget balanced" : "Small surplus"}: debt holds roughly level, at ${endDebt.pctGdp.toFixed(0)}% of GDP by year ${cfg.projection.years} as the economy grows. A larger surplus would pay it down.`;
       }
     }
 

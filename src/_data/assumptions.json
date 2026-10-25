@@ -36,16 +36,27 @@
       "years": 10,
       "assumedInterestRate": {
         "metric_name": "Assumed average interest rate on the debt stock",
-        "value": 0.04,
+        "value": 0.037,
         "unit": "share of the debt stock per year",
-        "date": "2026-09-03",
+        "date": "2026-10-25",
         "source_name": "Modelling assumption for this tool, checked against OBR debt interest and ONS net debt",
         "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/",
         "retrieved_date": "2026-10-25",
-        "notes": "An assumption for this model, not a published rate. Neither the OBR nor the House of Commons Library publishes a single effective interest rate on the UK debt stock; the Library briefing of 12 August 2026 describes the effective rate only as a trend. So this is set to a round 4% and checked against figures the site already carries: OBR debt interest of £110bn (March 2026 forecast) over ONS net debt of £3,005bn (end September 2026) gives 3.7%. That check follows the OBR's illustrative method in The outlook for debt interest spending (25 August 2017), and the OBR calls the method illustrative for good reason: the perimeters differ, because the interest figure is central government interest net of APF while net debt is public sector net debt excluding banks. The rate is an average across the whole stock and sits well below the market rate on new borrowing, which the Commons Library put at 5.05% for 10-year and 5.7% for 30-year gilts in mid-August 2026. Part of the stock is effectively financed at Bank Rate, 3.75% at that date, which is one reason the average is nearer 4% than 5%. Revisit at each OBR forecast, not on market moves.",
+        "notes": "An assumption for this model, not a published rate. Neither the OBR nor the House of Commons Library publishes a single effective interest rate on the UK debt stock; the Library briefing of 12 August 2026 describes the effective rate only as a trend. So it is set to 3.7%, the rate implied by figures the site already carries: OBR debt interest of £110bn (March 2026 forecast) over ONS net debt of £3,005bn (end September 2026). That check follows the OBR's illustrative method in The outlook for debt interest spending (25 August 2017), and the OBR calls the method illustrative for good reason: the perimeters differ, because the interest figure is central government interest net of APF while net debt is public sector net debt excluding banks. The rate is an average across the whole stock and sits well below the market rate on new borrowing, which the Commons Library put at 5.05% for 10-year and 5.7% for 30-year gilts in mid-August 2026. Part of the stock is effectively financed at Bank Rate, 3.75% at that date, which is one reason the average is nearer 4% than 5%. Revisit at each OBR forecast, not on market moves.",
         "confidence_level": "estimated"
       },
-      "note": "Debt in future years is the running total of borrowing plus assumed interest, held to zero once cleared. Economic growth, behavioural responses, and inflation are not modelled."
+      "assumedNominalGdpGrowth": {
+        "metric_name": "Assumed growth in the cash size of the economy",
+        "value": 0.035,
+        "unit": "share of GDP per year",
+        "date": "2026-03-31",
+        "source_name": "OBR, Economic and Fiscal Outlook March 2026, paragraph 2.40 (nominal GDP growth)",
+        "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/",
+        "retrieved_date": "2026-10-25",
+        "notes": "An assumption for this model. The OBR forecast has nominal GDP growth falling from just under 4.5% in 2025-26 to an average of 3.5% over the rest of the forecast; the model uses that 3.5% for every year. Nominal means in cash terms, so it includes inflation. It is the denominator for debt as a share of GDP and does not respond to the choices made in the simulator. Revisit at each OBR forecast.",
+        "confidence_level": "estimated"
+      },
+      "note": "Spending includes this year's debt interest. In later years interest is the assumed rate times the debt, so a bigger debt costs more to service. Debt is held at zero once cleared. The economy grows at the assumed cash rate, so debt as a share of GDP can fall while the debt itself rises. Behavioural responses are not modelled."
     }
   }
 }
