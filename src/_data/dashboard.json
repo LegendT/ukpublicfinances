@@ -59,13 +59,24 @@
       "value": 110,
       "unit": "£ billion per year",
       "explanation": "What the government pays to service its debt over a year. Affected both by how much is owed and by the interest rate on it.",
-      "whatThisMeans": "Interest is a real cash cost competing with other spending, around 8% of total public spending. Some of it rises and falls with inflation, because a share of UK debt is index-linked. On the narrower ONS measure described in the notes, central government net interest payable was £10.9 billion in September 2026 alone, so twelve such months do not add up to the figure above.",
+      "whatThisMeans": "Interest is a real cash cost competing with other spending, around 8% of total public spending. Some of it rises and falls with inflation, because a share of UK debt is index-linked. On the narrower ONS outturn measure, central government net interest payable was £10.9 billion in September 2026 alone, so twelve such months do not add up to the figure above.",
       "date": "2026-03-31",
       "source_name": "OBR, Economic and Fiscal Outlook March 2026 (central government debt interest, net of APF)",
       "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/",
       "retrieved_date": "2026-09-22",
-      "notes": "£109.7bn in 2025-26 (OBR March 2026 forecast), 3.6% of GDP on the OBR's own basis. Includes the inflation uplift on index-linked gilts. The ONS outturn measure of central government net interest payable is narrower and lower, at £96.8bn for the same year on the October 2026 vintage (series NMFX).",
-      "confidence_level": "provisional"
+      "notes": "£109.7bn in 2025-26 (OBR March 2026 forecast), 3.6% of GDP on the OBR's own basis. Includes the inflation uplift on index-linked gilts. The ONS outturn measure is narrower and lower, and carries its own provenance in onsOutturn because it is refreshed monthly while this figure moves only with each OBR forecast.",
+      "confidence_level": "provisional",
+      "onsOutturn": {
+        "metric_name": "Central government net interest payable (ONS outturn)",
+        "value": 96.8,
+        "unit": "£ billion, financial year 2025-26",
+        "date": "2026-03-31",
+        "source_name": "ONS, Public sector finances, UK: September 2026 (series NMFX, dataset PUSF)",
+        "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/timeseries/nmfx/pusf",
+        "retrieved_date": "2026-10-25",
+        "notes": "Twelve months April 2025 to March 2026 summed: £96.8bn. The latest month, September 2026, was £10.9bn; whatThisMeans quotes it.",
+        "confidence_level": "provisional"
+      }
     },
     {
       "id": "monthly-borrowing",

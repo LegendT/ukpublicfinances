@@ -56,7 +56,7 @@ npx lighthouse http://localhost:8080 --only-categories=accessibility --view
 
 ```
 .
-├── .eleventy.js              # Eleventy config + filters (number, oneDp, readableDate, isoDate, latestOf, poundsShort, findBy, jsonScript, yearOf)
+├── .eleventy.js              # Eleventy config + filters (number, oneDp, readableDate, isoDate, timeTag, latestOf, poundsShort, findBy, jsonScript, yearOf)
 ├── netlify.toml              # build settings + security headers (CSP, etc.)
 ├── .pa11yci.json             # routes for the WCAG audit
 ├── .node-version             # Node 24 (fnm locally, Netlify in CI)
