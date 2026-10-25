@@ -41,7 +41,9 @@ test("translateAmount: scales linearly with the amount", () => {
 const CFG = {
   baseline: { totalSpending: 1000, totalRevenue: 900, borrowing: 100, debt: 2000 },
   spendingBase: { health: 100, education: 50, defence: 40, welfare: 150, pensions: 60 },
-  projection: { years: 10, assumedInterestRate: { value: 0.04 } },
+  // 80 is 4% of the 2000 debt, so this year's interest and the model's rate agree.
+  debtInterest: 80,
+  projection: { years: 10, assumedInterestRate: { value: 0.04 }, assumedNominalGdpGrowth: { value: 0.03 } },
   gdp: 2000,
 };
 
@@ -75,9 +77,44 @@ test("simulateBudget: a large surplus clears debt but never goes negative", () =
   assert.equal(r.trajectory[r.trajectory.length - 1].debt, 0, "debt reaches zero");
 });
 
-test("simulateBudget: debt path compounds interest then adds borrowing", () => {
+// Borrowing is spending minus revenue, and spending already includes debt interest,
+// so the debt path must not add interest on top of it a second time.
+test("simulateBudget: interest is counted once, so year 1 adds exactly this year's borrowing", () => {
   const r = simulateBudget(CFG, { ...CFG.spendingBase }, [{ perpoint: 8, points: 0 }]);
-  const grown = CFG.baseline.debt * (1 + CFG.projection.assumedInterestRate.value) + CFG.baseline.borrowing;
-  assert.ok(near(r.trajectory[0].debt, grown, 0.5), "year 1 debt");
-  assert.ok(r.trajectory[4].debt > r.trajectory[0].debt, "debt grows over the path");
+  assert.ok(near(r.trajectory[0].debt, CFG.baseline.debt + CFG.baseline.borrowing, 0.5), "year 1 debt");
+  assert.ok(r.trajectory[4].debt > r.trajectory[0].debt, "a deficit still grows the debt");
+});
+
+// The fixture's interest equals rate x debt, which would hide a year 1 that ignored this
+// year's actual interest. Pull them apart so that branch is tested on its own.
+test("simulateBudget: year 1 uses this year's interest, later years the assumed rate", () => {
+  const cfg = { ...CFG, debtInterest: 70 };
+  const r = simulateBudget(cfg, { ...cfg.spendingBase }, [{ perpoint: 8, points: 0 }]);
+  const rate = cfg.projection.assumedInterestRate.value;
+  const primaryDeficit = cfg.baseline.borrowing - cfg.debtInterest;
+  assert.ok(near(r.trajectory[0].debt, cfg.baseline.debt + cfg.baseline.borrowing, 0.5), "year 1 debt");
+  assert.ok(near(r.trajectory[1].debt, r.trajectory[0].debt * (1 + rate) + primaryDeficit, 0.5), "year 2 debt");
+});
+
+test("simulateBudget: interest grows with the debt in later years", () => {
+  const r = simulateBudget(CFG, { ...CFG.spendingBase }, [{ perpoint: 8, points: 0 }]);
+  const rate = CFG.projection.assumedInterestRate.value;
+  const primaryDeficit = CFG.baseline.borrowing - CFG.debtInterest;
+  const year2 = r.trajectory[0].debt * (1 + rate) + primaryDeficit;
+  assert.ok(near(r.trajectory[1].debt, year2, 0.5), "year 2 debt");
+});
+
+test("simulateBudget: a budget balanced after interest holds the debt level", () => {
+  const spend = { ...CFG.spendingBase, welfare: CFG.spendingBase.welfare - CFG.baseline.borrowing };
+  const r = simulateBudget(CFG, spend, [{ perpoint: 8, points: 0 }]);
+  assert.equal(r.borrowing, 0);
+  assert.ok(r.trajectory.every((t) => near(t.debt, CFG.baseline.debt, 0.5)), "debt stays at the baseline");
+});
+
+test("simulateBudget: GDP grows, so a level debt is a falling share of GDP", () => {
+  const spend = { ...CFG.spendingBase, welfare: CFG.spendingBase.welfare - CFG.baseline.borrowing };
+  const r = simulateBudget(CFG, spend, [{ perpoint: 8, points: 0 }]);
+  const g = CFG.projection.assumedNominalGdpGrowth.value;
+  assert.ok(near(r.trajectory[0].pctGdp, (CFG.baseline.debt / (CFG.gdp * (1 + g))) * 100, 0.01), "year 1 ratio");
+  assert.ok(r.trajectory[9].pctGdp < r.trajectory[0].pctGdp, "ratio falls");
 });

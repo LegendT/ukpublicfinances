@@ -43,14 +43,24 @@ export function simulateBudget(cfg, spendValues, taxPoints) {
   const totalRevenue = cfg.baseline.totalRevenue + revDelta;
 
   const borrowing = totalSpending - totalRevenue;
+  // Spending is total managed expenditure, which already includes this year's
+  // debt interest. Take it out, so each future year's interest is worked out
+  // once, from the debt that year, rather than added on top of borrowing.
+  const primaryDeficit = borrowing - cfg.debtInterest;
   const rate = cfg.projection.assumedInterestRate.value;
+  const growth = cfg.projection.assumedNominalGdpGrowth.value;
   let debt = cfg.baseline.debt;
+  let gdp = cfg.gdp;
   const trajectory = [];
   for (let y = 1; y <= cfg.projection.years; y++) {
+    // Year 1 uses this year's actual interest, so the baseline path starts
+    // from the published borrowing figure.
+    const interest = y === 1 ? cfg.debtInterest : debt * rate;
     // Floor at zero: once the debt is cleared it stays cleared. We don't model
     // a surplus building up into net assets. This tool is about debt.
-    debt = Math.max(0, debt * (1 + rate) + borrowing);
-    trajectory.push({ year: y, debt, pctGdp: (debt / cfg.gdp) * 100 });
+    debt = Math.max(0, debt + primaryDeficit + interest);
+    gdp *= 1 + growth;
+    trajectory.push({ year: y, debt, pctGdp: (debt / gdp) * 100 });
   }
   return { totalSpending, totalRevenue, borrowing, trajectory };
 }
