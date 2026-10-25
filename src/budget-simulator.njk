@@ -4,15 +4,19 @@ title: Budget simulator
 description: A simplified educational model. Adjust spending and tax, try to balance the budget, and see the effect on debt.
 pageClass: has-sticky-status
 eleventyComputed:
-  dataUpdated: "{{ [dashboard.lastUpdated, assumptions.budgetSimulator.lastUpdated] | latestOf }}"
+  dataUpdated: "{{ [dashboard.lastUpdated, assumptions.budgetSimulator.lastUpdated, indicators.lastUpdated] | latestOf }}"
 ---
 {% from "components/macros.njk" import caveatBox, sourceNote %}
 {% set b = assumptions.budgetSimulator %}
 {% set interest = dashboard.metrics | findBy("id", "debt-interest") %}
+{% set netDebt = dashboard.metrics | findBy("id", "net-debt") %}
+{% set spendingRec = indicators.indicators | findBy("id", "spending") %}
 
 <div class="page-intro prose">
   <h1>Budget simulator</h1>
   <p class="lede">You are Chancellor. Your challenge: <strong>balance the budget</strong> (get borrowing down to zero) by changing spending and tax. Watch the effect on debt over {{ b.projection.years }} years.</p>
+  <p>{{ b.fiscalRules.summary }}</p>
+  {{ sourceNote(b.fiscalRules) }}
 </div>
 
 {{ caveatBox(b.disclaimer, "This is a teaching model, not a forecast") }}
@@ -90,7 +94,11 @@ eleventyComputed:
 <details class="prose">
   <summary>Assumptions used in this model</summary>
   <ul>
-    <li>Baseline spending £{{ b.baselineGbpBillion.totalSpending | number }} bn, revenue £{{ b.baselineGbpBillion.totalRevenue | number }} bn, debt £{{ b.baselineGbpBillion.debt | number }} bn, so today's starting point is a deficit of £{{ b.baselineGbpBillion.borrowing | number }} bn. That spending includes roughly £{{ interest.value | number }} bn of debt interest (the OBR's central government figure).</li>
+    {# Borrowing cites the net-debt record's release on purpose: no record owns the £ figure
+       for the year's borrowing, and UPDATING-DATA step 7 re-reads it from that same release
+       every month. #}
+    <li>The starting point is financial year {{ spendingComparisons.fiscalYear }}. Spending is £{{ b.baselineGbpBillion.totalSpending | number }} bn, from {{ spendingRec.source_name }}. It includes roughly £{{ interest.value | number }} bn of debt interest (the OBR's central government figure). Borrowing is £{{ b.baselineGbpBillion.borrowing | number }} bn, from {{ netDebt.source_name }}. Revenue, £{{ b.baselineGbpBillion.totalRevenue | number }} bn, is spending minus borrowing.</li>
+    <li>Debt starts at £{{ b.baselineGbpBillion.debt | number }} bn, from {{ netDebt.source_name }}, for {{ netDebt.date | timeTag | safe }}.</li>
     <li>{{ b.taxNote }}</li>
     <li>{{ b.projection.note }}</li>
     <li>Interest rate: {{ b.projection.assumedInterestRate.notes }}</li>
