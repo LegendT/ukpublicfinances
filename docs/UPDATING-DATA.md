@@ -14,7 +14,7 @@ All figures live in `src/_data/*.json`. Templates never hard-code numbers, so up
 
 **A refresh is done when every figure traces to a named publisher and a named vintage, or the record names the publisher that has not published it and `NEXT-STEPS.md` carries the item.** The tests are a secondary check, not the condition: a figure derived from others satisfies an identity by construction, so `npm test` can pass on a figure nobody published. Rule 8 and the total-revenue item in `NEXT-STEPS.md` are both this problem.
 
-The whole figure set was last re-audited against its primary sources on 21 July 2026; the headline, monthly and indicator figures were refreshed on 22 September 2026, against the ONS August 2026 release that carried the annual data alignment. The pre-2010 historical series remains a best-estimate reconstruction. Each file maps to one official source:
+The whole figure set was last re-audited against its primary sources on 21 July 2026; the headline, monthly and indicator figures were refreshed on 25 October 2026, against the ONS September 2026 release; the last annual data alignment was the August 2026 release of 22 September 2026. The pre-2010 historical series remains a best-estimate reconstruction. Each file maps to one official source:
 
 | File | Replace with | From |
 | --- | --- | --- |
@@ -45,7 +45,7 @@ The IMF DataMapper website blocks automated fetching, but its JSON API works fro
 curl -s "https://www.imf.org/external/datamapper/api/v1/GGXWDG_NGDP/GBR/USA/JPN/DEU/FRA/ITA/CAN/AUS"
 ```
 
-Indicators: `GGXWDG_NGDP` (general government gross debt, % of GDP), `GGXCNL_NGDP` (net lending or borrowing, % of GDP, where a deficit shows as negative), and `NGDP_RPCH` (real GDP growth). Read the value at `.values.<INDICATOR>.<ISO3>.<year>`. The site uses debt as the latest-year estimate, and deficit and growth as the prior-year outturn.
+Indicators: `GGXWDG_NGDP` (general government gross debt, % of GDP), `GGXCNL_NGDP` (net lending or borrowing, % of GDP, where a deficit shows as negative), and `NGDP_RPCH` (real GDP growth). Read the value at `.values.<INDICATOR>.<ISO3>.<year>`. The site uses the latest completed calendar year for all three: 2025 from the October 2026 vintage. An April vintage may not yet carry that year for deficit and growth; if not, keep the previous year and say so in the caveat and the table caption.
 
 ## When the monthly ONS release lands
 

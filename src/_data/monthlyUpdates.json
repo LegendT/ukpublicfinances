@@ -2,6 +2,31 @@
   "note": "Structured monthly summaries of the ONS public sector finances release. The newest entry is shown first and drives the monthly explainer page. Add a new object to the top of 'updates' each month. Figures are as first published in that month's release and are deliberately not updated for later ONS revisions, so older entries will differ from today's estimates. Fetch the current vintage from the ONS time series (series J5II, dataset PUSF) if you need the latest figure.",
   "updates": [
     {
+      "id": "2026-09",
+      "month": "September 2026",
+      "published": "2026-10-21",
+      "source_name": "ONS, Public sector finances, UK: September 2026",
+      "source_url": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/september2026",
+      "retrieved_date": "2026-10-25",
+      "confidence_level": "provisional",
+      "headline": "Net debt passed £3 trillion for the first time. September borrowing was the second highest for the month on record, as spending, including record September debt interest, grew faster than receipts.",
+      "borrowing": {
+        "value": 24.5,
+        "unit": "£ billion",
+        "direction": "rose",
+        "vsLastYear": "£1.8 billion more than September 2025",
+        "vsForecast": "£1.9 billion above the OBR forecast of £22.6 billion"
+      },
+      "answers": {
+        "whatChanged": "The government borrowed £24.5 billion in September 2026, the gap between what it spent and what it raised. That was £1.8 billion (7.7%) more than in September 2025 and the second-highest September since monthly records began, behind only 2020. It was also £1.9 billion more than the OBR had forecast. Net debt reached a provisional £3,005.0 billion at the end of the month, the first time it has passed £3 trillion, though as a share of the economy it fell to 94.0% of GDP, 0.7 percentage points lower than a year earlier.",
+        "borrowingWhy": "Spending grew faster than receipts. Central government receipts rose £4.5 billion on the year, but its day-to-day spending rose £6.5 billion, while its net investment fell £0.8 billion, so central government borrowed £21.2 billion, £1.5 billion more than a year earlier. Local government borrowed £0.4 billion more.",
+        "taxReceipts": "Central government receipts were £90.1 billion, up £4.5 billion (5.2%) on September 2025. Income-related taxes rose 7.4% to £23.2 billion, corporation tax rose 9.0% to £8.9 billion and VAT rose 3.7% to £18.3 billion. National Insurance contributions were £17.2 billion, up 4.3%.",
+        "spending": "Central government day-to-day spending was £98.6 billion, up £6.5 billion (7.0%) on the year, with the rise spread across the larger parts. Net social benefits rose £1.6 billion to £30.6 billion. That total includes £1.9 billion for Winter Fuel Payments, which the ONS records in September, when eligibility is set, even though they are paid from November. Spending on goods and services rose £1.5 billion and transfers to local government £1.7 billion.",
+        "debtInterest": "Central government interest payable was £10.9 billion in September, £1.6 billion (16.6%) more than a year earlier and the highest September since monthly records began in 1997. The RPI-linked capital uplift on index-linked gilts accounted for £4.0 billion of it, largely because the RPI rose 0.6% between June and July 2026.",
+        "vsObr": "Borrowing was £1.9 billion above the OBR's forecast for the month. For the financial year so far, borrowing of £97.8 billion is £4.4 billion lower than the same period last year but £6.0 billion above the OBR's forecast. Central government accounts for £3.2 billion of that, because its spending is £8.9 billion above profile (debt interest £3.8 billion and social benefits £2.5 billion the largest parts) while receipts are only £5.8 billion ahead, and public corporations for £2.6 billion. The ONS revised borrowing for the year to August down by £4.0 billion, mostly on higher tax receipts. The forecast compared against is still the OBR's March 2026 one, which the Budget forecast of 28 October 2026 replaces. One month is a weak guide and figures are routinely revised."
+      }
+    },
+    {
       "id": "2026-08",
       "month": "August 2026",
       "published": "2026-09-22",

@@ -84,6 +84,9 @@ export default function (eleventyConfig) {
       return `£${(billions / 1000).toLocaleString("en-GB", {
         minimumFractionDigits: 1,
         maximumFractionDigits: 2,
+        // Truncate, never round up: £3,005bn must not read as £3.01 trillion.
+        // roundingMode needs Node 20+; .node-version and netlify.toml pin 24.
+        roundingMode: "trunc",
       })} trillion`;
     }
     return `£${billions.toLocaleString("en-GB")} billion`;
