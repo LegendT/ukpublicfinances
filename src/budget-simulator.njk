@@ -15,6 +15,8 @@ eleventyComputed:
 <div class="page-intro prose">
   <h1>Budget simulator</h1>
   <p class="lede">You are Chancellor. Your challenge: <strong>balance the budget</strong> (get borrowing down to zero) by changing spending and tax. Watch the effect on debt over {{ b.projection.years }} years.</p>
+  <p>{{ b.fiscalRules.summary }}</p>
+  {{ sourceNote(b.fiscalRules) }}
 </div>
 
 {{ caveatBox(b.disclaimer, "This is a teaching model, not a forecast") }}

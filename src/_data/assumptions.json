@@ -32,6 +32,16 @@
       { "id": "corp", "label": "Corporation tax", "rate": 25, "min": 15, "max": 35, "perPointGbpBillion": 3.6 }
     ],
     "taxNote": "Each percentage point on a rate is worth roughly the amount shown (an HMRC 'ready reckoner' style estimate). Income tax shows the basic rate as a simple stand-in for the whole system.",
+    "fiscalRules": {
+      "metric_name": "UK fiscal rules, as set in the Charter for Budget Responsibility",
+      "summary": "This challenge is stricter than the government's own rules, which allow borrowing to invest.",
+      "source_name": "HM Treasury, Charter for Budget Responsibility: Autumn 2025, paragraphs 3.2 and 3.6",
+      "source_url": "https://www.gov.uk/government/publications/draft-charter-for-budget-responsibility-autumn-2025",
+      "date": "2026-02-23",
+      "retrieved_date": "2026-10-25",
+      "notes": "Paragraph 3.2 sets the principle 'to move towards only borrowing for investment', and paragraph 3.6 requires the current budget, which leaves out investment, to be in surplus. 'Stricter' is this site's reading: the challenge asks for total borrowing of zero. The URL keeps its 'draft' slug, but on 23 February 2026, the date used here, GOV.UK replaced the draft with the final version as laid in Parliament. A Budget can replace the Charter, so recheck this at every Budget.",
+      "confidence_level": "official"
+    },
     "projection": {
       "years": 10,
       "assumedInterestRate": {
