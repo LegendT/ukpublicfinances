@@ -39,7 +39,7 @@ if (dataEl) {
     resultsEl.innerHTML = rows
       .map(
         (r) =>
-          `<div class="metric-card metric-card--mini"><dt class="metric-card__label">${r.label}</dt><dd class="metric-card__value">${r.value}</dd></div>`
+          `<div class="metric-card metric-card--mini"><dt class="metric-card__label">${r.label}</dt> <dd class="metric-card__value">${r.value}</dd></div>`
       )
       .join("");
     tableBody.innerHTML = rows

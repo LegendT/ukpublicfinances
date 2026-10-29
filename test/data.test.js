@@ -30,8 +30,11 @@ test("every published figure carries source and provenance fields", () => {
   const assumed = [
     { id: "assumedInterestRate", ...proj.assumedInterestRate },
     { id: "assumedNominalGdpGrowth", ...proj.assumedNominalGdpGrowth },
+    { id: "baselineDebtInterest", ...load("assumptions.json").budgetSimulator.baselineDebtInterest },
   ];
-  for (const m of [...d.metrics, ...assumed]) {
+  // The Budget 2026 page's figures are forecasts shown as figures, so they answer to the same rules.
+  const budget = load("budget2026.json").metrics;
+  for (const m of [...d.metrics, ...assumed, ...budget]) {
     for (const field of ["metric_name", "value", "unit", "source_name", "source_url", "retrieved_date", "confidence_level"]) {
       assert.ok(m[field] !== undefined && m[field] !== "", `${m.id} missing ${field}`);
     }
@@ -52,6 +55,7 @@ test("every field that dates a page is a well-formed ISO date", () => {
     ["assumptions.json", "budgetSimulator.lastUpdated", (d) => d.budgetSimulator.lastUpdated],
     ["internationalComparisons.json", "retrieved_date", (d) => d.retrieved_date],
     ["monthlyUpdates.json", "updates[0].published", (d) => d.updates[0].published],
+    ["budget2026.json", "lastUpdated", (d) => d.lastUpdated],
   ];
   for (const [file, label, read] of dated) {
     const value = read(load(file));
@@ -152,6 +156,47 @@ test("monthly updates are well formed, newest first, and match the dashboard", (
   const latest = dash.metrics.find((x) => x.id === "monthly-borrowing");
   assert.equal(latest.value, m.updates[0].borrowing.value, "dashboard latest borrowing != newest monthly update");
   assert.equal(dash.referencePeriod, m.updates[0].month, "dashboard referencePeriod != newest monthly update");
+});
+
+test("the Budget page's worded claims match the forecast path it renders", () => {
+  // The templates state these in words (the EU limits section on /international/ and
+  // the Budget page), so a refreshed path must fail here until the words are rechecked.
+  const b = load("budget2026.json");
+  const byId = (id) => b.metrics.find((m) => m.id === id);
+  const row = (year) => b.path.years.find((y) => y.year === year);
+  const forecast = b.path.years.filter((y) => !y.outturn);
+  const eu = b.euLimits;
+  assert.equal(byId("borrowing-this-year").value, row("2026-27").borrowingGbp, "borrowing metric differs from its path row");
+  assert.equal(byId("psnfl-this-year").value, row("2026-27").psnflPct, "PSNFL metric differs from its path row");
+  assert.equal(byId("net-debt-peak").value, Math.max(...forecast.map((y) => y.netDebtPct)), "net debt peak is not the highest forecast year");
+  assert.equal(row("2028-29").netDebtPct, byId("net-debt-peak").value, "the page names 2028-29 as the peak year");
+  assert.ok(forecast.every((y) => y.borrowingVsMarchGbp === null || y.borrowingVsMarchGbp > 0), "the page says borrowing is higher than March in every compared year");
+  assert.ok(forecast.every((y) => y.netDebtVsMarchPct === null || y.netDebtVsMarchPct > 0), "the page says net debt is higher than March in every forecast year");
+  const firstUnder = forecast.find((y) => y.ggnbPct < eu.deficitLimitPct);
+  assert.equal(firstUnder?.year, eu.uk.firstYearUnderDeficitLimit, "first year under the EU deficit limit");
+  assert.equal(Math.min(...forecast.map((y) => y.ggDebtPct)), eu.uk.grossDebtMinPct, "gross debt minimum");
+  assert.equal(Math.max(...forecast.map((y) => y.ggDebtPct)), eu.uk.grossDebtMaxPct, "gross debt maximum");
+  assert.ok(forecast.every((y) => y.ggDebtPct > eu.debtLimitPct), "the pages say the UK is above the EU debt limit in every forecast year");
+  assert.ok(row("2026-27").ggnbPct > eu.deficitLimitPct, "the Budget page says the UK is above the EU deficit limit this year");
+  // Wordings on the Budget page: "down from", "unchanged", the growth directions, and cash debt rising every year.
+  const mandate = byId("headroom-mandate");
+  assert.ok(mandate.value < mandate.previous_value, "headroom is said to be down");
+  assert.ok(mandate.probability_pct < mandate.previous_probability_pct, "the probability is said to be down");
+  assert.equal(byId("headroom-supplementary").value, byId("headroom-supplementary").previous_value, "the supplementary margin is said to be unchanged");
+  assert.ok(byId("growth-2026").value > byId("growth-2026").previous_value, "2026 growth is said to be higher than March");
+  assert.ok(byId("growth-2027").value < byId("growth-2027").previous_value, "2027 growth is said to be lower than March");
+  b.path.years.slice(1).forEach((y, i) => assert.ok(y.netDebtGbp > b.path.years[i].netDebtGbp, `cash debt is said to rise every year, but not in ${y.year}`));
+  // /international/ says Germany, France and Italy are over the debt limit, and France and Italy over the deficit limit.
+  const intl = load("internationalComparisons.json");
+  const c = (id) => intl.countries.find((x) => x.id === id);
+  ["de", "fr", "it"].forEach((id) => assert.ok(c(id).debtToGdp > eu.debtLimitPct, `${id} is no longer over the EU debt limit: reword /international/`));
+  ["fr", "it"].forEach((id) => assert.ok(c(id).deficitToGdp > eu.deficitLimitPct, `${id} is no longer over the EU deficit limit: reword /international/`));
+  for (const field of ["source_name", "source_url", "retrieved_date", "confidence_level"]) {
+    assert.ok(b.path[field], `path missing ${field}`);
+  }
+  assert.ok(VALID_CONFIDENCE.includes(b.path.confidence_level), "path bad confidence");
+  assert.ok(VALID_CONFIDENCE.includes(eu.confidence_level), "euLimits bad confidence");
+  ["limits_source_url", "euro_source_url", "accession_source_url"].forEach((f) => assert.match(eu[f], /^https:\/\//, `euLimits ${f}`));
 });
 
 test("current figures are consistent across data files (no silent drift)", () => {

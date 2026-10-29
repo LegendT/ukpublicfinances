@@ -3,9 +3,9 @@ layout: layouts/base.njk
 title: International comparison
 description: How UK government debt compares with other major economies, using a consistent international measure.
 eleventyComputed:
-  dataUpdated: "{{ internationalComparisons.retrieved_date }}"
+  dataUpdated: "{{ [internationalComparisons.retrieved_date, budget2026.lastUpdated] | latestOf }}"
 ---
-{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge, sourceNote %}
 
 <div class="page-intro prose">
   <h1>International comparison</h1>
@@ -14,8 +14,7 @@ eleventyComputed:
 
 {{ caveatBox(internationalComparisons.caveat, "Comparing like with like") }}
 
-<section aria-labelledby="table-heading">
-  <h2 id="table-heading">{{ internationalComparisons.measure }}, {{ internationalComparisons.year }}</h2>
+<h2 id="table-heading">{{ internationalComparisons.measure }}, {{ internationalComparisons.year }}</h2>
   <div class="table-scroll" tabindex="0" role="region" aria-label="International debt comparison table">
     <table class="data-table">
       <caption>Sorted from highest to lowest debt-to-GDP. All figures are for {{ internationalComparisons.year }}, the latest completed year.</caption>
@@ -39,15 +38,41 @@ eleventyComputed:
       </tbody>
     </table>
   </div>
-</section>
 
-<p class="source-note">
-  Debt figures: <a href="{{ internationalComparisons.source_url }}" rel="noopener">{{ internationalComparisons.source_name }}</a>, {{ internationalComparisons.year }}.
-  Retrieved {{ internationalComparisons.retrieved_date | timeTag | safe }}.
-  {{ dataFreshnessBadge(internationalComparisons.confidence_level, "") }}
-</p>
+{{ sourceNote(internationalComparisons, "Figures are for " + internationalComparisons.year + ".") }}
 
-<section class="prose" aria-labelledby="note-heading">
+<div class="prose">
   <h2 id="note-heading">Why the UK number here differs from the headline</h2>
   <p>This table uses <strong>general government gross debt</strong>, the most consistent measure across countries. The UK's own headline measure (public sector net debt, around {{ (dashboard.metrics | findBy("id", "debt-gdp")).value | round }}% of GDP) is lower because it subtracts liquid assets and is defined slightly differently. Comparing countries fairly means using the same definition for all of them, even if it is not the one a country usually quotes at home.</p>
-</section>
+</div>
+
+{% set eu = budget2026.euLimits %}
+{% set de = internationalComparisons.countries | findBy("id", "de") %}
+{% set fr = internationalComparisons.countries | findBy("id", "fr") %}
+{% set it = internationalComparisons.countries | findBy("id", "it") %}
+<div class="prose">
+  <h2 id="eu-limits">The UK's figures on the EU's measures</h2>
+  <p>The EU's fiscal rules, the Stability and Growth Pact, ask member states to keep the government deficit under <strong>{{ eu.deficitLimitPct }}% of GDP</strong> and gross government debt under <strong>{{ eu.debtLimitPct }}% of GDP</strong>. Countries joining the euro are judged against the same two values. Joining the EU itself is a different test: the accession criteria ask for a functioning market economy, and set no deficit or debt figure.</p>
+  {%- set firstUnder = budget2026.path.years | findBy("year", eu.uk.firstYearUnderDeficitLimit) %}
+  <p>The OBR publishes UK figures on the EU's measures, by financial year. The deficit (general government net borrowing) is {{ (budget2026.path.years | findBy("year", "2026-27")).ggnbPct }}% of GDP in 2026-27 and first falls under {{ eu.deficitLimitPct }}% in {{ firstUnder.year }}, at {{ firstUnder.ggnbPct }}%. Gross debt stays between {{ eu.uk.grossDebtMinPct | round }}% and {{ eu.uk.grossDebtMaxPct | round }}% of GDP in every year of the forecast, so the UK would miss the debt limit throughout.</p>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="UK figures on the EU measures, by year">
+    <table class="data-table data-table--years">
+      <caption>UK on the EU's measures, % of GDP, financial years. The limits are {{ eu.deficitLimitPct }} for the deficit and {{ eu.debtLimitPct }} for debt. 2025-26 is outturn, still provisional. Later years are OBR forecasts.</caption>
+      <thead><tr><th scope="col">Year</th><th scope="col" class="num">Deficit</th><th scope="col" class="num">Gross debt</th></tr></thead>
+      <tbody>
+        {%- for y in budget2026.path.years %}
+        <tr><th scope="row">{{ y.year }}</th><td class="num">{{ y.ggnbPct | oneDp }}</td><td class="num">{{ y.ggDebtPct | oneDp }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p>In the country table at the top of this page, the three EU members shown are all over the debt limit: Germany at {{ de.debtToGdp }}%, France at {{ fr.debtToGdp }}% and Italy at {{ it.debtToGdp }}%. France ({{ fr.deficitToGdp }}%) and Italy ({{ it.deficitToGdp }}%) are also over the deficit limit. Those figures are the IMF's, for calendar year {{ internationalComparisons.year }}. The OBR's are by financial year, so the two do not match exactly: the UK row in the country table reads {{ (internationalComparisons.countries | findBy("id", "uk")).debtToGdp }}%, while the OBR's 2025-26 figure is {{ (budget2026.path.years | findBy("year", "2025-26")).ggDebtPct }}%. The caveat at the top of this page explains the difference.</p>
+  <dl class="source-note">
+    <div><dt>Limits</dt> <dd><a href="{{ eu.limits_source_url }}" rel="noopener">{{ eu.limits_source_name }}</a></dd></div>
+    <div><dt>Euro criteria</dt> <dd><a href="{{ eu.euro_source_url }}" rel="noopener">{{ eu.euro_source_name }}</a></dd></div>
+    <div><dt>Accession criteria</dt> <dd><a href="{{ eu.accession_source_url }}" rel="noopener">{{ eu.accession_source_name }}</a></dd></div>
+    <div><dt>Retrieved</dt> <dd>{{ eu.retrieved_date | timeTag | safe }}</dd></div>
+    <div><dt>Confidence</dt> <dd>{{ dataFreshnessBadge(eu.confidence_level, true) }}</dd></div>
+  </dl>
+  {{ sourceNote(budget2026.path, "The UK figures in the table above, by financial year.") }}
+</div>

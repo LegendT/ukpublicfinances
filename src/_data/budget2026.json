@@ -1,0 +1,162 @@
+{
+  "lastUpdated": "2026-10-29",
+  "forecast_name": "OBR, Economic and fiscal outlook, October 2026",
+  "forecast_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+  "forecast_published": "2026-10-28",
+  "last_assessment": "Budget 2025 (November 2025), when the fiscal rules were last formally assessed",
+  "budget_document_url": "https://www.gov.uk/government/publications/budget-2026-document",
+  "caveat": "Every figure on this page is an OBR forecast, not an outturn. Forecasts are revised at each fiscal event, and the OBR gives a 60 per cent chance that borrowing in 2031-32 lands anywhere between a surplus of 1.0 per cent of GDP and a deficit of 4.4 per cent. 'This year' means the financial year 2026-27, April 2026 to March 2027. The headroom figures are compared with Budget 2025, because that is when the fiscal rules were last formally assessed; the other comparisons are with the OBR's March 2026 forecast.",
+  "metrics": [
+    {
+      "id": "headroom-mandate",
+      "metric_name": "Margin against the fiscal mandate (current budget in surplus in 2029-30)",
+      "value": 15,
+      "previous_value": 22,
+      "probability_pct": 56,
+      "previous_probability_pct": 59,
+      "unit": "£ billion",
+      "date": "2026-10-28",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, paragraphs 1.24 and 7.17",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-28",
+      "confidence_level": "estimated",
+      "notes": "The current budget is forecast to be in surplus by £15 billion (0.4 per cent of GDP) in 2029-30. This is £7 billion lower than the £22 billion (0.6 per cent of GDP) when the rules were last formally assessed at Budget 2025. The OBR puts the probability of meeting the mandate at 56 per cent, against 59 per cent at Budget 2025."
+    },
+    {
+      "id": "headroom-supplementary",
+      "metric_name": "Margin against the supplementary target (public sector net financial liabilities falling in 2029-30)",
+      "value": 24,
+      "previous_value": 24,
+      "unit": "£ billion",
+      "date": "2026-10-28",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, paragraphs 1.25 and 7.17",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-28",
+      "confidence_level": "estimated",
+      "notes": "Met by a margin of £24 billion (0.7 per cent of GDP), unchanged from Budget 2025."
+    },
+    {
+      "id": "borrowing-this-year",
+      "metric_name": "Public sector net borrowing, 2026-27",
+      "value": 133.2,
+      "unit": "£ billion",
+      "date": "2026-10-28",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, Tables A.9 and A.10 and paragraphs 1.17 to 1.18",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-28",
+      "confidence_level": "estimated",
+      "notes": "4.2 per cent of GDP. Borrowing is higher than the March forecast in every year; the year-by-year differences are the borrowingVsMarchGbp column of path.years, from Table A.10. The OBR rounds them to 'around £18 billion this year, £16 billion in 2027-28, and an average of £11 billion a year thereafter', and attributes most of the change to higher debt interest."
+    },
+    {
+      "id": "debt-interest-this-year",
+      "metric_name": "Debt interest spending, 2026-27",
+      "value": 124,
+      "pre_measures_change_vs_march": 15,
+      "unit": "£ billion",
+      "date": "2026-10-28",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, paragraphs 1.17 and 5.29",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-28",
+      "confidence_level": "estimated",
+      "notes": "Before Budget measures, debt interest this year was £15 billion higher than the March forecast, driven by higher inflation raising the cost of index-linked gilts (paragraph 1.17)."
+    },
+    {
+      "id": "debt-interest-2031-32",
+      "metric_name": "Debt interest spending, 2031-32",
+      "value": 160,
+      "average_annual_increase": 7,
+      "unit": "£ billion",
+      "date": "2026-10-28",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, paragraph 5.29",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-28",
+      "confidence_level": "estimated",
+      "notes": "Rises from £124 billion in 2026-27 to £160 billion in 2031-32, an average year-on-year increase of around £7 billion. Driven by new borrowing adding to the stock of debt, and by an average of £184 billion of maturing gilts refinanced each year, usually at higher rates than the debt they replace."
+    },
+    {
+      "id": "net-debt-peak",
+      "metric_name": "Public sector net debt, peak, 2028-29",
+      "value": 97.3,
+      "unit": "% of GDP",
+      "date": "2026-10-28",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, Table A.9 and paragraphs 1.22 and 6.25",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-28",
+      "confidence_level": "estimated",
+      "notes": "Net debt rises from 95.5 per cent of GDP in 2026-27 to a peak of 97.3 per cent in 2028-29, then falls back to 95.6 per cent in 2031-32. The year-by-year differences from March are the netDebtVsMarchPct column of path.years. In cash it rises every year, from £3,082 billion in 2026-27 to £3,695 billion in 2031-32."
+    },
+    {
+      "id": "psnfl-this-year",
+      "metric_name": "Public sector net financial liabilities, 2026-27",
+      "value": 83.2,
+      "unit": "% of GDP",
+      "date": "2026-10-28",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, Table A.9",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-28",
+      "confidence_level": "estimated",
+      "notes": "The measure the government's debt rule uses. Rises to 83.8 per cent in 2027-28 and 2028-29, then falls to 81.7 per cent in 2031-32."
+    },
+    {
+      "id": "growth-2026",
+      "metric_name": "Real GDP growth, 2026",
+      "value": 1.2,
+      "previous_value": 1.1,
+      "unit": "% change on a year earlier",
+      "date": "2026-10-28",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, Tables A.1 and A.2",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-28",
+      "confidence_level": "estimated",
+      "notes": "Calendar year. Up 0.1 percentage points on the March forecast. The OBR describes it as 'around 1¼ per cent'."
+    },
+    {
+      "id": "growth-2027",
+      "metric_name": "Real GDP growth, 2027",
+      "value": 1.0,
+      "previous_value": 1.5,
+      "unit": "% change on a year earlier",
+      "date": "2026-10-28",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, Tables A.1 and A.2, paragraph 2.3",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-28",
+      "confidence_level": "estimated",
+      "notes": "Calendar year. Down 0.5 percentage points on the March forecast, which the OBR attributes to higher energy prices and interest rates. CPI inflation is forecast to peak close to 4 per cent in early 2027."
+    }
+  ],
+  "path": {
+    "source_name": "OBR, Economic and fiscal outlook, October 2026, Tables A.9 and A.10",
+    "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+    "retrieved_date": "2026-10-28",
+    "confidence_level": "estimated",
+    "outturn_note": "The OBR's 2025-26 borrowing outturn is £134.3 billion; the monthly update elsewhere on this site gives £134.2 billion from a later ONS release.",
+    "note": "2025-26 is outturn and still provisional; later years are forecasts. The VsMarch columns come from Table A.10, which stops at 2030-31; the 2031-32 net debt difference (0.6 points) is from paragraph 1.22, and Table A.10 gives no borrowing difference for that year. ggnbPct and ggDebtPct are general government net borrowing and gross debt, the measures used for international comparison and the EU's limits.",
+    "years": [
+      { "year": "2025-26", "outturn": true, "borrowingGbp": 134.3, "borrowingPct": 4.4, "borrowingVsMarchGbp": 1.6, "netDebtGbp": 2918, "netDebtPct": 93.1, "netDebtVsMarchPct": -1.2, "psnflPct": 81.4, "ggnbPct": 5.4, "ggDebtPct": 102.4 },
+      { "year": "2026-27", "outturn": false, "borrowingGbp": 133.2, "borrowingPct": 4.2, "borrowingVsMarchGbp": 17.7, "netDebtGbp": 3082, "netDebtPct": 95.5, "netDebtVsMarchPct": 0.7, "psnflPct": 83.2, "ggnbPct": 4.5, "ggDebtPct": 102.3 },
+      { "year": "2027-28", "outturn": false, "borrowingGbp": 112.0, "borrowingPct": 3.4, "borrowingVsMarchGbp": 15.5, "netDebtGbp": 3239, "netDebtPct": 96.7, "netDebtVsMarchPct": 1.0, "psnflPct": 83.8, "ggnbPct": 3.9, "ggDebtPct": 103.9 },
+      { "year": "2028-29", "outturn": false, "borrowingGbp": 99.5, "borrowingPct": 2.9, "borrowingVsMarchGbp": 13.5, "netDebtGbp": 3384, "netDebtPct": 97.3, "netDebtVsMarchPct": 1.0, "psnflPct": 83.8, "ggnbPct": 3.5, "ggDebtPct": 104.8 },
+      { "year": "2029-30", "outturn": false, "borrowingGbp": 73.8, "borrowingPct": 2.1, "borrowingVsMarchGbp": 10.4, "netDebtGbp": 3487, "netDebtPct": 96.7, "netDebtVsMarchPct": 0.6, "psnflPct": 83.1, "ggnbPct": 2.7, "ggDebtPct": 104.4 },
+      { "year": "2030-31", "outturn": false, "borrowingGbp": 66.9, "borrowingPct": 1.8, "borrowingVsMarchGbp": 7.9, "netDebtGbp": 3583, "netDebtPct": 95.9, "netDebtVsMarchPct": 0.8, "psnflPct": 82.3, "ggnbPct": 2.4, "ggDebtPct": 104.0 },
+      { "year": "2031-32", "outturn": false, "borrowingGbp": 68.3, "borrowingPct": 1.8, "borrowingVsMarchGbp": null, "netDebtGbp": 3695, "netDebtPct": 95.6, "netDebtVsMarchPct": 0.6, "psnflPct": 81.7, "ggnbPct": 2.1, "ggDebtPct": 103.6 }
+    ]
+  },
+  "euLimits": {
+    "_note": "The limits live here rather than in internationalComparisons.json because the section that uses them also needs the UK forecast path above, so the two would be split across files for no gain. The uk block holds claims the templates state in words; test/data.test.js checks each against path.years, so a refresh that changes the path fails the test until the claim is updated.",
+    "deficitLimitPct": 3,
+    "debtLimitPct": 60,
+    "uk": {
+      "firstYearUnderDeficitLimit": "2029-30",
+      "grossDebtMinPct": 102.3,
+      "grossDebtMaxPct": 104.8
+    },
+    "limits_source_name": "European Parliament, The EU framework for fiscal policies (fact sheet)",
+    "limits_source_url": "https://www.europarl.europa.eu/factsheets/en/sheet/89/the-eu-framework-for-fiscal-policies",
+    "euro_source_name": "European Central Bank, Convergence criteria",
+    "euro_source_url": "https://www.ecb.europa.eu/ecb/orga/escb/html/convergence-criteria.en.html",
+    "accession_source_name": "European Commission, Accession criteria (Copenhagen criteria)",
+    "accession_source_url": "https://enlargement.ec.europa.eu/enlargement-policy/glossary/accession-criteria_en",
+    "retrieved_date": "2026-10-29",
+    "confidence_level": "official"
+  }
+}

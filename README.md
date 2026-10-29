@@ -6,7 +6,7 @@ It is **not** a political commentary site and **not** a gimmicky debt clock. Eve
 
 ## Data status
 
-Live at **[ukpublicfinances.org](https://ukpublicfinances.org)**. The headline, monthly, and indicator figures were refreshed on 25 October 2026 against the ONS September 2026 public sector finances release, and the international comparison against the IMF World Economic Outlook of October 2026. Every public-facing figure was last re-audited in full against its primary source (ONS, OBR, HMRC, HM Treasury, House of Commons Library, IMF, and DWP) on 21 July 2026, following the June 2026 release and PESA 2026, with the international comparison pulled directly from the IMF DataMapper. Each record shows its own `source_url`, `date`, and `confidence_level`. Known caveats: the **long-run historical series before about 2010** is a best-estimate reconstruction (`confidence_level: estimated`); and the GDP figure is the denominator consistent with the published debt-to-GDP ratio rather than a single published release. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) for how to refresh figures.
+Live at **[ukpublicfinances.org](https://ukpublicfinances.org)**. The headline, monthly, and indicator figures were refreshed on 25 October 2026 against the ONS September 2026 public sector finances release, and the international comparison against the IMF World Economic Outlook of October 2026. The Budget 2026 page and the EU-limits section on the international page use the OBR's Economic and fiscal outlook of 28 October 2026. Those figures were read from the PDF on 28 October 2026. On 29 October 2026 the dashboard's debt interest moved to the same forecast (the 2026-27 figure, £124bn). So did the GDP growth and tax burden indicators, and the simulator's interest rate and nominal growth assumptions. Every public-facing figure was last re-audited in full against its primary source (ONS, OBR, HMRC, HM Treasury, House of Commons Library, IMF, and DWP) on 21 July 2026, following the June 2026 release and PESA 2026, with the international comparison pulled directly from the IMF DataMapper. Each record shows its own `source_url`, `date`, and `confidence_level`. Known caveats: the **long-run historical series before about 2010** is a best-estimate reconstruction (`confidence_level: estimated`); and the GDP figure is the denominator consistent with the published debt-to-GDP ratio rather than a single published release. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) for how to refresh figures.
 
 ## Stack
 
@@ -66,6 +66,7 @@ npx lighthouse http://localhost:8080 --only-categories=accessibility --view
 │   │   ├── debtTimeseries.json       # long-run series for the timeline
 │   │   ├── spendingComparisons.json  # annual budgets for context
 │   │   ├── internationalComparisons.json
+│   │   ├── budget2026.json           # the latest OBR forecast, for the Budget page and the EU limits box
 │   │   ├── indicators.json           # wider economic indicators (health page)
 │   │   ├── monthlyUpdates.json       # monthly explainer entries
 │   │   ├── events.json               # neutral timeline markers
@@ -98,11 +99,10 @@ Reusable Nunjucks macros in `src/_includes/components/macros.njk`:
 | Macro | Purpose |
 | --- | --- |
 | `metricCard` | A headline figure: value, explanation, "what this means", source note |
-| `sourceNote` | Source name, link, figure date, retrieved date, confidence badge |
+| `sourceNote` | A `dl` of Source, Figure dated, Retrieved, Confidence and an optional Note, styled as one line |
 | `caveatBox` | A clearly flagged caution |
-| `dataFreshnessBadge` | Confidence level marker (official / provisional / estimated / calculated) |
+| `dataFreshnessBadge` | Confidence level marker (official / provisional / estimated / calculated); says "Confidence:" to a screen reader unless called bare inside a labelled list |
 | `glossaryTerm` | A defined term |
-| `spendingRow` | One comparison row against an annual budget |
 
 The timeline chart renders a `<table>` fallback server-side, then enhances with SVG. The translator calculates in JavaScript and shows a `<noscript>` notice pointing at the sources page instead of results.
 
@@ -137,7 +137,9 @@ Verify, don't assume: run `npm run a11y:all` (pa11y-ci, WCAG 2.2 AA across every
 The audit is a regression guard, not a proof: it cannot tell a `strong` doing a title's job from a title, or a card that should be a list from one that is. These are checked by hand when a template changes.
 
 - A headline figure with an explanation and a details block is an `article` with an `h3` (the dashboard and health cards).
-- A label with one value is a `dl` of `dt`/`dd` pairs, label first, on every page and in every script that injects cards.
+- A label with one value is a `dl` of `dt`/`dd` pairs, label first, on every page and in every script that injects cards. Source lines are this pattern too: `sourceNote` renders a `dl` and the stylesheet runs it as one line, so no page writes a source line as a paragraph.
+- A repeated set of cards is a list, `ul > li > article`, so a screen reader announces the count (the dashboard, health and sources grids). A repeated set of plain items is a list too, without the `article` (the comparison bars on debt in context). These lists carry `role="list"`, because `list-style: none` strips list semantics in WebKit.
+- A chart's summary is a paragraph before the `figure`, outside it ("The chart below shows..."), with a link to the data table; the image itself is named "Line chart" and its `figcaption` carries the heading.
 - A caveat is a `div` with `role="note"` and a real heading, not an `aside`.
 - Dates in prose go through the `timeTag` filter, so they carry `datetime`; `readableDate` is for text-only output.
 - A `section` with `aria-labelledby` appears only where a block needs a heading the design hides, or is a distinct labelled region such as a tool. Prose pages run bare `h2`s.

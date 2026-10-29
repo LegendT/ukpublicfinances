@@ -25,6 +25,7 @@
       { "text": "Budget simulator", "url": "/budget-simulator/" }
     ] },
     { "text": "Learn", "children": [
+      { "text": "Budget 2026: what changed", "url": "/budget-2026/" },
       { "text": "Debt vs deficit", "url": "/deficit-vs-debt/" },
       { "text": "Monthly update", "url": "/monthly/" },
       { "text": "Glossary", "url": "/glossary/" }

@@ -76,8 +76,15 @@
     const earliest = earliestYearFor(measure);
     syncPeriodOptions(earliest);
     const startYear = parseInt(periodSelect.value, 10);
+    // The summary paragraph's year follows the control whether or not a chart results.
+    const start = document.getElementById("chart-start");
+    if (start) start.textContent = String(startYear);
+    // The container becomes an image only once the script draws into it.
+    chartEl.setAttribute("role", "img");
     const startNote = earliest > 1700 && earliest !== Infinity ? ` (data from ${earliest})` : "";
-    document.getElementById("chart-measure-label").textContent = measureLabels[measure] + startNote;
+    // Lower-case first letter: the label sits mid-sentence in the summary paragraph.
+    const label = measureLabels[measure];
+    document.getElementById("chart-measure-label").textContent = label.charAt(0).toLowerCase() + label.slice(1) + startNote;
 
     const points = series
       .filter((d) => d.year >= startYear && d[measure] !== null && d[measure] !== undefined)
@@ -95,10 +102,9 @@
       chartEl.innerHTML = '<p class="chart__empty">Not enough data for this combination. See the table below.</p>';
       return;
     }
-    chartEl.setAttribute(
-      "aria-label",
-      `Line chart: ${measureLabels[measure]}, since ${startYear}. The same data is in the table below.`
-    );
+    // A short generic name: the summary paragraph before the figure says what the chart
+    // shows, and a name that repeated it was heard twice.
+    chartEl.setAttribute("aria-label", "Line chart");
 
     const years = points.map((p) => p.year);
     const values = points.map((p) => p.value);

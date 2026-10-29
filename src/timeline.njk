@@ -5,7 +5,7 @@ description: How UK government debt, borrowing, and debt interest have changed o
 eleventyComputed:
   dataUpdated: "{{ [dashboard.lastUpdated, assumptions.translator.lastUpdated] | latestOf }}"
 ---
-{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge, sourceNote %}
 
 {# The current-year point comes from the dashboard, the single source of truth. #}
 {% set ndNow = dashboard.metrics | findBy("id", "net-debt") %}
@@ -34,7 +34,7 @@ eleventyComputed:
       <option value="1700">Since 1700</option>
       <option value="1900">Since 1900</option>
       <option value="1945">Since 1945</option>
-      <option value="1979" selected>Since 1979</option>
+      <option value="1979" selected>Since 1979</option>{# the summary paragraph's default year above must match this #}
       <option value="2008">Since 2008</option>
     </select>
   </div>
@@ -42,32 +42,37 @@ eleventyComputed:
 
 <p id="period-note" class="visually-hidden" role="status"></p>
 
+{# The summary sits before the figure, outside it, so a screen reader meets what the chart shows
+   before the image; inside the figure it was skipped or read only as a hint. The script keeps
+   the measure and start year current. #}
+<p class="prose">The chart below shows <span id="chart-measure-label">debt as a share of GDP</span> since <span id="chart-start">1979</span>. <a href="#timeline-table">The same data is in the table below.</a></p>
+
 <figure class="chart">
-  <div id="chart" class="chart__canvas" role="img" aria-label="Line chart of UK debt over time. The same data is in the table below.">
-    <!-- SVG injected by JS with aria-hidden; this container is the image, named by aria-label, and the table below is the accessible alternative. -->
+  <figcaption id="chart-caption" class="chart__caption"><h2>UK debt over time</h2></figcaption>
+  <div id="chart" class="chart__canvas">
+    <!-- SVG injected by JS with aria-hidden. The script gives this container role="img" and its name
+         when it draws, so without JS it is an empty box and not an image named "Line chart". The
+         table below is the accessible alternative. -->
   </div>
-  <figcaption id="chart-caption" class="chart__caption">
-    UK debt over time. <span id="chart-measure-label">Debt as a share of GDP</span>.
-  </figcaption>
 </figure>
 
-<section class="timeline-events" aria-labelledby="events-heading">
+<div class="timeline-events">
   <h2 id="events-heading">Event markers</h2>
   <ul class="event-list">
     {%- for e in events.events %}
     <li class="event-list__item">
-      <time class="event-list__year" datetime="{{ e.year }}">{{ e.year }}</time>
+      <span class="event-list__year">{{ e.year }}</span>
       <span class="event-list__body"><strong>{{ e.title }}</strong>: {{ e.summary }}</span>
     </li>
     {%- endfor %}
   </ul>
-</section>
+</div>
 
 <details class="data-table-wrap" open>
   <summary>Show the data as a table</summary>
-  <div class="table-scroll" tabindex="0" role="region" aria-label="UK debt time series">
+  <div class="table-scroll" tabindex="0" role="region" aria-label="UK debt time series" id="timeline-table">
   <table class="data-table">
-    <caption>UK debt time series. Pre-1900 values are approximate historical reconstructions.</caption>
+    <caption>UK debt time series. Values before about 2010 are best-estimate reconstructions; each row carries its own confidence level.</caption>
     <thead>
       <tr>
         <th scope="col">Year</th>
@@ -94,19 +99,15 @@ eleventyComputed:
         <td class="num">{{ dgNow.value }}</td>
         <td class="num">{{ ndNow.value | number }}</td>
         <td class="num">{{ bwNow | number }}</td>
-        <td class="num">{{ diNow.value | number }}</td>
-        <td>provisional</td>
+        <td class="num">{{ diNow.value | number }} <span class="muted">(forecast)</span></td>
+        <td>{{ ndNow.confidence_level }}; interest {{ diNow.confidence_level }}</td>
       </tr>
     </tbody>
   </table>
   </div>
 </details>
 
-<p class="source-note">
-  Source: <a href="{{ debtTimeseries.source_url }}" rel="noopener">{{ debtTimeseries.source_name }}</a>.
-  Retrieved {{ debtTimeseries.retrieved_date | timeTag | safe }}.
-  {{ dataFreshnessBadge("estimated", "") }}
-</p>
+{{ sourceNote({ source_name: debtTimeseries.source_name, source_url: debtTimeseries.source_url, retrieved_date: debtTimeseries.retrieved_date }, "The current-year row comes from the dashboard's own records; its interest figure is the OBR's " + diNow.period + " forecast.") }}
 
 {{ caveatBox(debtTimeseries.note, "About this series") }}
 

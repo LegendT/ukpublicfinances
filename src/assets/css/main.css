@@ -171,6 +171,16 @@ dl.metric-grid { margin: 0; }
 
 /* Source note + badges */
 .source-note { font-size: 0.82rem; color: var(--ink-soft); margin: 0.5rem 0 0; }
+/* A source line is a list of label-value pairs that reads as one line: "Source: X. Retrieved D. Confidence: official". */
+.source-note div, .source-note dt, .source-note dd { display: inline; margin: 0; }
+.source-note dt::after { content: ":"; }
+.source-note div:not(:last-child) dd::after { content: "."; }
+.source-note div + div::before { content: " "; }
+/* Card grids are lists, so a screen reader announces the count; the grid styling stays on the list. */
+ul.metric-grid, ul.indicator-grid, ul.source-grid, .compare-list { list-style: none; margin: 0; padding: 0; }
+/* The list item is now the grid item, so it stretches to the row; a grid on it makes the card inside fill it,
+   as the card did when it was the grid item itself. */
+ul.metric-grid > li, ul.indicator-grid > li, ul.source-grid > li { display: grid; }
 .badge {
   display: inline-flex; align-items: center; gap: 0.3rem;
   font-size: 0.72rem; font-weight: 600; text-transform: capitalize;
@@ -262,12 +272,16 @@ input[type="number"], select {
 
 /* Tables */
 .data-table-wrap { margin: 1.5rem 0; overflow-x: auto; }
-.data-table-wrap > summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+.data-table-wrap > summary, details.prose > summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+/* A link standing on its own line gets the house 44px target; links inside a sentence are exempt. */
+.block-link { display: inline-block; min-height: 44px; padding-block: 0.6rem; }
 .data-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
 .data-table caption { text-align: left; color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 0.4rem; }
 .data-table th, .data-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); text-align: left; }
 .data-table thead th { border-bottom: 2px solid var(--line); }
 .data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+/* Year-by-year forecast tables: a split "2025-\n26" reads as two years, so the year column scrolls rather than wraps. */
+.data-table--years th[scope="row"] { white-space: nowrap; }
 .data-table tbody tr:hover { background: #f0f3f6; }
 
 /* Events */
@@ -302,8 +316,11 @@ input[type="number"], select {
 /* Footer */
 .site-footer { background: #eef1f4; border-top: 1px solid var(--line); margin-top: 3rem; padding-block: 1.5rem; font-size: 0.9rem; color: var(--ink-soft); }
 .site-footer__warn { color: #6b5a1e; }
-.site-footer__links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; }
+.site-footer__links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.75rem; }
 .site-footer__links li + li::before { content: "· "; }
+/* The links sit in a row, so each needs its own 44px target: an 18px-tall link with a
+   12px gap fails the 24px spacing test of WCAG 2.5.8 as well as the house 44px. */
+.site-footer__links a { display: inline-block; min-height: 44px; padding: 0.7rem 0.1rem; }
 
 .see-also { margin-top: 2rem; }
 
@@ -335,10 +352,12 @@ input[type="number"], select {
 /* Neutral, non-alarmist: rising, falling and stable share one colour and the
    direction is shown by the arrow, not by red/green. */
 .status {
+  display: inline-block; margin: 0;
   font-size: 0.82rem; font-weight: 600; text-transform: capitalize;
   padding: 0.1rem 0.5rem; border-radius: 999px; background: #eef1f4; color: #3a4a5a;
   white-space: nowrap;
 }
+.status dd { display: inline; margin: 0; }
 .status__arrow { font-weight: 700; font-size: 1.4em; line-height: 1; vertical-align: -0.05em; }
 
 /* Budget simulator */
@@ -394,10 +413,10 @@ input[type="number"], select {
 
 /* Featured headline metric (net debt), more prominent, balances the grid */
 @media (min-width: 38rem) {
-  .metric-card--feature { grid-column: 1 / -1; }
+  .metric-grid__feature { grid-column: 1 / -1; }
 }
 @media (min-width: 60rem) {
-  .metric-card--feature { grid-column: span 2; }
+  .metric-grid__feature { grid-column: span 2; }
 }
 .metric-card--feature .metric-card__value { font-size: clamp(2rem, 5vw, 2.7rem); }
 
@@ -445,17 +464,25 @@ input[type="number"], select {
 .sim-goal--mid { background: #d4e4f4; border-color: var(--brand); color: #123a54; }
 .sim-goal--win { background: #d7eede; border-color: var(--c-official); color: #1f4a2b; }
 
-/* On mobile the result panel stacks below the sliders, so pin the goal banner
-   to the bottom of the screen, the balance status stays visible while you drag
-   the sliders. (On desktop the banner is already visible in the sticky panel.) */
-@media (max-width: 55.99rem) {
-  body.has-sticky-status { padding-bottom: 5rem; }
-  /* Keeps elements scrolled into view (focus, anchors) clear of the fixed
-     banner, which would otherwise sit directly over them. */
-  html:has(body.has-sticky-status) { scroll-padding-bottom: 8rem; }
+/* The result panel stacks below the sliders, so the goal banner is pinned to the
+   bottom of the screen and the balance status stays visible while you drag the
+   sliders. Mobile first: the pinned banner is the base, and the two-column
+   layout from 56rem, where the sticky panel already shows it, releases it. */
+body.has-sticky-status { padding-bottom: 5rem; }
+/* Keeps elements scrolled into view (focus, anchors) clear of the fixed
+   banner, which would otherwise sit directly over them. */
+html:has(body.has-sticky-status) { scroll-padding-bottom: 8rem; }
+.has-sticky-status .sim-goal {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  margin: 0; border-radius: 0; border-width: 4px 0 0 0;
+  box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.18);
+}
+@media (min-width: 56rem) {
+  body.has-sticky-status { padding-bottom: 0; }
+  html:has(body.has-sticky-status) { scroll-padding-bottom: 0; }
   .has-sticky-status .sim-goal {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
-    margin: 0; border-radius: 0; border-width: 4px 0 0 0;
-    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.18);
+    position: static; z-index: auto;
+    margin: 0 0 1rem; border-radius: var(--radius); border-width: 1px 1px 1px 5px;
+    box-shadow: none;
   }
 }

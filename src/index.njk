@@ -49,7 +49,8 @@ eleventyComputed:
 
 <section aria-labelledby="headline-heading">
   <h2 id="headline-heading" class="visually-hidden">Headline figures</h2>
-  <div class="metric-grid">
+  {# role="list" because list-style: none strips list semantics in WebKit, and the count is the point. #}
+  <ul class="metric-grid" role="list">
     {%- for metric in dashboard.metrics %}
       {%- if metric.display == "poundsShort" %}
         {% set formatted = metric.value | poundsShort %}
@@ -66,16 +67,17 @@ eleventyComputed:
       {%- else %}
         {% set formatted = metric.value %}
       {%- endif %}
-      {{ metricCard(metric, formatted, "metric-card--feature" if metric.id == "net-debt" else "") }}
+      <li{% if metric.id == "net-debt" %} class="metric-grid__feature"{% endif %}>{{ metricCard(metric, formatted, "metric-card--feature" if metric.id == "net-debt" else "") }}</li>
     {%- endfor %}
-  </div>
+  </ul>
 </section>
 
 {{ caveatBox(dashboard.caveat, "About these figures") }}
 
-<section class="next-steps" aria-labelledby="explore-heading">
+<div class="next-steps">
   <h2 id="explore-heading">Explore further</h2>
   <ul class="card-links">
+    <li><a href="{{ '/budget-2026/' | url }}"><span class="card-links__title">Budget 2026: what changed</span><span>The OBR's October forecast, figure by figure.</span></a></li>
     <li><a href="{{ '/timeline/' | url }}"><span class="card-links__title">Historical timeline</span><span>How debt has changed since 1700.</span></a></li>
     <li><a href="{{ '/debt-in-context/' | url }}"><span class="card-links__title">Debt in context</span><span>Debt and interest next to annual spending.</span></a></li>
     <li><a href="{{ '/interest/' | url }}"><span class="card-links__title">Interest costs</span><span>What servicing the debt costs each day.</span></a></li>
@@ -88,4 +90,4 @@ eleventyComputed:
     <li><a href="{{ '/monthly/' | url }}"><span class="card-links__title">Monthly update</span><span>The latest release in plain English.</span></a></li>
     <li><a href="{{ '/sources/' | url }}"><span class="card-links__title">Sources</span><span>Where every figure comes from.</span></a></li>
   </ul>
-</section>
+</div>

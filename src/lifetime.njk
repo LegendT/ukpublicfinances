@@ -31,7 +31,10 @@ eleventyComputed:
 </section>
 
 <noscript>
-  <p class="caveat">This feature needs JavaScript. The underlying series is on the <a href="{{ '/timeline/' | url }}">timeline page</a> as a table.</p>
+  <div class="caveat" role="note">
+    <h2 class="caveat__heading">This feature needs JavaScript</h2>
+    <p>The underlying series is on the <a href="{{ '/timeline/' | url }}">timeline page</a> as a table.</p>
+  </div>
 </noscript>
 
 {{ caveatBox("Changes in debt reflect economic cycles, wars, crises, policy choices, inflation, and changes in measurement. The figure for your birth year comes from the nearest data points either side, so treat it as illustrative.", "Reading this fairly") }}

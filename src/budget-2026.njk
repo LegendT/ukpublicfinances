@@ -1,0 +1,101 @@
+---
+layout: layouts/base.njk
+title: "Budget 2026: what changed"
+description: What the OBR's October 2026 forecast changed for headroom, borrowing, debt interest, debt and growth, in plain English, with every figure sourced.
+ogType: article
+eleventyComputed:
+  dataUpdated: "{{ budget2026.lastUpdated }}"
+---
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+
+{% set b = budget2026 %}
+{% set mandate = b.metrics | findBy("id", "headroom-mandate") %}
+{% set supp = b.metrics | findBy("id", "headroom-supplementary") %}
+{% set borrowing = b.metrics | findBy("id", "borrowing-this-year") %}
+{% set interest = b.metrics | findBy("id", "debt-interest-this-year") %}
+{% set interestEnd = b.metrics | findBy("id", "debt-interest-2031-32") %}
+{% set debtPeak = b.metrics | findBy("id", "net-debt-peak") %}
+{% set psnfl = b.metrics | findBy("id", "psnfl-this-year") %}
+{% set g26 = b.metrics | findBy("id", "growth-2026") %}
+{% set g27 = b.metrics | findBy("id", "growth-2027") %}
+{% set eu = b.euLimits %}
+{% set thisYear = b.path.years | findBy("year", "2026-27") %}
+{% set lowYear = b.path.years | findBy("year", "2030-31") %}
+{% set endYear = b.path.years | findBy("year", "2031-32") %}
+{# Highest PSNFL value, and every year that reaches it: the forecast has a two-year tie. #}
+{% set psnflPeak = (b.path.years | sort(true, false, "psnflPct"))[0].psnflPct %}
+{% set psnflPeakYears = [] %}
+{%- for y in b.path.years %}{% if y.psnflPct == psnflPeak %}{% set _ = psnflPeakYears.push(y.year) %}{% endif %}{% endfor %}
+
+<article class="prose">
+<div class="page-intro">
+  <h1>Budget 2026: what changed</h1>
+  <p class="lede">The Chancellor's Budget on {{ b.forecast_published | timeTag | safe }} came with a new forecast from the Office for Budget Responsibility (OBR). This page sets out what that forecast changed, figure by figure, and says nothing about whether the policies are right.</p>
+  <p class="updated">Figures from the <a href="{{ b.forecast_url }}" rel="noopener">{{ b.forecast_name }}</a>. {{ dataFreshnessBadge(b.path.confidence_level, "") }}</p>
+</div>
+
+{{ caveatBox(b.caveat, "How to read these figures") }}
+
+<h2>The one-paragraph version</h2>
+<p>The government has less room against its own borrowing rule than at the last Budget: £{{ mandate.value }} billion, down from £{{ mandate.previous_value }} billion. Borrowing is higher than the OBR expected in March in every year of the forecast, mainly because debt interest costs more. Debt interest reaches £{{ interest.value }} billion this year and £{{ interestEnd.value }} billion by 2031-32. Net debt peaks at {{ debtPeak.value }}% of GDP in 2028-29. Growth is slightly higher in 2026 than the OBR expected in March, and lower in 2027.</p>
+
+<h2>Headroom: the buffer against the fiscal rules</h2>
+<p>"Headroom" is the margin by which the government is forecast to meet its fiscal rules. There are two rules, so there are two margins. The OBR compares them with {{ b.last_assessment }}.</p>
+<dl class="def-list">
+  <dt>Current budget in surplus in 2029-30</dt>
+  <dd>Met by <strong>£{{ mandate.value }} billion</strong>, down from £{{ mandate.previous_value }} billion. The OBR puts the chance of meeting this rule at {{ mandate.probability_pct }}%, down from {{ mandate.previous_probability_pct }}%.</dd>
+  <dt>Net financial liabilities falling as a share of GDP in 2029-30</dt>
+  <dd>Met by <strong>£{{ supp.value }} billion</strong>, unchanged.</dd>
+</dl>
+<p class="source-note">Sources: <a href="{{ mandate.source_url }}" rel="noopener">{{ mandate.source_name }}</a>; <a href="{{ supp.source_url }}" rel="noopener">{{ supp.source_name }}</a>. Retrieved {{ mandate.retrieved_date | timeTag | safe }}. {{ dataFreshnessBadge(mandate.confidence_level, "") }}</p>
+
+<h2>Borrowing</h2>
+<p>Borrowing is the gap between what the government spends and what it raises in a year. The OBR forecasts <strong>£{{ borrowing.value | number }} billion</strong> ({{ thisYear.borrowingPct }}% of GDP) this year, falling to £{{ lowYear.borrowingGbp | number }} billion in 2030-31 and staying about there in 2031-32.</p>
+<p>What changed: borrowing is higher than the March forecast in every year the OBR compares. The last column of the table shows by how much. The OBR says most of the change is higher debt interest.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Borrowing forecast by year">
+  <table class="data-table data-table--years">
+    <caption>Public sector net borrowing, and the change since the March forecast. 2025-26 is outturn, still provisional. Later years are forecasts. The March comparison stops at 2030-31. {{ b.path.outturn_note }}</caption>
+    <thead><tr><th scope="col">Year</th><th scope="col" class="num">£ billion</th><th scope="col" class="num">% of GDP</th><th scope="col" class="num">Change since March, £bn</th></tr></thead>
+    <tbody>
+      {%- for y in b.path.years %}
+      <tr><th scope="row">{{ y.year }}</th><td class="num">{{ y.borrowingGbp | oneDp }}</td><td class="num">{{ y.borrowingPct | oneDp }}</td><td class="num">{% if y.borrowingVsMarchGbp !== null %}{% if y.borrowingVsMarchGbp > 0 %}+{% endif %}{{ y.borrowingVsMarchGbp | oneDp }}{% else %}<span class="muted">not given</span>{% endif %}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="source-note">Source: <a href="{{ borrowing.source_url }}" rel="noopener">{{ borrowing.source_name }}</a>. Retrieved {{ borrowing.retrieved_date | timeTag | safe }}. {{ dataFreshnessBadge(borrowing.confidence_level, "") }}</p>
+
+<h2>Debt interest</h2>
+<p>Debt interest is what the government pays each year on what it owes. The OBR forecasts <strong>£{{ interest.value }} billion</strong> this year, rising to <strong>£{{ interestEnd.value }} billion</strong> in 2031-32, an average increase of about £{{ interestEnd.average_annual_increase }} billion a year.</p>
+<p>What changed: before the Budget's own measures, debt interest this year was about £{{ interest.pre_measures_change_vs_march }} billion higher than the March forecast. The OBR says the main cause is higher inflation, which raises the cost of index-linked gilts. An index-linked gilt is a government bond whose payments rise with prices. See <a href="{{ '/interest/' | url }}">Interest costs</a> for why the rate matters as much as the debt.</p>
+<p class="source-note">Source: <a href="{{ interest.source_url }}" rel="noopener">{{ interest.source_name }}</a>. Retrieved {{ interest.retrieved_date | timeTag | safe }}. {{ dataFreshnessBadge(interest.confidence_level, "") }}</p>
+
+<h2>Debt</h2>
+<p>Public sector net debt is the headline measure of what the government owes. The OBR forecasts it at {{ thisYear.netDebtPct }}% of GDP this year, peaking at <strong>{{ debtPeak.value }}%</strong> in 2028-29, then falling back to {{ endYear.netDebtPct }}% in 2031-32. It is higher than the March forecast in every forecast year, by {{ thisYear.netDebtVsMarchPct }} percentage points this year and {{ endYear.netDebtVsMarchPct }} points in the final year.</p>
+<p>In cash, debt rises every year, from £{{ thisYear.netDebtGbp | number }} billion this year to £{{ endYear.netDebtGbp | number }} billion in 2031-32, because each year's borrowing is added to it. The share of GDP can fall while the cash total rises, if the economy grows faster than the debt. <a href="{{ '/deficit-vs-debt/' | url }}">Debt vs deficit</a> explains the difference.</p>
+<p>The government's debt rule does not use this measure. It uses <strong>public sector net financial liabilities</strong> (PSNFL), which also counts financial assets the government holds, such as student loans. PSNFL is lower: {{ psnfl.value }}% of GDP this year, rising to {{ psnflPeak }}% in {{ psnflPeakYears | join(" and ") }}, then falling to {{ endYear.psnflPct }}% by 2031-32. The rule asks only that it falls between 2028-29 and 2029-30.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Debt forecast by year">
+  <table class="data-table data-table--years">
+    <caption>Net debt in £ billion and as % of GDP, the change in that share since the March forecast (Table A.10 to 2030-31, paragraph 1.22 for 2031-32), and PSNFL as % of GDP. 2025-26 is outturn, still provisional. Later years are forecasts.</caption>
+    <thead><tr><th scope="col">Year</th><th scope="col" class="num">Net debt, £bn</th><th scope="col" class="num">Net debt, % GDP</th><th scope="col" class="num">Change since March, points</th><th scope="col" class="num">PSNFL, % GDP</th></tr></thead>
+    <tbody>
+      {%- for y in b.path.years %}
+      <tr><th scope="row">{{ y.year }}</th><td class="num">{{ y.netDebtGbp | number }}</td><td class="num">{{ y.netDebtPct | oneDp }}</td><td class="num">{% if y.netDebtVsMarchPct !== null %}{% if y.netDebtVsMarchPct > 0 %}+{% endif %}{{ y.netDebtVsMarchPct | oneDp }}{% else %}<span class="muted">not given</span>{% endif %}</td><td class="num">{{ y.psnflPct | oneDp }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="source-note">Source: <a href="{{ debtPeak.source_url }}" rel="noopener">{{ debtPeak.source_name }}</a>. Retrieved {{ debtPeak.retrieved_date | timeTag | safe }}. {{ dataFreshnessBadge(debtPeak.confidence_level, "") }}</p>
+
+<h2>Growth</h2>
+<p>The OBR forecasts the economy to grow by <strong>{{ g26.value | oneDp }}%</strong> in 2026 (March forecast: {{ g26.previous_value | oneDp }}%) and <strong>{{ g27.value | oneDp }}%</strong> in 2027 (March: {{ g27.previous_value | oneDp }}%). The OBR puts the lower 2027 figure down to higher energy prices and interest rates. These are calendar years, not financial years.</p>
+<p class="source-note">Source: <a href="{{ g27.source_url }}" rel="noopener">{{ g27.source_name }}</a>. Retrieved {{ g27.retrieved_date | timeTag | safe }}. {{ dataFreshnessBadge(g27.confidence_level, "") }}</p>
+
+<h2>The UK's figures on the EU's measures</h2>
+<p>The EU asks its members to keep the deficit under {{ eu.deficitLimitPct }}% of GDP and gross debt under {{ eu.debtLimitPct }}%. On the OBR's figures, the UK is above both this year, and above the debt limit in every year of the forecast. The <a href="{{ '/international/' | url }}#eu-limits">international comparison page</a> has the figures, the measures and the country comparisons.</p>
+
+<h2>What this page does not cover</h2>
+<p>The individual tax and spending measures announced in the Budget. For those, see the Treasury's <a href="{{ b.budget_document_url }}" rel="noopener">Budget 2026 document</a>.</p>
+
+<p class="see-also">See also: <a href="{{ '/monthly/' | url }}">the latest monthly update</a> and <a href="{{ '/glossary/' | url }}">the glossary</a>.</p>
+</article>

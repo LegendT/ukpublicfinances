@@ -5,7 +5,7 @@ description: A wider set of public-finance and economic indicators, each with a 
 eleventyComputed:
   dataUpdated: "{{ indicators.lastUpdated }}"
 ---
-{% from "components/macros.njk" import caveatBox %}
+{% from "components/macros.njk" import caveatBox, sourceNote %}
 
 {% set arrows = { "rising": "↑", "falling": "↓", "stable": "→" } %}
 
@@ -22,17 +22,16 @@ eleventyComputed:
 ] %}
 
 {%- for g in groups %}
-<section aria-labelledby="grp-{{ loop.index }}">
-  <h2 id="grp-{{ loop.index }}">{{ g.title }}</h2>
-  <div class="indicator-grid">
+<h2 id="grp-{{ loop.index }}">{{ g.title }}</h2>
+<ul class="indicator-grid" role="list">
     {%- for ind in indicators.indicators %}
       {%- if ind.id in g.ids %}
-    <article class="indicator">
+    <li><article class="indicator">
       <div class="indicator__head">
         <h3 class="indicator__name">{{ ind.name }}</h3>
-        <span class="status">
-          <span class="status__arrow" aria-hidden="true">{{ arrows[ind.status] }}</span> <span class="visually-hidden">Recent trend:</span> {{ ind.status }}
-        </span>
+        <dl class="status">
+          <dt class="visually-hidden">Recent trend</dt> <dd><span class="status__arrow" aria-hidden="true">{{ arrows[ind.status] }}</span> {{ ind.status }}</dd>
+        </dl>
       </div>
       {%- if ind.unit.startsWith("£") %}
       <p class="indicator__value">£{{ ind.value | number }} <span class="indicator__unit">{{ ind.unit | replace("£ ", "") }}</span></p>
@@ -42,12 +41,11 @@ eleventyComputed:
       <p class="indicator__value">{{ ind.value | number }} <span class="indicator__unit">{{ ind.unit }}</span></p>
       {%- endif %}
       <p class="indicator__explain">{{ ind.explanation }}</p>
-      <p class="source-note">Source: <a href="{{ ind.source_url }}" rel="noopener">{{ ind.source_name }}</a>. {{ ind.date | timeTag | safe }}.</p>
-    </article>
+      {{ sourceNote(ind) }}
+    </article></li>
       {%- endif %}
     {%- endfor %}
-  </div>
-</section>
+</ul>
 {%- endfor %}
 
 <details class="data-table-wrap">
@@ -62,7 +60,7 @@ eleventyComputed:
       {%- for ind in indicators.indicators %}
       <tr>
         <th scope="row">{{ ind.name }}</th>
-        <td class="num">{{ ind.value | number }} {{ ind.unit }}</td>
+        <td class="num">{% if ind.unit.startsWith("£") %}£{{ ind.value | number }} {{ ind.unit | replace("£ ", "") }}{% elif ind.unit.startsWith("%") %}{{ ind.value | number }}{{ ind.unit }}{% else %}{{ ind.value | number }} {{ ind.unit }}{% endif %}</td>
         <td>{{ ind.status }}</td>
         <td>{{ ind.confidence_level }}</td>
       </tr>

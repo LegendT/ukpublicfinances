@@ -8,7 +8,7 @@ eleventyComputed:
 ---
 {% from "components/macros.njk" import caveatBox, sourceNote %}
 {% set b = assumptions.budgetSimulator %}
-{% set interest = dashboard.metrics | findBy("id", "debt-interest") %}
+{% set interest = assumptions.budgetSimulator.baselineDebtInterest %}
 {% set netDebt = dashboard.metrics | findBy("id", "net-debt") %}
 {% set spendingRec = indicators.indicators | findBy("id", "spending") %}
 
@@ -24,7 +24,9 @@ eleventyComputed:
 <div class="sim-layout">
   {# A div, not a form: there is nothing to submit, the two fieldsets already group the controls,
      and pa11y rightly refuses a form with no submit button (WCAG 3.2.2, H32.2). #}
-  <div class="simulator" id="simulator">
+  {# A tool with a hidden heading: the README's case for a labelled section. #}
+  <section class="simulator" id="simulator" aria-labelledby="sim-controls-heading">
+    <h2 id="sim-controls-heading" class="visually-hidden">Your choices</h2>
     <fieldset class="simulator__group">
       <legend>Spending (£ billion per year)</legend>
       {%- set sp = b.spendingLeversGbpBillion %}
@@ -36,8 +38,9 @@ eleventyComputed:
       <div class="slider">
         <label for="sp-{{ key }}">{{ labels[key] }} <span class="slider__range">(£{{ min }}–{{ max }} bn)</span></label>
         <input type="range" id="sp-{{ key }}" data-spend="{{ key }}" data-base="{{ base }}"
-               min="{{ min }}" max="{{ max }}" step="{{ sr.step }}" value="{{ base }}"
-               aria-describedby="sp-{{ key }}-out">
+               min="{{ min }}" max="{{ max }}" step="{{ sr.step }}" value="{{ base }}">
+        {# No aria-describedby pointing at the output: the script already puts the value in
+           aria-valuetext, and a description that repeats it is heard twice on every change. #}
         <output id="sp-{{ key }}-out" for="sp-{{ key }}">£{{ base }} bn</output>
       </div>
       {%- endfor %}
@@ -49,46 +52,46 @@ eleventyComputed:
       <div class="slider">
         <label for="tax-{{ t.id }}">{{ t.label }} <span class="slider__range">({{ t.min }}–{{ t.max }}%, now {{ t.rate }}%)</span></label>
         <input type="range" id="tax-{{ t.id }}" data-tax="{{ t.id }}" data-base="{{ t.rate }}" data-perpoint="{{ t.perPointGbpBillion }}"
-               min="{{ t.min }}" max="{{ t.max }}" step="1" value="{{ t.rate }}" aria-describedby="tax-{{ t.id }}-out">
+               min="{{ t.min }}" max="{{ t.max }}" step="1" value="{{ t.rate }}">
         <output id="tax-{{ t.id }}-out" for="tax-{{ t.id }}">{{ t.rate }}%</output>
       </div>
       {%- endfor %}
     </fieldset>
 
     <button type="button" class="btn btn--ghost" id="sim-reset">Reset to today</button>
-  </div>
+  </section>
 
-  <div class="sim-results">
+  <section class="sim-results" aria-labelledby="sim-result-heading">
     <p class="sim-goal" id="sim-status">Move the sliders to balance the budget.</p>
     <!-- Announcements come from this mirror, debounced in JS, so a slider drag
          does not queue dozens of repeats of the visible banner text. -->
     <p id="sim-status-sr" class="visually-hidden" role="status"></p>
 
-    <h2 class="visually-hidden">Result</h2>
+    <h2 id="sim-result-heading" class="visually-hidden">Result</h2>
     <dl class="metric-grid metric-grid--compact">
       <div class="metric-card metric-card--mini">
         <dt class="metric-card__label">Total spending</dt>
-        <dd class="metric-card__value" id="r-spending">…</dd>
+        <dd class="metric-card__value" id="r-spending">£{{ b.baselineGbpBillion.totalSpending | number }} bn</dd>
       </div>
       <div class="metric-card metric-card--mini">
         <dt class="metric-card__label">Total revenue</dt>
-        <dd class="metric-card__value" id="r-revenue">…</dd>
+        <dd class="metric-card__value" id="r-revenue">£{{ b.baselineGbpBillion.totalRevenue | number }} bn</dd>
       </div>
       <div class="metric-card metric-card--mini">
         <dt class="metric-card__label" id="r-borrowing-label">Borrowing this year</dt>
-        <dd class="metric-card__value" id="r-borrowing">…</dd>
+        <dd class="metric-card__value" id="r-borrowing">£{{ b.baselineGbpBillion.borrowing | number }} bn</dd>
       </div>
     </dl>
 
     <h3>Debt over {{ b.projection.years }} years</h3>
     <div class="table-scroll" tabindex="0" role="region" aria-label="Projected debt over {{ b.projection.years }} years">
       <table class="data-table">
-        <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate.value * 100) | round(1) }}% interest rate (an average for the whole debt stock, not today's market rate) and an economy growing {{ (b.projection.assumedNominalGdpGrowth.value * 100) | round(1) }}% a year in cash terms. See the assumptions below.</caption>
+        <caption>Projected net debt, applying your choices each year. Assumes a {{ (b.projection.assumedInterestRate.value * 100) | round(1) }}% interest rate (an average for the whole debt stock, not today's market rate) and an economy growing {{ (b.projection.assumedNominalGdpGrowth.value * 100) | round(2) }}% a year in cash terms. See the assumptions below.</caption>
         <thead><tr><th scope="col">Year</th><th scope="col" class="num">Debt (£ bn)</th><th scope="col" class="num">Debt (% of GDP)</th></tr></thead>
         <tbody id="r-trajectory"></tbody>
       </table>
     </div>
-  </div>
+  </section>
 </div>
 
 <details class="prose">
@@ -97,7 +100,7 @@ eleventyComputed:
     {# Borrowing cites the net-debt record's release on purpose: no record owns the £ figure
        for the year's borrowing, and UPDATING-DATA step 7 re-reads it from that same release
        every month. #}
-    <li>The starting point is financial year {{ spendingComparisons.fiscalYear }}. Spending is £{{ b.baselineGbpBillion.totalSpending | number }} bn, from {{ spendingRec.source_name }}. It includes roughly £{{ interest.value | number }} bn of debt interest (the OBR's central government figure). Borrowing is £{{ b.baselineGbpBillion.borrowing | number }} bn, from {{ netDebt.source_name }}. Revenue, £{{ b.baselineGbpBillion.totalRevenue | number }} bn, is spending minus borrowing.</li>
+    <li>The starting point is financial year {{ spendingComparisons.fiscalYear }}. Spending is £{{ b.baselineGbpBillion.totalSpending | number }} bn, from {{ spendingRec.source_name }}. It includes roughly £{{ interest.value | number }} bn of debt interest (the OBR's central government figure for that year, from {{ interest.source_name }}). Borrowing is £{{ b.baselineGbpBillion.borrowing | number }} bn, from {{ netDebt.source_name }}. Revenue, £{{ b.baselineGbpBillion.totalRevenue | number }} bn, is spending minus borrowing.</li>
     <li>Debt starts at £{{ b.baselineGbpBillion.debt | number }} bn, from {{ netDebt.source_name }}, for {{ netDebt.date | timeTag | safe }}.</li>
     <li>{{ b.taxNote }}</li>
     <li>{{ b.projection.note }}</li>
@@ -108,7 +111,12 @@ eleventyComputed:
   {{ sourceNote(b.projection.assumedNominalGdpGrowth) }}
 </details>
 
-<noscript><p class="caveat">This simulator needs JavaScript. The baseline figures are on the <a href="{{ '/' | url }}">dashboard</a>.</p></noscript>
+<noscript>
+  <div class="caveat" role="note">
+    <h2 class="caveat__heading">This simulator needs JavaScript</h2>
+    <p>Without it the sliders do nothing and the figures above are the starting point only. The baseline figures are on the <a href="{{ '/' | url }}">dashboard</a>.</p>
+  </div>
+</noscript>
 
 <script id="sim-config" type="application/json">
 {

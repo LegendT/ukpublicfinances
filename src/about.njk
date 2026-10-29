@@ -28,7 +28,7 @@ eleventyComputed:
 
   <h2>Where the figures come from</h2>
   <p>The data is drawn from primary official sources, chiefly the ONS, the OBR, the UK Debt Management Office, HM Treasury, and the IMF for international comparisons. The <a href="{{ '/sources/' | url }}">sources page</a> lists each one and what it covers.</p>
-  <p>Every figure carries its provenance in the underlying data: the value, its unit, the date it refers to, the named source, a link, and the date it was retrieved. The headline figures were last reviewed on {{ meta.lastReviewed | readableDate }}.</p>
+  <p>Every figure carries its provenance in the underlying data: the value, its unit, the date it refers to, the named source, a link, and the date it was retrieved. The headline figures were last reviewed on {{ meta.lastReviewed | timeTag | safe }}.</p>
 
   <h2>How confident each figure is</h2>
   <p>Every figure carries a label for how solid it is:</p>
