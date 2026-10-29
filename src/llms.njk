@@ -6,7 +6,7 @@ eleventyExcludeFromCollections: true
 
 > {{ site.description }} The site is neutral and source-led, not a debt clock and not party-political. Every figure shows its source, date, and a confidence level (official, provisional, estimated, or calculated).
 
-Last updated: {{ [dashboard.lastUpdated, indicators.lastUpdated, meta.lastReviewed, assumptions.translator.lastUpdated, assumptions.budgetSimulator.lastUpdated, sources.lastUpdated] | latestOf | readableDate }}.
+Last updated: {{ [dashboard.lastUpdated, indicators.lastUpdated, meta.lastReviewed, assumptions.translator.lastUpdated, assumptions.budgetSimulator.lastUpdated, sources.lastUpdated, budget2026.lastUpdated] | latestOf | readableDate }}.
 
 ## About the data
 
@@ -18,11 +18,12 @@ Figures are drawn from official UK and international sources: the Office for Nat
 - [Historical timeline]({{ site.url }}/timeline/): UK debt since 1700, by measure and period, with neutral event markers.
 - [Debt in context]({{ site.url }}/debt-in-context/): Debt and annual interest set against NHS, education, defence, pensions, welfare, and tax receipts.
 - [Interest costs]({{ site.url }}/interest/): The yearly, monthly, and daily cost of servicing the debt, and why the interest rate matters.
-- [International comparison]({{ site.url }}/international/): UK debt, deficit, and growth against other major economies (IMF data).
+- [International comparison]({{ site.url }}/international/): UK debt, deficit, and growth against other major economies (IMF data), and the UK against the EU's {{ budget2026.euLimits.deficitLimitPct }}% deficit and {{ budget2026.euLimits.debtLimitPct }}% debt limits (OBR forecast).
 - [Public finance health]({{ site.url }}/health/): Wider indicators: inflation, unemployment, productivity, tax burden, revenue, spending.
 - [Big numbers translator]({{ site.url }}/big-numbers/): Turn a large sum into per-person figures and shares of budgets and GDP.
 - [During your lifetime]({{ site.url }}/lifetime/): How UK debt has changed since a chosen birth year.
 - [Budget simulator]({{ site.url }}/budget-simulator/): A simplified educational model of spending and tax trade-offs.
+- [Budget 2026: what changed]({{ site.url }}/budget-2026/): What the OBR's October 2026 forecast changed for headroom, borrowing, debt interest, debt and growth, every figure sourced.
 - [Debt vs deficit]({{ site.url }}/deficit-vs-debt/): Plain-English explainer of debt, deficit, borrowing, GDP, and gilts.
 - [Monthly update]({{ site.url }}/monthly/): Plain-English summary of the latest public finances release.
 - [Glossary]({{ site.url }}/glossary/): Definitions of the key public-finance terms.

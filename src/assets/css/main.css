@@ -268,6 +268,8 @@ input[type="number"], select {
 .data-table th, .data-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); text-align: left; }
 .data-table thead th { border-bottom: 2px solid var(--line); }
 .data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+/* Year-by-year forecast tables: a split "2025-\n26" reads as two years, so the year column scrolls rather than wraps. */
+.data-table--years th[scope="row"] { white-space: nowrap; }
 .data-table tbody tr:hover { background: #f0f3f6; }
 
 /* Events */

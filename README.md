@@ -6,7 +6,7 @@ It is **not** a political commentary site and **not** a gimmicky debt clock. Eve
 
 ## Data status
 
-Live at **[ukpublicfinances.org](https://ukpublicfinances.org)**. The headline, monthly, and indicator figures were refreshed on 25 October 2026 against the ONS September 2026 public sector finances release, and the international comparison against the IMF World Economic Outlook of October 2026. Every public-facing figure was last re-audited in full against its primary source (ONS, OBR, HMRC, HM Treasury, House of Commons Library, IMF, and DWP) on 21 July 2026, following the June 2026 release and PESA 2026, with the international comparison pulled directly from the IMF DataMapper. Each record shows its own `source_url`, `date`, and `confidence_level`. Known caveats: the **long-run historical series before about 2010** is a best-estimate reconstruction (`confidence_level: estimated`); and the GDP figure is the denominator consistent with the published debt-to-GDP ratio rather than a single published release. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) for how to refresh figures.
+Live at **[ukpublicfinances.org](https://ukpublicfinances.org)**. The headline, monthly, and indicator figures were refreshed on 25 October 2026 against the ONS September 2026 public sector finances release, and the international comparison against the IMF World Economic Outlook of October 2026. The Budget 2026 page and the EU-limits section on the international page use the OBR's Economic and fiscal outlook of 28 October 2026. Those figures were read from the PDF on 28 October 2026. Every public-facing figure was last re-audited in full against its primary source (ONS, OBR, HMRC, HM Treasury, House of Commons Library, IMF, and DWP) on 21 July 2026, following the June 2026 release and PESA 2026, with the international comparison pulled directly from the IMF DataMapper. Each record shows its own `source_url`, `date`, and `confidence_level`. Known caveats: the **long-run historical series before about 2010** is a best-estimate reconstruction (`confidence_level: estimated`); and the GDP figure is the denominator consistent with the published debt-to-GDP ratio rather than a single published release. See [`docs/UPDATING-DATA.md`](docs/UPDATING-DATA.md) for how to refresh figures.
 
 ## Stack
 
@@ -66,6 +66,7 @@ npx lighthouse http://localhost:8080 --only-categories=accessibility --view
 │   │   ├── debtTimeseries.json       # long-run series for the timeline
 │   │   ├── spendingComparisons.json  # annual budgets for context
 │   │   ├── internationalComparisons.json
+│   │   ├── budget2026.json           # the latest OBR forecast, for the Budget page and the EU limits box
 │   │   ├── indicators.json           # wider economic indicators (health page)
 │   │   ├── monthlyUpdates.json       # monthly explainer entries
 │   │   ├── events.json               # neutral timeline markers

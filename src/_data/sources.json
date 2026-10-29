@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-03",
+  "lastUpdated": "2026-10-29",
   "note": "Primary data sources this project is built to use. Replace placeholder figures with verified values pulled from these sources.",
   "sources": [
     {
@@ -72,6 +72,33 @@
       "url": "https://commonslibrary.parliament.uk/research-briefings/cbp-10842/",
       "covers": "Secondary analysis rather than a primary statistical release: plain-English context on debt, debt interest and borrowing costs, including the market gilt yields this site does not publish itself.",
       "updateFrequency": "Revised periodically",
+      "confidence_level": "official"
+    },
+    {
+      "id": "europarl-fiscal",
+      "name": "European Parliament: The EU framework for fiscal policies",
+      "publisher": "European Parliament",
+      "url": "https://www.europarl.europa.eu/factsheets/en/sheet/89/the-eu-framework-for-fiscal-policies",
+      "covers": "The EU's 3% deficit and 60% debt reference values, used on the international comparison page.",
+      "updateFrequency": "On change to the EU fiscal framework",
+      "confidence_level": "official"
+    },
+    {
+      "id": "ecb-convergence",
+      "name": "ECB: Convergence criteria",
+      "publisher": "European Central Bank",
+      "url": "https://www.ecb.europa.eu/ecb/orga/escb/html/convergence-criteria.en.html",
+      "covers": "The deficit and debt criteria for joining the euro.",
+      "updateFrequency": "On change",
+      "confidence_level": "official"
+    },
+    {
+      "id": "ec-accession",
+      "name": "European Commission: Accession criteria (Copenhagen criteria)",
+      "publisher": "European Commission",
+      "url": "https://enlargement.ec.europa.eu/enlargement-policy/glossary/accession-criteria_en",
+      "covers": "The conditions for joining the EU, which set no deficit or debt figure.",
+      "updateFrequency": "On change",
       "confidence_level": "official"
     }
   ]
