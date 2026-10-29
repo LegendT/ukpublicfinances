@@ -30,6 +30,7 @@ test("every published figure carries source and provenance fields", () => {
   const assumed = [
     { id: "assumedInterestRate", ...proj.assumedInterestRate },
     { id: "assumedNominalGdpGrowth", ...proj.assumedNominalGdpGrowth },
+    { id: "baselineDebtInterest", ...load("assumptions.json").budgetSimulator.baselineDebtInterest },
   ];
   // The Budget 2026 page's figures are forecasts shown as figures, so they answer to the same rules.
   const budget = load("budget2026.json").metrics;

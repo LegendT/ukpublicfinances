@@ -1,16 +1,27 @@
 {
   "note": "Assumptions used by the interactive tools. These are deliberately simple and visible. The budget simulator and translators are educational models, not forecasts.",
   "translator": {
-    "lastUpdated": "2026-10-25",
+    "lastUpdated": "2026-10-29",
     "population": 69500000,
     "adults": 55500000,
     "taxpayers": 36700000,
     "gdpGbpBillion": 3197,
     "annualBorrowingGbpBillion": 134,
-    "annualDebtInterestGbpBillion": 110
+    "annualDebtInterestGbpBillion": 124
   },
   "budgetSimulator": {
-    "lastUpdated": "2026-10-25",
+    "lastUpdated": "2026-10-29",
+    "baselineDebtInterest": {
+      "metric_name": "Debt interest inside the baseline year's spending",
+      "value": 108.7,
+      "unit": "£ billion, financial year 2025-26",
+      "date": "2026-03-31",
+      "source_name": "OBR, Economic and fiscal outlook, October 2026, Table A.7 (central government debt interest, net of APF, 2025-26 outturn)",
+      "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+      "retrieved_date": "2026-10-29",
+      "notes": "The simulator subtracts this from the baseline year's total spending to get non-interest spending, so it must be the same year as the baseline (2025-26, PESA), not the dashboard's current-year forecast. The dashboard metric moved to the 2026-27 forecast (£124bn) on 29 October 2026; this record stays on 2025-26 until the baseline year moves. Still open in NEXT-STEPS: taking this figure from the same PESA table as total spending, so the subtraction is like for like.",
+      "confidence_level": "provisional"
+    },
     "disclaimer": "A simplified educational model. It applies static, first-round effects only and does not model how the economy responds to changes. It is not a forecast and must not be read as one.",
     "baselineGbpBillion": {
       "totalSpending": 1360,
@@ -38,32 +49,32 @@
       "source_name": "HM Treasury, Charter for Budget Responsibility: Autumn 2025, paragraphs 3.2 and 3.6",
       "source_url": "https://www.gov.uk/government/publications/draft-charter-for-budget-responsibility-autumn-2025",
       "date": "2026-02-23",
-      "retrieved_date": "2026-10-25",
-      "notes": "Paragraph 3.2 sets the principle 'to move towards only borrowing for investment', and paragraph 3.6 requires the current budget, which leaves out investment, to be in surplus. 'Stricter' is this site's reading: the challenge asks for total borrowing of zero. The URL keeps its 'draft' slug, but on 23 February 2026, the date used here, GOV.UK replaced the draft with the final version as laid in Parliament. A Budget can replace the Charter, so recheck this at every Budget.",
+      "retrieved_date": "2026-10-29",
+      "notes": "Rechecked after Budget 2026 on 29 October 2026: a GOV.UK search listed no Charter newer than the February 2026 update, and the OBR's October 2026 outlook (paragraphs 1.24 and 1.25) assesses the same fiscal mandate and supplementary target, so the Charter stands. Paragraph 3.2 sets the principle 'to move towards only borrowing for investment', and paragraph 3.6 requires the current budget, which leaves out investment, to be in surplus. 'Stricter' is this site's reading: the challenge asks for total borrowing of zero. The URL keeps its 'draft' slug, but on 23 February 2026, the date used here, GOV.UK replaced the draft with the final version as laid in Parliament. A Budget can replace the Charter, so recheck this at every Budget.",
       "confidence_level": "official"
     },
     "projection": {
       "years": 10,
       "assumedInterestRate": {
         "metric_name": "Assumed average interest rate on the debt stock",
-        "value": 0.037,
+        "value": 0.041,
         "unit": "share of the debt stock per year",
-        "date": "2026-10-25",
+        "date": "2026-10-29",
         "source_name": "Modelling assumption for this tool, checked against OBR debt interest and ONS net debt",
-        "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/",
-        "retrieved_date": "2026-10-25",
-        "notes": "An assumption for this model, not a published rate. Neither the OBR nor the House of Commons Library publishes a single effective interest rate on the UK debt stock; the Library briefing of 12 August 2026 describes the effective rate only as a trend. So it is set to 3.7%, the rate implied by figures the site already carries: OBR debt interest of £110bn (March 2026 forecast) over ONS net debt of £3,005bn (end September 2026). That check follows the OBR's illustrative method in The outlook for debt interest spending (25 August 2017), and the OBR calls the method illustrative for good reason: the perimeters differ, because the interest figure is central government interest net of APF while net debt is public sector net debt excluding banks. The rate is an average across the whole stock and sits well below the market rate on new borrowing, which the Commons Library put at 5.05% for 10-year and 5.7% for 30-year gilts in mid-August 2026. Part of the stock is effectively financed at Bank Rate, 3.75% at that date, which is one reason the average is nearer 4% than 5%. Revisit at each OBR forecast, not on market moves.",
+        "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+        "retrieved_date": "2026-10-29",
+        "notes": "An assumption for this model, not a published rate. The OBR charts an effective interest rate on government debt (central government interest net of APF over central government gross debt, Chart 5.7 of the October 2026 outlook) and describes it as around 4 per cent over the forecast, but gives no figure for it in the text; the Commons Library briefing of 12 August 2026 describes the rate only as a trend. The simulator applies its rate to public sector net debt, so the rate is derived on that basis: 4.1%, OBR debt interest of £124bn (October 2026 forecast for 2026-27) over ONS net debt of £3,005bn (end September 2026), which agrees with the OBR's around 4 per cent. That check follows the OBR's illustrative method in The outlook for debt interest spending (25 August 2017), and the OBR calls the method illustrative for good reason: the perimeters differ, because the interest figure is central government interest net of APF while net debt is public sector net debt excluding banks. The rate is an average across the whole stock and sits below the market rate on new borrowing, which the OBR's October forecast assumes at 5.1% for market gilt rates in 2026-27 (Table A.3, financial years). Part of the stock is effectively financed at Bank Rate, 3.9% in 2026-27 on the same table, which is one reason the average is nearer 4% than 5%. Revisit at each OBR forecast, not on market moves.",
         "confidence_level": "estimated"
       },
       "assumedNominalGdpGrowth": {
         "metric_name": "Assumed growth in the cash size of the economy",
-        "value": 0.035,
+        "value": 0.0375,
         "unit": "share of GDP per year",
-        "date": "2026-03-31",
-        "source_name": "OBR, Economic and Fiscal Outlook March 2026, paragraph 2.40 (nominal GDP growth)",
-        "source_url": "https://obr.uk/efo/economic-and-fiscal-outlook-march-2026/",
-        "retrieved_date": "2026-10-25",
-        "notes": "An assumption for this model. The OBR forecast has nominal GDP growth falling from just under 4.5% in 2025-26 to an average of 3.5% over the rest of the forecast; the model uses that 3.5% for every year. Nominal means in cash terms, so it includes inflation. It is the denominator for debt as a share of GDP and does not respond to the choices made in the simulator. Revisit at each OBR forecast.",
+        "date": "2026-10-28",
+        "source_name": "OBR, Economic and fiscal outlook, October 2026, paragraph 2.65 (nominal GDP growth)",
+        "source_url": "https://obr.uk/download/economic-and-fiscal-outlook-october-2026/",
+        "retrieved_date": "2026-10-28",
+        "notes": "An assumption for this model. The OBR's October 2026 forecast has nominal GDP growth slowing from around 4% in 2026-27 to 3¼% in 2027-28, then averaging around 3¾% a year over the rest of the forecast; the model uses that 3.75% for every year. Nominal means in cash terms, so it includes inflation. It is the denominator for debt as a share of GDP and does not respond to the choices made in the simulator. Revisit at each OBR forecast.",
         "confidence_level": "estimated"
       },
       "note": "Spending includes this year's debt interest. In later years interest is the assumed rate times the debt, so a bigger debt costs more to service. Debt is held at zero once cleared. The economy grows at the assumed cash rate, so debt as a share of GDP can fall while the debt itself rises. Behavioural responses are not modelled."

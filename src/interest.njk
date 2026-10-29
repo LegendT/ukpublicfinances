@@ -43,7 +43,7 @@ eleventyComputed:
   </dl>
   <p class="source-note">
     Annual figure: <a href="{{ interest.source_url }}" rel="noopener">{{ interest.source_name }}</a>.
-    Monthly and daily are simple averages of the annual figure. Per cent of revenue and GDP are calculated.
+    Monthly and daily are simple averages of the annual figure. Per cent of revenue is calculated against the site's 2025-26 revenue figure, and per cent of GDP against the GDP consistent with the latest debt ratio; the interest figure is the OBR's 2026-27 forecast.
     {{ dataFreshnessBadge(interest.confidence_level, "") }}
   </p>
 </section>
@@ -67,11 +67,11 @@ eleventyComputed:
           <tr><th scope="row">{{ d.year }}</th><td class="num">{{ d.interestGbp | number }}</td></tr>
           {%- endif %}
         {%- endfor %}
-        <tr><th scope="row">{{ dashboard.referencePeriod | yearOf }}</th><td class="num">{{ annual | number }}</td></tr>
+        <tr><th scope="row">{{ interest.period }} (OBR forecast)</th><td class="num">{{ annual | number }}</td></tr>
       </tbody>
     </table>
   </details>
-  <p class="source-note">Source: <a href="{{ debtTimeseries.source_url }}" rel="noopener">{{ debtTimeseries.source_name }}</a>. {{ dataFreshnessBadge("estimated", "") }}</p>
+  <p class="source-note">Source: <a href="{{ debtTimeseries.source_url }}" rel="noopener">{{ debtTimeseries.source_name }}</a>; the {{ interest.period }} row is from <a href="{{ interest.source_url }}" rel="noopener">{{ interest.source_name }}</a>. {{ dataFreshnessBadge("estimated", "") }}</p>
 </section>
 
 {{ caveatBox("Monthly and daily figures are simple averages for illustration. Actual interest is uneven, with large peaks when index-linked gilts are uprated. Figures are provisional and may be revised.", "How to read these") }}
