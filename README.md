@@ -99,11 +99,10 @@ Reusable Nunjucks macros in `src/_includes/components/macros.njk`:
 | Macro | Purpose |
 | --- | --- |
 | `metricCard` | A headline figure: value, explanation, "what this means", source note |
-| `sourceNote` | Source name, link, figure date, retrieved date, confidence badge |
+| `sourceNote` | A `dl` of Source, Figure dated, Retrieved, Confidence and an optional Note, styled as one line |
 | `caveatBox` | A clearly flagged caution |
-| `dataFreshnessBadge` | Confidence level marker (official / provisional / estimated / calculated) |
+| `dataFreshnessBadge` | Confidence level marker (official / provisional / estimated / calculated); says "Confidence:" to a screen reader unless called bare inside a labelled list |
 | `glossaryTerm` | A defined term |
-| `spendingRow` | One comparison row against an annual budget |
 
 The timeline chart renders a `<table>` fallback server-side, then enhances with SVG. The translator calculates in JavaScript and shows a `<noscript>` notice pointing at the sources page instead of results.
 
@@ -138,7 +137,9 @@ Verify, don't assume: run `npm run a11y:all` (pa11y-ci, WCAG 2.2 AA across every
 The audit is a regression guard, not a proof: it cannot tell a `strong` doing a title's job from a title, or a card that should be a list from one that is. These are checked by hand when a template changes.
 
 - A headline figure with an explanation and a details block is an `article` with an `h3` (the dashboard and health cards).
-- A label with one value is a `dl` of `dt`/`dd` pairs, label first, on every page and in every script that injects cards.
+- A label with one value is a `dl` of `dt`/`dd` pairs, label first, on every page and in every script that injects cards. Source lines are this pattern too: `sourceNote` renders a `dl` and the stylesheet runs it as one line, so no page writes a source line as a paragraph.
+- A repeated set of cards is a list, `ul > li > article`, so a screen reader announces the count (the dashboard, health and sources grids). A repeated set of plain items is a list too, without the `article` (the comparison bars on debt in context). These lists carry `role="list"`, because `list-style: none` strips list semantics in WebKit.
+- A chart's summary is a paragraph before the `figure`, outside it ("The chart below shows..."), with a link to the data table; the image itself is named "Line chart" and its `figcaption` carries the heading.
 - A caveat is a `div` with `role="note"` and a real heading, not an `aside`.
 - Dates in prose go through the `timeTag` filter, so they carry `datetime`; `readableDate` is for text-only output.
 - A `section` with `aria-labelledby` appears only where a block needs a heading the design hides, or is a distinct labelled region such as a tool. Prose pages run bare `h2`s.

@@ -4,23 +4,26 @@
     {% from "components/macros.njk" import metricCard, sourceNote, caveatBox %}
 #}
 
-{# DataFreshnessBadge: confidence + last-updated marker. #}
-{% macro dataFreshnessBadge(confidence, date) %}
+{# DataFreshnessBadge: the confidence level. Standing alone it says what it is the confidence
+   of; inside sourceNote's list the "Confidence" label already does, so that caller passes bare. #}
+{% macro dataFreshnessBadge(confidence, bare) %}
 <span class="badge badge--{{ confidence }}">
   <span class="badge__dot" aria-hidden="true"></span>
-  {{ confidence }}{% if date %} · {{ date | timeTag | safe }}{% endif %}
+  {% if not bare %}<span class="visually-hidden">Confidence: </span>{% endif %}{{ confidence }}
 </span>
 {% endmacro %}
 
-{# SourceNote: where a figure came from, and when. #}
-{% macro sourceNote(record) %}
-<p class="source-note">
-  Source:
-  {% if record.source_url %}<a href="{{ record.source_url }}" rel="noopener">{{ record.source_name }}</a>{% else %}{{ record.source_name }}{% endif %}.
-  {% if record.date %}Figure dated {{ record.date | timeTag | safe }}.{% endif %}
-  {% if record.retrieved_date %}Retrieved {{ record.retrieved_date | timeTag | safe }}.{% endif %}
-  {% if record.confidence_level %}{{ dataFreshnessBadge(record.confidence_level, "") }}{% endif %}
-</p>
+{# SourceNote: where a figure came from, and when. Label-value pairs, so a description list
+   that the stylesheet runs as one line. `note` is template-authored prose, so it may carry
+   markup and is not escaped. #}
+{% macro sourceNote(record, note) %}
+<dl class="source-note">
+  <div><dt>Source</dt> <dd>{% if record.source_url %}<a href="{{ record.source_url }}" rel="noopener">{{ record.source_name }}</a>{% else %}{{ record.source_name }}{% endif %}</dd></div>
+  {%- if record.date %} <div><dt>Figure dated</dt> <dd>{{ record.date | timeTag | safe }}</dd></div>{% endif %}
+  {%- if record.retrieved_date %} <div><dt>Retrieved</dt> <dd>{{ record.retrieved_date | timeTag | safe }}</dd></div>{% endif %}
+  {%- if record.confidence_level %} <div><dt>Confidence</dt> <dd>{{ dataFreshnessBadge(record.confidence_level, true) }}</dd></div>{% endif %}
+  {%- if note %} <div><dt>Note</dt> <dd>{{ note | safe }}</dd></div>{% endif %}
+</dl>
 {% endmacro %}
 
 {# CaveatBox: a clearly flagged caution. A div with role="note", not an aside, because a caveat about
@@ -73,7 +76,7 @@
   </dl>
 </section>
 
-<section class="prose" aria-labelledby="qa-heading">
+<div class="prose">
   <h2 id="qa-heading">What changed, and why</h2>
   <dl class="def-list">
     {%- for q in questions %}
@@ -81,13 +84,9 @@
     <dd>{{ u.answers[q.key] }}</dd>
     {%- endfor %}
   </dl>
-</section>
+</div>
 
-<p class="source-note">
-  Source: <a href="{{ u.source_url }}" rel="noopener">{{ u.source_name }}</a>.
-  Retrieved {{ u.retrieved_date | timeTag | safe }}.
-  {{ dataFreshnessBadge(u.confidence_level, "") }}
-</p>
+{{ sourceNote(u) }}
 
 {{ caveatBox("One month is a weak guide to the year. Monthly figures are volatile, seasonal, and routinely revised as fuller data arrives. Read the direction, not the decimal.", "A note on monthly figures") }}
 {% endmacro %}
@@ -98,14 +97,4 @@
   <dt class="glossary-term__name">{{ term.term }}</dt>
   <dd class="glossary-term__def">{{ term.definition }}</dd>
 </div>
-{% endmacro %}
-
-{# SpendingComparison: one row comparing an amount to an annual budget. #}
-{% macro spendingRow(area, amountBillion) %}
-{% set ratio = (amountBillion / area.value * 100) %}
-<tr>
-  <th scope="row">{{ area.name }}</th>
-  <td class="num">£{{ area.value | number }} bn</td>
-  <td class="num">{{ ratio | round(0) }}%</td>
-</tr>
 {% endmacro %}

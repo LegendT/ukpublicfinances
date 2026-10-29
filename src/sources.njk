@@ -14,21 +14,21 @@ eleventyComputed:
 
 {{ caveatBox(meta.placeholderNotice, "About these figures") }}
 
-<div class="source-grid">
+<ul class="source-grid" role="list">
   {%- for s in sources.sources %}
-  <article class="source-card">
+  <li><article class="source-card">
     <h2 class="source-card__name">{{ s.name }}</h2>
     <p class="source-card__publisher">{{ s.publisher }}</p>
     <p>{{ s.covers }}</p>
-    <p class="source-card__meta">
-      Updated: {{ s.updateFrequency }}. {{ dataFreshnessBadge(s.confidence_level, "") }}
-    </p>
-    <p><a href="{{ s.url }}" rel="noopener">Visit source<span class="visually-hidden">: {{ s.name }}</span></a></p>
-  </article>
+    <dl class="source-note source-card__meta">
+      <div><dt>Updated</dt> <dd>{{ s.updateFrequency }}</dd></div> <div><dt>Confidence</dt> <dd>{{ dataFreshnessBadge(s.confidence_level, true) }}</dd></div>
+    </dl>
+    <p><a class="block-link" href="{{ s.url }}" rel="noopener">Visit source<span class="visually-hidden">: {{ s.name }}</span></a></p>
+  </article></li>
   {%- endfor %}
-</div>
+</ul>
 
-<section class="prose">
+<div class="prose">
   <h2>Confidence levels</h2>
   <dl class="def-list">
     {%- for key, desc in meta.confidenceLevels %}
@@ -36,4 +36,4 @@ eleventyComputed:
     <dd>{{ desc }}</dd>
     {%- endfor %}
   </dl>
-</section>
+</div>

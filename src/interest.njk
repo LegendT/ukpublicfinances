@@ -5,7 +5,7 @@ description: What the UK government pays to service its debt (yearly, monthly, a
 eleventyComputed:
   dataUpdated: "{{ [dashboard.lastUpdated, assumptions.budgetSimulator.lastUpdated] | latestOf }}"
 ---
-{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+{% from "components/macros.njk" import caveatBox, sourceNote %}
 
 {% set interest = dashboard.metrics | findBy("id", "debt-interest") %}
 {% set annual = interest.value %}
@@ -41,37 +41,31 @@ eleventyComputed:
       <dd class="metric-card__value">{{ (annual / gdp * 100) | oneDp }}%</dd>
     </div>
   </dl>
-  <p class="source-note">
-    Annual figure: <a href="{{ interest.source_url }}" rel="noopener">{{ interest.source_name }}</a>.
-    Monthly and daily are simple averages of the annual figure. Per cent of revenue is calculated against the site's 2025-26 revenue figure, and per cent of GDP against the GDP consistent with the latest debt ratio; the interest figure is the OBR's 2026-27 forecast.
-    {{ dataFreshnessBadge(interest.confidence_level, "") }}
-  </p>
+  {{ sourceNote(interest, "Monthly and daily are simple averages of the annual figure, which is the OBR's " + interest.period + " forecast. Per cent of revenue is calculated against the site's " + spendingComparisons.fiscalYear + " revenue figure, and per cent of GDP against the GDP consistent with the latest debt ratio.") }}
 </section>
 
-<section class="prose" aria-labelledby="why-rates">
+<div class="prose">
   <h2 id="why-rates">Why the interest rate matters as much as the debt</h2>
   <p>The same pile of debt can be cheap or expensive to hold, depending on the interest rate paid on it. Two things pushed UK debt interest up after 2021. High inflation raised the cost of <strong>index-linked gilts</strong>, whose value rises with prices. Higher Bank of England rates raised the cost of new and refinanced borrowing.</p>
   <p>So the cost can rise even when the debt itself is flat.</p>
-</section>
+</div>
 
-<section aria-labelledby="trend">
-  <h2 id="trend">Historical trend</h2>
-  <details class="data-table-wrap" open>
-    <summary>Annual debt interest over time</summary>
-    <table class="data-table">
-      <caption>Approximate annual debt interest, £ billion (nominal). Recent years only; earlier figures are estimates.</caption>
-      <thead><tr><th scope="col">Year</th><th scope="col" class="num">Debt interest (£ bn)</th></tr></thead>
-      <tbody>
-        {%- for d in debtTimeseries.series %}
-          {%- if d.interestGbp !== null %}
-          <tr><th scope="row">{{ d.year }}</th><td class="num">{{ d.interestGbp | number }}</td></tr>
-          {%- endif %}
-        {%- endfor %}
-        <tr><th scope="row">{{ interest.period }} (OBR forecast)</th><td class="num">{{ annual | number }}</td></tr>
-      </tbody>
-    </table>
-  </details>
-  <p class="source-note">Source: <a href="{{ debtTimeseries.source_url }}" rel="noopener">{{ debtTimeseries.source_name }}</a>; the {{ interest.period }} row is from <a href="{{ interest.source_url }}" rel="noopener">{{ interest.source_name }}</a>. {{ dataFreshnessBadge("estimated", "") }}</p>
-</section>
+<h2 id="trend">Historical trend</h2>
+<details class="data-table-wrap" open>
+  <summary>Annual debt interest over time</summary>
+  <table class="data-table">
+    <caption>Annual debt interest, £ billion (nominal). Each row carries its own confidence level; the last row is the OBR's forecast for the current financial year.</caption>
+    <thead><tr><th scope="col">Year</th><th scope="col" class="num">Debt interest (£ bn)</th><th scope="col">Confidence</th></tr></thead>
+    <tbody>
+      {%- for d in debtTimeseries.series %}
+        {%- if d.interestGbp !== null %}
+        <tr><th scope="row">{{ d.year }}</th><td class="num">{{ d.interestGbp | number }}</td><td>{{ d.confidence_level }}</td></tr>
+        {%- endif %}
+      {%- endfor %}
+      <tr><th scope="row">{{ interest.period }} (OBR forecast)</th><td class="num">{{ annual | number }}</td><td>{{ interest.confidence_level }}</td></tr>
+    </tbody>
+  </table>
+</details>
+{{ sourceNote({ source_name: debtTimeseries.source_name, source_url: debtTimeseries.source_url, retrieved_date: debtTimeseries.retrieved_date }, "The " + interest.period + " row is from <a href=\"" + interest.source_url + "\" rel=\"noopener\">" + interest.source_name + "</a>.") }}
 
 {{ caveatBox("Monthly and daily figures are simple averages for illustration. Actual interest is uneven, with large peaks when index-linked gilts are uprated. Figures are provisional and may be revised.", "How to read these") }}

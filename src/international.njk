@@ -5,7 +5,7 @@ description: How UK government debt compares with other major economies, using a
 eleventyComputed:
   dataUpdated: "{{ [internationalComparisons.retrieved_date, budget2026.lastUpdated] | latestOf }}"
 ---
-{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge, sourceNote %}
 
 <div class="page-intro prose">
   <h1>International comparison</h1>
@@ -14,8 +14,7 @@ eleventyComputed:
 
 {{ caveatBox(internationalComparisons.caveat, "Comparing like with like") }}
 
-<section aria-labelledby="table-heading">
-  <h2 id="table-heading">{{ internationalComparisons.measure }}, {{ internationalComparisons.year }}</h2>
+<h2 id="table-heading">{{ internationalComparisons.measure }}, {{ internationalComparisons.year }}</h2>
   <div class="table-scroll" tabindex="0" role="region" aria-label="International debt comparison table">
     <table class="data-table">
       <caption>Sorted from highest to lowest debt-to-GDP. All figures are for {{ internationalComparisons.year }}, the latest completed year.</caption>
@@ -39,18 +38,13 @@ eleventyComputed:
       </tbody>
     </table>
   </div>
-</section>
 
-<p class="source-note">
-  Debt figures: <a href="{{ internationalComparisons.source_url }}" rel="noopener">{{ internationalComparisons.source_name }}</a>, {{ internationalComparisons.year }}.
-  Retrieved {{ internationalComparisons.retrieved_date | timeTag | safe }}.
-  {{ dataFreshnessBadge(internationalComparisons.confidence_level, "") }}
-</p>
+{{ sourceNote(internationalComparisons, "Figures are for " + internationalComparisons.year + ".") }}
 
-<section class="prose" aria-labelledby="note-heading">
+<div class="prose">
   <h2 id="note-heading">Why the UK number here differs from the headline</h2>
   <p>This table uses <strong>general government gross debt</strong>, the most consistent measure across countries. The UK's own headline measure (public sector net debt, around {{ (dashboard.metrics | findBy("id", "debt-gdp")).value | round }}% of GDP) is lower because it subtracts liquid assets and is defined slightly differently. Comparing countries fairly means using the same definition for all of them, even if it is not the one a country usually quotes at home.</p>
-</section>
+</div>
 
 {% set eu = budget2026.euLimits %}
 {% set de = internationalComparisons.countries | findBy("id", "de") %}
@@ -73,12 +67,12 @@ eleventyComputed:
     </table>
   </div>
   <p>In the country table at the top of this page, the three EU members shown are all over the debt limit: Germany at {{ de.debtToGdp }}%, France at {{ fr.debtToGdp }}% and Italy at {{ it.debtToGdp }}%. France ({{ fr.deficitToGdp }}%) and Italy ({{ it.deficitToGdp }}%) are also over the deficit limit. Those figures are the IMF's, for calendar year {{ internationalComparisons.year }}. The OBR's are by financial year, so the two do not match exactly: the UK row in the country table reads {{ (internationalComparisons.countries | findBy("id", "uk")).debtToGdp }}%, while the OBR's 2025-26 figure is {{ (budget2026.path.years | findBy("year", "2025-26")).ggDebtPct }}%. The caveat at the top of this page explains the difference.</p>
-  <p class="source-note">
-    Limits: <a href="{{ eu.limits_source_url }}" rel="noopener">{{ eu.limits_source_name }}</a>.
-    Euro criteria: <a href="{{ eu.euro_source_url }}" rel="noopener">{{ eu.euro_source_name }}</a>.
-    Accession criteria: <a href="{{ eu.accession_source_url }}" rel="noopener">{{ eu.accession_source_name }}</a>.
-    Retrieved {{ eu.retrieved_date | timeTag | safe }}. {{ dataFreshnessBadge(eu.confidence_level, "") }}
-    UK figures: <a href="{{ budget2026.path.source_url }}" rel="noopener">{{ budget2026.path.source_name }}</a>.
-    Retrieved {{ budget2026.path.retrieved_date | timeTag | safe }}. {{ dataFreshnessBadge(budget2026.path.confidence_level, "") }}
-  </p>
+  <dl class="source-note">
+    <div><dt>Limits</dt> <dd><a href="{{ eu.limits_source_url }}" rel="noopener">{{ eu.limits_source_name }}</a></dd></div>
+    <div><dt>Euro criteria</dt> <dd><a href="{{ eu.euro_source_url }}" rel="noopener">{{ eu.euro_source_name }}</a></dd></div>
+    <div><dt>Accession criteria</dt> <dd><a href="{{ eu.accession_source_url }}" rel="noopener">{{ eu.accession_source_name }}</a></dd></div>
+    <div><dt>Retrieved</dt> <dd>{{ eu.retrieved_date | timeTag | safe }}</dd></div>
+    <div><dt>Confidence</dt> <dd>{{ dataFreshnessBadge(eu.confidence_level, true) }}</dd></div>
+  </dl>
+  {{ sourceNote(budget2026.path, "The UK figures in the table above, by financial year.") }}
 </div>

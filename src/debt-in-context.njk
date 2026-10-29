@@ -5,7 +5,7 @@ description: UK debt and annual debt interest set next to familiar areas of publ
 eleventyComputed:
   dataUpdated: "{{ dashboard.lastUpdated }}"
 ---
-{% from "components/macros.njk" import caveatBox, dataFreshnessBadge %}
+{% from "components/macros.njk" import caveatBox, dataFreshnessBadge, sourceNote %}
 
 {% set netDebt = dashboard.metrics | findBy("id", "net-debt") %}
 {% set interest = dashboard.metrics | findBy("id", "debt-interest") %}
@@ -17,15 +17,16 @@ eleventyComputed:
   <p class="lede">Trillions and billions are hard to picture. This page sets the debt, and the yearly interest on it, next to things the government spends on every year. It shows the scale and nothing more.</p>
 </div>
 
-<section aria-labelledby="interest-context">
-  <h2 id="interest-context">A year of debt interest is {{ interest.value | poundsShort }}</h2>
-  <p class="prose">Servicing the debt costs about {{ interest.value | poundsShort }} a year. Compared with what the government spends on each of these in a year:</p>
+<h2 id="interest-context">A year of debt interest is {{ interest.value | poundsShort }}</h2>
+<p class="prose">Servicing the debt costs about {{ interest.value | poundsShort }} a year. Compared with what the government spends on each of these in a year:</p>
 
+{# role="list" on both lists: list-style: none strips list semantics in WebKit. #}
+<ul class="compare-list" role="list">
   {%- for area in spendingComparisons.areas %}
     {%- set ratio = interest.value / area.value * 100 %}
     {%- set barWidth = ratio if ratio < 100 else 100 %}
     {%- set areaPhrase = "annual central government receipts" if area.id == "tax-receipts" else "the " + area.name + " budget" %}
-  <div class="compare">
+  <li class="compare">
     <p class="compare__text">
       {%- if ratio <= 110 %}About <strong>{{ ratio | round(0) }}%</strong> of {{ areaPhrase }}
       {%- else %}About <strong>{{ (ratio / 100) | round(1) }}×</strong> {{ areaPhrase }}
@@ -33,32 +34,31 @@ eleventyComputed:
       <span class="compare__amount">(£{{ area.value | number }} bn a year)</span>
     </p>
     <div class="compare__bar{% if ratio > 100 %} compare__bar--over{% endif %}" aria-hidden="true"><span style="width: {{ barWidth | round(0) }}%"></span></div>
-  </div>
+  </li>
   {%- endfor %}
-</section>
+</ul>
 
-<section aria-labelledby="debt-context">
-  <h2 id="debt-context">The whole debt is {{ netDebt.value | poundsShort }}</h2>
-  <p class="prose">That total has built up over many years. Next to a single year of each budget, it is:</p>
+<h2 id="debt-context">The whole debt is {{ netDebt.value | poundsShort }}</h2>
+<p class="prose">That total has built up over many years. Next to a single year of each budget, it is:</p>
 
+<ul class="compare-list" role="list">
   {%- for area in spendingComparisons.areas %}
     {%- set mult = netDebt.value / area.value %}
     {%- set spendPhrase = "a year's central government receipts" if area.id == "tax-receipts" else "a year's spending on " + area.name %}
-  <div class="compare">
+  <li class="compare">
     <p class="compare__text">
       About <strong>{{ mult | round(1) }}×</strong> {{ spendPhrase }}
       <span class="compare__amount">(£{{ area.value | number }} bn a year)</span>
     </p>
     <div class="compare__bar" aria-hidden="true"><span style="width: {{ (mult / maxMult * 100) | round(0) }}%"></span></div>
-  </div>
+  </li>
   {%- endfor %}
-</section>
+</ul>
 
-<p class="source-note">
-  Spending figures: HM Treasury and related departmental sources, fiscal year {{ spendingComparisons.fiscalYear }}.
-  Retrieved {{ (spendingComparisons.areas | sort(false, false, "retrieved_date") | last).retrieved_date | timeTag | safe }}.
-  {{ dataFreshnessBadge("estimated", "") }}
-</p>
+{#- The areas carry their own confidence levels, so the note names the exceptions rather than one badge covering all. #}
+{%- set notOfficial = [] %}
+{%- for area in spendingComparisons.areas %}{% if area.confidence_level != "official" %}{% set _ = notOfficial.push(area.name + " (" + area.confidence_level + ")") %}{% endif %}{% endfor %}
+{{ sourceNote({ source_name: "HM Treasury and related departmental sources, fiscal year " + spendingComparisons.fiscalYear, retrieved_date: (spendingComparisons.areas | sort(false, false, "retrieved_date") | last).retrieved_date }, "Each area carries its own confidence level in the data" + (": all are official except " + (notOfficial | join(", ")) if notOfficial.length else ": all are official") + ". The table below lists every area.") }}
 
 <details class="data-table-wrap">
   <summary>Show the figures as a table</summary>
